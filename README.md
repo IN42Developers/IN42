@@ -2,8 +2,8 @@
 ![Header](/documentation/images/Header.png)
 
 
-###So, what is IN42?
-IN42 is a mobile app developed for students at 42 schools around the world. Its available for Android and iOS.
+### What is IN42?
+Intra Native 42 is a mobile app developed for students at 42 schools around the world. It is available for Android and iOS.
 The project itself is developed in React Native together with Expo.
 
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
