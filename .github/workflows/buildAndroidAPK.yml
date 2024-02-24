@@ -23,8 +23,6 @@ jobs:
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-        env:
-          EXPO_PUBLIC_REDIRECT_URI: ${{ secrets.EXPO_PUBLIC_REDIRECT_URI }}
 
       - name: 📦 Install dependencies
         run: yarn install
