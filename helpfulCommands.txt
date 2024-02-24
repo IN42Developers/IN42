@@ -1,0 +1,44 @@
+apt update
+apt upgrade -y
+apt install nodejs npm
+apt install git
+apt install curl -y
+apt install wget
+npm update
+npm install -g n
+n latest
+/bin/bash
+npm install -g npm@latest
+
+apt install openjdk-11-jdk unzip -y
+wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.2.1.0/android-studio-ide-202.7351085-linux.tar.gz
+tar -xvzf android-studio-ide-202.7351085-linux.tar.gz
+mv android-studio /opt/
+
+mkdir /opt/android-sdk
+cd /opt/android-sdk
+wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
+unzip commandlinetools-linux-7302050_latest.zip
+
+
+export ANDROID_HOME=/opt/android-sdk
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
+
+sdkmanager --sdk_root=/opt/android-sdk "build-tools;29.0.3" //note i need to press yes here which sucks
+
+npm install -g eas-cli
+cd /app/in42/
+npx eas build -p android --local //note requires login details to run
+npx eas build -p android --profile preview --local //uses preview profile to create .apk build
+
+build a docker image
+docker build -t android1 .
+
+//join a container
+docker exec -it busy_hofstadter /bin/bash
+
+//from container to local
+cp intelligent_kare:/app/in42/build-1697049224391.aab ./builds
+
+//from local to container
+cp D:\OtherProjects\DummyReactNativeApp awesome_mclaren:/app
