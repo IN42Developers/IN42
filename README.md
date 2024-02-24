@@ -1,18 +1,22 @@
 
 ![Header](/documentation/images/Header.png)
 
-This is a mobile app developed for students at 42 schools around the world. Its available for Android and Ios.
-The project itself is developed in React native together with Expo.
+
+###So, what is IN42?
+IN42 is a mobile app developed for students at 42 schools around the world. Its available for Android and iOS.
+The project itself is developed in React Native together with Expo.
+
+![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
 
 ![App views](/documentation/images/AppViewPresentation.png)
 
 ![Resources](/documentation/images/Resources.png)
 
-- React native https://reactnative.dev/docs/environment-setup <br>
+- React Native https://reactnative.dev/docs/environment-setup <br>
 - Expo https://docs.expo.dev/get-started/installation/ <br>
 - Intra App https://api.intra.42.fr/apidoc/guides/getting_started <br>
 
-- Build Process https://github.com/cdinsomnia/in42/blob/master/documentation/buildProcess.md
+- Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md
 
 ![Getting Started](/documentation/images/GettingStarted.png)
 
