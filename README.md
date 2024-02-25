@@ -7,10 +7,9 @@ Intra Native 42 is a mobile app developed for students at 42 schools around the 
 The project itself is developed in React Native together with Expo.
 
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
-
 ![App views](/documentation/images/AppViewPresentation.png)
+# Resources
 
-# Resources <br>
 
 - React Native https://reactnative.dev/docs/environment-setup <br>
 - Expo https://docs.expo.dev/get-started/installation/ <br>
@@ -18,7 +17,10 @@ The project itself is developed in React Native together with Expo.
 
 - Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md
 
-# Getting started <br>
+
+
+
+# Getting started
 
 ## Basic Setup
 ### Automatic Installation
