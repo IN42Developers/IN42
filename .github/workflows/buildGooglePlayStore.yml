@@ -47,5 +47,8 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: com.mrm0lten.IN42
           releaseFiles: ./aab/in42.aab
-          track: internal
+          track: internal # will likely need to change in the future
+          status: draft #note this will need to be changed later to completed or removed
           # whatsNewDirectory: distribution/         
+# documentation on google play upload
+# https://github.com/r0adkll/upload-google-play
