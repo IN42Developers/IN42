@@ -1,0 +1,25 @@
+name: testUpload
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  download-artifact:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifact
+        run: |
+          ARTIFACT_URL="https://api.github.com/repos/IN42Developers/IN42/actions/runs/8040114924/artifacts"
+          DOWNLOAD_URL=$(curl -s -X GET -u mrm0lten:${{ secrets.JEAN_GITHUB_TOKEN }} "$ARTIFACT_URL" | jq -r '.artifacts[] ) | .archive_download_url')
+          curl -s -o artifact.zip -L -u mrm0lten:${{ secrets.JEAN_GITHUB_TOKEN }} "$DOWNLOAD_URL"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: print Something
+        run: |
+          ls
+      
+     
