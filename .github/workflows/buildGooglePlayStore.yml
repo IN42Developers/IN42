@@ -1,4 +1,4 @@
-name: buildAPK
+name: buildAAB
 on: push
   # push:
   #   branches-ignore: 
