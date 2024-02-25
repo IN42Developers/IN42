@@ -1,4 +1,4 @@
-name: buildAAB
+name: Build and Upload to Play Store
 on: push
   # push:
   #   branches-ignore: 
