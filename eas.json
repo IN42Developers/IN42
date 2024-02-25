@@ -27,6 +27,7 @@
         "EXPO_PUBLIC_REDIRECT_URI": "exp://ltn1_0g.mrm0lten.8081.exp.direct/THISISFROMEASJSON"
       },
       "android": {
+        "autoIncrement": true
       },
       "ios": {
       }
