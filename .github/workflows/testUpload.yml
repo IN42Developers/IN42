@@ -1,0 +1,16 @@
+name: testUpload
+
+on: push
+
+jobs:
+  Upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name:  https://github.com/IN42Developers/IN42/actions/runs/8040114924/artifacts/1273397220
+      - name: print Something
+        run: |
+          ls
+      
+     
