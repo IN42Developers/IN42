@@ -1,14 +1,24 @@
 name: testUpload
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  Upload:
+  download-artifact:
     runs-on: ubuntu-latest
+
     steps:
-      - name: print Something
+      - name: Download Artifact
         run: |
-          wget https://github.com/IN42Developers/IN42/actions/runs/8040114924/artifacts/1273397220
+          ARTIFACT_URL="https://api.github.com/repos/IN42Developers/IN42/actions/runs/8040114924/artifacts"
+          DOWNLOAD_URL=$(curl -s -X GET -u ${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_TOKEN }} "$ARTIFACT_URL" | jq -r '.artifacts[] | select(.name == "your_artifact_name") | .archive_download_url')
+          curl -s -o artifact.zip -L -u ${{ secrets.GITHUB_USERNAME }}:${{ secrets.GITHUB_TOKEN }} "$DOWNLOAD_URL"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+
       - name: print Something
         run: |
           ls
