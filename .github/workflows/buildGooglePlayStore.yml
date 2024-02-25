@@ -47,5 +47,5 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: com.mrm0lten.IN42
           releaseFiles: ./aab/in42.aab
-          track: qa
+          track: internal
           # whatsNewDirectory: distribution/         
