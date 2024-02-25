@@ -10,7 +10,7 @@ The project itself is developed in React Native together with Expo.
 
 ![App views](/documentation/images/AppViewPresentation.png)
 
-![Resources](/documentation/images/Resources.png)
+# Resources <br>
 
 - React Native https://reactnative.dev/docs/environment-setup <br>
 - Expo https://docs.expo.dev/get-started/installation/ <br>
@@ -18,7 +18,7 @@ The project itself is developed in React Native together with Expo.
 
 - Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md
 
-![Getting Started](/documentation/images/GettingStarted.png)
+# Getting started <br>
 
 ## Basic Setup
 ### Automatic Installation
@@ -28,9 +28,9 @@ You will find a Makefile which should handle the basic setup for you. Use the ma
 *If the automatic setup worked for you proceed to the next step*
 
 The goal of this setup is the following:<br>
-- install Node
-- get Android studio
-- install Expo cli
+- Install Node
+- Get Android studio
+- Install Expo CLI
 
 If you are not on a school PC you may be able to just use npm. With npm you can install nvm which has node
 
@@ -55,7 +55,7 @@ You may have a very old version, so just install the latest stable version with:
 
 > nvm install --lts
 
-Next we want to install the expo cli. Depending on your situation you may use one of these commands. Its used to later start our local server for testing<br>
+Next we want to install the Expo CLI. Depending on your situation you may use one of these commands. Its used to later start our local server for testing<br>
 
 > install expo cli
 > 
@@ -69,7 +69,7 @@ some packages may not work with the lastest, so just manually fix it for the rig
 > npx expo install --fix
 
 <br>
-setting up android studios https://operavps.com/docs/install-android-studio-on-linux/ <br>
+Setting up Android Studios https://operavps.com/docs/install-android-studio-on-linux/ <br>
 Be careful, Android studios is big, you may want to make sure to install it in the right folders <br>
 
 > wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz
@@ -86,7 +86,7 @@ To later easily start the emulator from the terminal add the paths to your envir
 
 ## Set up a virtual device (Your emulator that you use to test the project)
 
-After it has completed installing you should be able to run "make android". It opens the Android studio wizard. If you manually installed it somewhere else, just find the studio.sh file and run it.
+After it has completed installing you should be able to run "make android". It opens the Android Studio wizard. If you manually installed it somewhere else, just find the studio.sh file and run it.
 
 > ./android-studio/bin/studio.sh
 Install it with the standard settings<br>
@@ -95,7 +95,7 @@ create a virtual device https://developer.android.com/studio/run/managing-avds?u
 doesnt really matter which one at this point. Its your working device, you will later install different versions anyways<br>
 <br>
 
-## Create an eas Expo account
+## Create an Expo EAS account
 Expo is the service that we use to locally install and run our app on the emulator. It will also be used later for the building process. Its important that you do this step as it will change the redirecto URL from "anonymous" to "your account name", which you need for for creating your Intra APP in the next step. <br>
 
 > https://expo.dev/signup
