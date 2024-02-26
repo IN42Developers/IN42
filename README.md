@@ -33,14 +33,17 @@ _If the automatic setup worked for you, just proceed to the next step._
 
 - Installing NodeJS
 - Installing Android Studio
-- Installing Expo CLI
+- Installing Expo CLI <br>
 
-#### Installing NodeJS <br>
+# 
 
-> [!NOTE]
-> To install NodeJS we provide two ways which differenciate regarding if you're using an school computer or not. <br>
+<br>
+NodeJS
 
-##### I don't use an school computer
+#### Installing NodeJS on your own device<br>
+If you want to develop at home or you are not using an school computer just follow **these** steps.
+
+<br>
 
 ```
 npm update
@@ -51,44 +54,63 @@ npm update n
 
 <br>
 
-Please check if you have the latest nvm version installed. <br>
+Please check if you have the latest nvm version installed<br>
 `nvm --version` <br>
 
 <br>
 
-If you want to update your version we recommend using this command. <br>
-`nvm install --lts`
+If you want to update your version we recommend using this command<br>
+`nvm install --lts` <br>
 
 <br>
 
-##### I am using an school computer
+#### Installing NodeJS on a school computer
 
 Most likely you don't have sufficient permissions at school workstations. Hence we use an different approach.<br>
 
-**Reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide**<br>
+**Reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide**
+
+<br>
+
+Let's start by downloading the install script.
 
 `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash`
 
-check if it worked (it may ask you to restart your terminal) <br>
+<br>
 
-> nvm --version
+Check if it worked (it may ask you to restart your terminal) <br>
 
-You may have a very old version, so just install the latest stable version with:<br>
-
-> nvm install --lts
-
-Next we want to install the Expo CLI. Depending on your situation you may use one of these commands. Its used to later start our local server for testing<br>
-
-> install expo cli
-> 
-> npm install expo cli
-> 
-> npx expo install
+`nvm --version`
 
 <br>
-some packages may not work with the lastest, so just manually fix it for the right version: <br>
 
-> npx expo install --fix
+You may have a very old version. To keep everything up-to-date, let's update to an current version.<br>
+
+`nvm install --lts`
+
+# 
+
+<br>
+Expo CLI
+
+#### Installing the Expo Commandline Interface (Expo CLI)
+
+<br>
+
+Depending on your situation you may use one of these commands. It is used to later start our local server for testing.<br>
+
+<br>
+
+`install expo cli` <br>
+`npm install expo cli` <br>
+`npx expo install` <br>
+
+<br>
+Some packages may not work with the lastest one but we can just manually fix it so that it works for the right version.<br>
+
+`npx expo install --fix`
+
+# 
 
 <br>
 Setting up Android Studios https://operavps.com/docs/install-android-studio-on-linux/ <br>
