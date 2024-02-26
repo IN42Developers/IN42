@@ -9,19 +9,16 @@ The project itself is developed in React Native together with Expo.
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
 ![App views](/documentation/images/AppViewPresentation.png)
 
-# Basic Setup
-
-<br>
-
-As IN42 is an crossplatform application, you will need some tools to get everything up and running.
-
-<br>
+# Resources
 
 - React Native https://reactnative.dev/docs/environment-setup <br>
 - Expo https://docs.expo.dev/get-started/installation/ <br>
 - Intra App https://api.intra.42.fr/apidoc/guides/getting_started <br>
 - Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md<br>
 
+<br>
+
+# Setting up your environment
 
 ### Automatic Installation
 You will find a Makefile which should handle the basic setup for you. Use the makefile.
@@ -30,13 +27,9 @@ You will find a Makefile which should handle the basic setup for you. Use the ma
 
 ### Manual Installation
 
-<br>
+_If the automatic setup worked for you, just proceed to the next step._
 
-> _If the automatic setup worked for you, just proceed to the next step._
-
-<br>
-
-#### Steps to get there
+#### Fundamentals
 
 - Install Node / NodeJS
 - Get Android Studio / Install it locally
@@ -44,7 +37,7 @@ You will find a Makefile which should handle the basic setup for you. Use the ma
 
 <br>
 
-_**If you are not on a school PC you may be able to just use the Node Package Manager. With npm you can install nvm which has NodeJS included.**_
+_In the case you're not working from a school computer, just use the Node package manager. Get nvm from there and you have node already included._
 
 <br>
 
