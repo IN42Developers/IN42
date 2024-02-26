@@ -68,7 +68,7 @@ If you want to update your version we recommend using this command<br>
 
 Most likely you don't have sufficient permissions at school workstations. Hence we use an different approach.<br>
 
-**Reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide**
+_Reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide_
 
 <br>
 
@@ -106,27 +106,42 @@ Depending on your situation you may use one of these commands. It is used to lat
 `npx expo install` <br>
 
 <br>
-Some packages may not work with the lastest one but we can just manually fix it so that it works for the right version.<br>
+It can happen that some packages will not work anymore in the latest version - of course, we can manually fix it.<br>
 
 `npx expo install --fix`
 
 # 
 
 <br>
-Setting up Android Studios https://operavps.com/docs/install-android-studio-on-linux/ <br>
-Be careful, Android studios is big, you may want to make sure to install it in the right folders <br>
+Android Studio
 
-> wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz
-> 
-> tar -xvzf android-studio-*-linux.tar.gz
+#### Installing & Setting up Android Studio
 
 <br>
-To later easily start the emulator from the terminal add the paths to your environment. (I suggest you add them to your .bashrc file) 
 
-> export ANDROID_SDK=$HOME/Android/Sdk/
-> 
-> export PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+> [!NOTE]
+> Android Studio has a big filesize. We recommend to install it in Folders or Drives where you have a bit more space available.
 
+<br>
+
+_Reference: https://operavps.com/docs/install-android-studio-on-linux/_ <br>
+
+<br>
+
+Start by downloading and extracting Android Studio <br>
+
+`wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz`
+`tar -xvzf android-studio-*-linux.tar.gz`
+
+<br>
+To later easily start the emulator from the terminal, add these paths to your environment. (Add them to your .bashrc file too so that you don't have to do this step again) 
+
+`export ANDROID_SDK=$HOME/Android/Sdk/`
+`export PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools`
+
+#
+
+<br>
 
 ## Set up a virtual device (Your emulator that you use to test the project)
 
