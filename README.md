@@ -134,10 +134,15 @@ Start by downloading and extracting Android Studio <br>
 `tar -xvzf android-studio-*-linux.tar.gz`
 
 <br>
-To later easily start the emulator from the terminal, add these paths to your environment. (Add them to your .bashrc file too so that you don't have to do this step again) 
 
-`export ANDROID_SDK=$HOME/Android/Sdk/`
-`export PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools`
+Add some Paths to your environment to be able to start the android emulator directly from your terminal. <br>
+
+`export ANDROID_SDK=$HOME/Android/Sdk/` <br>
+`export PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools` <br>
+
+<br>
+
+_Write it into your .bashrc file - you don't have to setup it again!_
 
 #
 
