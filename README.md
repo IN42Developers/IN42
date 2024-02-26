@@ -9,19 +9,16 @@ The project itself is developed in React Native together with Expo.
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
 ![App views](/documentation/images/AppViewPresentation.png)
 
-# Basic Setup
-
-<br>
-
-As IN42 is an crossplatform application, you will need some tools to get everything up and running.
-
-<br>
+# Resources
 
 - React Native https://reactnative.dev/docs/environment-setup <br>
 - Expo https://docs.expo.dev/get-started/installation/ <br>
 - Intra App https://api.intra.42.fr/apidoc/guides/getting_started <br>
 - Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md<br>
 
+<br>
+
+# Setting up your environment
 
 ### Automatic Installation
 You will find a Makefile which should handle the basic setup for you. Use the makefile.
@@ -30,75 +27,126 @@ You will find a Makefile which should handle the basic setup for you. Use the ma
 
 ### Manual Installation
 
-<br>
+_If the automatic setup worked for you, just proceed to the next step._
 
-> _If the automatic setup worked for you, just proceed to the next step._
+#### Fundamentals
 
-<br>
+- Installing NodeJS
+- Installing Android Studio
+- Installing Expo CLI <br>
 
-#### Steps to get there
-
-- Install Node / NodeJS
-- Get Android Studio / Install it locally
-- Install the Expo CLI
+# 
 
 <br>
+NodeJS
 
-_**If you are not on a school PC you may be able to just use the Node Package Manager. With npm you can install nvm which has NodeJS included.**_
-
-<br>
-
-`npm update`
-
-`npm install`
-
-`npm install nvm`
-
-`npm update n`
+#### Installing NodeJS on your own device<br>
+If you want to develop at home or you are not using an school computer just follow **these** steps.
 
 <br>
 
-Check if you have the lastest Node version already. If not, you are likely using a PC at school where you cant easily update node. Hence we use a different approach<br>
-reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide
-
-> curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-check if it worked (it may ask you to restart your terminal) <br>
-
-> nvm --version
-
-You may have a very old version, so just install the latest stable version with:<br>
-
-> nvm install --lts
-
-Next we want to install the Expo CLI. Depending on your situation you may use one of these commands. Its used to later start our local server for testing<br>
-
-> install expo cli
-> 
-> npm install expo cli
-> 
-> npx expo install
+```
+npm update
+npm install
+npm install nvm
+npm update n
+```
 
 <br>
-some packages may not work with the lastest, so just manually fix it for the right version: <br>
 
-> npx expo install --fix
-
-<br>
-Setting up Android Studios https://operavps.com/docs/install-android-studio-on-linux/ <br>
-Be careful, Android studios is big, you may want to make sure to install it in the right folders <br>
-
-> wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz
-> 
-> tar -xvzf android-studio-*-linux.tar.gz
+Please check if you have the latest nvm version installed<br>
+`nvm --version` <br>
 
 <br>
-To later easily start the emulator from the terminal add the paths to your environment. (I suggest you add them to your .bashrc file) 
 
-> export ANDROID_SDK=$HOME/Android/Sdk/
-> 
-> export PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+If you want to update your version we recommend using this command<br>
+`nvm install --lts` <br>
 
+<br>
+
+#### Installing NodeJS on a school computer
+
+Most likely you don't have sufficient permissions at school workstations. Hence we use an different approach.<br>
+
+_Reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide_
+
+<br>
+
+Let's start by downloading the install script.
+
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash`
+
+<br>
+
+Check if it worked (it may ask you to restart your terminal) <br>
+
+`nvm --version`
+
+<br>
+
+You may have a very old version. To keep everything up-to-date, let's update to an current version.<br>
+
+`nvm install --lts`
+
+# 
+
+<br>
+Expo CLI
+
+#### Installing the Expo Commandline Interface (Expo CLI)
+
+<br>
+
+Depending on your situation you may use one of these commands. It is used to later start our local server for testing.<br>
+
+<br>
+
+`install expo cli` <br>
+`npm install expo cli` <br>
+`npx expo install` <br>
+
+<br>
+It can happen that some packages will not work anymore in the latest version - of course, we can manually fix it.<br>
+
+`npx expo install --fix`
+
+# 
+
+<br>
+Android Studio
+
+#### Installing & Setting up Android Studio
+
+<br>
+
+> [!NOTE]
+> Android Studio has a big filesize. We recommend to install it in Folders or Drives where you have a bit more space available.
+
+<br>
+
+_Reference: https://operavps.com/docs/install-android-studio-on-linux/_ <br>
+
+<br>
+
+Start by downloading and extracting Android Studio <br>
+
+`wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz`
+`tar -xvzf android-studio-*-linux.tar.gz`
+
+<br>
+
+Add some Paths to your environment to be able to start the android emulator directly from your terminal. <br>
+
+`export ANDROID_SDK=$HOME/Android/Sdk/` <br>
+`export PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools` <br>
+
+<br>
+
+_Write it into your .bashrc file - you don't have to setup it again!_
+
+#
+
+<br>
 
 ## Set up a virtual device (Your emulator that you use to test the project)
 
