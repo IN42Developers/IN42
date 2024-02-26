@@ -7,10 +7,9 @@ Intra Native 42 is a mobile app developed for students at 42 schools around the 
 The project itself is developed in React Native together with Expo.
 
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
-
 ![App views](/documentation/images/AppViewPresentation.png)
 
-# Resources
+# Basic Setup
 
 <br>
 
@@ -23,33 +22,43 @@ As IN42 is an crossplatform application, you will need some tools to get everyth
 - Intra App https://api.intra.42.fr/apidoc/guides/getting_started <br>
 - Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md<br>
 
-<br>
 
-# Basic Setup <br>
 ### Automatic Installation
 You will find a Makefile which should handle the basic setup for you. Use the makefile.
 
 `make install` <br>
 
 ### Manual Installation
-*If the automatic setup worked for you proceed to the next step*
 
-The goal of this setup is the following:<br>
-- Install Node
-- Get Android studio
-- Install Expo CLI
-
-If you are not on a school PC you may be able to just use npm. With npm you can install nvm which has node
-
-> npm update
->
-> npm install n
->
-> npm install nvm
->
-> npm update n
 <br>
-check if you have the lastest node version.If not you are likely using a PC at school, where you cant easily update node. Hence we use a different approach<br>
+
+> _If the automatic setup worked for you, just proceed to the next step._
+
+<br>
+
+#### Steps to get there
+
+- Install Node / NodeJS
+- Get Android Studio / Install it locally
+- Install the Expo CLI
+
+<br>
+
+_**If you are not on a school PC you may be able to just use the Node Package Manager. With npm you can install nvm which has NodeJS included.**_
+
+<br>
+
+`npm update`
+
+`npm install`
+
+`npm install nvm`
+
+`npm update n`
+
+<br>
+
+Check if you have the lastest Node version already. If not, you are likely using a PC at school where you cant easily update node. Hence we use a different approach<br>
 reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide
 
 > curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
