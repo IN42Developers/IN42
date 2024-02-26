@@ -10,20 +10,27 @@ The project itself is developed in React Native together with Expo.
 
 ![App views](/documentation/images/AppViewPresentation.png)
 
-# Resources <br>
+# Resources
+
+<br>
+
+As IN42 is an crossplatform application, you will need some tools to get everything up and running.
+
+<br>
 
 - React Native https://reactnative.dev/docs/environment-setup <br>
 - Expo https://docs.expo.dev/get-started/installation/ <br>
 - Intra App https://api.intra.42.fr/apidoc/guides/getting_started <br>
+- Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md<br>
 
-- Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md
+<br>
 
-# Getting started <br>
-
-## Basic Setup
+# Basic Setup <br>
 ### Automatic Installation
 You will find a Makefile which should handle the basic setup for you. Use the makefile.
-> make install
+
+`make install` <br>
+
 ### Manual Installation
 *If the automatic setup worked for you proceed to the next step*
 
