@@ -31,30 +31,43 @@ _If the automatic setup worked for you, just proceed to the next step._
 
 #### Fundamentals
 
-- Install Node / NodeJS
-- Get Android Studio / Install it locally
-- Install the Expo CLI
+- Installing NodeJS
+- Installing Android Studio
+- Installing Expo CLI
+
+#### Installing NodeJS <br>
+
+> [!NOTE]
+> To install NodeJS we provide two ways which differenciate regarding if you're using an school computer or not. <br>
+
+##### I don't use an school computer
+
+```
+npm update
+npm install
+npm install nvm
+npm update n
+```
 
 <br>
 
-_In the case you're not working from a school computer, just use the Node package manager. Get nvm from there and you have node already included._
+Please check if you have the latest nvm version installed. <br>
+`nvm --version` <br>
 
 <br>
 
-`npm update`
-
-`npm install`
-
-`npm install nvm`
-
-`npm update n`
+If you want to update your version we recommend using this command. <br>
+`nvm install --lts`
 
 <br>
 
-Check if you have the lastest Node version already. If not, you are likely using a PC at school where you cant easily update node. Hence we use a different approach<br>
-reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide
+##### I am using an school computer
 
-> curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+Most likely you don't have sufficient permissions at school workstations. Hence we use an different approach.<br>
+
+**Reference: https://codedamn.com/news/nodejs/nvm-installation-setup-guide**<br>
+
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash`
 
 check if it worked (it may ask you to restart your terminal) <br>
 
