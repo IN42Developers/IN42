@@ -29,10 +29,6 @@ export default function HomeScreen() {
 
   const y = useSharedValue(0);
 
-
-  // const [loaded, error] = useFonts ({
-  // });
-
   const unlockGestureHandler = useAnimatedGestureHandler({
     onStart: () => {
     },

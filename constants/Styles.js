@@ -8,21 +8,6 @@ export const Gradient = () => {
    )
 }
 
-export let UiText = {
-   bold: {
-    fontSize: 12,
-    fontFamily: 'Bold',
-   },
-   medium: {
-    fontSize: 12,
-    fontFamily: 'Medium',
-   },
-   boldSmall: {
-    fontSize: 10,
-    fontFamily: 'Bold',
-   },
-}
-
 export const Color = {
     primary: '#3498db',
     secondary: '#2ecc71',

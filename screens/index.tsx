@@ -1,8 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { useFonts } from 'expo-font'
-import Logo42 from '../components/svg/logo42'
-import Shape from '../components/svg/Shape'
 import DefaultButton from '../components/buttons/AuthButton'
 import { useNavigation } from '@react-navigation/native'
 import { useEffect } from 'react'
@@ -20,14 +17,6 @@ export default function IndexScreen() {
     const navigation = useNavigation();
 
     const { response,promptAsync: AuthUser } = authorizeUser();
-
-    const [loaded, error] = useFonts({
-    Regular: require('../assets/fonts/PlusJakartaSans-Regular.ttf'),
-    Medium: require('../assets/fonts/PlusJakartaSans-Medium.ttf'),
-    SemiBold: require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
-    Bold: require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
-    ExtraBold: require('../assets/fonts/PlusJakartaSans-ExtraBold.ttf'),
-  });
 
   useEffect( () => {
     const tokenExchange = async() =>{
@@ -65,12 +54,6 @@ export default function IndexScreen() {
     //self invoking async function wtf?!
   },[response])
 
-  if (!loaded) {
-    console.log(loaded);
-    return null;
-  }
-
-
   const handlePress = async () => {
     try{
       if(AssertUserCanRequestData() == false){
@@ -86,21 +69,8 @@ export default function IndexScreen() {
 
   return (
     <SafeAreaView>
-      <View style={styles.body}>
-        <View style={styles.container}>
-          <Shape style={styles.shape} />
-            <View style={styles.render}>
-              <Logo42 style={styles.logo} />
-              <View style={styles.separator}/>
-              <View style={styles.loginCard}>
-                <Text style={styles.loginTitle}>Sign In</Text>
-                <Text style={styles.loginText}>In order to use the app and all it’s features, please first authorize with your 42 student account.</Text>
-                <DefaultButton title={"Sign in with 42"} onPress={handlePress} />
-                <View style={styles.cardSeparator}/>
-              </View>
-            </View>
-          </View>
-        </View>
+      <Text>Melde dich an</Text>
+      <DefaultButton onPress={handlePress} title={"Yeet"}/>
     </SafeAreaView>
   )
 }
@@ -114,6 +84,7 @@ const styles = StyleSheet.create({
   shape: {
     zIndex: 0,
     width: '100%',
+    height: '100%',
   },
   logo: {
     zIndex: 1,
@@ -121,37 +92,34 @@ const styles = StyleSheet.create({
   render: {
     zIndex: 2,
     alignItems: 'center',
-    margin: 100,
     position: 'absolute',
   },
   separator: {
-    marginVertical: 70,
-    height: 1,
-    width: '80%',
+    height: 16,
+  },
+  trim: {
+    height: 64,
   },
   cardSeparator: {
     marginVertical: 10,
-    height: 1,
-    width: '80%',
+    height: 84,
   },
   loginCard: {
     backgroundColor: '#181818',
     borderRadius: 8,
-    padding: 30,
+    padding: 100,
     alignItems: 'center',
   },
   loginTitle: {
-    fontFamily: 'Bold',
-    fontSize: 24,
+    fontSize: 32,
     color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   loginText: {
-    fontFamily: 'Regular',
-    fontSize: 16,
+    fontSize: 22,
     color: '#cbcbcb',
     textAlign: 'center',
-    marginVertical: 20,
-    fontWeight: '100',
   },
   body: {
     width: '100%',
