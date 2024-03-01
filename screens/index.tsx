@@ -1,8 +1,10 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
 import DefaultButton from '../components/buttons/AuthButton'
 import { useNavigation } from '@react-navigation/native'
 import { useEffect } from 'react'
+import { LinearGradient } from 'expo-linear-gradient'
+import Logo from '../components/svg/logo'
 
 import {authorizeUser} from '../Utilities/apiAuthorization.js'
 import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid } from '../Utilities/TokenStorage';
@@ -55,8 +57,8 @@ export default function IndexScreen() {
   },[response])
 
   const handlePress = async () => {
-    try{
-      if(AssertUserCanRequestData() == false){
+    try {
+      if (AssertUserCanRequestData() == false) {
         return;
       }
       await AuthUser();
@@ -68,10 +70,28 @@ export default function IndexScreen() {
   }
 
   return (
-    <SafeAreaView>
-      <Text>Melde dich an</Text>
-      <DefaultButton onPress={handlePress} title={"Yeet"}/>
+    <View id='General container' style={styles.container}>
+      <View id='Pattern Group' style={styles.group}>
+      <Image source={require('../assets/images/HeadLayout.png')} style={{
+        width: Dimensions.get('window').width * 1.1,
+        height: Dimensions.get('window').height * 0.38,
+      }} />
+        <View id='Logo' style={styles.logo}>
+          <Logo />
+        </View>
+      </View>
+      <SafeAreaView>
+      <View id='Main Container' style={styles.main}>
+        <View id='Text field with Button' style={styles.field}>
+          <View style={styles.seperator} />
+          <Text style={styles.textHeading}>Welcome back</Text>
+          <Text style={styles.textDescription}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
+          <View style={styles.seperator} />
+          <DefaultButton onPress={handlePress} title='Authorize' />
+        </View>
+      </View>
     </SafeAreaView>
+    </View>
   )
 }
 
@@ -81,49 +101,38 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  shape: {
-    zIndex: 0,
-    width: '100%',
-    height: '100%',
+  headLayout: {
+  },
+  group: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
-    zIndex: 1,
-  },
-  render: {
-    zIndex: 2,
-    alignItems: 'center',
     position: 'absolute',
   },
-  separator: {
-    height: 16,
+  seperator: {
+    height: 8,
   },
-  trim: {
-    height: 64,
+  textHeading: {
+    fontSize: 42,
+    fontWeight: '500',
+    color: '#E0E0E0',
   },
-  cardSeparator: {
-    marginVertical: 10,
-    height: 84,
+  textDescription: {
+    fontSize: 20,
+    color: '#A7A7A7',
+    textAlign: 'center',
   },
-  loginCard: {
-    backgroundColor: '#181818',
-    borderRadius: 8,
-    padding: 100,
+  main: {
+    flex: 1,
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
-  loginTitle: {
-    fontSize: 32,
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  loginText: {
-    fontSize: 22,
-    color: '#cbcbcb',
+  field: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 24,
+    gap: 28,
     textAlign: 'center',
   },
-  body: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'black'
-  },
-});
+  });

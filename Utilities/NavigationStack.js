@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
-import LoginLogo from '../components/svg/loginLogo';
+import LoginLogo from '../components/svg/logo';
 // import TabNavigator from '../TabNavigator';
 import { Color, Ui, UiText } from '../constants/Styles';
 import { StatusBar } from 'react-native';
