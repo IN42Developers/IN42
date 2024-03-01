@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, StyleSheet, Text, View, Dimensions } from 'react-native'
+import { Platform, Image, SafeAreaView, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
 import DefaultButton from '../components/buttons/AuthButton'
 import { useNavigation } from '@react-navigation/native'
@@ -87,6 +87,7 @@ export default function IndexScreen() {
           <Text style={styles.textHeading}>Welcome back</Text>
           <Text style={styles.textDescription}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
           <View style={styles.seperator} />
+          <View style={styles.seperator} />
           <DefaultButton onPress={handlePress} title='Authorize' />
         </View>
       </View>
@@ -119,7 +120,14 @@ const styles = StyleSheet.create({
     color: '#E0E0E0',
   },
   textDescription: {
-    fontSize: 20,
+    ...Platform.select({
+      ios: {
+        fontSize: 20,
+      },
+      android: {
+        fontSize: 18,
+      },
+    }),
     color: '#A7A7A7',
     textAlign: 'center',
   },
