@@ -13,15 +13,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-
+          
+      - name: 📦 Install dependencies
+        run: yarn install
+        
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: 📦 Install dependencies
-        run: yarn install
 
       - name: 🚀 Build app
         run: eas build -p ios --profile production --local --non-interactive --clear-cache --output "./ipa/IN42ios_build.ipa"
