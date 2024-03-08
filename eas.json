@@ -11,7 +11,8 @@
 // building apks and simulated ios builds
     "preview": {
       "env": {
-        "EXPO_PUBLIC_REDIRECT_URI": "exp://ltn1_0g.mrm0lten.8081.exp.direct/THISISFROMEASJSON"
+        "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-c52d4d03f8d2e2ebbad031ee2ae7938fe33d503a9fce436ce6ac1c058c9fe48c",
+        "EXPO_PUBLIC_REDIRECT_URI": "exp://i-x6kme.in42developers.8081.exp.direct"
       },
       "android": {
         "buildType": "apk"
@@ -24,7 +25,8 @@
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_REDIRECT_URI": "exp://ltn1_0g.mrm0lten.8081.exp.direct/THISISFROMEASJSON"
+        "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-c52d4d03f8d2e2ebbad031ee2ae7938fe33d503a9fce436ce6ac1c058c9fe48c",
+        "EXPO_PUBLIC_REDIRECT_URI": "exp://i-x6kme.in42developers.8081.exp.direct"
       },
       "android": {
       },
