@@ -72,7 +72,7 @@ export default function EventDetailScreen() {
             </View>
 
             <View style={styles.detailsView}>
-                <Text style={{color: 'white',fontSize: 24,paddingBottom: 5, fontFamily: 'Bold'}}>About this event</Text>
+                <Text style={{color: 'white',fontSize: 24,paddingBottom: 5, fontWeight: 'bold'}}>About this event</Text>
                 <ScrollView >
                     <Text style={styles.DetailText}>{details}</Text>
                 </ScrollView>

@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
   TypeText: {
     color: 'lightgrey',
-    fontFamily: 'SemiBold',
+    fontWeight: 'bold',
     fontSize: 10,
     textTransform: 'uppercase',
   },
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     // alignSelf: 'flex-start',
     color: 'white',
-    fontFamily: 'Bold',
+    fontWeight: 'bold',
     fontSize: 14,
     marginBottom: 5,
     textTransform: 'uppercase',

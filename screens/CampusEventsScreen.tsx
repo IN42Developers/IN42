@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     text:{
         color: 'white',
-        fontFamily: 'Bold'
+        fontWeight: 'bold'
     },
     text2:{
         color: 'white',
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
         padding: 30,
         backgroundColor: 'grey',
         fontSize: 24,
-        fontFamily: 'Bold'
+        fontWeight: 'bold'
     }
 })

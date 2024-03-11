@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 20,
         color: 'white',
-        fontFamily: 'Bold' 
+        fontWeight: 'bold'
     },
     element: {
         color: 'white',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         verticalAlign: 'top',
         color: 'white',
-        fontFamily: 'Bold',
+        fontWeight: 'bold',
         bottom: 3,
     },  
 })

@@ -9,7 +9,6 @@ import Logo from '../components/svg/logo'
 import {authorizeUser} from '../Utilities/apiAuthorization.js'
 import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid } from '../Utilities/TokenStorage';
 import { getTokenFromCode } from '../Utilities/apiAuthorization.js'
-import { getTokenFromCode2 } from '../Utilities/apiAuthorization.js'
 import { setKeyValuePair } from '../Utilities/TokenStorage'
 import { AssertUserCanRequestData } from '../Utilities/UserData'
 
@@ -30,7 +29,7 @@ export default function IndexScreen() {
           console.log('CODE = ', code);
           
           //const accessToken = await getTokenFromCode(code);
-          const accessToken = await getTokenFromCode2(code);
+          const accessToken = await getTokenFromCode(code);
           console.log('saved TOKEN = ', accessToken);
           setKeyValuePair('AccessToken', accessToken);
           setAccessToken(accessToken);

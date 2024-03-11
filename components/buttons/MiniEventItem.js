@@ -80,7 +80,7 @@ const MiniEventItem = ({data,callback}) => {
           >
         </ImageBackground> */}
           <Text style={styles.dayText}>{weekdayAbbreviation}</Text>
-          <Text style={[styles.dayText,{fontSize: 22, fontFamily: 'Bold',paddingBottom: 4 }] }>{weekDayNumber}</Text>
+          <Text style={[styles.dayText,{fontSize: 22, fontWeight: 'bold',paddingBottom: 4 }] }>{weekDayNumber}</Text>
           <Text style={styles.dayText}>{monthName}</Text>
         </LinearGradient>
         <View style={styles.rightSection}>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   TypeText: {
     flex: 1,
     color: 'lightgrey',
-    fontFamily: 'SemiBold',
+    fontWeight: 'bold',
     fontSize: 10,
     // margin: -3,
     textTransform: 'uppercase',
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     color: 'lightgrey',
     // color: 'lime',
-    fontFamily: 'SemiBold',
+    fontWeight: 'bold',
     fontSize: 20,
     alignSelf: 'flex-end',
     // alignContent: 'flex-end',
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   titleText: {
     flex: 5,
     color: 'white',
-    fontFamily: 'Bold',
+    fontWeight: 'bold',
     fontSize: 14,
     marginBottom: 5,
     textTransform: 'uppercase',

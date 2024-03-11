@@ -11,8 +11,9 @@
 // building apks and simulated ios builds
     "preview": {
       "env": {
-        "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-c52d4d03f8d2e2ebbad031ee2ae7938fe33d503a9fce436ce6ac1c058c9fe48c",
-        "EXPO_PUBLIC_REDIRECT_URI": "exp://i-x6kme.in42developers.8081.exp.direct"
+        "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c",
+        "EXPO_PUBLIC_REDIRECT_URI": "exp://dxtwshi.in42developers.8081.exp.direct",
+        "EXPO_PUBLIC_AUTH_SERVER_IP": "34.145.84.149:3000" //should later become a different port
       },
       "android": {
         "buildType": "apk"
@@ -25,8 +26,9 @@
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-c52d4d03f8d2e2ebbad031ee2ae7938fe33d503a9fce436ce6ac1c058c9fe48c",
-        "EXPO_PUBLIC_REDIRECT_URI": "exp://i-x6kme.in42developers.8081.exp.direct"
+        "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c",
+        "EXPO_PUBLIC_REDIRECT_URI": "exp://dxtwshi.in42developers.8081.exp.direct",
+        "EXPO_PUBLIC_AUTH_SERVER_IP": "34.145.84.149:3000"
       },
       "android": {
       },

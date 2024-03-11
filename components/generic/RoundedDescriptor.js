@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#999999',
     textTransform: 'uppercase',
-    fontFamily: 'ExtraBold',
+    fontWeight: 'bold',
   },
 });
 

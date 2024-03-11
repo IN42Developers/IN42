@@ -37,8 +37,8 @@ export default function UserInfoCard() {
 
                         </View>
                         <View id='About username and loginname' style={{ top: 4, flex: 1, left: 32 }}>
-                            <Text style={{ fontSize: 18, color: 'white', fontFamily: 'ExtraBold' }}>{displayname}</Text>
-                            <Text style={{ fontSize: 14, color: '#D3D3D3', fontFamily: 'Medium' }}>{login}</Text>
+                            <Text style={{ fontSize: 18, color: 'white' }}>{displayname}</Text>
+                            <Text style={{ fontSize: 14, color: '#D3D3D3' }}>{login}</Text>
                         </View>
                         <View id='Profile image'>
                             <Image src={profileimage} style={{ width: 60, height: 60, borderRadius: 50, bottom: 4, right: 32, top: 6 }} />
@@ -49,21 +49,21 @@ export default function UserInfoCard() {
                         <View id='Links: Wallet, Evaluations' style={styles.leftBox}>
                             <View id='Wallet' style={styles.stats}>
                                 <EvaluationPointsIcon />
-                                <Text style={{ color: 'white', marginHorizontal: 5, fontFamily: 'Medium', fontSize: 11 }}>POINTS</Text>
-                                <Text style={{ color: '#D3D3D3', fontSize: 14, fontFamily: 'Bold', left: 4, bottom: 2, paddingRight: 2 }}>{walletPoints}</Text>
+                                <Text style={{ color: 'white', marginHorizontal: 5, fontSize: 11 }}>POINTS</Text>
+                                <Text style={{ color: '#D3D3D3', fontSize: 14, left: 4, bottom: 2, paddingRight: 2 }}>{walletPoints}</Text>
                             </View>
                             <View id='Evaluations' style={styles.stats}>
                                 <EvaluationPointsIcon />
-                                <Text style={{ color: 'white', marginHorizontal: 5, fontFamily: 'Medium', fontSize: 11 }}>POINTS</Text>
-                                <Text style={{ color: '#D3D3D3', fontSize: 14, fontFamily: 'Bold', left: 4, bottom: 2, paddingRight: 8 }}>{correctionPoints}</Text>
+                                <Text style={{ color: 'white', marginHorizontal: 5, fontSize: 11 }}>POINTS</Text>
+                                <Text style={{ color: '#D3D3D3', fontSize: 14, fontWeight: 'bold', left: 4, bottom: 2, paddingRight: 8 }}>{correctionPoints}</Text>
                             </View>
                         </View>
                         <View id='Rechts: Level' style={styles.rightBox}>
                             <View id='Level based progress' style={styles.level}>
-                                <Text style={{ color: '#e8e8e8', fontSize: 12, fontFamily: 'Bold', }}>LEVEL BASED PROGRESS</Text>
+                                <Text style={{ color: '#e8e8e8', fontSize: 12, fontWeight: 'bold', }}>LEVEL BASED PROGRESS</Text>
                                 <View id='Current and next level' style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: 'white', fontFamily: 'Regular', fontSize: 11 }}>{curLevel}</Text>
-                                    <Text style={{ color: 'white', fontFamily: 'Regular', fontSize: 11 }}>LEVEL 4</Text>
+                                    <Text style={{ color: 'white', fontSize: 11 }}>{curLevel}</Text>
+                                    <Text style={{ color: 'white', fontSize: 11 }}>LEVEL 4</Text>
                                 </View>
                                 <View id='Progress bar' style={styles.progressbar}>
                                     <View id='Progress made' style={{ width: '35%', backgroundColor: 'white', zIndex: 1, height: 4 }} />

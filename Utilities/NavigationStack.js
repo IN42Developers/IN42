@@ -72,7 +72,7 @@ export const AppStack = () => {
             shadowOpacity: 0,
           },
           tabBarLabelStyle: {
-            fontFamily: 'Bold',
+            fontWeight: 'bold',
             fontSize: 16,
           },
           headerTintColor: '#fff',
@@ -109,7 +109,7 @@ export const AppStack = () => {
             borderTopWidth: 1,
         },
         tabBarLabelStyle: {
-          fontFamily: 'Bold',
+          fontWeight: 'bold',
           fontSize: 16,
         },
         tabBarLabel: '',

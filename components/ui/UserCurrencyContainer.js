@@ -28,7 +28,6 @@ styles = StyleSheet.create({
     color: Color.darkGray,
     fontSize: 10,
     top: 1,
-    fontFamily: 'Medium',
    },
    numberText: {
     color: Color.white,
@@ -36,7 +35,7 @@ styles = StyleSheet.create({
     left: 8,
     bottom: 2,
     fontSize: 14,
-    fontFamily: 'Bold',
+    fontWeight: 'bold',
    },
 
 })
