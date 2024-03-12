@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import {useAuthRequest} from 'expo-auth-session';
-// import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from '@env'
+import { BASIC_HEADER_HASH } from '@env'
 import { setAccessToken,setKeyValuePair, retrieveStoredValue } from './TokenStorage';
 // import { getTokenFromCode } from './api_utilities';
 import { IncrementRequestCounter } from './UserData';
@@ -32,57 +32,21 @@ export const  authorizeUser =  () => {
 }
 
 
-//getTokenFromCode and refresh token could be made into 1 function
+//authorize over Auth server
 export const getTokenFromCode = async (code) => {
 
   const tokenRequest = {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `grant_type=authorization_code&client_id=${process.env.EXPO_PUBLIC_CLIENT_ID}&client_secret=${process.env.EXPO_PUBLIC_CLIENT_SECRET}&code=${code}&redirect_uri=${encodeURIComponent(process.env.EXPO_PUBLIC_REDIRECT_URI)}`,
-    };
-    console.log('Token request = ', tokenRequest)
-  try {
-      IncrementRequestCounter();
-      const response = await fetch("https://api.intra.42.fr/oauth/token", tokenRequest);
-      console.log(response)
-      if (response.ok) {
-          const tokenData = await response.json();
-          setAccessToken(tokenData);
-          await setKeyValuePair('AccessToken', tokenData);
-          // console.log('TOKENDATA = ',tokenData);
-          return tokenData;
-      } else {
-          throw new Error('Failed to obtain token');
-      }
-  } catch (error) {
-      console.log(error);
-      throw new Error(error);
-  }
-}
-
-
-export const getTokenFromCode2 = async (code) => {
-
-  const anotherSecret = "amVhbklzc2Vyc3RlZHQ6MTIz";
-
-  const tokenRequest = {
-      method: 'POST',
-      headers: {
           'Content-Type': 'application/json',
-          'X-SECRET': `${anotherSecret}`,
+          'X-SECRET': `${BASIC_HEADER_HASH}`,
       },
-      body: JSON.stringify({ code: code }),
     };
-    console.log("CODE = ",code)
-    console.log('Token request = ', tokenRequest)
     try{
-
-      console.log("----------------------------------")
-      //note this obviously doens't work because my phone is not in the same network
-      const resp = await fetch("http://10.13.3.6:3000/status")
+      const resp = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
       const data = await resp.json()
+      if(data.status != "ok")
+        throw new Error('Server may be offline');
       console.log("SERVER STATUS = ",data.status);
     }
     catch{
@@ -90,14 +54,14 @@ export const getTokenFromCode2 = async (code) => {
     }
     try {
       IncrementRequestCounter();
-      const response = await fetch(`http://10.13.3.6:3000/token/access?code=${code}`, tokenRequest);
+      const response = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`, tokenRequest);
       console.log('THIS IS A RESPONSE BOII = ',response)
       if (response.ok) {
           const tokenData = await response.json();
-          console.log('TOKEN DATA AAAAA = ',tokenData)
           setAccessToken(tokenData);
           await setKeyValuePair('AccessToken', tokenData);
-          // console.log('TOKENDATA = ',tokenData);
+          let token = await retrieveStoredValue('AccessToken')
+          console.log('AFTER STORED = ',token);
           return tokenData;
       } else {
           throw new Error('Failed to obtain token');
@@ -107,3 +71,4 @@ export const getTokenFromCode2 = async (code) => {
       throw new Error(error);
   }
 }
+

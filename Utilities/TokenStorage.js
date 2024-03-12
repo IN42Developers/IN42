@@ -1,5 +1,5 @@
 import * as SecureStore from 'expo-secure-store'
-// import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from '@env'
+import { BASIC_HEADER_HASH } from '@env'
 // import { refreshToken } from './apiAuthorization';
 
 let accessToken = null;
@@ -61,24 +61,25 @@ export function calculateRemainingTokenTime(creationDate) {
     return res;
 }
 
-export const refreshToken = async () => {
+  export const refreshToken = async () => {
 
     try {
       let tokendata = await retrieveStoredValue('AccessToken')
+      console.log('tokenData before jsonparse= ',tokendata);
       tokendata = JSON.parse(tokendata);
-    //   console.log('tokenData in refresh token= ',tokendata);
+
+      console.log('tokenData in refresh token= ',tokendata);
       if(tokendata === null)
           throw new Error("Couldn't retrieve tokendata from storage in refreshToken()");
   
     const tokenRequest = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            'X-SECRET': `${BASIC_HEADER_HASH}`, //process.env.BASIC_HEADER_HASH
         },
-        body: `grant_type=refresh_token&client_id=${process.env.EXPO_PUBLIC_CLIENT_ID}&client_secret=${process.env.EXPO_PUBLIC_CLIENT_SECRET}&refresh_token=${tokendata.refresh_token}&redirect_uri=${encodeURIComponent(process.env.EXPO_PUBLIC_REDIRECT_URI)}`,
       };
-  
-        const response = await fetch("https://api.intra.42.fr/oauth/token", tokenRequest);
+        const response = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/refresh?refresh_token=${tokendata.refresh_token}`, tokenRequest);
         if (response.ok) {
             const tokenData = await response.json();
             setAccessToken(tokenData);

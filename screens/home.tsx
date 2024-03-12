@@ -18,6 +18,9 @@ import Animated, { useAnimatedGestureHandler, useSharedValue, useAnimatedStyle, 
 // import UserInfoCard2 from '../components/complex/UserInfoCard2';
 import EmptyContainerItem from '../components/buttons/EmptyContainerItem';
 
+import { BASIC_HEADER_HASH  } from '@env'
+import DefaultButton from '../components/buttons/AuthButton';
+
 export default function HomeScreen() {
   const {height} = useWindowDimensions();
 
@@ -67,6 +70,9 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
     navigation.navigate("UserSlotScreen");
   }
 
+  const handlePress = () => {
+    console.log("BASIC_HEADER_HASH",BASIC_HEADER_HASH);
+  }
 
   // if (!loaded) { 
   //   console.log('loaded failed returned null')
@@ -83,6 +89,7 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
         <View style={styles.userInfoCardContainer}>
           <UserInfoCard />
         </View>
+        <DefaultButton onPress={handlePress} title='Authorize' />
         <ListContainer title={'Evaluations'}  ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>
         <ListContainer title={'Events'} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={emptyEventText} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen}/>  
         <PanGestureHandler onGestureEvent={unlockGestureHandler}>
