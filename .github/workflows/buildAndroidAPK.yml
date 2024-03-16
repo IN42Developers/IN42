@@ -31,7 +31,8 @@ jobs:
           done
       
       - name: Display file content
-        run: cat ./screens/index.tsx
+        run: cat ./Utilities/apiAuthorization.js
+        # run: cat ./screens/index.tsx
 
 
 #       - name: 🏗 Setup Node
