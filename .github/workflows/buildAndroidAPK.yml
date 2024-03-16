@@ -14,7 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: find files
-        run: grep -rl "${BASIC_HEADER_HASH}" .
+        run: pwd
+        # run: grep -rl "${BASIC_HEADER_HASH}" .
         
       - name: Set environment variable
         run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
