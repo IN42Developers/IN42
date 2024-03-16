@@ -31,8 +31,6 @@ export const  authorizeUser =  () => {
     return { response, promptAsync };
 }
 
-
-//authorize over Auth server
 export const getTokenFromCode = async (code) => {
 
   const tokenRequest = {
@@ -42,6 +40,7 @@ export const getTokenFromCode = async (code) => {
           'X-SECRET': `${BASIC_HEADER_HASH}`,
       },
     };
+    console.log("tokenRequest = ", tokenRequest)
     try{
       const resp = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
       const data = await resp.json()
@@ -56,6 +55,9 @@ export const getTokenFromCode = async (code) => {
       IncrementRequestCounter();
       const response = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`, tokenRequest);
       console.log('THIS IS A RESPONSE BOII = ',response)
+      console.log("response.ok = ",response.ok)
+      const tokenData1 = await response.json();
+      console.log("tokenData1.json = ",tokenData1)
       if (response.ok) {
           const tokenData = await response.json();
           setAccessToken(tokenData);
