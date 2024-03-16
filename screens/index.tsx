@@ -14,6 +14,8 @@ import { AssertUserCanRequestData } from '../Utilities/UserData'
 
 import { AuthContext } from '../Context'
 
+import { BASIC_HEADER_HASH } from '@env'
+
 export default function IndexScreen() {
     const {Login} = React.useContext(AuthContext);
     const navigation = useNavigation();
@@ -57,6 +59,11 @@ export default function IndexScreen() {
     //self invoking async function wtf?!
   },[response])
 
+
+  const getXSecret = async () => {
+    console.log(`X-SECRET = ${BASIC_HEADER_HASH}`)
+  }
+
   const handlePress = async () => {
     try {
       if (AssertUserCanRequestData() == false) {
@@ -89,6 +96,7 @@ export default function IndexScreen() {
           <Text style={styles.textDescription}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
           <View style={styles.seperator} />
           <View style={styles.seperator} />
+          <DefaultButton onPress={getXSecret} title='get X-Secret' />
           <DefaultButton onPress={handlePress} title='Authorize' />
         </View>
       </View>
