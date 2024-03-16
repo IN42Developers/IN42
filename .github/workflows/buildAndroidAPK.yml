@@ -17,7 +17,7 @@ jobs:
         run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
       
       - name: Replace occurrences
-        run: find . -type f -name \( -name '*.js' -o -name '*.tsx' -o -name '*.ts' \) -exec sed -i "s|${BASIC_HEADER_HASH}|${{ env.BASIC_HEADER_HASH }}|g" {} +
+        run: find . -type f \( -name '*.js' -o -name '*.tsx' -o -name '*.ts' \) -exec sed -i "s|${BASIC_HEADER_HASH}|${{ env.BASIC_HEADER_HASH }}|g" {} +
       
       - name: Display file content
         run: cat ./screens/index.tsx
