@@ -12,50 +12,38 @@ jobs:
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
-
-      - name: find files
-        run: ls -la
-        # run: grep -rl "${BASIC_HEADER_HASH}" .
         
       - name: Set environment variable
         run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
       
       - name: Replace occurrences
-        # run: |
-        #   for file in $(find . -type f -name '*.js' -o -name '*.tsx' -o -name '*.ts'); do
-        #     sed -i "s|\${BASIC_HEADER_HASH}|${BASIC_HEADER_HASH}|g" "$file"
-        #   done
         run: |
           for file in $(find . -type f -name '*.js' -o -name '*.tsx' -o -name '*.ts'); do
-            sed -i "s|\${BASIC_HEADER_HASH}|WOWOWOWOWOWOOWOWOWOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOWOOWWOOW|g" "$file"
+            sed -i "s|\${BASIC_HEADER_HASH}|${BASIC_HEADER_HASH}|g" "$file"
           done
-      
-      - name: Display file content
-        run: cat ./Utilities/apiAuthorization.js
-        # run: cat ./screens/index.tsx
 
 
-#       - name: 🏗 Setup Node
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 18.x
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
 
-#       - name: 🏗 Setup EAS
-#         uses: expo/expo-github-action@v8
-#         with:
-#           eas-version: latest
-#           token: ${{ secrets.EXPO_TOKEN }}
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
 
-#       - name: 📦 Install dependencies
-#         run: yarn install
+      - name: 📦 Install dependencies
+        run: yarn install
 
-#       - name: 🚀 Build app
-#         run: eas build -p android --profile preview --local --non-interactive --clear-cache --output "./apk/android-preview-build.apk"
+      - name: 🚀 Build app
+        run: eas build -p android --profile preview --local --non-interactive --clear-cache --output "./apk/android-preview-build.apk"
         
           
 
-# # Upload the file generated
-#       - uses: actions/upload-artifact@v4
-#         with:
-#           name: buildArtifact
-#           path: ./apk/android-preview-build.apk
+# Upload the file generated
+      - uses: actions/upload-artifact@v4
+        with:
+          name: buildArtifact
+          path: ./apk/android-preview-build.apk
