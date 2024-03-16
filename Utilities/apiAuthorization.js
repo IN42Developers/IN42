@@ -14,7 +14,7 @@ export const  authorizeUser =  () => {
     if(!apiUrl){
       console.log('REDIRECT URI =',apiUrl)
       console.log('Redirect URI is undefined, it seems like your .env is not setup')
-      return {undefined, promptAsync: () => console.log("THIS FUNCTION DOESN'T EXIST. .env is not setup")};
+      return {undefined, promptAsync: () => console.log(`THIS FUNCTION DOESN'T EXIST. .env is not setup`)};
     }
 
     const [request, response, promptAsync] = useAuthRequest(
@@ -45,9 +45,9 @@ export const getTokenFromCode = async (code) => {
     try{
       const resp = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
       const data = await resp.json()
-      if(data.status != "ok")
+      if(data.status != `ok`)
         throw new Error('Server may be offline');
-      console.log("SERVER STATUS = ",data.status);
+      console.log(`SERVER STATUS = `,data.status);
     }
     catch{
       throw new Error('Couldnt do it');
