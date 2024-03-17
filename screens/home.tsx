@@ -18,7 +18,7 @@ import Animated, { useAnimatedGestureHandler, useSharedValue, useAnimatedStyle, 
 // import UserInfoCard2 from '../components/complex/UserInfoCard2';
 import EmptyContainerItem from '../components/buttons/EmptyContainerItem';
 
-import { BASIC_HEADER_HASH  } from '@env'
+import { refreshToken } from '../Utilities/TokenStorage';
 import DefaultButton from '../components/buttons/AuthButton';
 
 export default function HomeScreen() {
@@ -70,8 +70,13 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
     navigation.navigate("UserSlotScreen");
   }
 
-  const handlePress = () => {
-    console.log("BASIC_HEADER_HASH",BASIC_HEADER_HASH);
+  const handlePress =async () => {
+    try {
+      await refreshToken();
+      
+    } catch (error) {
+      
+    }
   }
 
   // if (!loaded) { 

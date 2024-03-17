@@ -1,26 +1,25 @@
 import { useEffect } from 'react'
 import {useAuthRequest} from 'expo-auth-session';
-import { BASIC_HEADER_HASH } from '@env'
 import { setAccessToken,setKeyValuePair, retrieveStoredValue } from './TokenStorage';
 // import { getTokenFromCode } from './api_utilities';
 import { IncrementRequestCounter } from './UserData';
 
 export const  authorizeUser =  () => {
 
-  const apiUrl = process.env.EXPO_PUBLIC_REDIRECT_URI;
-  const id = process.env.EXPO_PUBLIC_CLIENT_ID;
-  console.log('EXPO_PUBLIC_API_URL =',apiUrl);
-  console.log('EXPO_PUBLIC_CLIENT_ID =',id);
-    if(!apiUrl){
-      console.log('REDIRECT URI =',apiUrl)
+  const redirectURI = (process.env.IN42_DEV == "true" ? process.env.IN42_DEV_REDIRECT_URI: process.env.EXPO_PUBLIC_REDIRECT_URI );
+  const clientID =(process.env.IN42_DEV == "true" ? process.env.IN42_DEV_CLIENT_ID : process.env.EXPO_PUBLIC_CLIENT_ID);
+  console.log('API_URL =',redirectURI);
+  console.log('CLIENT_ID =',clientID);
+    if(!redirectURI){
+      console.log('REDIRECT URI =',redirectURI)
       console.log('Redirect URI is undefined, it seems like your .env is not setup')
       return {undefined, promptAsync: () => console.log(`THIS FUNCTION DOESN'T EXIST. .env is not setup`)};
     }
 
     const [request, response, promptAsync] = useAuthRequest(
       {
-        clientId: process.env.EXPO_PUBLIC_CLIENT_ID,
-        redirectUri: apiUrl, 
+        clientId: clientID,
+        redirectUri: redirectURI, 
         responseType: 'code',
         scopes: ['public','projects','profile','elearning','forum'],
         codeChallengeMethod: 'S256',
@@ -31,46 +30,52 @@ export const  authorizeUser =  () => {
     return { response, promptAsync };
 }
 
-export const getTokenFromCode = async (code) => {
-
-  const tokenRequest = {
+//function that depends on the IN42_DEV env variable to bypass auth server
+const createRequestInit = (code) => {
+  if(process.env.IN42_DEV == 'true' ){
+    return {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/json',
-          'X-SECRET': `${BASIC_HEADER_HASH}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
       },
+      body: `grant_type=authorization_code&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&code=${code}&redirect_uri=${encodeURIComponent(process.env.EXPO_PUBLIC_REDIRECT_URI)}`,
     };
-    console.log("tokenRequest = ", tokenRequest)
-    try{
-      const resp = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
-      const data = await resp.json()
-      if(data.status != `ok`)
-        throw new Error('Server may be offline');
-      console.log(`SERVER STATUS = `,data.status);
-    }
-    catch{
-      throw new Error('Couldnt do it');
-    }
-    try {
-      IncrementRequestCounter();
-      const response = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`, tokenRequest);
-      console.log('THIS IS A RESPONSE BOII = ',response)
-      console.log("response.ok = ",response.ok)
-      const tokenData1 = await response.json();
-      console.log("tokenData1.json = ",tokenData1)
-      if (response.ok) {
-          const tokenData = await response.json();
-          setAccessToken(tokenData);
-          await setKeyValuePair('AccessToken', tokenData);
-          let token = await retrieveStoredValue('AccessToken')
-          console.log('AFTER STORED = ',token);
-          return tokenData;
-      } else {
-          throw new Error('Failed to obtain token');
-      }
-  } catch (error) {
-      console.log(error);
-      throw new Error(error);
   }
+  return {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        "X-SECRET": `${process.env.BASIC_HEADER_HASH}`,
+    },
+    body: JSON.stringify({ code: code }),
+  };
 }
 
+//function that depends on the IN42_DEV env variable to bypass auth server
+const createRequestURL = (code) => {
+  if(process.env.IN42_DEV == 'true' ){
+    return "https://api.intra.42.fr/oauth/token";
+  }
+  return `http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`;
+}
+
+export const getTokenFromCode = async (code) => {
+  
+  try {
+    IncrementRequestCounter();
+    const response = await fetch(createRequestURL(code), createRequestInit(code));
+    console.log(response)
+    if (response.ok) {
+        const tokenData = await response.json();
+        setAccessToken(tokenData);
+        await setKeyValuePair('AccessToken', tokenData);
+        // console.log('TOKENDATA = ',tokenData);
+        return tokenData;
+    } else {
+        throw new Error('Failed to obtain token');
+    }
+} catch (error) {
+    console.log(error);
+    throw new Error(error);
+}
+}

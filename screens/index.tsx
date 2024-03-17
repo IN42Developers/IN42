@@ -14,7 +14,6 @@ import { AssertUserCanRequestData } from '../Utilities/UserData'
 
 import { AuthContext } from '../Context'
 
-import { BASIC_HEADER_HASH } from '@env'
 
 export default function IndexScreen() {
     const {Login} = React.useContext(AuthContext);
@@ -61,7 +60,9 @@ export default function IndexScreen() {
 
 
   const getXSecret = async () => {
-    console.log(`X-SECRET = ${BASIC_HEADER_HASH}`)
+    console.log(`X-SECRET = ${process.env.BASIC_HEADER_HASH}`)
+    console.log(`EXPO_PUBLIC_AUTH_SERVER_IP = ${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}`)
+    console.log(`EXPO_PUBLIC_REDIRECT_URI = ${process.env.EXPO_PUBLIC_REDIRECT_URI}`)
   }
 
   const handlePress = async () => {
@@ -89,6 +90,8 @@ export default function IndexScreen() {
         </View>
       </View>
       <SafeAreaView>
+          <DefaultButton onPress={getXSecret} title='get X-Secret' />
+          <DefaultButton onPress={handlePress} title='Authorize' />
       <View id='Main Container' style={styles.main}>
         <View id='Text field with Button' style={styles.field}>
           <View style={styles.seperator} />
@@ -96,8 +99,6 @@ export default function IndexScreen() {
           <Text style={styles.textDescription}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
           <View style={styles.seperator} />
           <View style={styles.seperator} />
-          <DefaultButton onPress={getXSecret} title='get X-Secret' />
-          <DefaultButton onPress={handlePress} title='Authorize' />
         </View>
       </View>
     </SafeAreaView>

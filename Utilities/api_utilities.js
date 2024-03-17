@@ -97,6 +97,7 @@ export const DeleteDataFromEndpoint =async (endpoint)=> {
 
 }
 
+//yikes?
 export const StallTimeBetweenApiCalls = () =>{
     return new Promise(resolve => setTimeout(resolve, 600));
 }
