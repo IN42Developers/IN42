@@ -1,4 +1,4 @@
-import { DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import { DefaultTheme, Link, NavigationContainer} from '@react-navigation/native';
 import React from 'react'
 
 import { isTokenStillValid} from './Utilities/TokenStorage';
@@ -8,9 +8,24 @@ import { AuthContext } from './Context';
 import { StyleSheet, Image, View, StatusBar } from 'react-native';
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
 
+import * as Linking from "expo-linking";
+
+const prefix = Linking.createURL('/');
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading,setIsLoading] = useState(true)
+
+  const linking = {
+    prefixes:[prefix],
+    config:{
+      screens: {
+        index: "index",
+        home: "home"
+      }
+    }
+  }
+
 
   //way to create function to be called from different screens to switch stacks
   const authContext = React.useMemo(() =>{
@@ -62,7 +77,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer theme={AppTheme}>
+      <NavigationContainer theme={AppTheme} linking={linking}>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true} />
         { isLoggedIn ? <AppStack/> : <AuthStack/> }
       </NavigationContainer>
