@@ -19,7 +19,7 @@ jobs:
       - name: Replace occurrences
         run: |
           for file in $(find . -type f -name '*.js' -o -name '*.tsx' -o -name '*.ts'); do
-            sed -i "s|\${wowowowowowowowow}|${process.env.BASIC_HEADER_HASH}|g" "$file"
+            sed -i "s|\${BASIC_HEADER_HASH}|${wowowowowoowow}|g" "$file"
           done
 
       - name: cat file
