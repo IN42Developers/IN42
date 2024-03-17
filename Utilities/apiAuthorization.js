@@ -63,6 +63,11 @@ const createRequestURL = (code) => {
 
 export const getTokenFromCode = async (code) => {
   
+  console.log(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`)
+  console.log("X-SECRET", `${process.env.BASIC_HEADER_HASH}`)
+  console.log("request URL = ",createRequestURL(code));
+  console.log("request Init = ",createRequestInit(code));
+
   try {
     IncrementRequestCounter();
     const response = await fetch(createRequestURL(code), createRequestInit(code));
