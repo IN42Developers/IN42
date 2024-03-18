@@ -12,6 +12,14 @@
       "backgroundColor": "#ffffff"
     },
     "scheme": "in42",
+    "plugins": [
+      ["expo-build-properties", {
+        "android": {
+          "usesCleartextTraffic": true
+        },
+        "ios": {
+        }
+      }]],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -24,7 +32,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mrm0lten.IN42"
+      "package": "com.mrm0lten.IN42",
     },
     "web": {
       "favicon": "./assets/favicon.png"
