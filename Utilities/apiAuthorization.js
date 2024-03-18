@@ -71,12 +71,12 @@ export const getTokenFromCode = async (code) => {
   console.log('------------------------------------------------------------');
 
   try {
-    // IncrementRequestCounter(); might crash
-    if(!process.env.IN42_DEV){
-      console.log('Before status request');
-      const status = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
-      console.log("status = ", status.json())
-    }
+    IncrementRequestCounter();
+    
+    console.log('Before status request');
+    const status = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
+    console.log("status = ", status.json())
+    
     console.log('Before fetch request');
     const response = await fetch(createRequestURL(code), createRequestInit(code));
     console.log('after fetch request');
