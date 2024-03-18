@@ -24,7 +24,8 @@ export default function IndexScreen() {
   useEffect( () => {
     const tokenExchange = async() =>{
       try {
-        
+        console.log('logging Response',response);
+        console.log('Response Type',response?.type);
         if (response?.type === 'success') {
           const { code } = response.params;
           console.log('CODE = ', code);
