@@ -41,7 +41,8 @@
     "react-native-svg": "13.9.0",
     "typescript": "^5.1.3",
     "zustand": "^4.4.1",
-    "expo-linking": "~5.0.2"
+    "expo-linking": "~5.0.2",
+    "expo-dev-client": "~2.4.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
