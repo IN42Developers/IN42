@@ -50,7 +50,7 @@ const createRequestInit = (code) => {
         "X-SECRET": `${process.env.BASIC_HEADER_HASH}`,
     },
     body: JSON.stringify({ code: code }),
-    agent: new https.Agent({ rejectUnauthorized: false }),
+    // agent: new https.Agent({ rejectUnauthorized: false }),
   };
 }
 
