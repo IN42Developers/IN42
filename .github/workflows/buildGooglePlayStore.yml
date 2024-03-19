@@ -22,45 +22,45 @@ jobs:
             sed -i "s|\${process.env.BASIC_HEADER_HASH}|${BASIC_HEADER_HASH}|g" "$file"
           done
 
-      - name: cat file
-        run: cat ./Utilities/apiAuthorization.js
+      # - name: cat file
+      #   run: cat ./Utilities/apiAuthorization.js
 
-#       - name: 🏗 Setup Node
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 18.x
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
 
-#       - name: 🏗 Setup EAS
-#         uses: expo/expo-github-action@v8
-#         with:
-#           eas-version: latest
-#           token: ${{ secrets.EXPO_TOKEN }}
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
 
-#       - name: 📦 Install dependencies
-#         run: yarn install
+      - name: 📦 Install dependencies
+        run: yarn install
 
-#       - name: 🚀 Build app
-#         run: eas build -p android --profile production --local --non-interactive --clear-cache --output "./aab/in42.aab"
+      - name: 🚀 Build app
+        run: eas build -p android --profile production --local --non-interactive --clear-cache --output "./aab/in42.aab"
         
           
 
-# # Upload the file generated
-#       - uses: actions/upload-artifact@v4
-#         with:
-#           name: buildArtifact
-#           path: ./aab/in42.aab
+# Upload the file generated
+      - uses: actions/upload-artifact@v4
+        with:
+          name: buildArtifact
+          path: ./aab/in42.aab
 
-#       - name: Create service_account.json
-#         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+      - name: Create service_account.json
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
 
-#       - name: Deploy to Play store
-#         uses: r0adkll/upload-google-play@v1
-#         with:
-#           serviceAccountJson: service_account.json
-#           packageName: com.mrm0lten.IN42
-#           releaseFiles: ./aab/in42.aab
-#           track: internal # will likely need to change in the future
-#           status: draft #note this will need to be changed later to completed or removed
-#           # whatsNewDirectory: distribution/         
-# # documentation on google play upload
-# # https://github.com/r0adkll/upload-google-play
+      - name: Deploy to Play store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: service_account.json
+          packageName: com.mrm0lten.IN42
+          releaseFiles: ./aab/in42.aab
+          track: internal # will likely need to change in the future
+          status: draft #note this will need to be changed later to completed or removed
+          # whatsNewDirectory: distribution/         
+# documentation on google play upload
+# https://github.com/r0adkll/upload-google-play
