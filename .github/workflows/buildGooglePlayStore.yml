@@ -13,6 +13,9 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
 
+      - name: Set environment variable
+        run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
+
       - name: Replace occurrences
         run: |
           for file in $(find . -type f -name '*.js' -o -name '*.tsx' -o -name '*.ts'); do
