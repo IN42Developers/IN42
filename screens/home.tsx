@@ -5,9 +5,7 @@ import { View, StyleSheet, SafeAreaView, useWindowDimensions } from 'react-nativ
 import ListContainer from '../components/generic/ListContainer';
 import EventItem from '../components/buttons/EventItem';
 import EvaluationItem from '../components/buttons/EvaluationItem';
-// import UserInfoCard from '../components/ui/UserInfoCard';
 import UserInfoCard from '../components/complex/UserInfoCard';
-// import UserStatusContainer from '../components/ui/UserStatusContainer';
 import { useNavigation } from '@react-navigation/native'
 import { useStore } from '../Utilities/store';
 import { shallow } from 'zustand/shallow'
@@ -15,11 +13,9 @@ import { shallow } from 'zustand/shallow'
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { PanGestureHandler } from "react-native-gesture-handler"
 import Animated, { useAnimatedGestureHandler, useSharedValue, useAnimatedStyle, withTiming, Easing, runOnJS } from "react-native-reanimated"
-// import UserInfoCard2 from '../components/complex/UserInfoCard2';
 import EmptyContainerItem from '../components/buttons/EmptyContainerItem';
 
 import { refreshToken } from '../Utilities/TokenStorage';
-import DefaultButton from '../components/buttons/AuthButton';
 
 export default function HomeScreen() {
   const {height} = useWindowDimensions();
@@ -94,7 +90,6 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
         <View style={styles.userInfoCardContainer}>
           <UserInfoCard />
         </View>
-        <DefaultButton onPress={handlePress} title='Authorize' />
         <ListContainer title={'Evaluations'}  ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>
         <ListContainer title={'Events'} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={emptyEventText} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen}/>  
         <PanGestureHandler onGestureEvent={unlockGestureHandler}>

@@ -40,17 +40,16 @@ const createRequestInit = (code) => {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `grant_type=authorization_code&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&code=${code}&redirect_uri=${encodeURIComponent(process.env.EXPO_PUBLIC_REDIRECT_URI)}`,
+      body: `grant_type=authorization_code&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&code=${code}&redirect_uri=${encodeURIComponent(process.env.IN42_DEV_REDIRECT_URI)}`,
     };
   }
   return {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        "X-SECRET": `${process.env.BASIC_HEADER_HASH}`,
+        "X-SECRET": `${process.env.BASIC_HEADER_HASH}`, //note this gets replaced in the build process
     },
     body: JSON.stringify({ code: code }),
-    // agent: new https.Agent({ rejectUnauthorized: false }),
   };
 }
 

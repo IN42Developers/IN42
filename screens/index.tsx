@@ -24,8 +24,8 @@ export default function IndexScreen() {
   useEffect( () => {
     const tokenExchange = async() =>{
       try {
-        console.log('logging Response',response);
-        console.log('Response Type',response?.type);
+        console.log('logging Response =',response);
+        console.log('Response Type =',response?.type);
         if (response?.type === 'success') {
           const { code } = response.params;
           console.log('CODE = ', code);
@@ -92,8 +92,6 @@ export default function IndexScreen() {
         </View>
       </View>
       <SafeAreaView>
-          <DefaultButton onPress={getXSecret} title='get X-Secret' />
-          <DefaultButton onPress={handlePress} title='Authorize' />
       <View id='Main Container' style={styles.main}>
         <View id='Text field with Button' style={styles.field}>
           <View style={styles.seperator} />
@@ -101,6 +99,7 @@ export default function IndexScreen() {
           <Text style={styles.textDescription}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
           <View style={styles.seperator} />
           <View style={styles.seperator} />
+          <DefaultButton onPress={handlePress} title='Authorize' />
         </View>
       </View>
     </SafeAreaView>
