@@ -1,6 +1,4 @@
 import * as SecureStore from 'expo-secure-store'
-import { BASIC_HEADER_HASH } from '@env'
-// import { refreshToken } from './apiAuthorization';
 
 let accessToken = null;
 
@@ -61,6 +59,35 @@ export function calculateRemainingTokenTime(creationDate) {
     return res;
 }
 
+//function that depends on the IN42_DEV env variable to bypass auth server
+const createRequestInit = (tokendata) => {
+    if(process.env.IN42_DEV == 'true' ){
+      return {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `grant_type=refresh_token&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&refresh_token=${tokendata.refresh_token}&redirect_uri=${encodeURIComponent(process.env.IN42_DEV_REDIRECT_URI)}`,
+      };
+    }
+    return {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-SECRET': `${process.env.BASIC_HEADER_HASH}`,
+        },
+      };
+  }
+  
+  //function that depends on the IN42_DEV env variable to bypass auth server
+  const createRequestURL = (tokendata) => {
+    console.log('CREATE REQUEST URL',tokendata)
+    if(process.env.IN42_DEV == 'true' ){
+      return "https://api.intra.42.fr/oauth/token";
+    }
+    return `http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/refresh?refresh_token=${tokendata.refresh_token}`;
+  }
+
   export const refreshToken = async () => {
 
     try {
@@ -72,14 +99,7 @@ export function calculateRemainingTokenTime(creationDate) {
       if(tokendata === null)
           throw new Error("Couldn't retrieve tokendata from storage in refreshToken()");
   
-    const tokenRequest = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-SECRET': `${BASIC_HEADER_HASH}`, //process.env.BASIC_HEADER_HASH
-        },
-      };
-        const response = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/refresh?refresh_token=${tokendata.refresh_token}`, tokenRequest);
+      const response = await fetch(createRequestURL(tokendata), createRequestInit(tokendata));
         if (response.ok) {
             const tokenData = await response.json();
             setAccessToken(tokenData);
@@ -93,5 +113,4 @@ export function calculateRemainingTokenTime(creationDate) {
         console.log(error);
         throw error;
     }
-    return false;
   }

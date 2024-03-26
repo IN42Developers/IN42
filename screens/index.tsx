@@ -14,6 +14,7 @@ import { AssertUserCanRequestData } from '../Utilities/UserData'
 
 import { AuthContext } from '../Context'
 
+
 export default function IndexScreen() {
     const {Login} = React.useContext(AuthContext);
     const navigation = useNavigation();
@@ -23,7 +24,8 @@ export default function IndexScreen() {
   useEffect( () => {
     const tokenExchange = async() =>{
       try {
-        
+        console.log('logging Response =',response);
+        console.log('Response Type =',response?.type);
         if (response?.type === 'success') {
           const { code } = response.params;
           console.log('CODE = ', code);
@@ -57,7 +59,15 @@ export default function IndexScreen() {
     //self invoking async function wtf?!
   },[response])
 
+
+  const getXSecret = async () => {
+    console.log(`X-SECRET = ${process.env.BASIC_HEADER_HASH}`)
+    console.log(`EXPO_PUBLIC_AUTH_SERVER_IP = ${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}`)
+    console.log(`EXPO_PUBLIC_REDIRECT_URI = ${process.env.EXPO_PUBLIC_REDIRECT_URI}`)
+  }
+
   const handlePress = async () => {
+    console.log("process.env.IN42_DEV",process.env.IN42_DEV);
     try {
       if (AssertUserCanRequestData() == false) {
         return;

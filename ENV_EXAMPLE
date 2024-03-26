@@ -1,0 +1,25 @@
+# --------------------- Development and testing on the Live environment -------------------------------- #
+# Since we dont want to mess with the live environment, its vital that you create your own APP and use that for testing purposes
+
+# Simple switch that allows you to use your own app, over the live environment
+IN42_DEV=true
+# Redirect URI can be found when starting the expo server for the first time, use 'Expo Go' for local dev
+IN42_DEV_REDIRECT_URI="Your Own redirect URI"
+# your own Apps client ID
+IN42_DEV_CLIENT_ID="Your own apps client ID"
+# your own Apps client Secret. DONT SHARE IT WITH ANYONE
+IN42_DEV_CLIENT_SECRET="Your own apps secret"
+
+
+
+# --------------------- Development and testing on the Live environment -------------------------------- #
+# You shouldn't have to concern yourself with this. If you really need to work on the live environment, ask Jean or Chris.
+
+# the default puplic CLIENT_ID. You will find this also in the eas.json
+EXPO_PUBLIC_CLIENT_ID=u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c
+# Our custom redirect scheme. Will redirect to index screen after auth.
+EXPO_PUBLIC_REDIRECT_URI=in42://index
+# the default IP and Port. This should, by default, stay the same.
+EXPO_PUBLIC_AUTH_SERVER_IP=35.233.217.18:3000
+# Basic 64 hash that allows you to use the live auth server. you will get a 401 if thats not included
+BASIC_HEADER_HASH="You need to ask the people to get this secret. This gives access to our server, hence the secrecy"
