@@ -13,6 +13,18 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
 
+      - name: Set environment variable
+        run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
+
+      - name: Replace occurrences
+        run: |
+          for file in $(find . -type f -name '*.js' -o -name '*.tsx' -o -name '*.ts'); do
+            sed -i "s|\${process.env.BASIC_HEADER_HASH}|${BASIC_HEADER_HASH}|g" "$file"
+          done
+
+      # - name: cat file
+      #   run: cat ./Utilities/apiAuthorization.js
+
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
         with:
