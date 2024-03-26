@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useFonts } from 'expo-font';
 import { View, StyleSheet, SafeAreaView, useWindowDimensions } from 'react-native';
 import ListContainer from '../components/generic/ListContainer';
 import EventItem from '../components/buttons/EventItem';
