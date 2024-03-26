@@ -43,7 +43,7 @@ export const AuthStack = () => {
         },
       }}>
         <Stack.Screen name="index" options={{ statusBarColor: '#000', headerShown: false }} component={IndexScreen}/>
-        <Stack.Screen name="home" options={{ statusBarColor: '#000', headerShown: false }} component={HomeScreen}/>
+        {/* <Stack.Screen name="home" options={{ statusBarColor: '#000', headerShown: false }} component={HomeScreen}/> */}
       </Stack.Navigator>
   );
 };

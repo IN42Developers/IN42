@@ -15,10 +15,15 @@ export default function SettingsScreen () {
 
     const {Logout} = React.useContext(AuthContext);
     const LogoutUser =  async () =>{
-      await setKeyValuePair('AccessToken', '');
-      setAccessToken(null);
-      console.log('Trying to Logout');
-      Logout();
+        try {
+            
+            await setKeyValuePair('AccessToken', '');
+            setAccessToken(null);
+            console.log('Trying to Logout');
+            Logout();
+        } catch (error) {
+            console.log('Logout Failed for some reason?',error)
+        }
   
     } 
 

@@ -31,10 +31,12 @@ export default function App() {
   const authContext = React.useMemo(() =>{
     return {
       Login: () => {
+        console.log("isLoggedIn =",isLoggedIn )
         setIsLoading(false);
         setIsLoggedIn(true);
       },
       Logout: () => {
+        console.log("isLoggedIn =",isLoggedIn )
         setIsLoading(false);
         setIsLoggedIn(false);
       }

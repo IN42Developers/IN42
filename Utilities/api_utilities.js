@@ -9,7 +9,11 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
 
     let uri = `https://api.intra.42.fr${endpoint}`;
     let tokendata = getAccessToken();
-    // console.log("tokendata in getdata = ",tokendata);
+    console.log("tokendata in getdata = ",tokendata);
+    if(!tokendata){
+        // return null
+        throw new Error("TokenData is Null");
+    }
 
     let req = new Request(uri, {
         method: 'GET',
