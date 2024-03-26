@@ -22,4 +22,4 @@ EXPO_PUBLIC_REDIRECT_URI=in42://index
 # the default IP and Port. This should, by default, stay the same.
 EXPO_PUBLIC_AUTH_SERVER_IP=35.233.217.18:3000
 # Basic 64 hash that allows you to use the live auth server. you will get a 401 if thats not included
-BASIC_HEADER_HASH="You need to ask the people to get this secret. This gives access to our server, hence the secrecy"
+BASIC_HEADER_HASH="You need to ask the people to get this secret. This gives access to our server, hence the secrecy" 
