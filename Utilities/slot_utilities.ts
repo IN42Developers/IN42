@@ -20,6 +20,7 @@ interface SlotChunk {
 
 //takes an array of slot datas and converts them into an array of chunked slot items
 export const CreateSlotChunkata = ( data: Slot[] ) :SlotChunk[] => {
+    console.log(data)
     if(data == null ){
         console.log('data is null or undefined')
         return []

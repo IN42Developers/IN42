@@ -67,6 +67,13 @@ const store = (set) =>({
           console.log(error);
       }
     },
+    CreateEvalSlot: async () => {
+      try {
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },
     DeleteUserSlotChunk: async (chunkID) => {
       let Slots = useStore.getState().Slots;
       
@@ -102,6 +109,7 @@ const store = (set) =>({
         useStore.getState().initEvents();
         await StallTimeBetweenApiCalls()
         useStore.getState().initEvaluations();
+        console.log('Setting UserData complete');
       } catch (error) {
         console.log('Error in refreshUserData() = ', error);
       }

@@ -62,6 +62,7 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
     try {
         console.log('try fetching the post request')
         IncrementRequestCounter()
+        console.log("Post Request = ",tokenRequest)
         const response = await fetch(uri,tokenRequest);
         if(response.ok){
             console.log('Suceess')

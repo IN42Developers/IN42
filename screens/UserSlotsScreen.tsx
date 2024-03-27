@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, FlatList } from "react-native"
+import { StyleSheet, SafeAreaView, FlatList, Button, Text } from "react-native"
 import React, { useState, useEffect } from 'react'
 import ListContainer from "../components/generic/ListContainer"
 import SlotItem from "../components/buttons/SlotItem"
@@ -7,10 +7,13 @@ import SlotPlaceholderItem from "../components/buttons/SlotPlaceholderItem"
 
 import { useStore } from '../Utilities/store';
 import { IsoDateToWeekDay,retrieveDatesFromChunks } from "../Utilities/slot_utilities"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import EvaluationSlotPicker from "../components/complex/EvaluationSlotPicker"
 
 export default function UserSlotsScreen() {
 
     const initSlots = useStore((store) => store.initSlots);
+    const CreateSlots = useStore((store) => store.CreateEvalSlot);
     const slotChunks = useStore((store) => store.Slots);
     let slotDays = retrieveDatesFromChunks(slotChunks);
 
@@ -33,6 +36,10 @@ export default function UserSlotsScreen() {
 
     return (
         <SafeAreaView style={{flex: 1}}>
+                <TouchableOpacity onPress={CreateSlots}>
+                    <Text style={styles.text}>Create slot</Text>
+                    </TouchableOpacity>
+                    <EvaluationSlotPicker></EvaluationSlotPicker>
             <FlatList 
                 data={slotDays}
                 renderItem={({item}) =>(
