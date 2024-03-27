@@ -67,7 +67,6 @@ export default function IndexScreen() {
     //self invoking async function wtf?!
   },[response])
 
-
   const getXSecret = async () => {
     console.log(`X-SECRET = ${process.env.BASIC_HEADER_HASH}`)
     console.log(`EXPO_PUBLIC_AUTH_SERVER_IP = ${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}`)
@@ -75,7 +74,7 @@ export default function IndexScreen() {
   }
 
   const handlePress = async () => {
-    console.log("process.env.IN42_DEV",process.env.IN42_DEV);
+    /* console.log("process.env.IN42_DEV", process.env.IN42_DEV);
     try {
       if (AssertUserCanRequestData() == false) {
         return;
@@ -85,81 +84,35 @@ export default function IndexScreen() {
 
     catch(error){
       console.log(error);
-    }
+    } */
+    navigation.navigate('home', { screen: 'HomeScreen' });
+  }
+
+  if (!fontsLoaded) {
+    return null;
   }
 
   return (
-    <View id='General container' style={styles.container}>
-      <View id='Pattern Group' style={styles.group}>
-      <Image source={require('../assets/images/HeadLayout.png')} style={{
-        width: Dimensions.get('window').width * 1.1,
-        height: Dimensions.get('window').height * 0.38,
-      }} />
-        <View id='Logo' style={styles.logo}>
-          <Logo />
-        </View>
+    <View className='flex flex-col items-center justify-between'>
+      <Image
+        source={require('../assets/images/HeadLayout.png')}
+        style={{width: 480, height: 240}}
+      />
+      <View className='flex flex-col items-center absolute top-24'>
+        <Logo />
       </View>
       <SafeAreaView>
-      <View id='Main Container' style={styles.main}>
-        <View id='Text field with Button' style={styles.field}>
-          <View style={styles.seperator} />
-          <Text style={styles.textHeading}>Welcome back</Text>
-          <Text style={styles.textDescription}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
-          <View style={styles.seperator} />
-          <View style={styles.seperator} />
-          <DefaultButton onPress={handlePress} title='Authorize' />
+        <View className='flex flex-col items-center gap-y-4 my-8'>
+          <Text className='text-white text-3xl font-InterMedium'>Welcome back</Text>
+          <Text className='text-white/50 text-center text-lg p-4 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
         </View>
-      </View>
-    </SafeAreaView>
+        <View className='flex flex-col justify-between items-center'>
+        <DefaultButton
+            title="Authorize"
+            onPress={handlePress}
+          />
+        </View>
+      </SafeAreaView>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  headLayout: {
-  },
-  group: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    position: 'absolute',
-  },
-  seperator: {
-    height: 8,
-  },
-  textHeading: {
-    fontSize: 42,
-    fontWeight: '500',
-    color: '#E0E0E0',
-  },
-  textDescription: {
-    ...Platform.select({
-      ios: {
-        fontSize: 20,
-      },
-      android: {
-        fontSize: 18,
-      },
-    }),
-    color: '#A7A7A7',
-    textAlign: 'center',
-  },
-  main: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  field: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 24,
-    gap: 28,
-    textAlign: 'center',
-  },
-  });
