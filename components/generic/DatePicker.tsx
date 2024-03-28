@@ -4,13 +4,16 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 
+import { IsoDateToWeekDay,formatDateToCustomString } from "../../Utilities/slot_utilities";
+import { GetCurrentDateWithOffset } from "../../Utilities/event_utilities";
+
 interface Props {
   date: Date; // Define the type of the 'date' prop
   onDateChange: (newDate: Date) => void;
 }
 
 
-const DatePicker = ( props: Props ) => {
+const InDatePicker = ( props: Props ) => {
     const [currDate, setDate] = useState<Date>(props.date);
     const [mode, setMode] = useState<'date' | 'time'>('date');
     const [show, setShow] = useState(false);
@@ -34,11 +37,11 @@ const DatePicker = ( props: Props ) => {
     const showTimepicker = () => {
       showMode('time');
     };
-  
+    
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={showDatepicker}>
-        <Text style={styles.text}>{currDate.toDateString()}</Text>
+        <Text style={styles.text}>{formatDateToCustomString(currDate)}</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={showTimepicker}>
         <Text style={styles.text}>{currDate.toLocaleTimeString()}</Text>
@@ -50,6 +53,8 @@ const DatePicker = ( props: Props ) => {
           mode={mode}
           is24Hour={true}
           onChange={onChange}
+          minimumDate={GetCurrentDateWithOffset()}
+          maximumDate={GetCurrentDateWithOffset(0,0,7)}
         />
       )}
     </View>
@@ -57,14 +62,15 @@ const DatePicker = ( props: Props ) => {
 };
 
 
-export default DatePicker;
+export default InDatePicker;
 
 const styles = StyleSheet.create({
     container:{
         // flex: 1,
         flexDirection: 'row',
-        borderColor: 'red',
+        // borderColor: 'red',
         borderWidth: 2,
+        justifyContent: 'space-between',
     },
     timeElement:{
         flex: 1,
@@ -76,7 +82,8 @@ const styles = StyleSheet.create({
         color: 'white',
         backgroundColor: '#1F1F1F',
         alignSelf: 'center',
-        borderColor: 'red',
+        // borderColor: 'red',
+        fontSize: 18,
         borderWidth: 2,
     }
 })

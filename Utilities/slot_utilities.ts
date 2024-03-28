@@ -67,7 +67,7 @@ export const RemoveSlotChunk = async (SlotChunk: SlotChunk) : Promise<boolean> =
     return true;
 }
 
-function formatDateToCustomString(inputDate: Date) : string {
+export function formatDateToCustomString(inputDate: Date) : string {
     const daysOfWeek: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const dayOfWeek: string = daysOfWeek[inputDate.getDay()];
     const dayOfMonth: number = inputDate.getDate();

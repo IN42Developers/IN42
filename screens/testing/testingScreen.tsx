@@ -2,7 +2,7 @@ import { View,StyleSheet,Text,SafeAreaView,ScrollView,FlatList,Image } from "rea
 import React, { useState } from 'react'
 import DefaultButton from "../../components/buttons/AuthButton"
 import { GetDataFromEndPoint } from "../../Utilities/api_utilities"
-import { GetCurrentISODate } from "../../Utilities/event_utilities"
+import { GetCurrentDateWithOffset } from "../../Utilities/event_utilities"
 import ListContainer from "../../components/generic/ListContainer"
 import EventItem from "../../components/buttons/EventItem"
 import EvaluationItem from "../../components/buttons/EvaluationItem"
