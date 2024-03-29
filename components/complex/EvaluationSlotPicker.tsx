@@ -7,12 +7,16 @@ import { PostDataToEndPoint,GetDataFromEndPoint } from "../../Utilities/api_util
 import { GetCurrentDateWithOffset, getCurrentActiveCampus } from "../../Utilities/event_utilities";
 
 import { GetUserData } from "../../Utilities/UserData";
-
+import { useStore } from "../../Utilities/store";
 
 //note there is an endpoint to retrieve the campus specific time https://api.intra.42.fr/apidoc/2.0/campus/stats.html
 //However its gated by a specific requirement. Hence the default slot duration will be set for 1h by default
 //30min in advance of current time (rounded up to next 15min timeframe)
 export default function EvaluationSlotPicker() {
+
+    const insertSlots = useStore((store) => store.insertSlots);
+    
+    
     const [currStartDate, setStartDate] = useState<Date>(()=>{
         const bestPossibleDate = new Date();
         const minuteOffset = 30;
@@ -34,6 +38,7 @@ export default function EvaluationSlotPicker() {
             let querystring = `slot[user_id]=${userData.id}&slot[begin_at]=${currStartDate.toISOString()}&slot[end_at]=${currEndDate.toISOString()}`;
             const response = await PostDataToEndPoint("/v2/slots",querystring);
             console.log("response = ",response);
+            insertSlots(response)
         } catch (error) {
             // console.log(error)
         }

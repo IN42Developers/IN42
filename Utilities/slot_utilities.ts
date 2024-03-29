@@ -1,4 +1,4 @@
-import { DeleteDataFromEndpoint,StallTimeBetweenApiCalls } from "./api_utilities"
+import { DeleteDataFromEndpoint,PostDataToEndPoint,StallTimeBetweenApiCalls } from "./api_utilities"
 
 
 interface Slot {
@@ -29,6 +29,16 @@ export const CreateSlotChunkata = ( data: Slot[] ) :SlotChunk[] => {
         console.log('data lenght is 1, found single 15min slot')
         return [{data:data,id: 0,type: 'slotChunk',date: data[0].begin_at}];
     }
+
+    //sort data by date ascending 
+    data.sort((a,b)=> {
+        const dateA = new Date(a.begin_at)
+        const dateB = new Date(b.begin_at)
+        if(dateA > dateB)
+            return 1;
+        return -1;
+    })
+
     // console.log('in createSlotChunk data')
     let chunkData: SlotChunk[]  = [];
     let tmpArray:  Slot[] = [];
@@ -54,7 +64,31 @@ export const CreateSlotChunkata = ( data: Slot[] ) :SlotChunk[] => {
 }
 
 export const RemoveSlotChunk = async (SlotChunk: SlotChunk) : Promise<boolean> => {
-    //delete each individual slot within the chunk data
+
+    //This was a test, it seems like it almost works, but the formatting is wrong -.- 
+    // decided to not use it as its not a common RESTful setup
+    // try {
+    //     // const endpoint = `/v2/slots/${SlotChunk.data[1].id}.json`;
+    //     const endpoint = `/v2/slots/${SlotChunk.data[0].id}.json`;
+    //     let querystring = "ids=";
+    //     for (let i = 1; i < SlotChunk.data.length; i++) {
+    //         querystring += SlotChunk.data[i].id
+    //         // if(i < SlotChunk.data.length -1)
+    //             querystring += ',';
+    //     }
+    //     querystring += SlotChunk.data[0].id; //doing this because the order is messed up
+    //     querystring += "&_method=delete&confirm=false"
+    //     console.log("endpoint =",endpoint)
+    //     console.log("querystring =",querystring)
+    //     const response = await PostDataToEndPoint(endpoint,querystring)
+    //     console.log("POST response = ",response)
+    // } catch (error) {
+    //     console.log(error);
+    // }
+
+
+
+    // delete each individual slot within the chunk data
     for (let i = 0; i < SlotChunk.data.length; i++) {
         try {
             await DeleteDataFromEndpoint(`/v2/slots/${SlotChunk.data[i].id}`);

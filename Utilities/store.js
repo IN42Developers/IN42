@@ -67,6 +67,17 @@ const store = (set) =>({
           console.log(error);
       }
     },
+    insertSlots: async(rawSlotData) => {
+        let newSlotChunks = CreateSlotChunkata(rawSlotData);
+
+        //merge both arrays
+        let allSlots = [...useStore.getState().Slots,...newSlotChunks]
+        //reassign IDs for(used for later deletion)
+        for (let i = 0; i < allSlots.length; i++)
+          allSlots[i].id = i;
+      
+        set({Slots: allSlots });
+    },
     CreateEvalSlot: async () => {
       try {
         
@@ -77,6 +88,8 @@ const store = (set) =>({
     DeleteUserSlotChunk: async (chunkID) => {
       let Slots = useStore.getState().Slots;
       
+      console.log("Slots = ", Slots);
+
       let chunkIndex = 0;
       for (; chunkIndex < Slots.length; chunkIndex++) {
         if(Slots[chunkIndex].id == chunkID) {

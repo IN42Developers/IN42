@@ -66,6 +66,9 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
         const response = await fetch(uri,tokenRequest);
         if(response.ok){
             console.log('Suceess')
+            console.log("response.ok =",response.ok)
+            console.log('response = ',response)
+            return response.json();
         } else {
             throw new Error(`HTTP error! Status: ${response.status}`);
     }
