@@ -162,3 +162,15 @@ export const retrieveDatesFromChunks = (slotChunks: SlotChunk[]): string[] => {
         
     return dates;
 } 
+
+//truncates any given Date towards the next 15min increment(always rounds up) and adds offset
+//special function for EvalSlots
+export const TruncateTimeToSlotIncrement = (offsetInMinutes: number,startDate?: Date): Date => {
+    let offsetDate = new Date();
+    if(startDate){
+        offsetDate = new Date(startDate)
+    }
+    let minutes = (Math.floor(offsetDate.getMinutes()/15)+1) * 15 + offsetInMinutes;
+    offsetDate.setMinutes(minutes,0,0);
+    return offsetDate;
+}

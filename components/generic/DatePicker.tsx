@@ -8,8 +8,9 @@ import { IsoDateToWeekDay,formatDateToCustomString } from "../../Utilities/slot_
 import { GetCurrentDateWithOffset } from "../../Utilities/event_utilities";
 
 interface Props {
+  id: number,
   date: Date; // Define the type of the 'date' prop
-  onDateChange: (newDate: Date) => void;
+  onDateChange: (id: number, date: Date) => void;
 }
 
 
@@ -19,10 +20,10 @@ const InDatePicker = ( props: Props ) => {
     const [show, setShow] = useState(false);
   
     const onChange = (event: any, selectedDate: Date) => {
-      const currentDate = selectedDate;
+      const currentDate = new Date(selectedDate.getTime()/1000*1000) ;
       setShow(false);
       setDate(currentDate);
-      props.onDateChange(selectedDate);
+      props.onDateChange(props.id, currentDate);
     };
   
     const showMode = (currentMode: 'date' | 'time') => {
@@ -51,7 +52,7 @@ const InDatePicker = ( props: Props ) => {
           testID="dateTimePicker"
           value={currDate}
           mode={mode}
-          is24Hour={true}
+          is24Hour={false}
           onChange={onChange}
           minimumDate={new Date()}
           maximumDate={GetCurrentDateWithOffset(0,0,7)}
