@@ -88,7 +88,7 @@ const store = (set) =>({
     DeleteUserSlotChunk: async (chunkID) => {
       let Slots = useStore.getState().Slots;
       
-      console.log("Slots = ", Slots);
+      // console.log("Slots = ", Slots);
 
       let chunkIndex = 0;
       for (; chunkIndex < Slots.length; chunkIndex++) {

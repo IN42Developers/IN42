@@ -32,21 +32,14 @@ export default function EvaluationSlotPicker() {
     
     //user experience is pretty shit
     const onDateChange = (id: number, date: Date) => {
-        //update times in parent component
-        // id == 0 ? setStartDate(date) : setEndDate(date);
+
         if(id == START_ID){
-            console.log('Setting START date to: ',date)
             setStartDate(date)
         }
         else{
-            console.log('Setting END date to: ',date)
             setEndDate(date)
         }
-        //check against new times if they still work
-        console.log('Component Rerenders')
 
-
-        
         FormatDescriptionText();
     }
 
@@ -80,9 +73,6 @@ export default function EvaluationSlotPicker() {
     const FormatValidDescription = () => {
 
         const diffTime = (currEndDate.getTime() - currStartDate.getTime())
-        console.log("currStartDate =",currStartDate)
-        console.log("currEndDate =",currEndDate)
-        console.log("diffTime =",diffTime,"hours =",Math.floor(diffTime /1000 /60 /60))
         const hours = Math.floor(diffTime /1000 /60 /60);
         const minutes = diffTime /1000 /60  %60;
         let formattedString = `You are about to create a slot thats `
@@ -103,7 +93,7 @@ export default function EvaluationSlotPicker() {
             // console.log(userData)
             let querystring = `slot[user_id]=${userData.id}&slot[begin_at]=${currStartDate.toISOString()}&slot[end_at]=${currEndDate.toISOString()}`;
             const response = await PostDataToEndPoint("/v2/slots",querystring);
-            console.log("response = ",response);
+            // console.log("response = ",response);
             insertSlots(response)
         } catch (error) {
             // console.log(error)

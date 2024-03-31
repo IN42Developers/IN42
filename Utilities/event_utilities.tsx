@@ -100,7 +100,7 @@ export const CheckEventSubscriptionStatus = async (EventID) => {
     }
 }
 
-//returns the current date in ISO 8601 format at 00:00,optionally allows for modifying the year,month or day
+//returns the current date at 00:00,optionally allows for modifying the year,month or day
 export const GetCurrentDateWithOffset = (yearsToAdd: number = 0,monthsToAdd: number = 0,daysToAdd: number = 0) : Date=> {
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
@@ -112,7 +112,6 @@ export const GetCurrentDateWithOffset = (yearsToAdd: number = 0,monthsToAdd: num
 
 export const getUserSubscribedEvents = async (userID) =>{
         let querystring = `?page[size]=100&range[begin_at]=${GetCurrentDateWithOffset().toISOString()},${GetCurrentDateWithOffset(1).toISOString()}&sort=begin_at`
-        console.log("querystring = ",querystring)
         try {
             const completeEventData = await GetDataFromEndPoint(`/v2/users/${userID}/events${querystring}`); 
             return completeEventData;

@@ -9,25 +9,27 @@ import { useStore } from '../Utilities/store';
 import { IsoDateToWeekDay,retrieveDatesFromChunks } from "../Utilities/slot_utilities"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import EvaluationSlotPicker from "../components/complex/EvaluationSlotPicker"
+import { SortByDateAscending } from "../Utilities/slot_utilities"
 
 export default function UserSlotsScreen() {
 
     const initSlots = useStore((store) => store.initSlots);
     const CreateSlots = useStore((store) => store.CreateEvalSlot);
     const slotChunks = useStore((store) => store.Slots);
-    let slotDays = retrieveDatesFromChunks(slotChunks);
+    let slotDays:string[] = [];// custom user facing strings
 
-    let todayString = (new Date()).toISOString().split('T')[0];
-    let tomorrow = new Date;
-    tomorrow.setDate(tomorrow.getDate()+ 1)
-    let tmrString = tomorrow.toISOString().split('T')[0];
-    if(!slotDays.includes(todayString)) {
-        slotDays.unshift(todayString);
-    }
-    if(!slotDays.includes(tmrString)) {
-        slotDays.splice(1,0,tmrString);
+    for (let i = 0; i < slotChunks.length; i++) {
+        const day = IsoDateToWeekDay(slotChunks[i].date)
+        if(!slotDays.includes(day))
+            slotDays.push(day)
     }
 
+    if(!slotDays.includes("Today")) {
+        slotDays.unshift("Today");
+    }
+    if(!slotDays.includes("Tomorrow")) {
+        slotDays.splice(1,0,"Tomorrow");
+    }
 
     useEffect( () => {
         initSlots();
@@ -44,8 +46,8 @@ export default function UserSlotsScreen() {
                 data={slotDays}
                 renderItem={({item}) =>(
                     <SlotContainer 
-                    title={IsoDateToWeekDay(item)}
-                    ComponentData={slotChunks.filter((element) =>element.date == item)}  
+                    title={item}
+                    ComponentData={slotChunks.filter((element) =>IsoDateToWeekDay(element.date) == item).sort(SortByDateAscending)}  
                     ChildComponent={SlotItem}/> //SlotItem
                 )}/>
         </SafeAreaView>
