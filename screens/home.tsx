@@ -84,9 +84,9 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
   const emptyEventText = 'You are not subscribed to any events at the moment. You can use the + to add one.'
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <Animated.View style={[styles.container,animatedContainerStyle]}>
-        <View style={styles.userInfoCardContainer}>
+    <GestureHandlerRootView className='flex-1'>
+      <Animated.View style={[animatedContainerStyle]} className='flex-1'>
+        <View className='flex mb-2'>
           <UserInfoCard />
         </View>
         <ListContainer title={'Evaluations'}  ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>

@@ -11,18 +11,10 @@ import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid }
 import { getTokenFromCode } from '../Utilities/apiAuthorization.js'
 import { setKeyValuePair } from '../Utilities/TokenStorage'
 import { AssertUserCanRequestData } from '../Utilities/UserData'
-import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
 
 import { AuthContext } from '../Context'
 
 export default function IndexScreen() {
-  let [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_500Medium,
-    Inter_600SemiBold,
-    Inter_700Bold,
-    Inter_800ExtraBold
-  });
 
   const {Login} = React.useContext(AuthContext);
   const navigation = useNavigation();
@@ -88,31 +80,28 @@ export default function IndexScreen() {
     navigation.navigate('home', { screen: 'HomeScreen' });
   }
 
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <View className='flex flex-col items-center justify-between'>
+    <View className='flex-1 items-center'>
       <Image
         source={require('../assets/images/HeadLayout.png')}
-        style={{width: 480, height: 240}}
+        style={{width: 480, height: 280}}
       />
       <View className='flex flex-col items-center absolute top-24'>
         <Logo />
       </View>
+      <View className='flex mt-12' />
       <SafeAreaView>
-        <View className='flex flex-col items-center gap-y-4 my-8'>
-          <Text className='text-white text-3xl font-InterMedium'>Welcome back</Text>
-          <Text className='text-white/50 text-center text-lg p-4 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
-        </View>
-        <View className='flex flex-col justify-between items-center'>
-        <DefaultButton
-            title="Authorize"
-            onPress={handlePress}
-          />
+        <View className='flex gap-y-4'>
+          <Text className='text-white text-center text-3xl font-InterMedium'>Welcome back</Text>
+          <Text className='text-white/50 text-center text-lg p-4 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text> 
         </View>
       </SafeAreaView>
+      <View className='flex-1 w-full bottom-0'>
+        <DefaultButton
+          title="Authorize"
+          onPress={handlePress}
+        />
+      </View>
     </View>
   )
 }

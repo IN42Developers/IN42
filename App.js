@@ -6,6 +6,8 @@ import { useEffect,useState } from 'react';
 import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/NavigationStack';
 import { AuthContext } from './Context';
 import { StyleSheet, Image, View, StatusBar } from 'react-native';
+import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
+
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
 
 import * as Linking from "expo-linking";
@@ -75,6 +77,20 @@ export default function App() {
     //display the loading screen screen
   }
 
+  let [fontsLoaded] = useFonts({
+    // Loads the Inter Font from Expo's Google Font package and renders them
+    // Also take a look at tailwind.config.js file
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_800ExtraBold
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer theme={AppTheme} linking={linking}>
@@ -84,15 +100,3 @@ export default function App() {
       </AuthContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  profileCircle: {
-    width: 45,
-    height: 45,
-  }
-});

@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, ImageBackground, SafeAreaView, Dimensions } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import { GetUserData } from '../../Utilities/UserData'
-import { Ui, UiText, Color } from '../../constants/Styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import NoCoalitionIcon from '../svg/NoCoalitionIcon';
 import { EvaluationPointsIcon } from '../svg/UIIcons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function UserInfoCard() {
     const screenWidth = Dimensions.get('screen').width;
@@ -28,37 +28,10 @@ export default function UserInfoCard() {
         nextLevel = UserData.level + 1;
     }
 
-    return (
-        <View style={styles.container}>
-            <ImageBackground style={{ width: screenWidth + 20, height: screenHeight / 3.35, bottom: 12 }} source={require('../../assets/images/userInfoCard.png')} resizeMode='cover' >
-                <SafeAreaView style={{ alignItems: 'center' }}>
-                    <View style={styles.userContainer}>
-                        <View id='Coalition content' style={{ top: 4 }}>
+    // Image: source={require('../../assets/images/userInfoCard.png')}
 
-                        </View>
-                        <View id='About username and loginname' style={{ top: 4, flex: 1, left: 32 }}>
-                            <Text style={{ fontSize: 18, color: 'white' }}>{displayname}</Text>
-                            <Text style={{ fontSize: 14, color: '#D3D3D3' }}>{login}</Text>
-                        </View>
-                        <View id='Profile image'>
-                            <Image src={profileimage} style={{ width: 60, height: 60, borderRadius: 50, bottom: 4, right: 32, top: 6 }} />
-                        </View>
-                    </View>
-
-                    <View id='Box Container' style={{ flexDirection: 'row' }}>
-                        <View id='Links: Wallet, Evaluations' style={styles.leftBox}>
-                            <View id='Wallet' style={styles.stats}>
-                                <EvaluationPointsIcon />
-                                <Text style={{ color: 'white', marginHorizontal: 5, fontSize: 11 }}>POINTS</Text>
-                                <Text style={{ color: '#D3D3D3', fontSize: 14, left: 4, bottom: 2, paddingRight: 2 }}>{walletPoints}</Text>
-                            </View>
-                            <View id='Evaluations' style={styles.stats}>
-                                <EvaluationPointsIcon />
-                                <Text style={{ color: 'white', marginHorizontal: 5, fontSize: 11 }}>POINTS</Text>
-                                <Text style={{ color: '#D3D3D3', fontSize: 14, fontWeight: 'bold', left: 4, bottom: 2, paddingRight: 8 }}>{correctionPoints}</Text>
-                            </View>
-                        </View>
-                        <View id='Rechts: Level' style={styles.rightBox}>
+    /*
+    <View id='Rechts: Level' style={styles.rightBox}>
                             <View id='Level based progress' style={styles.level}>
                                 <Text style={{ color: '#e8e8e8', fontSize: 12, fontWeight: 'bold', }}>LEVEL BASED PROGRESS</Text>
                                 <View id='Current and next level' style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -71,9 +44,25 @@ export default function UserInfoCard() {
                             </View>
                         </View>
                     </View>
-                </SafeAreaView> 
-            </ImageBackground>
-         </View>
+    */
+
+    return (
+      <View className='flex bg-blue-600 justify-center'>
+        <SafeAreaView className='flex-col mx-4'>
+          <View className='flex flex-col'>
+            <Text className='text-white text-lg font-InterSemibold'>{displayname}</Text>
+            <Text className='text-white text-sm font-InterRegular'>{login}</Text>
+          </View>
+          <View className='flex'>
+            <View className='flex flex-col mt-4 bg-slate-950 p-4 justify-center items-center rounded-2xl'>
+              <Text className='text-white'>Wallet</Text>
+            </View>
+            <View className='flex flex-col mt-2 bg-slate-950 p-4 justify-center items-center rounded-2xl'>
+              <Text className='text-white'>Balance</Text>
+            </View>
+          </View>
+        </SafeAreaView>
+      </View>
     )
 };
 

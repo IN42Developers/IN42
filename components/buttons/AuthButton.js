@@ -1,40 +1,13 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Text, Pressable } from 'react-native';
 
 const DefaultButton = ({ title, onPress }) => {
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
-        <Text style={styles.text}>{title}</Text>
-    </TouchableOpacity>
+      <Pressable onPress={onPress} className='w-full h-16 bg-slate-300 active:bg-slate-300/70 rounded-full justify-center'>
+          <Text className='font-InterBold text-2xl text-center'>{title}</Text>
+      </Pressable>
   )
-}
-
-const styles = StyleSheet.create({
-  button: {
-      backgroundColor: '#F4F4F4',
-      borderRadius: 100,
-      paddingVertical: 10,
-      paddingHorizontal: 12,
-      width: 250,
-      height: 60,
-      alignItems: 'center',
-      justifyContent: 'center',
-  },
-  text: {
-      ...Platform.select({
-          ios: {
-              fontSize: 20,
-              color: '#1e1e1e',
-              fontWeight: '700',
-          },
-          android: {
-              fontSize: 20,
-              color: '#1e1e1e',
-              fontWeight: '600',
-          },
-      }),
-  },
-});
-
+};
 
 export default DefaultButton
