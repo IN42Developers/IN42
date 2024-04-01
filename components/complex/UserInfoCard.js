@@ -28,7 +28,7 @@ export default function UserInfoCard() {
     return (
       <View className='container'>
         <View className='flex p-8 bg-blue-500'>
-          <SafeAreaView>
+          <SafeAreaView style={{margin: -10}}>
             <View className='flex flex-row justify-between'>
               <View className='flex-col gap-y-1'>
                 <Text className='text-white font-InterBold'>{displayname}</Text>
@@ -43,19 +43,26 @@ export default function UserInfoCard() {
             </View>
             <View className='flex flex-row mt-6 justify-between gap-2 content-center'>
               <View className='flex flex-col gap-y-2 min-w-[134] max-w-96'>
-                <View className='flex-row bg-slate-950 p-4 justify-between rounded-lg'>
+                <View className='flex-row bg-slate-950 p-2.5 justify-between rounded-lg'>
                   <EvaluationPointsIcon />
                   <Text className='text-white font-InterMedium'>Wallet</Text>
                   <Text className='text-gray-400 ml-2 font-InterBold'>{walletPoints}</Text>
                 </View>
-                <View className='flex-row bg-slate-950 p-4 justify-between rounded-lg'>
+                <View className='flex-row bg-slate-950 p-2.5 justify-between rounded-lg'>
                 <EvaluationPointsIcon />  
                   <Text className='text-white font-InterMedium'>Points</Text>
                   <Text className='text-gray-400 ml-2 font-InterBold'>{correctionPoints}</Text>
                 </View>
               </View>
-              <View className='flex w-7/12 bg-slate-950 p-4 rounded-lg'>
+              <View className='flex w-7/12 bg-slate-950 p-2.5 gap-y-3 rounded-lg'>
                 <Text className='text-white'>Level based progress</Text>
+                <View className='flex flex-row justify-between'>
+                  <Text className='text-gray-400'>{curLevel}</Text>
+                  <Text className='text-white'>{nextLevel}</Text>
+                </View>
+                <View className='p-0.5 bg-slate-400 rounded-full z-0'>
+                  <View className='w-[35%] p-0.5 z-10 bg-white rounded-full' />
+                </View>
               </View>
             </View>
           </SafeAreaView>
