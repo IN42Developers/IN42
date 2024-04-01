@@ -9,8 +9,8 @@ import { StyleSheet, Image, View, StatusBar } from 'react-native';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
 
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
-
 import * as Linking from "expo-linking";
+import "./global.css"
 
 const prefix = Linking.createURL('/');
 

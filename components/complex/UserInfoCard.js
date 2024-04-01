@@ -1,14 +1,11 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { GetUserData } from '../../Utilities/UserData'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import NoCoalitionIcon from '../svg/NoCoalitionIcon';
 import { EvaluationPointsIcon } from '../svg/UIIcons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function UserInfoCard() {
-    const screenWidth = Dimensions.get('screen').width;
-    const screenHeight = Dimensions.get('screen').height;
     const UserData = GetUserData();
     const insets = useSafeAreaInsets();
     let displayname = 'Long display name';
@@ -28,40 +25,41 @@ export default function UserInfoCard() {
         nextLevel = UserData.level + 1;
     }
 
-    // Image: source={require('../../assets/images/userInfoCard.png')}
-
-    /*
-    <View id='Rechts: Level' style={styles.rightBox}>
-                            <View id='Level based progress' style={styles.level}>
-                                <Text style={{ color: '#e8e8e8', fontSize: 12, fontWeight: 'bold', }}>LEVEL BASED PROGRESS</Text>
-                                <View id='Current and next level' style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: 'white', fontSize: 11 }}>{curLevel}</Text>
-                                    <Text style={{ color: 'white', fontSize: 11 }}>LEVEL 4</Text>
-                                </View>
-                                <View id='Progress bar' style={styles.progressbar}>
-                                    <View id='Progress made' style={{ width: '35%', backgroundColor: 'white', zIndex: 1, height: 4 }} />
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-    */
-
     return (
-      <View className='flex bg-blue-600 justify-center'>
-        <SafeAreaView className='flex-col mx-4'>
-          <View className='flex flex-col'>
-            <Text className='text-white text-lg font-InterSemibold'>{displayname}</Text>
-            <Text className='text-white text-sm font-InterRegular'>{login}</Text>
-          </View>
-          <View className='flex'>
-            <View className='flex flex-col mt-4 bg-slate-950 p-4 justify-center items-center rounded-2xl'>
-              <Text className='text-white'>Wallet</Text>
+      <View className='container'>
+        <View className='flex p-8 bg-blue-500'>
+          <SafeAreaView>
+            <View className='flex flex-row justify-between'>
+              <View className='flex-col gap-y-1'>
+                <Text className='text-white font-InterBold'>{displayname}</Text>
+                <Text className='text-white font-InterRegular'>{login}</Text>
+              </View>
+              <View>
+                <Image
+                  src={profileimage}
+                  style={{ width: 60, height: 60, borderRadius: 50, bottom: 4, right: 32, top: 6 }}
+                />
+              </View>
             </View>
-            <View className='flex flex-col mt-2 bg-slate-950 p-4 justify-center items-center rounded-2xl'>
-              <Text className='text-white'>Balance</Text>
+            <View className='flex flex-row mt-6 justify-between gap-2 content-center'>
+              <View className='flex flex-col gap-y-2 min-w-[134] max-w-96'>
+                <View className='flex-row bg-slate-950 p-4 justify-between rounded-lg'>
+                  <EvaluationPointsIcon />
+                  <Text className='text-white font-InterMedium'>Wallet</Text>
+                  <Text className='text-gray-400 ml-2 font-InterBold'>{walletPoints}</Text>
+                </View>
+                <View className='flex-row bg-slate-950 p-4 justify-between rounded-lg'>
+                <EvaluationPointsIcon />  
+                  <Text className='text-white font-InterMedium'>Points</Text>
+                  <Text className='text-gray-400 ml-2 font-InterBold'>{correctionPoints}</Text>
+                </View>
+              </View>
+              <View className='flex w-7/12 bg-slate-950 p-4 rounded-lg'>
+                <Text className='text-white'>Level based progress</Text>
+              </View>
             </View>
-          </View>
-        </SafeAreaView>
+          </SafeAreaView>
+        </View>
       </View>
     )
 };

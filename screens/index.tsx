@@ -1,10 +1,9 @@
-import { Platform, Image, SafeAreaView, StyleSheet, Text, View, Dimensions } from 'react-native'
+import { Button, Image, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
-import DefaultButton from '../components/buttons/AuthButton'
+import { DefaultButton } from '../components/buttons/AuthButton'
 import { useNavigation } from '@react-navigation/native'
 import { useEffect } from 'react'
-import { LinearGradient } from 'expo-linear-gradient'
-import Logo from '../components/svg/logo'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import {authorizeUser} from '../Utilities/apiAuthorization.js'
 import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid } from '../Utilities/TokenStorage';
@@ -13,6 +12,7 @@ import { setKeyValuePair } from '../Utilities/TokenStorage'
 import { AssertUserCanRequestData } from '../Utilities/UserData'
 
 import { AuthContext } from '../Context'
+import EntryHeader from '../components/ui/EntryHeader'
 
 export default function IndexScreen() {
 
@@ -81,26 +81,22 @@ export default function IndexScreen() {
   }
 
   return (
-    <View className='flex-1 items-center'>
-      <Image
-        source={require('../assets/images/HeadLayout.png')}
-        style={{width: 480, height: 280}}
-      />
-      <View className='flex flex-col items-center absolute top-24'>
-        <Logo />
-      </View>
-      <View className='flex mt-12' />
-      <SafeAreaView>
-        <View className='flex gap-y-4'>
-          <Text className='text-white text-center text-3xl font-InterMedium'>Welcome back</Text>
-          <Text className='text-white/50 text-center text-lg p-4 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text> 
+    <View className='flex-1 container'>
+      <EntryHeader />
+      <View className='flex-1 mt-8'>
+        <View className='flex-1 flex-col justify-between gap-y-4 mt-12'>
+          <View>
+            <Text className='text-white text-center text-3xl font-InterMedium'>Welcome back</Text>
+            <Text className='text-white/50 text-center text-xl p-4 mt-12 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
+          </View>
+          <View className='bottom-0 absolute w-[90%] mb-12 justify-center self-center mx-auto'>
+            <DefaultButton
+              title='Authorize'
+              onPress={handlePress}
+            />
+            <Text className='text-center mt-8 font-InterRegular text-xs text-gray-500'>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
+          </View>
         </View>
-      </SafeAreaView>
-      <View className='flex-1 w-full bottom-0'>
-        <DefaultButton
-          title="Authorize"
-          onPress={handlePress}
-        />
       </View>
     </View>
   )

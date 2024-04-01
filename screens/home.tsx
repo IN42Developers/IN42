@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useFonts } from 'expo-font';
 import { View, StyleSheet, SafeAreaView, useWindowDimensions } from 'react-native';
 import ListContainer from '../components/generic/ListContainer';
 import EventItem from '../components/buttons/EventItem';
@@ -84,10 +85,11 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
   const emptyEventText = 'You are not subscribed to any events at the moment. You can use the + to add one.'
 
   return (
-    <GestureHandlerRootView className='flex-1'>
-      <Animated.View style={[animatedContainerStyle]} className='flex-1'>
-        <View className='flex mb-2'>
+    <GestureHandlerRootView style={styles.container}>
+      <Animated.View style={[styles.container, animatedContainerStyle]}>
+        <View className='flex'>
           <UserInfoCard />
+          <View className='mt-4' />
         </View>
         <ListContainer title={'Evaluations'}  ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>
         <ListContainer title={'Events'} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={emptyEventText} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen}/>  

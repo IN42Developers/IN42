@@ -1,4 +1,4 @@
-import { View,Text, ScrollView,TouchableOpacity,FlatList } from "react-native"
+import { View, Text, TouchableOpacity, FlatList } from "react-native"
 import { StyleSheet } from "react-native";
 import EmptyContainerItem from "../buttons/EmptyContainerItem";
 import { AntDesign } from '@expo/vector-icons';
