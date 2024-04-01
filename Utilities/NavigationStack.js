@@ -13,7 +13,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import EventDetailScreen from "../screens/EventDetailScreen"
 import EvaluationDetailScreen from '../screens/EvaluationDetailScreen';
 import CampusEventsScreen from '../screens/CampusEventsScreen';
-import UserSlotsScreen from '../screens/UserSlotsScreen';
+import UserSlotsScreen from '../screens/UserSlotScreen';
 import RequestCounter from '../components/complex/RequestCounter';
 import { GetRequestCounter,GetRequestCounterMax } from './UserData';
 

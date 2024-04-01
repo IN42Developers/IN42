@@ -11,7 +11,6 @@ import { useStore } from "../../Utilities/store";
 
 import { TruncateTimeToSlotIncrement } from "../../Utilities/slot_utilities";
 import {Dimensions} from 'react-native';
-import { useEvaluationSlotContext } from "../context/EvaluationSlotContext";
 
 const START_ID = 0;
 const END_ID = 1;
@@ -22,7 +21,7 @@ const windowHeight = Dimensions.get('window').height;
 //note there is an endpoint to retrieve the campus specific time https://api.intra.42.fr/apidoc/2.0/campus/stats.html
 //However its gated by a specific requirement. Hence the default slot duration will be set for 1h by default
 //30min in advance of current time (rounded up to next 15min timeframe)
-export default function EvaluationSlotPicker() {
+export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
 
     const insertSlots = useStore((store) => store.insertSlots);
     
@@ -32,14 +31,11 @@ export default function EvaluationSlotPicker() {
     const [descriptionText, setdescriptionText] = useState<string>("Placeholder")
     const [isValidSlot, setIsValidSlot] = useState<boolean>(true);
 
-    const { mainModalVisible, setMainModalVisible} = useEvaluationSlotContext();
-
     useEffect(() => {
         // Update the document title using the browser API
         FormatDescriptionText();
-        console.log("wtf 2")
 
-    },[]);
+    },[descriptionText,currStartDate,currEndDate]);
     
 
 
@@ -58,7 +54,6 @@ export default function EvaluationSlotPicker() {
 
     const FormatDescriptionText = () => {
 
-        // console.log("[Success] Slot is valid")
         let errorString = validateTimeSlot();
         if(!errorString){
             setdescriptionText(FormatValidDescription());
@@ -81,7 +76,7 @@ export default function EvaluationSlotPicker() {
         if(currEndDate > TruncateTimeToSlotIncrement(60*24 -15,currStartDate)){
             return "[Error] Slot cannot be longer than 24 hours (it can, but come on...)"
         }
-        //probably worth to make a case for preventing multi day slots...maybe
+        //multi-day slots are allowed, Will be correctly handled and displayed by UI
         return null;
     }
 
@@ -108,7 +103,7 @@ export default function EvaluationSlotPicker() {
             let querystring = `slot[user_id]=${userData.id}&slot[begin_at]=${currStartDate.toISOString()}&slot[end_at]=${currEndDate.toISOString()}`;
             const response = await PostDataToEndPoint("/v2/slots",querystring);
             insertSlots(response)
-            setMainModalVisible(false)
+            onDismissModal()
         } catch (error) {
             console.log(error)
         }
@@ -116,31 +111,30 @@ export default function EvaluationSlotPicker() {
  
     const PressCancel =  () => {
         console.log("Cancel Pressed")
-        setMainModalVisible(false)
+        onDismissModal()
     }
  
 
     return (
         <View style={styles.modalContainer}>
-                <View style={styles.container}>
-                        <Text style={styles.text}>Start:</Text>
-
-                        <InDatePicker id= {START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
-                        <Text style={styles.text}>End:</Text>
-                        <InDatePicker id= {END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker>
-                        <Text style={styles.durationText} >{descriptionText}</Text>
-                        <View style={styles.buttonsBottomRowActive}>
-                        <TouchableOpacity onPress={PressCancel}>
-                            <Text style={styles.buttonText} >Cancel</Text>
-                        </TouchableOpacity>
-                        {isValidSlot &&
-                        <TouchableOpacity onPress={CreateSlot}>
-                            <Text style={styles.buttonText} >Confirm</Text>
-                        </TouchableOpacity>
-                        }
-                        </View>
+            <View style={styles.container}>
+                <Text style={styles.text}>Start:</Text>
+                <InDatePicker id= {START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
+                <Text style={styles.text}>End:</Text>
+                <InDatePicker id= {END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker>
+                <Text style={styles.durationText} >{descriptionText}</Text>
+                <View style={styles.buttonsBottomRowActive}>
+                <TouchableOpacity onPress={PressCancel}>
+                    <Text style={styles.buttonText} >Cancel</Text>
+                </TouchableOpacity>
+                {isValidSlot &&
+                    <TouchableOpacity onPress={CreateSlot}>
+                        <Text style={styles.buttonText} >Confirm</Text>
+                    </TouchableOpacity>
+                }
                 </View>
             </View>
+        </View>
 
     );
   };

@@ -61,7 +61,7 @@ const InDatePicker = ( props: Props ) => {
           is24Hour={false}
           onChange={onChange}
           minimumDate={new Date()}
-          maximumDate={GetCurrentDateWithOffset(0,0,14)}
+          maximumDate={GetCurrentDateWithOffset(0,0,13)}
         />
       )}
     </View>

@@ -7,14 +7,13 @@ import { useStore } from '../Utilities/store';
 import { IsoDateToWeekDay,retrieveDatesFromChunks } from "../Utilities/slot_utilities"
 import EvaluationSlotPicker from "../components/complex/EvaluationSlotPicker"
 import { SortByDateAscending } from "../Utilities/slot_utilities"
-import { EvaluationSlotProvider, useEvaluationSlotContext } from "../components/context/EvaluationSlotContext";
 
-export default function SlotsScreen() {
+export default function UserSlotsScreen() {
 
     const initSlots = useStore((store) => store.initSlots);
     const slotChunks = useStore((store) => store.Slots);
-    const { mainModalVisible, setMainModalVisible} = useEvaluationSlotContext();
-    // const [visible, setVisible] = React.useState(false);
+    const [visible, setVisible] = React.useState(false);
+    const [mainModalVisible, setMainModalVisible] = React.useState(false);
 
     let slotDays:string[] = [];// custom user facing strings
 
@@ -38,16 +37,21 @@ export default function SlotsScreen() {
 
     const bla = () => {
         console.log("pressed fucking button")
-        // setVisible(true);
+        setVisible(true);
         setMainModalVisible(true)
+    }
+
+    const deactivate = () => {
+        console.log("pressed Cancel from other screen")
+        setVisible(false);
+        setMainModalVisible(false)
     }
     
 
     return (
-
         <SafeAreaView style={{flex: 1}}>
             <Modal transparent={true} visible={mainModalVisible}>
-                <EvaluationSlotPicker ></EvaluationSlotPicker>
+                <EvaluationSlotPicker modalVisible={mainModalVisible} onDismissModal={deactivate}></EvaluationSlotPicker>
             </Modal>
             <Button title="wowow" onPress={bla}>
             </Button>
