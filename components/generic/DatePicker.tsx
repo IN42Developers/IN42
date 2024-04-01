@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View } from "react-native"
-import React from 'react';
+import React, { useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
@@ -19,6 +19,12 @@ const InDatePicker = ( props: Props ) => {
     const [mode, setMode] = useState<'date' | 'time'>('date');
     const [show, setShow] = useState(false);
   
+    useEffect(() => {
+      // Update the document title using the browser API
+      console.log("Rerendering DatePicker")
+  });
+
+
     const onChange = (event: any, selectedDate: Date) => {
       const currentDate = new Date(selectedDate.getTime()/1000*1000) ;
       setShow(false);
@@ -55,7 +61,7 @@ const InDatePicker = ( props: Props ) => {
           is24Hour={false}
           onChange={onChange}
           minimumDate={new Date()}
-          maximumDate={GetCurrentDateWithOffset(0,0,7)}
+          maximumDate={GetCurrentDateWithOffset(0,0,14)}
         />
       )}
     </View>
@@ -70,13 +76,15 @@ const styles = StyleSheet.create({
         // flex: 1,
         flexDirection: 'row',
         // borderColor: 'red',
-        borderWidth: 2,
+        // borderWidth: 2,
+        // margin:4,
         justifyContent: 'space-between',
     },
     timeElement:{
-        flex: 1,
+        // flex: 1,
         borderColor: 'red',
-        borderWidth: 2,
+        margin:4,
+        borderWidth: 12,
     },
     text:{
         // flex: 1,
@@ -85,6 +93,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         // borderColor: 'red',
         fontSize: 18,
-        borderWidth: 2,
+        // margin:10,
+        // borderWidth: 2,
+        paddingHorizontal:10,
+        paddingVertical: 5,
+        // marginHorizontal:  10,
     }
 })

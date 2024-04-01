@@ -78,13 +78,6 @@ const store = (set) =>({
       
         set({Slots: allSlots });
     },
-    CreateEvalSlot: async () => {
-      try {
-        
-      } catch (error) {
-        console.log(error);
-      }
-    },
     DeleteUserSlotChunk: async (chunkID) => {
       let Slots = useStore.getState().Slots;
       

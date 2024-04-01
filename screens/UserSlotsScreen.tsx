@@ -1,21 +1,20 @@
 import { StyleSheet, SafeAreaView, FlatList, Button, Text } from "react-native"
 import React, { useState, useEffect } from 'react'
-import ListContainer from "../components/generic/ListContainer"
 import SlotItem from "../components/buttons/SlotItem"
 import SlotContainer from "../components/generic/SlotContainer"
-import SlotPlaceholderItem from "../components/buttons/SlotPlaceholderItem"
 
 import { useStore } from '../Utilities/store';
 import { IsoDateToWeekDay,retrieveDatesFromChunks } from "../Utilities/slot_utilities"
-import { TouchableOpacity } from "react-native-gesture-handler"
 import EvaluationSlotPicker from "../components/complex/EvaluationSlotPicker"
 import { SortByDateAscending } from "../Utilities/slot_utilities"
 
 export default function UserSlotsScreen() {
 
     const initSlots = useStore((store) => store.initSlots);
-    const CreateSlots = useStore((store) => store.CreateEvalSlot);
     const slotChunks = useStore((store) => store.Slots);
+
+    // const [visible, setVisible] = React.useState(false);
+
     let slotDays:string[] = [];// custom user facing strings
 
     for (let i = 0; i < slotChunks.length; i++) {
@@ -33,15 +32,20 @@ export default function UserSlotsScreen() {
 
     useEffect( () => {
         initSlots();
+        console.log("wtf")
     },[])
 
+    const bla = () => {
+        console.log("pressed fucking button")
+        // setVisible(true);
+    }
+    
 
     return (
         <SafeAreaView style={{flex: 1}}>
-                <TouchableOpacity onPress={CreateSlots}>
-                    <Text style={styles.text}>Create slot</Text>
-                    </TouchableOpacity>
-                    <EvaluationSlotPicker></EvaluationSlotPicker>
+            <EvaluationSlotPicker ></EvaluationSlotPicker>
+            <Button title="wowow" onPress={bla}>
+            </Button>
             <FlatList 
                 data={slotDays}
                 renderItem={({item}) =>(
