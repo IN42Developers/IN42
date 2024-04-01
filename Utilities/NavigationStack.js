@@ -13,7 +13,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import EventDetailScreen from "../screens/EventDetailScreen"
 import EvaluationDetailScreen from '../screens/EvaluationDetailScreen';
 import CampusEventsScreen from '../screens/CampusEventsScreen';
-import UserSlotsScreen from '../screens/UserSlotsScreen';
+import UserSlotsScreen from '../screens/UserSlotScreen';
 import RequestCounter from '../components/complex/RequestCounter';
 import { GetRequestCounter,GetRequestCounterMax } from './UserData';
 
@@ -27,6 +27,7 @@ import TestingScreen2 from "../screens/testing/testingScreen2"
 import TestingScreenGestures from '../screens/testing/testingScreen_gestures';
 import { AntDesign } from '@expo/vector-icons';
 import { Gradient } from '../constants/Styles';
+import ShowModalButton from '../components/buttons/ShowModalButton';
 
 
 const Stack = createStackNavigator();
@@ -43,7 +44,7 @@ export const AuthStack = () => {
         },
       }}>
         <Stack.Screen name="index" options={{ statusBarColor: '#000', headerShown: false }} component={IndexScreen}/>
-        <Stack.Screen name="home" options={{ statusBarColor: '#000', headerShown: false }} component={HomeScreen}/>
+        {/* <Stack.Screen name="home" options={{ statusBarColor: '#000', headerShown: false }} component={HomeScreen}/> */}
       </Stack.Navigator>
   );
 };
@@ -76,7 +77,7 @@ export const AppStack = () => {
             fontSize: 16,
           },
           headerTintColor: '#fff',
-          headerTitle: '',
+          // headerTitle: '',
           // headerStatusBarHeight: 84,
         }}>
           <DetailStack.Screen name="home" options={{
@@ -88,7 +89,13 @@ export const AppStack = () => {
                     }}/>
           <DetailStack.Screen name="EvaluationDetailScreen" component={EvaluationDetailScreen}/>
           <DetailStack.Screen name="CampusEvents" component={CampusEventsScreen}/>
-          <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen}/>
+          <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen} options={{
+              headerShown: true,
+              title: 'Your Slots',
+              headerTintColor: 'white',
+              headerRight: () => (<ShowModalButton></ShowModalButton>)
+
+                    }}/>
         </DetailStack.Navigator>
     );
   };

@@ -100,20 +100,18 @@ export const CheckEventSubscriptionStatus = async (EventID) => {
     }
 }
 
-//returns the current date in ISO 8601 format at 00:00,optionally allows for modifying the year,month or day
-export const GetCurrentISODate = (yearsToAdd = 0,monthsToAdd = 0,daysToAdd = 0)=> {
+//returns the current date at 00:00,optionally allows for modifying the year,month or day
+export const GetCurrentDateWithOffset = (yearsToAdd: number = 0,monthsToAdd: number = 0,daysToAdd: number = 0) : Date=> {
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
     currentDate.setFullYear(currentDate.getFullYear() + yearsToAdd);
     currentDate.setMonth(currentDate.getMonth() + monthsToAdd);
     currentDate.setDate(currentDate.getDate() + daysToAdd);
-    const iso8601Date = currentDate.toISOString();
-    return iso8601Date;
+    return currentDate;
 }
 
 export const getUserSubscribedEvents = async (userID) =>{
-        let querystring = `?page[size]=100&range[begin_at]=${GetCurrentISODate()},${GetCurrentISODate(1)}&sort=begin_at`
-
+        let querystring = `?page[size]=100&range[begin_at]=${GetCurrentDateWithOffset().toISOString()},${GetCurrentDateWithOffset(1).toISOString()}&sort=begin_at`
         try {
             const completeEventData = await GetDataFromEndPoint(`/v2/users/${userID}/events${querystring}`); 
             return completeEventData;
@@ -126,7 +124,7 @@ export const getUserSubscribedEvents = async (userID) =>{
 export const getCampusEvents = async () =>{
     //query string needs to be expanded to check if the cursus is correct to, so that 
     //piscine users wont have the same display as regular users
-    let querystring = `?page[size]=100&range[begin_at]=${GetCurrentISODate()},${GetCurrentISODate(1)}&sort=begin_at`
+    let querystring = `?page[size]=100&range[begin_at]=${GetCurrentDateWithOffset().toISOString()},${GetCurrentDateWithOffset(1).toISOString()}&sort=begin_at`
 
     try {
         //figure out how to extract the current active campus as well as current active curriculum

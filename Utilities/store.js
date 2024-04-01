@@ -67,9 +67,22 @@ const store = (set) =>({
           console.log(error);
       }
     },
+    insertSlots: async(rawSlotData) => {
+        let newSlotChunks = CreateSlotChunkata(rawSlotData);
+
+        //merge both arrays
+        let allSlots = [...useStore.getState().Slots,...newSlotChunks]
+        //reassign IDs for(used for later deletion)
+        for (let i = 0; i < allSlots.length; i++)
+          allSlots[i].id = i;
+      
+        set({Slots: allSlots });
+    },
     DeleteUserSlotChunk: async (chunkID) => {
       let Slots = useStore.getState().Slots;
       
+      // console.log("Slots = ", Slots);
+
       let chunkIndex = 0;
       for (; chunkIndex < Slots.length; chunkIndex++) {
         if(Slots[chunkIndex].id == chunkID) {
@@ -102,6 +115,7 @@ const store = (set) =>({
         useStore.getState().initEvents();
         await StallTimeBetweenApiCalls()
         useStore.getState().initEvaluations();
+        console.log('Setting UserData complete');
       } catch (error) {
         console.log('Error in refreshUserData() = ', error);
       }
