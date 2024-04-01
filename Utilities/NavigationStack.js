@@ -27,6 +27,7 @@ import TestingScreen2 from "../screens/testing/testingScreen2"
 import TestingScreenGestures from '../screens/testing/testingScreen_gestures';
 import { AntDesign } from '@expo/vector-icons';
 import { Gradient } from '../constants/Styles';
+import ShowModalButton from '../components/buttons/ShowModalButton';
 
 
 const Stack = createStackNavigator();
@@ -76,7 +77,7 @@ export const AppStack = () => {
             fontSize: 16,
           },
           headerTintColor: '#fff',
-          headerTitle: '',
+          // headerTitle: '',
           // headerStatusBarHeight: 84,
         }}>
           <DetailStack.Screen name="home" options={{
@@ -88,7 +89,13 @@ export const AppStack = () => {
                     }}/>
           <DetailStack.Screen name="EvaluationDetailScreen" component={EvaluationDetailScreen}/>
           <DetailStack.Screen name="CampusEvents" component={CampusEventsScreen}/>
-          <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen}/>
+          <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen} options={{
+              headerShown: true,
+              title: 'Your Slots',
+              headerTintColor: 'white',
+              headerRight: () => (<ShowModalButton></ShowModalButton>)
+
+                    }}/>
         </DetailStack.Navigator>
     );
   };
