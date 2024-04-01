@@ -1,5 +1,5 @@
 import { Modal, StyleSheet, Text, View } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from 'react-native';
 import { useState,useEffect  } from "react";
 import InDatePicker from "../generic/DatePicker";
 
@@ -11,6 +11,7 @@ import { useStore } from "../../Utilities/store";
 
 import { TruncateTimeToSlotIncrement } from "../../Utilities/slot_utilities";
 import {Dimensions} from 'react-native';
+import { useEvaluationSlotContext } from "../context/EvaluationSlotContext";
 
 const START_ID = 0;
 const END_ID = 1;
@@ -31,13 +32,14 @@ export default function EvaluationSlotPicker() {
     const [descriptionText, setdescriptionText] = useState<string>("Placeholder")
     const [isValidSlot, setIsValidSlot] = useState<boolean>(true);
 
+    const { mainModalVisible, setMainModalVisible} = useEvaluationSlotContext();
 
     useEffect(() => {
         // Update the document title using the browser API
         FormatDescriptionText();
         console.log("wtf 2")
 
-    },[descriptionText]);
+    },[]);
     
 
 
@@ -106,37 +108,50 @@ export default function EvaluationSlotPicker() {
             let querystring = `slot[user_id]=${userData.id}&slot[begin_at]=${currStartDate.toISOString()}&slot[end_at]=${currEndDate.toISOString()}`;
             const response = await PostDataToEndPoint("/v2/slots",querystring);
             insertSlots(response)
+            setMainModalVisible(false)
         } catch (error) {
             console.log(error)
         }
     }
  
+    const PressCancel =  () => {
+        console.log("Cancel Pressed")
+        setMainModalVisible(false)
+    }
  
 
     return (
-            <View style={styles.container}>
-                    <Text style={styles.text}>Start:</Text>
+        <View style={styles.modalContainer}>
+                <View style={styles.container}>
+                        <Text style={styles.text}>Start:</Text>
 
-                    <InDatePicker id= {START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
-                    <Text style={styles.text}>End:</Text>
-                    <InDatePicker id= {END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker>
-                    <Text style={styles.durationText} >{descriptionText}</Text>
-                    <View style={styles.buttonsBottomRowActive}>
-                    <TouchableOpacity onPress={()=>console.log("Cancel Pressed")}>
-                        <Text style={styles.buttonText} >Cancel</Text>
-                    </TouchableOpacity>
-                    {isValidSlot &&
-                    <TouchableOpacity onPress={CreateSlot}>
-                        <Text style={styles.buttonText} >Confirm</Text>
-                    </TouchableOpacity>
-                    }
-                    </View>
+                        <InDatePicker id= {START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
+                        <Text style={styles.text}>End:</Text>
+                        <InDatePicker id= {END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker>
+                        <Text style={styles.durationText} >{descriptionText}</Text>
+                        <View style={styles.buttonsBottomRowActive}>
+                        <TouchableOpacity onPress={PressCancel}>
+                            <Text style={styles.buttonText} >Cancel</Text>
+                        </TouchableOpacity>
+                        {isValidSlot &&
+                        <TouchableOpacity onPress={CreateSlot}>
+                            <Text style={styles.buttonText} >Confirm</Text>
+                        </TouchableOpacity>
+                        }
+                        </View>
+                </View>
             </View>
+
     );
   };
 
 
 const styles = StyleSheet.create({
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container:{
         // flex: 1,
         backgroundColor: '#1A1A1A',
@@ -144,6 +159,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         padding: 5,
         alignSelf: 'center',
+        justifyContent: 'center',
         width:windowWidth/1.5,
     },
     buttonsBottomRowActive:{
@@ -170,8 +186,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#1F1F1F',
         // alignSelf: 'center',
         fontSize: 22,
-        // borderColor: 'red',
-        // borderWidth: 2,
+        borderColor: 'red',
+        borderWidth: 2,
         padding: 2,
     },
     durationText:{

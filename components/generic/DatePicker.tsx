@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View } from "react-native"
 import React, { useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from 'react-native';
 import { useState } from "react";
 
 import { IsoDateToWeekDay,formatDateToCustomString } from "../../Utilities/slot_utilities";
