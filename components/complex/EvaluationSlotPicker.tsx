@@ -161,11 +161,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         
     },
-    timeElement:{
-        flex: 1,
-        borderColor: 'red',
-        borderWidth: 2,
-    },
     text:{
         // flex: 1,
         color: 'white',
@@ -180,8 +175,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#1F1F1F',
         // alignSelf: 'center',
         fontSize: 22,
-        borderColor: 'red',
-        borderWidth: 2,
+        // borderColor: 'red',
+        // borderWidth: 2,
         padding: 2,
     },
     durationText:{
