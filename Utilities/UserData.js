@@ -3,7 +3,7 @@ import { retrieveStoredValue,setKeyValuePair } from "./TokenStorage";
 //Object that stores data from /v2/me endpoint
 let UserData = null;
 let requestCounter = -1;
-const requestCounterMax = 1000;
+const requestCounterMax =process.env.IN42_DEV ? 10000 : 100;
 //the time when how long the counter needs to count
 //, will determine resetting of requestCounter
 let prevRequestPeriod = -1; 
@@ -67,6 +67,7 @@ export const GetRequestCounter = () =>{
         prevRequestPeriod = currPeriod;
         setKeyValuePair('PrevCounterPeriod',currPeriod);
         requestCounter = 0;
+        setKeyValuePair('RequestCounter',requestCounter);
     }
 
     return requestCounter;
@@ -80,8 +81,10 @@ export const AssertUserCanRequestData = () =>{
     const val = GetRequestCounter();
     // console.log('val = ',val)
     // console.log('max val = ',requestCounterMax )
+    console.log(`current Requests ${val}/${requestCounterMax}`)
     if(val >= requestCounterMax){
         console.log('User Cannot request any more data for this period')
+        console.log(`current Requests ${val}/${requestCounterMax}`)
         // throw new Error('Exceeded Request Limit');
         let timeData = CalculateRemainingTimePeriod(prevRequestPeriod); 
         alert(`Request Limit exceeded!\nNew Peroid in ${timeData.minutes}min ${timeData.seconds}sec`);  

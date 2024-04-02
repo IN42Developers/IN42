@@ -17,21 +17,22 @@ export default CountDownTimer = ({totalTimeInSeconds,textStyle=styles }) =>{
         let seconds = totalSecondsLeft % 60; 
         let minutes = Math.floor(totalSecondsLeft / 60);
         let hours = Math.floor(totalSecondsLeft / 3600);
-        if(seconds >= 10)
-            setSecondsLeft(seconds); 
-        else
-            setSecondsLeft(`0${seconds}`);  
-        if(minutes >= 10)
-            setMinutesLeft(minutes); 
-        else
-            setMinutesLeft(`0${minutes}`);  
-        if(hours >= 10)
-            setHoursLeft(hours); 
-        else
-            setHoursLeft(`0${hours}`);  
+        
+        setHoursLeft(formatTimeValue(hours));
+        setMinutesLeft(formatTimeValue(minutes));
+        setSecondsLeft(formatTimeValue(seconds)); 
 
+
+        if(totalSecondsLeft <= 0){
+            console.log('Timer is complete')
+            // onTimerComplete();
+        }
         // console.log(totalSecondsLeft);
     },[totalSecondsLeft])
+
+    const formatTimeValue = (value) => {
+        return value < 10 ? `0${value}` : `${value}`;
+    };
 
     return(
         <Text style={textStyle.text}>{hoursLeft}:{minutesLeft}:{secondLeft}</Text>

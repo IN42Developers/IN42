@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View,Text, SafeAreaView,StyleSheet,ScrollView,TouchableOpacity } from "react-native"
 import { AuthContext } from '../Context'
 import { setAccessToken, setKeyValuePair } from '../Utilities/TokenStorage';
@@ -12,8 +12,10 @@ import { AntDesign } from '@expo/vector-icons'
 export default function SettingsScreen () {
 
     const UserData = GetUserData();
-
+    console.log("SettingsScreen")
     const {Logout} = React.useContext(AuthContext);
+
+
     const LogoutUser =  async () =>{
         try {
             
@@ -51,8 +53,8 @@ export default function SettingsScreen () {
                 </SettingsSection>
                 <View style={styles.vertContainerLogout}>
                     <View style={{justifyContent: 'center',}}>
-                        <Text style={[styles.text,{fontSize: 18,color: 'white',}]}>{UserData.displayname}</Text>
-                        <Text style={[styles.text,{fontSize: 14}]}>{UserData.login}</Text>
+                        <Text style={[styles.text,{fontSize: 18,color: 'white',}]}>{UserData? UserData.displayname: "Display Name"}</Text>
+                        <Text style={[styles.text,{fontSize: 14}]}>{UserData? UserData.login: "Slug"}</Text>
                     </View>
                     <TouchableOpacity style={styles.LogoutButton} onPress={LogoutUser}>
                         <View  style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center',}}>
