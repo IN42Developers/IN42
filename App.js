@@ -47,7 +47,8 @@ export default function App() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: 'rgba(16, 16, 16, 1)'
+      background: 'rgba(16, 16, 16, 1)',
+      navigationBarHandleColor: '#0E0E0E'
     },
   };
   //random invalid time 1693689163
@@ -94,7 +95,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer theme={AppTheme} linking={linking}>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent={true} />
+      <StatusBar barStyle="light-content" navigationBarHandleColor="#0E0E0E" backgroundColor="transparent" showHideTransition={true} translucent={true} />
         { isLoggedIn ? <AppStack/> : <AuthStack/> }
       </NavigationContainer>
       </AuthContext.Provider>

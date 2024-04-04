@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.3",
-    "@expo/cli": "^0.10.13",
+    "@expo/config-plugins": "^7.8.0",
+    "@expo/metro-config": "^0.17.1",
     "@expo/ngrok": "^4.1.1",
+    "@expo/prebuild-config": "^6.7.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/drawer": "^6.6.4",
@@ -31,6 +33,7 @@
     "expo-linking": "~6.2.2",
     "expo-secure-store": "~12.8.1",
     "expo-status-bar": "~1.11.1",
+    "lucide-react-native": "^0.364.0",
     "n": "^9.2.1",
     "nativewind": "^4.0.1",
     "nvm": "0.0.4",
@@ -50,7 +53,8 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react-native": "^0.73.0"
   },
   "private": true
 }

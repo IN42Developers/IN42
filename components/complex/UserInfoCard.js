@@ -15,7 +15,7 @@ export default function UserInfoCard() {
     let correctionPoints = -1;
     let curLevel = 'Current Level';
     let nextLevel = -1;
-    if(UserData != null) {
+    if (UserData != null) {
         displayname = UserData.displayname;
         login = UserData.login;
         profileimage = UserData.image.versions.small;
@@ -23,6 +23,14 @@ export default function UserInfoCard() {
         correctionPoints = UserData.correction_point;
         curLevel = UserData.level;
         nextLevel = UserData.level + 1;
+    } else {
+      displayname = 'Loading displayname ...';
+      login = 'Loading login ...'
+      profileimage = require('../../assets/images/profilePlaceholder.png');
+      walletPoints = '0';
+      correctionPoints = '0';
+      curLevel = 'Level 0';
+      nextLevel = 'Level 0';
     }
 
     return (
@@ -30,35 +38,35 @@ export default function UserInfoCard() {
         <View className='flex p-8 bg-blue-500'>
           <SafeAreaView style={{margin: -10}}>
             <View className='flex flex-row justify-between'>
-              <View className='flex-col gap-y-1'>
+              <View className='flex-col gap-y-1 mt-1'>
                 <Text className='text-white font-InterBold'>{displayname}</Text>
                 <Text className='text-white font-InterRegular'>{login}</Text>
               </View>
               <View>
                 <Image
-                  src={profileimage}
-                  style={{ width: 60, height: 60, borderRadius: 50, bottom: 4, right: 32, top: 6 }}
+                  source={{profileimage}}
+                  className='w-14 h-14 bg-slate-300 rounded-full'
                 />
               </View>
             </View>
             <View className='flex flex-row mt-6 justify-between gap-2 content-center'>
-              <View className='flex flex-col gap-y-2 min-w-[134] max-w-96'>
-                <View className='flex-row bg-slate-950 p-2.5 justify-between rounded-lg'>
+              <View className='flex flex-col gap-y-2 min-w-[140] max-w-96'>
+                <View className='flex-row bg-slate-950 p-3 justify-between rounded-lg'>
                   <EvaluationPointsIcon />
                   <Text className='text-white font-InterMedium'>Wallet</Text>
                   <Text className='text-gray-400 ml-2 font-InterBold'>{walletPoints}</Text>
                 </View>
-                <View className='flex-row bg-slate-950 p-2.5 justify-between rounded-lg'>
+                <View className='flex-row bg-slate-950 p-3 justify-between rounded-lg'>
                 <EvaluationPointsIcon />  
                   <Text className='text-white font-InterMedium'>Points</Text>
                   <Text className='text-gray-400 ml-2 font-InterBold'>{correctionPoints}</Text>
                 </View>
               </View>
-              <View className='flex w-7/12 bg-slate-950 p-2.5 gap-y-3 rounded-lg'>
-                <Text className='text-white'>Level based progress</Text>
+              <View className='flex bg-slate-950 p-4 w-60 gap-y-2 rounded-lg'>
+                <Text className='text-white font-InterBold'>Level based progress</Text>
                 <View className='flex flex-row justify-between'>
-                  <Text className='text-gray-400'>{curLevel}</Text>
-                  <Text className='text-white'>{nextLevel}</Text>
+                  <Text className='text-white font-InterMedium'>{curLevel}</Text>
+                  <Text className='text-gray-400 font-InterRegular'>{nextLevel}</Text>
                 </View>
                 <View className='p-0.5 bg-slate-400 rounded-full z-0'>
                   <View className='w-[35%] p-0.5 z-10 bg-white rounded-full' />

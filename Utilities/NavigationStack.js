@@ -20,13 +20,13 @@ import { GetRequestCounter,GetRequestCounterMax } from './UserData';
 import { setAccessToken, setKeyValuePair } from './TokenStorage';
 import { AuthContext } from '../Context'
 
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import TestingScreen from "../screens/testing/testingScreen"
 import TestingScreen2 from "../screens/testing/testingScreen2"
 import TestingScreenGestures from '../screens/testing/testingScreen_gestures';
 import { AntDesign } from '@expo/vector-icons';
 import { Gradient } from '../constants/Styles';
+import Icon from '../constants/AutoIcon';
 
 
 const Stack = createStackNavigator();
@@ -43,7 +43,7 @@ export const AuthStack = () => {
         },
       }}>
         <Stack.Screen name="index" options={{ statusBarColor: '#000', headerShown: false }} component={IndexScreen}/>
-        <Stack.Screen name="home" options={{ statusBarColor: '#000', headerShown: false }} component={HomeScreen}/>
+        {/* <Stack.Screen name="home" options={{ statusBarColor: '#000', headerShown: false }} component={HomeScreen}/> */}
       </Stack.Navigator>
   );
 };
@@ -52,9 +52,8 @@ export const AppStack = () => {
       <Stack.Navigator screenOptions={{
           headerStyle: {
             backgroundColor: '#101010',
-            
           },
-          headerShown:false,
+          headerShown: false,
         }}>
           <Stack.Screen name="home" 
             component={TabNavigator}/>
@@ -92,54 +91,59 @@ export const AppStack = () => {
         </DetailStack.Navigator>
     );
   };
-
-
   
-  export  const TabNavigator = () => {
-  
-    const Tab = createBottomTabNavigator();
+  export const TabNavigator = () => {
+  const Tab = createBottomTabNavigator();
 
-    const insets = useSafeAreaInsets();
-
-    return (
-      <Tab.Navigator screenOptions={{
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#00D2A0',
+        tabBarInactiveTintColor: 'gray',
+        headerShown: false,
         tabBarStyle: {
-            backgroundColor: '#000',
-            borderTopColor: '#1B1B1B',
-            borderTopWidth: 1,
+          backgroundColor: '#0E0E0E',
+          borderTopWidth: 0,
         },
         tabBarLabelStyle: {
-          fontWeight: 'bold',
-          fontSize: 16,
-        },
-        tabBarLabel: '',
-        headerShown: false,
-        tabBarActiveTintColor: '#fff',
-    }}>
-  
-          <Tab.Screen name="Home" options={{
-              tabBarIcon: ({ color, size }) => ( <AntDesign name="home" color={'#fff'} size={28} />),
-              tabBarLabel: '',
-          }} component={HomeNavigationSubStack} />
-          <Tab.Screen name="testing" options={{
-              tabBarIcon: ({ color, size }) => ( <AntDesign name="home" color={'#fff'} size={28} />),
-              tabBarLabel: '',
-          }} component={TestingScreen} />
-          <Tab.Screen name="Gestures" options={{
-              tabBarIcon: ({ color, size }) => ( <AntDesign name="home" color={'#fff'} size={28} /> ),
-              tabBarLabel: '',
-          }} component={TestingScreenGestures} />
-          <Tab.Screen name="Settings" options={{
-              tabBarIcon: ({ color, size }) => ( <AntDesign name="setting" color={'#fff'} size={28} /> ),
-              tabBarLabel: '',
-          }} component={SettingsScreen} />
-      </Tab.Navigator>
-    )
-  }
-  
-
-  
-
+          fontFamily: 'Inter_500Medium',
+          fontSize: 11
+        }
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ color, focused }) =>
+          (
+            <Icon name='Home' color={color} focused={focused} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Evaluations"
+        component={EvaluationDetailScreen}
+        options={{
+          tabBarIcon: ({ color, focused }) =>
+          (
+            <Icon name='Laptop' color={color} focused={focused} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ color, focused }) =>
+          (
+            <Icon name='Cog' color={color} focused={focused} />
+          )
+        }}
+      />
+    </Tab.Navigator>
+    );
+  };
 
 const styles = StyleSheet.create({
     container: {
