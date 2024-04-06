@@ -9,9 +9,19 @@ import SettingsSection from '../components/generic/SettingsSection';
 import SettingsToggle from '../components/generic/SettingsToggle';
 import { AntDesign } from '@expo/vector-icons'
 
-export default function SettingsScreen () {
+const SettingsScreen = () => {
 
     const UserData = GetUserData();
+    let displayname = 'Long display name';
+    let login = 'intra login';
+
+    if (UserData != null) {
+        displayname = UserData.displayname;
+        login = UserData.login;
+    } else {
+        displayname = 'Loading displayname ...';
+        login = 'Loading login ...'
+    }
 
     const {Logout} = React.useContext(AuthContext);
     const LogoutUser =  async () =>{
@@ -46,8 +56,8 @@ export default function SettingsScreen () {
                 </SettingsSection>
                 <View style={styles.vertContainerLogout}>
                     <View style={{justifyContent: 'center',}}>
-                        <Text style={[styles.text,{fontSize: 18,color: 'white',}]}>{UserData.displayname}</Text>
-                        <Text style={[styles.text,{fontSize: 14}]}>{UserData.login}</Text>
+                        <Text style={[styles.text,{fontSize: 18,color: 'white',}]}>{displayname}</Text>
+                        <Text style={[styles.text,{fontSize: 14}]}>{login}</Text>
                     </View>
                     <TouchableOpacity style={styles.LogoutButton} onPress={LogoutUser}>
                         <View  style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center',}}>
@@ -127,6 +137,6 @@ const styles = StyleSheet.create({
     },
 })
 
-
+export default SettingsScreen
 
 

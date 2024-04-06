@@ -1,12 +1,14 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
-import LoginLogo from '../components/svg/logo';
-// import TabNavigator from '../TabNavigator';
-import { Color, Ui, UiText } from '../constants/Styles';
-import { StatusBar } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
 
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+
+// import TabNavigator from '../TabNavigator';
+import { GetRequestCounter,GetRequestCounterMax } from './UserData';
+import { setAccessToken, setKeyValuePair } from './TokenStorage';
+import RequestCounter from '../components/complex/RequestCounter';
+import { AuthContext } from '../Context'
 import IndexScreen from '../screens';
 import HomeScreen from '../screens/home';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -14,20 +16,8 @@ import EventDetailScreen from "../screens/EventDetailScreen"
 import EvaluationDetailScreen from '../screens/EvaluationDetailScreen';
 import CampusEventsScreen from '../screens/CampusEventsScreen';
 import UserSlotsScreen from '../screens/UserSlotsScreen';
-import RequestCounter from '../components/complex/RequestCounter';
-import { GetRequestCounter,GetRequestCounterMax } from './UserData';
 
-import { setAccessToken, setKeyValuePair } from './TokenStorage';
-import { AuthContext } from '../Context'
-
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import TestingScreen from "../screens/testing/testingScreen"
-import TestingScreen2 from "../screens/testing/testingScreen2"
-import TestingScreenGestures from '../screens/testing/testingScreen_gestures';
-import { AntDesign } from '@expo/vector-icons';
-import { Gradient } from '../constants/Styles';
 import Icon from '../constants/AutoIcon';
-
 
 const Stack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -122,12 +112,20 @@ export const AppStack = () => {
         }}
       />
       <Tab.Screen
+        name="Events"
+        component={EventDetailScreen}
+        options={{
+          tabBarIcon: ({ color, focused }) => (
+            <Icon name='CalendarFold' color={color} focused={focused} />
+          )
+        }}
+      />
+      <Tab.Screen
         name="Evaluations"
         component={EvaluationDetailScreen}
         options={{
-          tabBarIcon: ({ color, focused }) =>
-          (
-            <Icon name='Laptop' color={color} focused={focused} />
+          tabBarIcon: ({ color, focused }) => (
+            <Icon name='UserCheck' color={color} focused={focused} />
           )
         }}
       />
@@ -135,8 +133,7 @@ export const AppStack = () => {
         name="Settings"
         component={SettingsScreen}
         options={{
-          tabBarIcon: ({ color, focused }) =>
-          (
+          tabBarIcon: ({ color, focused }) => (
             <Icon name='Cog' color={color} focused={focused} />
           )
         }}
@@ -144,20 +141,3 @@ export const AppStack = () => {
     </Tab.Navigator>
     );
   };
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    profileCircle: {
-      width: 45,
-      height: 45,
-      marginRight: 16
-    },
-    RequestCounter:{
-      fontSize: 30,
-      color: 'white',
-    },
-  });

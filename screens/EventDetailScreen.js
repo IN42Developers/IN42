@@ -2,29 +2,43 @@ import { View,StyleSheet,Text,SafeAreaView,TouchableOpacity } from "react-native
 import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native';
 import { UnsubscribeEvent,SubscribeEvent,ToggleEventSubscription,CheckEventSubscriptionStatus } from '../Utilities/event_utilities.js'
-import AttendenceCounter from "../components/generic/AttendenceCounter";
-import { getCampusTimeZone } from "../Utilities/UserData";
-import { useStore } from "../Utilities/store";
+import AttendenceCounter from "../components/generic/AttendenceCounter.js";
+import { getCampusTimeZone } from "../Utilities/UserData.js";
+import { useStore } from "../Utilities/store.js";
 import { useNavigation } from "@react-navigation/native";
-import SubscribeButton from "../components/buttons/SubscribeButton.tsx";
+import SubscribeButton from "../components/buttons/SubscribeButton.js";
 import NavigateBackButton from "../components/buttons/NavigateBackButton.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons'
 
 export default function EventDetailScreen() {
 
-    const route = useRoute();
-    const { eventData } = route.params;
-    const navigation = useNavigation();
+  const route = useRoute();
+  const eventData = route.params;
+  const navigation = useNavigation();
     
-    const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.id)); //needs cleanup
-    const GetNextEvent = useStore((store)=> store.GetNextEvent)
+  const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.id)); //needs cleanup
+  const GetNextEvent = useStore((store)=> store.GetNextEvent)
+
+  if (eventData == null) {
+    return (
+      <SafeAreaView>
+        <View className="flex flex-col mt-12 ml-8">
+          <Text className="text-2xl text-white font-InterSemibold">Not authenticated</Text>
+          <Text className=" text-base text-gray-400 font-InterRegular mt-2.5">It seems that you're not connected with the 42 API anymore. Please restart our app and ensure you have an internet connection.</Text>
+        </View>
+      </SafeAreaView>
+    )
+  }
 
     // const title = props.eventData.name;
     if(currEvent === null)
         return;
     const title = currEvent.name;
     const type = currEvent.kind;
+
+    if(title === null)
+        return;
 
     let tempDate = new Date( currEvent.begin_at);
     const date =tempDate.toLocaleDateString('en-US',getCampusTimeZone()) +' '+ tempDate.toLocaleTimeString('en-US',getCampusTimeZone());
