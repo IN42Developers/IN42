@@ -23,9 +23,9 @@ export default function EventDetailScreen() {
   if (eventData == null) {
     return (
       <SafeAreaView>
-        <View className="flex flex-col mt-12 ml-8">
+        <View className="flex flex-col mt-12 ml-8 p-12">
           <Text className="text-2xl text-white font-InterSemibold">Not authenticated</Text>
-          <Text className=" text-base text-gray-400 font-InterRegular mt-2.5">It seems that you're not connected with the 42 API anymore. Please restart our app and ensure you have an internet connection.</Text>
+          <Text className=" text-sm text-gray-400 font-InterRegular mt-4">It seems that you're not connected with the 42 API anymore. Please restart IN42 and ensure a stable connection to the Internet.</Text>
         </View>
       </SafeAreaView>
     )

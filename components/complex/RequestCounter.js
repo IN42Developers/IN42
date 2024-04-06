@@ -3,8 +3,11 @@ import { GetRequestCounter, GetRequestCounterMax } from '../../Utilities/UserDat
 
 const RequestCounter = ({textStyle=styles}) =>{
 
-    return(
-        <Text style={textStyle.text}>{GetRequestCounter()}/{GetRequestCounterMax()}</Text>
+    return (
+        <View className='flex flex-row'>
+            <Text className='text-white font-InterBold'>{GetRequestCounter()}/</Text>
+            <Text className='text-gray-500 font-InterBold'>{GetRequestCounterMax()}</Text>
+        </View>
     )
 }
 

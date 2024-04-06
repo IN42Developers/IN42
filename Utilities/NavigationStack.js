@@ -81,6 +81,14 @@ export const AppStack = () => {
         </DetailStack.Navigator>
     );
   };
+
+  export const DetailNavigationSubStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+      </Stack.Navigator>
+    )
+  }
   
   export const TabNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -92,8 +100,8 @@ export const AppStack = () => {
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#0E0E0E',
-          borderTopWidth: 0,
+          backgroundColor: '#202020',
+          borderTopColor: '#595959'
         },
         tabBarLabelStyle: {
           fontFamily: 'Inter_500Medium',
@@ -133,6 +141,18 @@ export const AppStack = () => {
         name="Settings"
         component={SettingsScreen}
         options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#202020',
+            borderColor: '#595959',
+            borderEndWidth: 0,
+            height: 118,
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontFamily: 'Inter_500Medium',
+          },
           tabBarIcon: ({ color, focused }) => (
             <Icon name='Cog' color={color} focused={focused} />
           )

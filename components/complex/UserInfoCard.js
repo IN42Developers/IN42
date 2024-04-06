@@ -52,16 +52,16 @@ export default function UserInfoCard() {
           <View className='flex flex-row mt-6 justify-between gap-2 content-center'>
             <View className='flex flex-col gap-y-2 min-w-[140] max-w-96'>
               <View className='flex-row bg-slate-950 p-3 justify-between rounded-lg'>
-                <View className='flex flex-row items-start justify-normal gap-x-4'>
+                <View className='flex flex-row items-start justify-normal'>
                   <PiggyBankIcon stroke="#A8D8F8" />
-                  <Text className='text-white font-InterBold mt-1'>Wallet</Text>
+                  <Text className='text-white font-InterBold mt-1 ml-3'>Wallet</Text>
                 </View>
                 <Text className='text-gray-400 ml-2 font-InterBold mt-1'>{walletPoints}</Text>
               </View>
               <View className='flex-row bg-slate-950 p-3 justify-between rounded-lg'>
-                <View className='flex flex-row items-start justify-normal gap-x-4'>
+                <View className='flex flex-row items-start justify-normal'>
                   <CoinsIcon stroke="#A8D8F8" /> 
-                  <Text className='text-white font-InterBold mt-1'>Points</Text>
+                  <Text className='text-white font-InterBold mt-1 ml-3'>Points</Text>
                 </View>
                 <Text className='text-gray-400 ml-2 font-InterBold mt-1'>{correctionPoints}</Text>
               </View>

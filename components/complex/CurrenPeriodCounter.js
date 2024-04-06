@@ -19,7 +19,7 @@ const CurrenPeriodCounter = ({textStyle=styles}) =>{
     },[])
     
     return(
-        <CountDownTimer totalTimeInSeconds={timeInSeconds} textStyle={textStyle}></CountDownTimer>
+        <CountDownTimer totalTimeInSeconds={timeInSeconds} className="text-gray-300"></CountDownTimer>
     )
 }
 
