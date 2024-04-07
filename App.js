@@ -96,7 +96,7 @@ export default function App() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer theme={AppTheme} linking={linking}>
       <StatusBar barStyle="light-content" navigationBarHandleColor="#0E0E0E" backgroundColor="transparent" showHideTransition={true} translucent={true} />
-        { true ? <AppStack/> : <AuthStack/> }
+        { isLoggedIn ? <AppStack/> : <AuthStack/> }
       </NavigationContainer>
       </AuthContext.Provider>
   );

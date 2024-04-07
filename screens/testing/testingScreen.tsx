@@ -1,6 +1,6 @@
 import { View,StyleSheet,Text,SafeAreaView,ScrollView,FlatList,Image } from "react-native"
 import React, { useState } from 'react'
-import DefaultButton from "../../components/buttons/AuthButton"
+import DefaultButton from "../../components/buttons/Button"
 import { GetDataFromEndPoint } from "../../Utilities/api_utilities"
 import { GetCurrentISODate } from "../../Utilities/event_utilities"
 import ListContainer from "../../components/generic/ListContainer"
