@@ -10,6 +10,7 @@ import SettingsToggle from '../components/generic/SettingsToggle';
 import { AntDesign } from '@expo/vector-icons'
 
 import { LogOutIcon, RefreshCwIcon } from 'lucide-react-native';
+import { Button } from '../components/buttons/Button';
 
 const SettingsScreen = () => {
 
@@ -60,22 +61,20 @@ const SettingsScreen = () => {
           </View>
           <View className='ml-0 mt-8 bg-gray-600 h-0.5' />
           <View className='flex flex-row items-center mt-12 justify-center gap-x-16'>
-            <View className='flex bg-[##202020] w-3/6 p-8 bottom-0 rounded-xl'>
-              <View className='flex flex-row gap-x-8 justify-center'>
+            <View className='flex border-gray-500 border w-5/6 p-8 bottom-0 rounded-xl'>
+              <View className='flex flex-row gap-x-8'>
                 <Image
                   source={{profileimage}}
                   className='w-14 h-14 bg-slate-300 rounded-full'
                 />
                 <View className='flex flex-col justify-center'>
                   <Text className='text-white font-InterBold text-lg'>{displayname}</Text>
-                  <Text className='text-gray-300 font-InterMedium text-sm'>{login}</Text>
+                  <Text className='text-gray-300 font-InterMedium text-sm mb-4'>{login}</Text>
+                  <Button onPress={LogoutUser} variant='link'>
+                    <Text className='text-white font-InterMedium text-lg'>Log out</Text>
+                  </Button>
                 </View>
               </View>
-            </View>
-            <View className='flex flex-row'>
-              <Pressable className='w-50 h-50' onPress={LogoutUser}>
-                <LogOutIcon stroke="gray" />
-              </Pressable>
             </View>
           </View>
         </View>

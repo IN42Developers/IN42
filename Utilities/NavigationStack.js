@@ -147,7 +147,7 @@ export const AppStack = () => {
             backgroundColor: '#202020',
             borderColor: '#595959',
             borderEndWidth: 0,
-            height: 118,
+            shadowRadius: 0
           },
           headerTitleStyle: {
             color: '#fff',
