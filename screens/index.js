@@ -90,7 +90,7 @@ export default function IndexScreen() {
             <Text className='text-white/50 text-center text-xl p-4 mt-12 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
           </View>
           <View className='bottom-0 absolute w-[90%] mb-12 justify-center self-center mx-auto'>
-            <Button onPress={handlePress} variant="primary">
+            <Button onPress={handlePress}>
               <Text className='text-center font-InterBold text-2xl'>Authorize</Text>
             </Button>
             <Text className='text-center mt-8 font-InterRegular text-xs text-gray-500'>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
