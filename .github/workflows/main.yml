@@ -6,10 +6,13 @@ on: push
 jobs:
   build:
     if: ${{ contains(github.event.head_commit.message,'[expo ios]') }}
-    runs-on: macos-latest
+    runs-on: macosx13.3
     steps:
       - name: Setup repo
         uses: actions/checkout@v4
+
+      - name: Print macOS Version
+        run: sw_vers -productVersion
 
       - name: Set environment variable
         run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
