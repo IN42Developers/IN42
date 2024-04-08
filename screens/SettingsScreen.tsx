@@ -7,7 +7,6 @@ import { GetRequestCounter, GetRequestCounterMax, GetUserData } from '../Utiliti
 import CurrenPeriodCounter from '../components/complex/CurrenPeriodCounter';
 import SettingsSection from '../components/generic/SettingsSection';
 import SettingsToggle from '../components/generic/SettingsToggle';
-import { AntDesign } from '@expo/vector-icons'
 
 import { LogOutIcon, RefreshCwIcon } from 'lucide-react-native';
 import { Button } from '../components/buttons/Button';
@@ -71,6 +70,7 @@ const SettingsScreen = () => {
                   <Text className='text-white font-InterBold text-lg'>{displayname}</Text>
                   <Text className='text-gray-300 font-InterMedium text-sm mb-4'>{login}</Text>
                   <Button onPress={LogoutUser} variant='link'>
+                    <LogOutIcon stroke='white' size="18" />
                     <Text className='text-white font-InterMedium text-lg'>Log out</Text>
                   </Button>
                 </View>

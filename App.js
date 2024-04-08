@@ -1,22 +1,22 @@
-import { DefaultTheme, Link, NavigationContainer} from '@react-navigation/native';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { StatusBar } from 'react-native';
+
+import { DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import * as Linking from "expo-linking";
+import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
+import * as NavigationBar from 'expo-navigation-bar';
 
 import { isTokenStillValid} from './Utilities/TokenStorage';
-import { useEffect,useState } from 'react';
 import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/NavigationStack';
 import { AuthContext } from './Context';
-import { StyleSheet, Image, View, StatusBar } from 'react-native';
-import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter'
-
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
-import * as Linking from "expo-linking";
 import "./global.css"
 
 const prefix = Linking.createURL('/');
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading,setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   const linking = {
     prefixes:[prefix],
@@ -70,6 +70,7 @@ export default function App() {
       }
     }
     retrieveData();
+    NavigationBar.setBackgroundColorAsync("#202020");
   },[])
 
 
@@ -95,7 +96,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer theme={AppTheme} linking={linking}>
-      <StatusBar barStyle="light-content" navigationBarHandleColor="#0E0E0E" backgroundColor="transparent" showHideTransition={true} translucent={true} />
+      <StatusBar barStyle="light-content" navigationBarHandleColor="#202020" backgroundColor="transparent" showHideTransition={true} translucent={true} />
         { true ? <AppStack/> : <AuthStack/> }
       </NavigationContainer>
       </AuthContext.Provider>

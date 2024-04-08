@@ -10,7 +10,6 @@ import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid }
 import { getTokenFromCode } from '../Utilities/apiAuthorization.js'
 import { setKeyValuePair } from '../Utilities/TokenStorage'
 import { AssertUserCanRequestData } from '../Utilities/UserData'
-
 import { AuthContext } from '../Context'
 import EntryHeader from '../components/ui/EntryHeader'
 

@@ -9,12 +9,12 @@ interface ButtonProps {
 
 export const Button: React.FC<ButtonProps> = ({ onPress, variant, children }) => {
 
-  const defaultButtonStyle = 'bg-gray-300 rounded-full active:bg-gray-400';
+  const defaultButtonStyle = 'bg-gray-300 p-4 rounded-full active:bg-gray-400';
 
   const variants = {
     primary: 'bg-gray-300 rounded-full p-4 active:bg-gray-400',
     secondary: 'bg-blue-500 rounded-lg p-4 active:bg-blue-600',
-    link: 'text-white bg-gray-800 p-2 rounded-sm'
+    link: 'text-white bg-gray-800 p-2 rounded-sm flex-row gap-x-2 items-center'
   };
 
   const variantStyles = variants[variant] || defaultButtonStyle;
