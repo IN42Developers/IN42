@@ -2,7 +2,7 @@ name: Build and Upload to Play Store
 on: push
   # push:
   #   branches-ignore: 
-  #     - "release"
+  #     - "release" 
     
 jobs: 
   Build:
