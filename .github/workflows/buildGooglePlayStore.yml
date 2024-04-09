@@ -7,7 +7,7 @@ on: push
 jobs: 
   Build:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message,'[store]') }}
+    if: ${{ contains(github.event.head_commit.message,'[store]') || contains(github.event.head_commit.message,'[store android]') }}
 
     steps:
       - name: 🏗 Setup repo
