@@ -9,7 +9,6 @@ import { GetUserData, getUserCursus } from '../../Utilities/UserData'
 export default function UserInfoCard() {
   const UserData = GetUserData();
   const UserCursus = getUserCursus();
-  // console.log(UserData)
   let displayname = 'Long display name';
   let login = 'intra login';
   let profileimage = '';
@@ -35,7 +34,6 @@ export default function UserInfoCard() {
     nextLevel = 'Level 0';
   }
 
-  console.log(profileimage)
   return (
     <View className='container'>
       <View className='flex p-8 bg-blue-500'>
