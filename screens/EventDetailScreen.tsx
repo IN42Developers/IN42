@@ -17,19 +17,21 @@ export default function EventDetailScreen() {
   const eventData = route.params;
   const navigation = useNavigation();
     
-  const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.id)); //needs cleanup
+  const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.eventData.id)); //needs cleanup
   const GetNextEvent = useStore((store)=> store.GetNextEvent)
 
-  if (eventData == null) {
-    return (
-      <SafeAreaView>
-        <View className="flex flex-col mt-12 ml-8 p-12">
-          <Text className="text-2xl text-white font-InterSemibold">Not authenticated</Text>
-          <Text className=" text-sm text-gray-400 font-InterRegular mt-4">It seems that you're not connected with the 42 API anymore. Please restart IN42 and ensure a stable connection to the Internet.</Text>
-        </View>
-      </SafeAreaView>
-    )
-  }
+    // console.log("currEvent",eventData.id)
+
+//   if (eventData == null) {
+//     return (
+//       <SafeAreaView>
+//         <View className="flex flex-col mt-12 ml-8 p-12">
+//           <Text className="text-2xl text-white font-InterSemibold">Not authenticated</Text>
+//           <Text className=" text-sm text-gray-400 font-InterRegular mt-4">It seems that you're not connected with the 42 API anymore. Please restart IN42 and ensure a stable connection to the Internet.</Text>
+//         </View>
+//       </SafeAreaView>
+//     )
+//   }
 
     // const title = props.eventData.name;
     if(currEvent === null)
