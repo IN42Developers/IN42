@@ -76,7 +76,6 @@ export const AppStack = () => {
               headerShown: false,
                     }}/>
           <DetailStack.Screen name="EvaluationDetailScreen" component={EvaluationDetailScreen}/>
-          <DetailStack.Screen name="CampusEvents" component={CampusEventsScreen}/>
           <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen}/>
         </DetailStack.Navigator>
     );
@@ -86,6 +85,7 @@ export const AppStack = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+        <Stack.Screen name="CampusEventsScreen" component={CampusEventsScreen} />
       </Stack.Navigator>
     )
   }
@@ -123,6 +123,18 @@ export const AppStack = () => {
         name="Events"
         component={CampusEventsScreen}
         options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#202020',
+            borderColor: '#595959',
+            borderEndWidth: 0,
+            shadowRadius: 0
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontFamily: 'Inter_500Medium',
+          },
           tabBarIcon: ({ color, focused }) => (
             <Icon name='CalendarFold' color={color} focused={focused} />
           )
