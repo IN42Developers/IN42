@@ -16,6 +16,7 @@ export const GetUserData = () =>{
     return UserData;
 }
 
+//note this is currently hard coded to 21!
 export const getUserCursus = () => {
     if (UserData == null) {
         return (null);
@@ -25,7 +26,8 @@ export const getUserCursus = () => {
             return UserData.cursus_users[i];
     }
     console.log(UserData);
-    return (null);
+    //return the first one if the data is not null and main cursus cant be found
+    return (UserData.cursus_users[0]);
 }
 
 //returns an object with a timeZone field set to the Campus TimeZone o0f the user

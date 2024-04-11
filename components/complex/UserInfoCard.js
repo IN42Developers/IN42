@@ -4,10 +4,12 @@ import { View, Image, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PiggyBankIcon, CoinsIcon } from 'lucide-react-native';
 
-import { GetUserData } from '../../Utilities/UserData'
+import { GetUserData, getUserCursus } from '../../Utilities/UserData'
 
 export default function UserInfoCard() {
   const UserData = GetUserData();
+  const UserCursus = getUserCursus();
+  // console.log(UserData)
   let displayname = 'Long display name';
   let login = 'intra login';
   let profileimage = '';
@@ -21,8 +23,8 @@ export default function UserInfoCard() {
     profileimage = UserData.image.versions.small;
     walletPoints = UserData.wallet;
     correctionPoints = UserData.correction_point;
-    curLevel = UserData.level;
-    nextLevel = UserData.level + 1;
+    curLevel = Math.floor(UserCursus.level);
+    nextLevel = curLevel + 1;
   } else {
     displayname = 'Loading displayname ...';
     login = 'Loading login ...'
@@ -33,6 +35,7 @@ export default function UserInfoCard() {
     nextLevel = 'Level 0';
   }
 
+  console.log(profileimage)
   return (
     <View className='container'>
       <View className='flex p-8 bg-blue-500'>
@@ -44,7 +47,7 @@ export default function UserInfoCard() {
             </View>
             <View>
               <Image
-                source={{profileimage}}
+                source={{uri: profileimage}}
                 className='w-14 h-14 bg-slate-300 rounded-full'
               />
             </View>
@@ -69,8 +72,8 @@ export default function UserInfoCard() {
             <View className='flex bg-slate-950 p-4 w-60 gap-y-2 rounded-lg'>
                 <Text className='text-white font-InterBold'>Level based progress</Text>
                 <View className='flex flex-row justify-between'>
-                  <Text className='text-white font-InterMedium'>{curLevel}</Text>
-                  <Text className='text-gray-400 font-InterRegular'>{nextLevel}</Text>
+                  <Text className='text-white font-InterMedium'>{"LEVEL "+ curLevel}</Text>
+                  <Text className='text-gray-400 font-InterRegular'>{"LEVEL "+ nextLevel}</Text>
                 </View>
                 <View className='p-0.5 bg-slate-400 rounded-full z-0'>
                   <View className='w-[35%] p-0.5 z-10 bg-white rounded-full' />
