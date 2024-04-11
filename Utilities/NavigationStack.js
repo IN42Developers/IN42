@@ -121,7 +121,7 @@ export const AppStack = () => {
       />
       <Tab.Screen
         name="Events"
-        component={EventDetailScreen}
+        component={CampusEventsScreen}
         options={{
           tabBarIcon: ({ color, focused }) => (
             <Icon name='CalendarFold' color={color} focused={focused} />

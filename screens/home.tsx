@@ -66,7 +66,7 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
     navigation.navigate("UserSlotScreen");
   }
 
-  const handlePress =async () => {
+  const handlePress = async () => {
     try {
       await refreshToken();
       

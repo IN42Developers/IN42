@@ -65,7 +65,7 @@ export default function IndexScreen() {
   }
 
   const handlePress = async () => {
-/*     console.log("process.env.IN42_DEV", process.env.IN42_DEV);
+    console.log("process.env.IN42_DEV", process.env.IN42_DEV);
     try {
       if (AssertUserCanRequestData() == false) {
         return;
@@ -75,9 +75,9 @@ export default function IndexScreen() {
 
     catch(error){
       console.log(error);
-    } */
+    }
     console.log('Logged in');
-  }
+  };
 
   return (
     <View className='flex-1 container'>

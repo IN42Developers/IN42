@@ -30,14 +30,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mrm0lten.IN42"
+      "bundleIdentifier": "com.in42.IN42"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mrm0lten.IN42"
+      "package": "com.in42.IN42"
     },
     "web": {
       "bundler": "metro"
