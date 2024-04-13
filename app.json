@@ -30,7 +30,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.in42.IN42"
+      "bundleIdentifier": "com.in42.IN42",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        } 
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -44,8 +49,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "3db51579-3df9-4f7d-b340-c3a0aa40600f"
+        "projectId": "4490b7e2-3344-4f8f-a7a8-73e9974c0815"
       }
-    }
+    },
+    "owner": "in42developers"
   }
 }

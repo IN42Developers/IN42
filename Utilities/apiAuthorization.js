@@ -28,7 +28,7 @@ export const  authorizeUser =  () => {
       },
       { authorizationEndpoint: 'https://api.intra.42.fr/oauth/authorize' }
     );
-    console.log('Request = ', request);
+    // console.log('Request = ', request);
     return { response, promptAsync };
 }
 

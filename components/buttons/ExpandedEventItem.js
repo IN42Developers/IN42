@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View,Image,ImageBackground } from 'react-native';
 import React from 'react';
 import RoundedDescriptor from '../generic/RoundedDescriptor';
-import { getMonthFromDate, getShortDayFromDate,getEventTypeColorGradient as getImageFromEventType } from '../../Utilities/event_utilities.js'
+import { getMonthFromDate, getShortDayFromDate,getEventTypeColorGradient as getImageFromEventType } from '../../Utilities/event_utilities.tsx'
 import { useNavigation } from '@react-navigation/native'
 import { getCampusTimeZone } from '../../Utilities/UserData';
 import { AntDesign } from '@expo/vector-icons'

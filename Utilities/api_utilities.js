@@ -10,6 +10,10 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
     let uri = `https://api.intra.42.fr${endpoint}`;
     let tokendata = getAccessToken();
     // console.log("tokendata in getdata = ",tokendata);
+    if(!tokendata){
+        // return null
+        throw new Error("TokenData is Null");
+    }
 
     let req = new Request(uri, {
         method: 'GET',
@@ -21,6 +25,7 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
     try {
         // console.log('try fetching from',endpoint)
         IncrementRequestCounter();
+        console.log("GETting from",uri)
         const response = await fetch(req);
         if(response.ok){
             const data = await response.json();
@@ -44,7 +49,7 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
 
     let uri = `https://api.intra.42.fr${endpoint}`;
     let tokendata = getAccessToken();
-    console.log("tokendata in getdata = ",tokendata);
+    // console.log("tokendata in getdata = ",tokendata);
 
     const tokenRequest = {
         method: 'POST',
@@ -56,11 +61,13 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
       };
 
     try {
-        console.log('try fetching the post request')
+        console.log('POSTing to',uri)
         IncrementRequestCounter()
+        // console.log("Post Request = ",tokenRequest)
         const response = await fetch(uri,tokenRequest);
         if(response.ok){
             console.log('Suceess')
+            return response.json();
         } else {
             throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -73,13 +80,15 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
 
 export const DeleteDataFromEndpoint =async (endpoint)=> {
 
+    const uri = `https://api.intra.42.fr${endpoint}`;
     if(AssertUserCanRequestData() == false)
         return;
 
     let tokendata = getAccessToken();
     try {
         IncrementRequestCounter();
-        const response = await fetch(`https://api.intra.42.fr${endpoint}`, {
+        console.log("DELETEing at",uri)
+        const response = await fetch(uri, {
             method: 'DELETE',
             headers: {
            'Authorization': `Bearer ${tokendata.access_token}`, // Replace with your access token

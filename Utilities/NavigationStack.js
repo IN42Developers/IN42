@@ -4,20 +4,16 @@ import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
-// import TabNavigator from '../TabNavigator';
-import { GetRequestCounter,GetRequestCounterMax } from './UserData';
-import { setAccessToken, setKeyValuePair } from './TokenStorage';
-import RequestCounter from '../components/complex/RequestCounter';
-import { AuthContext } from '../Context'
 import IndexScreen from '../screens';
 import HomeScreen from '../screens/home';
 import SettingsScreen from '../screens/SettingsScreen';
 import EventDetailScreen from "../screens/EventDetailScreen"
 import EvaluationDetailScreen from '../screens/EvaluationDetailScreen';
 import CampusEventsScreen from '../screens/CampusEventsScreen';
-import UserSlotsScreen from '../screens/UserSlotsScreen';
+import UserSlotsScreen from '../screens/UserSlotScreen';
 
 import Icon from '../constants/AutoIcon';
+import ShowModalButton from '../components/buttons/ShowModalButton';
 
 const Stack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -65,7 +61,7 @@ export const AppStack = () => {
             fontSize: 16,
           },
           headerTintColor: '#fff',
-          headerTitle: '',
+          // headerTitle: '',
           // headerStatusBarHeight: 84,
         }}>
           <DetailStack.Screen name="home" options={{
@@ -77,7 +73,13 @@ export const AppStack = () => {
                     }}/>
           <DetailStack.Screen name="EvaluationDetailScreen" component={EvaluationDetailScreen}/>
           <DetailStack.Screen name="CampusEvents" component={CampusEventsScreen}/>
-          <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen}/>
+          <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen} options={{
+              headerShown: true,
+              title: 'Your Slots',
+              headerTintColor: 'white',
+              headerRight: () => (<ShowModalButton></ShowModalButton>)
+
+                    }}/>
         </DetailStack.Navigator>
     );
   };
