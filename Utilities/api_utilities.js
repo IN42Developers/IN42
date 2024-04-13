@@ -19,7 +19,7 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
     });
 
     try {
-        // console.log('try fetching')
+        // console.log('try fetching from',endpoint)
         IncrementRequestCounter();
         const response = await fetch(req);
         if(response.ok){

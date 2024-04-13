@@ -10,8 +10,8 @@ export const  authorizeUser =  () => {
   const clientID =(process.env.IN42_DEV == "true" ? process.env.IN42_DEV_CLIENT_ID : process.env.EXPO_PUBLIC_CLIENT_ID);
   console.log('API_URL =',redirectURI);
   console.log('CLIENT_ID =',clientID);
-  console.log('process.env.IN42_DEV == "true" = ',process.env.IN42_DEV == "true")
-  console.log("TEEEEEEEEEST = ",(process.env.IN42_DEV == "true" ? process.env.IN42_DEV_CLIENT_ID : process.env.EXPO_PUBLIC_CLIENT_ID))
+  // console.log('process.env.IN42_DEV == "true" = ',process.env.IN42_DEV == "true")
+  // console.log("TEEEEEEEEEST = ",(process.env.IN42_DEV == "true" ? process.env.IN42_DEV_CLIENT_ID : process.env.EXPO_PUBLIC_CLIENT_ID))
     if(!redirectURI){
       console.log('REDIRECT URI =',redirectURI)
       console.log('Redirect URI is undefined, it seems like your .env is not setup')
@@ -63,20 +63,14 @@ const createRequestURL = (code) => {
 
 export const getTokenFromCode = async (code) => {
   
-  console.log('------------------------------------------------------------');
-  console.log(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`)
-  console.log("X-SECRET", `${process.env.BASIC_HEADER_HASH}`)
-  console.log("request URL = ",createRequestURL(code));
-  console.log("request Init = ",createRequestInit(code));
-  console.log('------------------------------------------------------------');
-
   try {
     IncrementRequestCounter();
     
     console.log('Before status request');
-    const status = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
-    console.log("status = ", status.json())
-    
+    if(!process.env.IN42_DEV){
+      const status = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
+      console.log("status = ", status.json())
+    }
     console.log('Before fetch request');
     const response = await fetch(createRequestURL(code), createRequestInit(code));
     console.log('after fetch request');
