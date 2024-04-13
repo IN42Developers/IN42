@@ -16,12 +16,12 @@ const SettingsScreen = () => {
     const UserData = GetUserData();
     let displayname = 'Long display name';
     let login = 'intra login';
-    let profileimage = '';
+    let profileimage;
 
     if (UserData != null) {
         displayname = UserData.displayname;
         login = UserData.login;
-        profileimage = UserData.image.versions.small;
+        profileimage = {uri: UserData.image.versions.small};
     } else {
         displayname = 'User';
         login = 'username';
@@ -63,7 +63,7 @@ const SettingsScreen = () => {
             <View className='flex border-gray-500 border w-5/6 p-8 bottom-0 rounded-xl'>
               <View className='flex flex-row gap-x-8'>
                 <Image
-                  source={ { uri: profileimage}}
+                  source={ profileimage}
                   className='w-14 h-14 bg-slate-300 rounded-full'
                 />
                 <View className='flex flex-col justify-center'>

@@ -19,7 +19,7 @@ export default function UserInfoCard() {
   if (UserData != null) {
     displayname = UserData.displayname;
     login = UserData.login;
-    profileimage = UserData.image.versions.small;
+    profileimage ={uri: UserData.image.versions.small};
     walletPoints = UserData.wallet;
     correctionPoints = UserData.correction_point;
     curLevel = Math.floor(UserCursus.level);
@@ -45,7 +45,7 @@ export default function UserInfoCard() {
             </View>
             <View>
               <Image
-                source={{uri: profileimage}}
+                source={profileimage}
                 className='w-14 h-14 bg-slate-300 rounded-full'
               />
             </View>
