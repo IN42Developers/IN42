@@ -1,4 +1,4 @@
-name: buildAPK
+name: build Android APK
 on: push
   # push:
   #   branches-ignore: 

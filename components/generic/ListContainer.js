@@ -1,4 +1,4 @@
-import { View,Text, ScrollView,TouchableOpacity,FlatList } from "react-native"
+import { View, Text, TouchableOpacity, FlatList } from "react-native"
 import { StyleSheet } from "react-native";
 import EmptyContainerItem from "../buttons/EmptyContainerItem";
 import { AntDesign } from '@expo/vector-icons';
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'grey',
         // paddingVertical: 5,
         paddingHorizontal: 16,
+        marginTop: 12
     },
     header: {
         flexDirection: 'row',

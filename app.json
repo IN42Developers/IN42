@@ -1,5 +1,5 @@
 {
-  "expo": { 
+  "expo": {
     "name": "IN42",
     "slug": "IN42",
     "version": "0.3.0",
@@ -8,39 +8,50 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "scheme": "in42",
     "plugins": [
-      ["expo-build-properties", {
-        "android": {
-          "usesCleartextTraffic": true
-        },
-        "ios": {
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          },
+          "ios": {}
         }
-      }]],
+      ],
+      "expo-font",
+      "expo-secure-store"
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mrm0lten.IN42"
+      "bundleIdentifier": "com.in42.IN42",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        } 
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mrm0lten.IN42",
+      "package": "com.in42.IN42"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "bundler": "metro"
     },
     "extra": {
       "eas": {
-        "projectId": "3db51579-3df9-4f7d-b340-c3a0aa40600f"
+        "projectId": "4490b7e2-3344-4f8f-a7a8-73e9974c0815"
       }
-    }
+    },
+    "owner": "in42developers"
   }
 }

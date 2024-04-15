@@ -19,7 +19,8 @@
         "buildType": "apk"
       },
       "ios": {
-        "simulator": true
+        "distribution": "internal"
+        //"simulator": true
       }
     },
 // builds specifically to upload to the app stores
@@ -33,6 +34,8 @@
       "android": {
       },
       "ios": {
+        "distribution": "store",
+        "releaseChannel": "default"
       }
     }
   },

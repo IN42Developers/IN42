@@ -2,29 +2,45 @@ import { View,StyleSheet,Text,SafeAreaView,TouchableOpacity } from "react-native
 import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native';
 import { UnsubscribeEvent,SubscribeEvent,ToggleEventSubscription,CheckEventSubscriptionStatus } from '../Utilities/event_utilities.js'
-import AttendenceCounter from "../components/generic/AttendenceCounter";
-import { getCampusTimeZone } from "../Utilities/UserData";
-import { useStore } from "../Utilities/store";
+import AttendenceCounter from "../components/generic/AttendenceCounter.js";
+import { getCampusTimeZone } from "../Utilities/UserData.js";
+import { useStore } from "../Utilities/store.js";
 import { useNavigation } from "@react-navigation/native";
-import SubscribeButton from "../components/buttons/SubscribeButton.tsx";
+import SubscribeButton from "../components/buttons/SubscribeButton.js";
 import NavigateBackButton from "../components/buttons/NavigateBackButton.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons'
 
 export default function EventDetailScreen() {
 
-    const route = useRoute();
-    const { eventData } = route.params;
-    const navigation = useNavigation();
+  const route = useRoute();
+  const eventData = route.params;
+  const navigation = useNavigation();
     
-    const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.id)); //needs cleanup
-    const GetNextEvent = useStore((store)=> store.GetNextEvent)
+  const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.eventData.id)); //needs cleanup
+  const GetNextEvent = useStore((store)=> store.GetNextEvent)
+
+    // console.log("currEvent",eventData.id)
+
+//   if (eventData == null) {
+//     return (
+//       <SafeAreaView>
+//         <View className="flex flex-col mt-12 ml-8 p-12">
+//           <Text className="text-2xl text-white font-InterSemibold">Not authenticated</Text>
+//           <Text className=" text-sm text-gray-400 font-InterRegular mt-4">It seems that you're not connected with the 42 API anymore. Please restart IN42 and ensure a stable connection to the Internet.</Text>
+//         </View>
+//       </SafeAreaView>
+//     )
+//   }
 
     // const title = props.eventData.name;
     if(currEvent === null)
         return;
     const title = currEvent.name;
     const type = currEvent.kind;
+
+    if(title === null)
+        return;
 
     let tempDate = new Date( currEvent.begin_at);
     const date =tempDate.toLocaleDateString('en-US',getCampusTimeZone()) +' '+ tempDate.toLocaleTimeString('en-US',getCampusTimeZone());

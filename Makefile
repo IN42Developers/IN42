@@ -9,6 +9,9 @@ android:
 	./$(F_SETUP)/$(F_ANDROIDSTUDIO)/android-studio/bin/studio.sh
 
 start:
+	npx expo start
+
+tstart:
 	npx expo start --tunnel
 
 clean:

@@ -4,11 +4,11 @@
 # Simple switch that allows you to use your own app, over the live environment
 IN42_DEV=true
 # Redirect URI can be found when starting the expo server for the first time, use 'Expo Go' for local dev
-IN42_DEV_REDIRECT_URI="Your Own redirect URI"
+IN42_DEV_REDIRECT_URI="exp://fr9xiek-in42developers-8081.exp.direct"
 # your own Apps client ID
-IN42_DEV_CLIENT_ID="Your own apps client ID"
+IN42_DEV_CLIENT_ID="u-s4t2ud-4cf23d5d1f168fbc430cb566418234b22adbf1fc5f8766c2fc2620ec931e353b"
 # your own Apps client Secret. DONT SHARE IT WITH ANYONE
-IN42_DEV_CLIENT_SECRET="Your own apps secret"
+IN42_DEV_CLIENT_SECRET="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"
 
 
 

@@ -6,11 +6,11 @@ import { useStore } from '../Utilities/store'
 
 export default function CampusEventsScreen() {
 
-    const allEvents = useStore((store) =>store.events);
+    const allEvents = useStore((store) => store.events);
 
     return (
         <SafeAreaView style={{flex: 1}}>
-            <ListContainer title={'Campus Events'} ComponentData={allEvents}  ChildComponent={EventItem}/>
+            <ListContainer title={'Campus events'} ComponentData={allEvents}  ChildComponent={EventItem}/>
         </SafeAreaView>
     )
 }

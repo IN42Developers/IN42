@@ -1,21 +1,16 @@
-import { View,StyleSheet,Text,SafeAreaView,TouchableOpacity } from "react-native"
-import React, { useEffect, useState } from 'react'
-import { Ui, UiText, Color } from "../constants/Styles"
+import React from 'react'
+import { Text, View } from "react-native"
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 
-export default function EvaluationDetailScreen() {
-
-
-    return (
-        <View  style={styles.container}>
-            <Text style={[UiText.bold, { fontSize: 20, color: Color.white, marginLeft: 16 }]}>Feature not implemented</Text>
-            <Text style={[UiText.medium,  { fontSize: 12, color: Color.white, marginLeft: 16, marginTop: 8 }]}>Evaluation Details are not available.</Text>
-        </View>
-    )
+const EvaluationDetailScreen = () => {
+  return (
+    <SafeAreaView>
+      <View className='justify-center items-center mt-12'>
+        <Text className="text-2xl font-InterSemibold text-white">Evaluations</Text>
+      </View>
+    </SafeAreaView>
+  )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-})
+export default EvaluationDetailScreen

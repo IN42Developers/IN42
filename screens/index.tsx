@@ -1,25 +1,24 @@
-import { Platform, Image, SafeAreaView, StyleSheet, Text, View, Dimensions } from 'react-native'
+import { Image, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
-import DefaultButton from '../components/buttons/AuthButton'
+import { Button } from '../components/buttons/Button'
 import { useNavigation } from '@react-navigation/native'
 import { useEffect } from 'react'
-import { LinearGradient } from 'expo-linear-gradient'
-import Logo from '../components/svg/logo'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import {authorizeUser} from '../Utilities/apiAuthorization.js'
 import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid } from '../Utilities/TokenStorage';
 import { getTokenFromCode } from '../Utilities/apiAuthorization.js'
 import { setKeyValuePair } from '../Utilities/TokenStorage'
 import { AssertUserCanRequestData } from '../Utilities/UserData'
-
 import { AuthContext } from '../Context'
-
+import EntryHeader from '../components/ui/EntryHeader'
 
 export default function IndexScreen() {
-    const {Login} = React.useContext(AuthContext);
-    const navigation = useNavigation();
 
-    const { response,promptAsync: AuthUser } = authorizeUser();
+  const {Login} = React.useContext(AuthContext);
+  const navigation = useNavigation();
+
+  const { response, promptAsync: AuthUser } = authorizeUser();
 
   useEffect( () => {
     const tokenExchange = async() =>{
@@ -59,15 +58,14 @@ export default function IndexScreen() {
     //self invoking async function wtf?!
   },[response])
 
-
-  const getXSecret = async () => {
-    console.log(`X-SECRET = ${process.env.BASIC_HEADER_HASH}`)
-    console.log(`EXPO_PUBLIC_AUTH_SERVER_IP = ${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}`)
-    console.log(`EXPO_PUBLIC_REDIRECT_URI = ${process.env.EXPO_PUBLIC_REDIRECT_URI}`)
-  }
+  // const getXSecret = async () => {
+  //   console.log(`X-SECRET = ${process.env.BASIC_HEADER_HASH}`)
+  //   console.log(`EXPO_PUBLIC_AUTH_SERVER_IP = ${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}`)
+  //   console.log(`EXPO_PUBLIC_REDIRECT_URI = ${process.env.EXPO_PUBLIC_REDIRECT_URI}`)
+  // }
 
   const handlePress = async () => {
-    console.log("process.env.IN42_DEV",process.env.IN42_DEV);
+    console.log("process.env.IN42_DEV", process.env.IN42_DEV);
     try {
       if (AssertUserCanRequestData() == false) {
         return;
@@ -78,80 +76,26 @@ export default function IndexScreen() {
     catch(error){
       console.log(error);
     }
-  }
+    console.log('Logged in');
+  };
 
   return (
-    <View id='General container' style={styles.container}>
-      <View id='Pattern Group' style={styles.group}>
-      <Image source={require('../assets/images/HeadLayout.png')} style={{
-        width: Dimensions.get('window').width * 1.1,
-        height: Dimensions.get('window').height * 0.38,
-      }} />
-        <View id='Logo' style={styles.logo}>
-          <Logo />
+    <View className='flex-1 container'>
+      <EntryHeader />
+      <View className='flex-1 mt-8'>
+        <View className='flex-1 flex-col justify-between gap-y-4 mt-12'>
+          <View>
+            <Text className='text-white text-center text-3xl font-InterMedium'>Welcome back</Text>
+            <Text className='text-white/50 text-center text-xl p-4 mt-12 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
+          </View>
+          <View className='bottom-0 absolute w-[90%] mb-12 justify-center self-center mx-auto'>
+            <Button onPress={handlePress}>
+              <Text className='text-center font-InterBold text-2xl'>Authorize</Text>
+            </Button>
+            <Text className='text-center mt-8 font-InterRegular text-xs text-gray-500'>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
+          </View>
         </View>
       </View>
-      <SafeAreaView>
-      <View id='Main Container' style={styles.main}>
-        <View id='Text field with Button' style={styles.field}>
-          <View style={styles.seperator} />
-          <Text style={styles.textHeading}>Welcome back</Text>
-          <Text style={styles.textDescription}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
-          <View style={styles.seperator} />
-          <View style={styles.seperator} />
-          <DefaultButton onPress={handlePress} title='Authorize' />
-        </View>
-      </View>
-    </SafeAreaView>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  headLayout: {
-  },
-  group: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    position: 'absolute',
-  },
-  seperator: {
-    height: 8,
-  },
-  textHeading: {
-    fontSize: 42,
-    fontWeight: '500',
-    color: '#E0E0E0',
-  },
-  textDescription: {
-    ...Platform.select({
-      ios: {
-        fontSize: 20,
-      },
-      android: {
-        fontSize: 18,
-      },
-    }),
-    color: '#A7A7A7',
-    textAlign: 'center',
-  },
-  main: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  field: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 24,
-    gap: 28,
-    textAlign: 'center',
-  },
-  });
