@@ -116,8 +116,8 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
  
 
     return (
-        <View style={styles.modalContainer}>
-            <View style={styles.container}>
+        <View className="flex-1 justify-center items-center">
+            <View className="bg-[#1A1A1A] border-gray-300 border p-4 self-center justify-center w-[windowWidth / 1.5]">
                 <Text style={styles.text}>Start:</Text>
                 <InDatePicker id= {START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
                 <Text style={styles.text}>End:</Text>
@@ -145,16 +145,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    container:{
-        // flex: 1,
-        backgroundColor: '#1A1A1A',
-        borderColor: 'grey',
-        borderWidth: 2,
-        padding: 5,
-        alignSelf: 'center',
-        justifyContent: 'center',
-        width:windowWidth/1.5,
     },
     buttonsBottomRowActive:{
         flexDirection: "row",
