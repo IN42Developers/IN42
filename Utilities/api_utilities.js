@@ -23,8 +23,8 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
     });
 
     try {
-        // console.log('try fetching from',endpoint)
-        IncrementRequestCounter();
+        // console.log('try fetching')
+        await IncrementRequestCounter();
         console.log("GETting from",uri)
         const response = await fetch(req);
         if(response.ok){
@@ -62,7 +62,7 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
 
     try {
         console.log('POSTing to',uri)
-        IncrementRequestCounter()
+        await IncrementRequestCounter()
         // console.log("Post Request = ",tokenRequest)
         const response = await fetch(uri,tokenRequest);
         if(response.ok){
@@ -86,7 +86,7 @@ export const DeleteDataFromEndpoint =async (endpoint)=> {
 
     let tokendata = getAccessToken();
     try {
-        IncrementRequestCounter();
+        await IncrementRequestCounter();
         console.log("DELETEing at",uri)
         const response = await fetch(uri, {
             method: 'DELETE',
