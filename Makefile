@@ -3,7 +3,7 @@ F_ANDROIDSTUDIO=androidStudio
 
 
 install:
-	bash setup.sh
+	bash setup.sh 
 
 android:
 	./$(F_SETUP)/$(F_ANDROIDSTUDIO)/android-studio/bin/studio.sh
