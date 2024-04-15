@@ -1,6 +1,9 @@
 name: iOS App Release Build
 
-on: push
+on:
+  push:
+    branches: 
+      - "release/**" 
 
 jobs:
   build:
