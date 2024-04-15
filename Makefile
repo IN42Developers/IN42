@@ -1,6 +1,6 @@
 F_SETUP=buildSetup
 F_ANDROIDSTUDIO=androidStudio
-
+ s
 
 install:
 	bash setup.sh 
