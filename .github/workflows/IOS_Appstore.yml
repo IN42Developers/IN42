@@ -1,4 +1,4 @@
-name: iOS App Release Build
+name: Build and Upload to IOS Store
 
 on:
   push:
