@@ -17,7 +17,7 @@
         "expo-build-properties",
         {
           "android": {
-            // "usesCleartextTraffic": true
+            "usesCleartextTraffic": true
           },
           "ios": {}
         }
@@ -30,12 +30,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.in42.IN42"
-      // "infoPlist": {
-      //   "NSAppTransportSecurity": {
-      //     "NSAllowsArbitraryLoads": true
-      //   } 
-      // }
+      "bundleIdentifier": "com.in42.IN42",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        } 
+      }
     },
     "android": {
       "adaptiveIcon": {
