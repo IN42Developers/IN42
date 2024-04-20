@@ -43,22 +43,16 @@ const createRequestInit = (code) => {
       body: `grant_type=authorization_code&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&code=${code}&redirect_uri=${encodeURIComponent(process.env.IN42_DEV_REDIRECT_URI)}`,
     };
   }
-  return {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        "X-SECRET": `${process.env.BASIC_HEADER_HASH}`, //note this gets replaced in the build process
-    },
-    body: JSON.stringify({ code: code }),
-  };
+  return {};
 }
 
 //function that depends on the IN42_DEV env variable to bypass auth server
 const createRequestURL = (code) => {
+
   if(process.env.IN42_DEV == 'true' ){
     return "https://api.intra.42.fr/oauth/token";
   }
-  return `http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`;
+  return `https://auth-7y7fitjvjq-uc.a.run.app/?code=${code}`;
 }
 
 export const getTokenFromCode = async (code) => {
@@ -66,13 +60,9 @@ export const getTokenFromCode = async (code) => {
   try {
     IncrementRequestCounter();
     
-    console.log('Before status request');
-    if(!process.env.IN42_DEV){
-      const status = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
-      console.log("status = ", status.json())
-    }
     console.log('Before fetch request');
     const response = await fetch(createRequestURL(code), createRequestInit(code));
+    // const response = await fetch(`https://auth-7y7fitjvjq-uc.a.run.app/?code=${code}`, createRequestInit(code));
     console.log('after fetch request');
     console.log(response)
     if (response.ok) {

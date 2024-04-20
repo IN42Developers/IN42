@@ -70,13 +70,7 @@ const createRequestInit = (tokendata) => {
         body: `grant_type=refresh_token&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&refresh_token=${tokendata.refresh_token}&redirect_uri=${encodeURIComponent(process.env.IN42_DEV_REDIRECT_URI)}`,
       };
     }
-    return {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-SECRET': `${process.env.BASIC_HEADER_HASH}`,
-        },
-      };
+    return {};
   }
   
   //function that depends on the IN42_DEV env variable to bypass auth server
@@ -85,7 +79,7 @@ const createRequestInit = (tokendata) => {
     if(process.env.IN42_DEV == 'true' ){
       return "https://api.intra.42.fr/oauth/token";
     }
-    return `http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/refresh?refresh_token=${tokendata.refresh_token}`;
+    return `https://refresh-7y7fitjvjq-uc.a.run.app?refresh_token=${tokendata.refresh_token}`;
   }
 
   export const refreshToken = async () => {
