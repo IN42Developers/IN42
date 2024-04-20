@@ -38,5 +38,5 @@ buildAndroidAAB:
 buildIos:
 	@docker compose -f ./build/docker-compose.yml up -d iosEMUL --build
 
-# create new Container for ios builds
+# create new Container for ios builds 
 
