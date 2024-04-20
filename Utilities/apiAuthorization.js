@@ -58,7 +58,7 @@ const createRequestURL = (code) => {
   if(process.env.IN42_DEV == 'true' ){
     return "https://api.intra.42.fr/oauth/token";
   }
-  return `http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`;
+  return `https://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/token/access?code=${code}`;
 }
 
 export const getTokenFromCode = async (code) => {
@@ -68,7 +68,7 @@ export const getTokenFromCode = async (code) => {
     
     console.log('Before status request');
     if(!process.env.IN42_DEV){
-      const status = await fetch(`http://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
+      const status = await fetch(`https://${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}/status`)
       console.log("status = ", status.json())
     }
     console.log('Before fetch request');

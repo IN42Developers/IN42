@@ -13,7 +13,7 @@
       "env": {
         "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c",
         "EXPO_PUBLIC_REDIRECT_URI": "in42://index",
-        "EXPO_PUBLIC_AUTH_SERVER_IP": "35.233.217.18:3000" //should later become a different port
+        "EXPO_PUBLIC_AUTH_SERVER_IP": "34.70.90.82" //should later become a different port
       },
       "android": {
         "buildType": "apk"
@@ -29,7 +29,7 @@
       "env": {
         "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c",
         "EXPO_PUBLIC_REDIRECT_URI": "in42://index",
-        "EXPO_PUBLIC_AUTH_SERVER_IP": "35.233.217.18:3000"
+        "EXPO_PUBLIC_AUTH_SERVER_IP": "34.70.90.82"
       },
       "android": {
       },
