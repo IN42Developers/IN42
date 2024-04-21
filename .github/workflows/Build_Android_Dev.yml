@@ -44,10 +44,11 @@ jobs:
 
       - name: 📦 Install dependencies
         run: yarn install
+        working-directory: frontend
         
       - name: 🚀 Build app
-        run: |
-          cd ./frontend && eas build -p android --profile preview --local --non-interactive --clear-cache --output "./apk/android-preview-build.apk"
+        run: eas build -p android --profile preview --local --non-interactive --clear-cache --output "./apk/android-preview-build.apk"
+        working-directory: frontend
         
           
 
