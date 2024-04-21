@@ -56,5 +56,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: buildArtifact
-          path: ./apk/android-preview-build.apk
-          working-directory: frontend
+          path: ./frontend/apk/android-preview-build.apk
+          
