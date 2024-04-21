@@ -13,15 +13,6 @@
     },
     "scheme": "in42",
     "plugins": [
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            // "usesCleartextTraffic": true
-          },
-          "ios": {}
-        }
-      ],
       "expo-font",
       "expo-secure-store"
     ],
@@ -30,12 +21,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.in42.IN42",
-      // "infoPlist": {
-      //   "NSAppTransportSecurity": {
-      //     "NSAllowsArbitraryLoads": true
-      //   } 
-      // }
+      "bundleIdentifier": "com.in42.IN42"
     },
     "android": {
       "adaptiveIcon": {
