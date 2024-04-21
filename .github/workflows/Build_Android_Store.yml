@@ -47,9 +47,11 @@ jobs:
 
       - name: 📦 Install dependencies
         run: yarn install
+        working-directory: frontend
 
       - name: 🚀 Build app
         run: eas build -p android --profile production --local --non-interactive --clear-cache --output "./aab/in42.aab"
+        working-directory: frontend
         
           
 
