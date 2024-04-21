@@ -13,8 +13,8 @@
     },
     "scheme": "in42",
     "plugins": [
-      "expo-font",
-      "expo-secure-store"
+      ["expo-font", {}],
+      ["expo-secure-store", {}]
     ],
     "assetBundlePatterns": [
       "**/*"
