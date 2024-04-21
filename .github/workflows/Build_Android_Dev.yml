@@ -57,3 +57,4 @@ jobs:
         with:
           name: buildArtifact
           path: ./apk/android-preview-build.apk
+          working-directory: frontend
