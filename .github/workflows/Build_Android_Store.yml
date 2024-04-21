@@ -63,6 +63,7 @@ jobs:
 
       - name: Create service_account.json
         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+        working-directory: frontend
 
       - name: Deploy to Play store
         uses: r0adkll/upload-google-play@v1
@@ -72,6 +73,7 @@ jobs:
           releaseFiles: ./aab/in42.aab
           track: internal # will likely need to change in the future
           status: draft #note this will need to be changed later to completed or removed
+          working-directory: frontend
           # whatsNewDirectory: distribution/         
 # documentation on google play upload
 # https://github.com/r0adkll/upload-google-play
