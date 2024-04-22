@@ -59,21 +59,19 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: buildArtifact
-          path: ./aab/in42.aab
+          path: ./frontend/aab/in42.aab
 
       - name: Create service_account.json
         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
-        working-directory: frontend
 
       - name: Deploy to Play store
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service_account.json
           packageName: com.in42.IN42
-          releaseFiles: ./aab/in42.aab
+          releaseFiles: ./frontend/aab/in42.aab
           track: internal # will likely need to change in the future
           status: draft #note this will need to be changed later to completed or removed
-          working-directory: frontend
           # whatsNewDirectory: distribution/         
 # documentation on google play upload
 # https://github.com/r0adkll/upload-google-play
