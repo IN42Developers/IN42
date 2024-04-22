@@ -99,7 +99,7 @@ export const AppStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#00D2A0',
+        tabBarActiveTintColor: '#00B5C0',
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
         tabBarStyle: {
@@ -145,8 +145,20 @@ export const AppStack = () => {
       />
       <Tab.Screen
         name="Evaluations"
-        component={EvaluationDetailScreen}
+        component={UserSlotsScreen}
         options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#202020',
+            borderColor: '#595959',
+            borderEndWidth: 0,
+            shadowRadius: 0
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontFamily: 'Inter_500Medium',
+          },
           tabBarIcon: ({ color, focused }) => (
             <Icon name='UserCheck' color={color} focused={focused} />
           )

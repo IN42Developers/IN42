@@ -35,7 +35,7 @@ export default function UserSlotsScreen() {
 
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{flex: 1, marginTop: 12}}>
             <FlatList 
                 data={slotDays}
                 renderItem={({item}) =>(

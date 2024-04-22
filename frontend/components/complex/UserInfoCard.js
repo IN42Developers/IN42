@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text } from 'react-native'
+import { View, Image, Text, ImageBackground } from 'react-native'
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PiggyBankIcon, CoinsIcon } from 'lucide-react-native';
@@ -30,14 +30,12 @@ export default function UserInfoCard() {
     profileimage = require('../../assets/images/profilePlaceholder.png');
     walletPoints = '0';
     correctionPoints = '0';
-    curLevel = 'Level 0';
-    nextLevel = 'Level 0';
   }
 
   return (
     <View className='container'>
-      <View className='flex p-8 bg-blue-500'>
-        <SafeAreaView style={{margin: -10}}>
+      <ImageBackground source={require('../../assets/images/userInfoCard.png')} className='flex p-8 bg-cyan-600'>
+        <SafeAreaView style={{marginTop: -25, marginBottom: -45}}>
           <View className='flex flex-row justify-between'>
             <View className='flex-col gap-y-1 mt-1'>
               <Text className='text-white font-InterBold'>{displayname}</Text>
@@ -51,27 +49,27 @@ export default function UserInfoCard() {
             </View>
           </View>
           <View className='flex flex-row mt-6 justify-between gap-2 content-center'>
-            <View className='flex flex-col gap-y-2 min-w-[140] max-w-96'>
-              <View className='flex-row bg-slate-950 p-3 justify-between rounded-lg'>
+            <View className='flex-2 flex-col gap-y-2'>
+              <View className='flex-row bg-slate-950/30 bg-opacity-55 p-1 justify-between rounded-lg'>
                 <View className='flex flex-row items-start justify-normal'>
-                  <Text className='text-["#A8D8F8"] mt-1 ml-1 font-InterSemibold text-2xl'>₳</Text>
-                  <Text className='text-white font-InterBold mt-2.5 ml-3'>Wallet</Text>
+                  <Text className='text-["#00B5C0"] ml-2 font-InterSemibold text-2xl'>₳</Text>
+                  <Text className='text-gray-200 font-InterBold mt-2 ml-3'>Wallet</Text>
                 </View>
-                <Text className='text-gray-400 ml-2 font-InterBold mt-2.5'>{walletPoints}</Text>
+                <Text className='text-white ml-2 font-InterBold mt-2 pr-2'>{walletPoints}</Text>
               </View>
-              <View className='flex-row bg-slate-950 p-3 justify-between rounded-lg'>
+              <View className='flex-row bg-slate-950/30 pl-3 pt-2 pb-2 justify-between rounded-lg'>
                 <View className='flex flex-row items-start justify-normal'>
-                  <CoinsIcon stroke="#A8D8F8" /> 
-                  <Text className='text-white font-InterBold mt-1 ml-3'>Ev. Points</Text>
+                  <CoinsIcon stroke="#00B5C0" size={20} /> 
+                  <Text className='text-gray-200 font-InterBold pt-0.5 ml-3'>Ev.P.</Text>
                 </View>
-                <Text className='text-gray-400 ml-2 font-InterBold mt-1'>{correctionPoints}</Text>
+                <Text className='text-white ml-2 font-InterBold mt-0.5 pr-3'>{correctionPoints}</Text>
               </View>
             </View>
-            <View className='flex bg-slate-950 p-4 w-60 gap-y-2 rounded-lg'>
-                <Text className='text-white font-InterBold'>Level based progress</Text>
+            <View className='flex-1 bg-slate-950/30 pl-3 pr-3 pt-2 gap-y-2 rounded-lg'>
+                <Text className='text-white font-InterBold pt-0.5'>Level based progress</Text>
                 <View className='flex flex-row justify-between'>
-                  <Text className='text-white font-InterMedium'>{"LEVEL "+ curLevel}</Text>
-                  <Text className='text-gray-400 font-InterRegular'>{"LEVEL "+ nextLevel}</Text>
+                  <Text className='text-white font-InterMedium pt-1'>{"Level "+ curLevel}</Text>
+                  <Text className='text-gray-400 font-InterRegular pt-1'>{"Level "+ nextLevel}</Text>
                 </View>
                 <View className='p-0.5 bg-slate-400 rounded-full z-0'>
                   <View className='w-[35%] p-0.5 z-10 bg-white rounded-full' />
@@ -79,7 +77,7 @@ export default function UserInfoCard() {
               </View>
             </View>
           </SafeAreaView>
-        </View>
+        </ImageBackground>
       </View>
     )
 };
