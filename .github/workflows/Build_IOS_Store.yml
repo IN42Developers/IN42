@@ -19,14 +19,6 @@ jobs:
       - name: Set environment variable
         run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
       
-      # - name: Replace BASIC_HEADER_HASH
-      #   run: |
-      #     find . -type f \( -name '*.js' -o -name '*.tsx' -o -name '*.ts' \) | while read -r file; do
-      #       sed -i '' "s|\${process.env.BASIC_HEADER_HASH}|${BASIC_HEADER_HASH}|g" "$file"
-      #     done
-      #   env:
-      #     BASIC_HEADER_HASH: ${{ secrets.BASIC_HEADER_HASH }}
-      
       - name: Setup node
         uses: actions/setup-node@v3
         with:
