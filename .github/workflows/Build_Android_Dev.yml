@@ -15,12 +15,12 @@ jobs:
         
       - name: Set environment variable
         run: echo "BASIC_HEADER_HASH=${{ secrets.BASIC_HEADER_HASH }}" >> $GITHUB_ENV
-      
-      - name: Replace occurrences
-        run: |
-          for file in $(find . -type f -name '*.js' -o -name '*.tsx' -o -name '*.ts'); do
-            sed -i "s|\${process.env.BASIC_HEADER_HASH}|${BASIC_HEADER_HASH}|g" "$file"
-          done
+
+      # - name: Replace occurrences
+      #   run: |
+      #     for file in $(find . -type f -name '*.js' -o -name '*.tsx' -o -name '*.ts'); do
+      #       sed -i "s|\${process.env.BASIC_HEADER_HASH}|${BASIC_HEADER_HASH}|g" "$file"
+      #     done
 
       # - name: cat file
       #   run: cat ./Utilities/apiAuthorization.js
@@ -44,9 +44,11 @@ jobs:
 
       - name: 📦 Install dependencies
         run: yarn install
-
+        working-directory: frontend
+        
       - name: 🚀 Build app
         run: eas build -p android --profile preview --local --non-interactive --clear-cache --output "./apk/android-preview-build.apk"
+        working-directory: frontend
         
           
 
@@ -54,4 +56,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: buildArtifact
-          path: ./apk/android-preview-build.apk
+          path: ./frontend/apk/android-preview-build.apk
+          
