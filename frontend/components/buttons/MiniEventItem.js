@@ -25,8 +25,9 @@ const MiniEventItem = ({data,callback}) => {
   }
 
 
-  // console.log(eventData)
+  console.log(data)
   let location = data.location;
+  let locationDefined = (location == "" || location == null || location == undefined) ? false : true;
   location = location.split(' ')[0];
   // console.log(eventData.location);
 
@@ -88,8 +89,8 @@ const MiniEventItem = ({data,callback}) => {
           <Text style={styles.titleText}>{title}</Text>
           <View style={styles.DescriptorContainer}>
             <View style={styles.leftDescriptor}>
-              <RoundedDescriptor  title={formattedTime} scale ={.4} IconName='calendar'></RoundedDescriptor>
-              <RoundedDescriptor  title={location} scale ={.4} IconName='enviromento'></RoundedDescriptor>
+              <RoundedDescriptor  title={formattedTime} scale ={.4} IconName='calendar'/>
+              {locationDefined && <RoundedDescriptor  title={location} scale ={.4} IconName='enviromento'/>}
             </View>
             {data.subscribed == true ?
             <AntDesign style={styles.subscribedIcon} name='check'></AntDesign>
