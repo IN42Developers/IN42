@@ -119,11 +119,13 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
               <Button onPress={PressCancel} variant="dialog">
                 <Text className="text-gray-400 text-center text-lg font-InterSemibold" >CANCEL</Text>
               </Button>
+              
                 {isValidSlot &&
                   <Button onPress={CreateSlot} variant="dialog">
                     <Text className="text-gray-400 text-center text-lg font-InterSemibold">CONFIRM</Text>
                   </Button>
                 }
+                
             </View>
           </View>
         </View>
