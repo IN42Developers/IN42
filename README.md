@@ -1,5 +1,5 @@
 
-![Header](/documentation/images/Header.png)
+![Header](/docs/images/Header.png)
 
 
 ### What is IN42?
@@ -7,14 +7,14 @@ Intra Native 42 is a mobile app developed for students at 42 schools around the 
 The project itself is developed in React Native together with Expo.
 
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
-![App views](/documentation/images/AppViewPresentation.png)
+![App views](/docs/images/AppViewPresentation.png)
 
 # Resources
 
 - React Native https://reactnative.dev/docs/environment-setup <br>
 - Expo https://docs.expo.dev/get-started/installation/ <br>
 - Intra App https://api.intra.42.fr/apidoc/guides/getting_started <br>
-- Build Process https://github.com/in42developers/in42/blob/master/documentation/buildProcess.md<br>
+- Build Process https://github.com/in42developers/in42/blob/master/docs/buildProcess.md<br>
 
 <br>
 
@@ -176,7 +176,7 @@ In order to get the redirect URI from expo simple start the project. Either use 
 > npx expo start --tunnel
 
 When you start your server you see something like "Metro waiting on 'RedirectURI'"
-![Redirect Uri](/documentation/images/RedirectURI.png)
+![Redirect Uri](/docs/images/RedirectURI.png)
 
 ## Setting up your .env file
 Last step. Create and configure a .env file locally in the root directory with the following key-value pairs<br>
@@ -206,7 +206,7 @@ You should be able to see the app :)<br>
 
 
 
-![Setting up vs code](/documentation/images/SettingUpVsCode.png)
+![Setting up vs code](/docs/images/SettingUpVsCode.png)
 
 Working with javascript,typescript and jsx can be a pain without certain extensions. You are free to install what you want but its recommended to use these 3:<br>
 ES7+ React/Redux/React-Native snippets<br>
