@@ -63,7 +63,7 @@ export const GetRequestCounter = () =>{
 
     let currPeriod = getcurrCounterPeriod();
     if(currPeriod > prevRequestPeriod){
-        console.log('New Period has arrived, updating request Counter')
+        console.log('New Period has arrived, request counter will be updated now.')
         // console.log('Previous Peroid = ',new Date(prevRequestPeriod))
         // console.log('New Peroid = ',new Date(currPeriod))
         prevRequestPeriod = currPeriod;
