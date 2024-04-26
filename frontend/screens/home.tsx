@@ -87,10 +87,7 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
   return (
     <GestureHandlerRootView style={styles.container}>
       <Animated.View style={[styles.container, animatedContainerStyle]}>
-        <View className='flex'>
-          <UserInfoCard />
-          <View className='mt-4' />
-        </View>
+        <UserInfoCard />
         <ListContainer title={'Evaluations'}  ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>
         <ListContainer title={'Events'} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={emptyEventText} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen}/>  
         <PanGestureHandler onGestureEvent={unlockGestureHandler}>

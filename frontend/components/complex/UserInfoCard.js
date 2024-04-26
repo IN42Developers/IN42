@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, ImageBackground } from 'react-native'
+import { View, Image, Text, ImageBackground,StyleSheet } from 'react-native'
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PiggyBankIcon, CoinsIcon } from 'lucide-react-native';
@@ -33,9 +33,9 @@ export default function UserInfoCard() {
   }
 
   return (
-    <View className='container'>
-      <ImageBackground source={require('../../assets/images/userInfoCard.png')} className='flex p-8 bg-cyan-600'>
-        <SafeAreaView style={{marginTop: -25, marginBottom: -45}}>
+    <View className='container '>
+      <ImageBackground source={require('../../assets/images/userInfoCard.png')} className='flex pb-3 px-8 bg-cyan-600 '>
+        <SafeAreaView style={styles.safeArea} >
           <View className='flex flex-row justify-between'>
             <View className='flex-col gap-y-1 mt-1'>
               <Text className='text-white font-InterBold'>{displayname}</Text>
@@ -81,3 +81,12 @@ export default function UserInfoCard() {
       </View>
     )
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    // marginTop: -25,
+    // marginBottom: -45,
+    // borderColor: 'red',
+    // borderWidth: 1,
+  }
+})
