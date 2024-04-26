@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red', //add for debugging purposes
     position: 'absolute',
     width: '100%',
-    height: '30%',
+    height: '20%',
     // bottom: 0,
     // left: 0,
 }
