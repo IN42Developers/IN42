@@ -11,7 +11,7 @@ const EventItem = ({data}) => {
 
   const ShowDetails = () =>{
     console.log('trying to navigate')
-    //a bit silly and should be reworked but may workf or now
+    // a bit silly and should be reworked but may workf or now
     navigation.navigate("EventDetails",{ 
       eventData: data,
     });
