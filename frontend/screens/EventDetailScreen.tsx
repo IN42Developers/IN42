@@ -10,6 +10,12 @@ import SubscribeButton from "../components/buttons/SubscribeButton.js";
 import NavigateBackButton from "../components/buttons/NavigateBackButton.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons'
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react-native";
+
+export function getCurrentEvent() {
+    const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.eventData.id));
+    return currEvent;
+  }  
 
 export default function EventDetailScreen() {
 
@@ -22,17 +28,6 @@ export default function EventDetailScreen() {
 
     // console.log("currEvent",eventData.id)
 
-//   if (eventData == null) {
-//     return (
-//       <SafeAreaView>
-//         <View className="flex flex-col mt-12 ml-8 p-12">
-//           <Text className="text-2xl text-white font-InterSemibold">Not authenticated</Text>
-//           <Text className=" text-sm text-gray-400 font-InterRegular mt-4">It seems that you're not connected with the 42 API anymore. Please restart IN42 and ensure a stable connection to the Internet.</Text>
-//         </View>
-//       </SafeAreaView>
-//     )
-//   }
-
     // const title = props.eventData.name;
     if(currEvent === null)
         return;
@@ -42,8 +37,8 @@ export default function EventDetailScreen() {
     if(title === null)
         return;
 
-    let tempDate = new Date( currEvent.begin_at);
-    const date =tempDate.toLocaleDateString('en-US',getCampusTimeZone()) +' '+ tempDate.toLocaleTimeString('en-US',getCampusTimeZone());
+    let tempDate = new Date (currEvent.begin_at);
+    const date = tempDate.toLocaleDateString('en-US',getCampusTimeZone()) +' '+ tempDate.toLocaleTimeString('en-US',getCampusTimeZone());
 
     const details = currEvent.description;
 
@@ -53,15 +48,15 @@ export default function EventDetailScreen() {
         let nextEvent = GetNextEvent(currEvent.id,1);
 
         if(nextEvent != null){
-            navigation.navigate("EventDetails",{ eventData: nextEvent, })
+            navigation.navigate("EventDetails", { eventData: nextEvent, })
         }
     }
 
     const PrevEvent =  () => {
-        console.log('Previous Event jaaaa')
+        console.log('Navigating to Previous Event')
         let nextEvent = GetNextEvent(currEvent.id,-1);
 
-        if(nextEvent != null){
+        if(nextEvent != null) {
             navigation.navigate("EventDetails",{ eventData: nextEvent, })
         }
     }
@@ -71,42 +66,38 @@ export default function EventDetailScreen() {
     }
 
     return (
-        <SafeAreaView  style={styles.container}>
-            <View style={styles.topView}>
-                <View style={styles.NavigationVertBox}>
-                    <View>
-                        <NavigateBackButton size={40}></NavigateBackButton>
-                    </View>
-                    <Text style={styles.typeText}>{type}</Text>
-                </View>
-                <Text style={styles.text}>{date}</Text>
-                <Text style={styles.TitleText}>{title}</Text>
-                <View style={styles.InfoVertBox}>
-                    <SubscribeButton eventID={currEvent.id} scale={.9} initialState={currEvent.subscribed}></SubscribeButton>
-                    <AttendenceCounter currentCount={eventData.nbr_subscribers} maxCount={eventData.max_people} scale={1}></AttendenceCounter>
-                </View>
+      <SafeAreaView className="flex-1">
+         <View className="flex-[2] pt-2 px-4 content-center justify-center bg-[#202020]">
+            <View id="Wrapper">
+               <Text className="text-gray-400 font-InterBold text-sm mb-2">{date}</Text>
+               <Text className="text-white font-InterBold text-xl mr-20">{title}</Text>
             </View>
+            <View className="flex flex-row items-start my-3 justify-between">
+            <AttendenceCounter currentCount={eventData.nbr_subscribers} maxCount={eventData.max_people} scale={1}></AttendenceCounter>
+               <SubscribeButton eventID={currEvent.id} scale={.9} initialState={currEvent.subscribed}></SubscribeButton>
+            </View>
+         </View>
 
-            <View style={styles.detailsView}>
-                <Text style={{color: 'white',fontSize: 24,paddingBottom: 5, fontWeight: 'bold'}}>About this event</Text>
-                <ScrollView >
-                    <Text style={styles.DetailText}>{details}</Text>
-                </ScrollView>
-            </View>
+         <View className="flex-[6] mt-8 px-4">
+            <Text className="text-white text-2xl font-InterSemibold mb-2">About this event</Text>
+            <ScrollView>
+               <Text className="text-gray-400 text-base font-InterRegular">{details}</Text>
+            </ScrollView>
+         </View>
 
-            <View style={styles.bottomView}>
-                <TouchableOpacity style={styles.nextEventButton} onPress={PrevEvent} >
-                    {/* <Text>Prev Event</Text> */}
-                    <AntDesign name={'left'} color={'#E0E0E0'} size={30}></AntDesign>
-                </TouchableOpacity>
-                {/* <View style={{flex:1 ,backgroundColor: 'grey'}}></View> */}
-                <TouchableOpacity style={styles.nextEventButton} onPress={NextEvent} >
-                    {/* <Text>Next Event</Text> */}
-                    <AntDesign name={'right'} color={'#E0E0E0'} size={30}></AntDesign>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
-    )
+         <View style={styles.bottomView}>
+            <TouchableOpacity style={styles.nextEventButton} onPress={PrevEvent} >
+               {/* <Text>Prev Event</Text> */}
+               <ChevronLeftIcon stroke='#fff' size='32' />
+            </TouchableOpacity>
+            {/* <View style={{flex:1 ,backgroundColor: 'grey'}}></View> */}
+            <TouchableOpacity style={styles.nextEventButton} onPress={NextEvent} >
+            {/* <Text>Next Event</Text> */}
+               <ChevronRightIcon stroke='#fff' size='32' />
+            </TouchableOpacity>
+         </View>
+      </SafeAreaView>
+   )
 }
 
 const styles = StyleSheet.create({
@@ -153,10 +144,9 @@ const styles = StyleSheet.create({
         flex: 2, 
         paddingTop: 10,
         paddingHorizontal: 20,
-        // paddingBottom: 10,
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: '#333333'
+        backgroundColor: '#333'
     },
     detailsView: {
         flex: 6,

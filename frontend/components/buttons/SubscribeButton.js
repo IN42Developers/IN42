@@ -4,7 +4,9 @@ import { useStore } from "../../Utilities/store";
 import { useEffect } from "react";
 import { ToggleEventSubscription } from "../../Utilities/event_utilities";
 
-export default function SubscribeButton ({eventID, initialState=true,scale=1, textData={true:'Subscribe', false: 'Unsubscribe'} , style=styles}) {
+import { CalendarPlusIcon } from "lucide-react-native";
+
+export default function SubscribeButton ({eventID, initialState=true,scale=1, textData={true: 'SUBSCRIBE', false: 'UNSUBSCRIBE'} , style=styles}) {
     const [toggle,SetToggle] = useState(initialState);
 
     const updateEventSubscriptionStatus = useStore((store) => store.updateEventSubscriptionStatus);
@@ -38,6 +40,8 @@ export default function SubscribeButton ({eventID, initialState=true,scale=1, te
 
     return (
         <TouchableOpacity onPress={ToggleEvent} style={[toggle ? style.containerOff : style.containerOn ,{width: btnWidth,justifyContent: 'center',alignItems: 'center'}]}>
+            <CalendarPlusIcon stroke="white" size="24" />
+            {/* Note for Jean: When shown Unsubscribe, change Icon to CalendarMinus2Icon */}
             <Text style={[toggle ? style.textOff : style.textOn, {fontSize: 14 * scale}]}>{text}</Text>
         </TouchableOpacity>
     )
@@ -45,25 +49,31 @@ export default function SubscribeButton ({eventID, initialState=true,scale=1, te
 
 const styles = StyleSheet.create({
     containerOn: {
-        // flex: 1,
-        backgroundColor : '#0085FF',
-        borderRadius: 2000,
-        borderWidth: 2,
-        borderColor: '#00000000'
-
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#333',
+        borderRadius: 200,
+        maxWidth: 142,
+        paddingVertical: 10,
+        borderColor: '#00000000',
+        gap: 8,
     },
     containerOff: {
-        // flex: 1,
-        // backgroundColor : 'green',
-        borderColor: '#0085FF',
+        flex: 1,
+        flexDirection: 'row',
+        borderColor: '#333',
         borderWidth: 2,
-        borderRadius: 2000,
-
+        borderRadius: 200,
+        maxWidth: 148,
+        paddingVertical: 10,
+        gap: 8,
     },
     textOn: {
-        color: 'white',
+        color: 'lightgray',
+        fontFamily: 'Inter_700Bold',
     },
     textOff: {
-        color: 'white',
+        color: 'lightgray',
+        fontFamily: 'Inter_700Bold'
     },
 })

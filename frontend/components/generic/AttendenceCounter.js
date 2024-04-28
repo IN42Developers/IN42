@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
+import { UsersIcon } from 'lucide-react-native';
 
 
 const AttendenceCounter = ({currentCount,maxCount,scale=1}) =>{
@@ -12,9 +13,7 @@ const AttendenceCounter = ({currentCount,maxCount,scale=1}) =>{
 
     return(
         <View  style={styles.container}>
-        <AntDesign style={styles.text  }
-            size={20 * scale} 
-            name={'team'}/>
+        <UsersIcon stroke='gray' size='20' />
             <Text style={[styles.text, {fontSize: 14 * scale}]}> {text}</Text>
         </View>
     )
@@ -26,6 +25,7 @@ const styles = StyleSheet.create({
         // flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        marginTop: 12,
     },
     text:{
         color: '#838383',

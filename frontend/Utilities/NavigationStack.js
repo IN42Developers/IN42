@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { useRoute } from '@react-navigation/native';
+import { getCurrentEvent } from '../screens/EventDetailScreen';
 
 import IndexScreen from '../screens';
 import HomeScreen from '../screens/home';
@@ -11,9 +13,9 @@ import EventDetailScreen from "../screens/EventDetailScreen"
 import EvaluationDetailScreen from '../screens/EvaluationDetailScreen';
 import CampusEventsScreen from '../screens/CampusEventsScreen';
 import UserSlotsScreen from '../screens/UserSlotScreen';
-
 import Icon from '../constants/AutoIcon';
 import ShowModalButton from '../components/buttons/ShowModalButton';
+import { useStore } from './store';
 
 const Stack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -49,6 +51,7 @@ export const AppStack = () => {
 
 
   export const HomeNavigationSubStack = () => {
+
     return (
       <DetailStack.Navigator screenOptions={{
           headerStyle: {
@@ -69,8 +72,15 @@ export const AppStack = () => {
                     }}
         component={HomeScreen}/>
           <DetailStack.Screen name="EventDetails" component={EventDetailScreen} options={{
-              headerShown: false,
-                    }}/>
+            headerTitleAlign: 'center',
+            headerBackTitle: '',
+            headerTitle: 'Coalition Event: Coding Challenge for New Starters',
+            headerStyle: {
+              backgroundColor: '#202020',
+              borderColor: '#595959',
+              shadowRadius: 0,
+            },
+          }}/>
           <DetailStack.Screen name="EvaluationDetailScreen" component={EvaluationDetailScreen}/>
           <DetailStack.Screen name="CampusEvents" component={CampusEventsScreen}/>
           <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen} options={{
