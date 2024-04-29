@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useRoute } from '@react-navigation/native';
-import { getCurrentEvent } from '../screens/EventDetailScreen';
 
 import IndexScreen from '../screens';
 import HomeScreen from '../screens/home';
@@ -16,6 +15,7 @@ import UserSlotsScreen from '../screens/UserSlotScreen';
 import Icon from '../constants/AutoIcon';
 import ShowModalButton from '../components/buttons/ShowModalButton';
 import { useStore } from './store';
+import { truncateStringAppendDots } from './event_utilities';
 
 const Stack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -71,16 +71,17 @@ export const AppStack = () => {
               headerShown: false,
                     }}
         component={HomeScreen}/>
-          <DetailStack.Screen name="EventDetails" component={EventDetailScreen} options={{
+          <DetailStack.Screen name="EventDetails" component={EventDetailScreen} 
+           options={({ route }) => ({ 
+            title: truncateStringAppendDots(route.params.eventData.name, 25),
             headerTitleAlign: 'center',
-            headerBackTitle: '',
-            headerTitle: 'Coalition Event: Coding Challenge for New Starters',
             headerStyle: {
               backgroundColor: '#202020',
               borderColor: '#595959',
               shadowRadius: 0,
             },
-          }}/>
+          })}
+          />
           <DetailStack.Screen name="EvaluationDetailScreen" component={EvaluationDetailScreen}/>
           <DetailStack.Screen name="CampusEvents" component={CampusEventsScreen}/>
           <DetailStack.Screen name="UserSlotScreen" component={UserSlotsScreen} options={{
@@ -93,15 +94,6 @@ export const AppStack = () => {
         </DetailStack.Navigator>
     );
   };
-
-  // export const DetailNavigationSubStack = () => {
-  //   return (
-  //     <Stack.Navigator>
-  //       <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
-  //       <Stack.Screen name="CampusEventsScreen" component={CampusEventsScreen} />
-  //     </Stack.Navigator>
-  //   )
-  // }
   
   export const TabNavigator = () => {
   const Tab = createBottomTabNavigator();

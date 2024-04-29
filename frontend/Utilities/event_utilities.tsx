@@ -156,3 +156,11 @@ export const getCurrentActiveCampus = (UserData) =>{
     return null;
     
 }
+
+// removes all characters after maxCharacters appends "..." afterwards
+export const truncateStringAppendDots = (string ,maxCharacters) =>{
+    if(string.length > maxCharacters){
+        return string.substring(0,maxCharacters) + "..."
+    }
+    return string;
+}
