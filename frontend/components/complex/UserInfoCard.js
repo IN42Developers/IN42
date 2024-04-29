@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { PiggyBankIcon, CoinsIcon } from 'lucide-react-native';
 
 import { GetUserData, getUserCursus } from '../../Utilities/UserData'
+import * as Progress from 'react-native-progress';
 
 export default function UserInfoCard() {
   const UserData = GetUserData();
@@ -16,6 +17,7 @@ export default function UserInfoCard() {
   let correctionPoints = -1;
   let curLevel = '';
   let nextLevel = -1;
+  let levelProgress = 0.5;
   if (UserData != null) {
     displayname = UserData.displayname;
     login = UserData.login;
@@ -24,6 +26,7 @@ export default function UserInfoCard() {
     correctionPoints = UserData.correction_point;
     curLevel = Math.floor(UserCursus.level);
     nextLevel = curLevel + 1;
+    levelProgress = UserCursus.level - curLevel;
   } else {
     displayname = 'Loading displayname ...';
     login = 'Loading login ...'
@@ -71,9 +74,7 @@ export default function UserInfoCard() {
                   <Text className='text-white font-InterMedium pt-1'>{"Level "+ curLevel}</Text>
                   <Text className='text-gray-400 font-InterRegular pt-1'>{"Level "+ nextLevel}</Text>
                 </View>
-                <View className='p-0.5 bg-slate-400 rounded-full z-0'>
-                  <View className='w-[35%] p-0.5 z-10 bg-white rounded-full' />
-                </View>
+                  <Progress.Bar progress={levelProgress} width={200} color={'white'}unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} />
               </View>
             </View>
           </SafeAreaView>
