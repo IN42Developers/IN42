@@ -161,6 +161,7 @@ export const AppStack = () => {
             color: '#fff',
             fontFamily: 'Inter_500Medium',
           },
+          headerRight: () => (<ShowModalButton></ShowModalButton>),
           tabBarIcon: ({ color, focused }) => (
             <Icon name='UserCheck' color={color} focused={focused} />
           )
