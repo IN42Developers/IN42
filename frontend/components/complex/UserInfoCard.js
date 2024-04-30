@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, Image, Text, ImageBackground,StyleSheet } from 'react-native'
+import { View, Image, Text, ImageBackground, StyleSheet } from 'react-native'
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { PiggyBankIcon, CoinsIcon } from 'lucide-react-native';
+import { CoinsIcon } from 'lucide-react-native';
 
 import { GetUserData, getUserCursus } from '../../Utilities/UserData'
 import * as Progress from 'react-native-progress';
@@ -36,45 +36,45 @@ export default function UserInfoCard() {
   }
 
   return (
-    <View className='container '>
-      <ImageBackground source={require('../../assets/images/userInfoCard.png')} className='flex pb-3 px-8 bg-cyan-600 '>
+    <View style={{ display: 'flex' }}>
+      <ImageBackground source={require('../../assets/images/userInfoCard.png')} style={{ display: 'flex', paddingBottom: 12, paddingHorizontal: 32, backgroundColor: 'cyan' }}>
         <SafeAreaView style={styles.safeArea} >
-          <View className='flex flex-row justify-between'>
-            <View className='flex-col gap-y-1 mt-1'>
-              <Text className='text-white font-InterBold'>{displayname}</Text>
-              <Text className='text-white font-InterRegular'>{login}</Text>
+          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'column', columnGap: 1, marginTop: 14 }}>
+              <Text style={{ color: 'white', fontFamily: 'Inter_700Bold' }}>{displayname}</Text>
+              <Text style={{ color: 'white', fontFamily: 'Inter_400Regular' }}>{login}</Text>
             </View>
             <View>
               <Image
                 source={profileimage}
-                className='w-14 h-14 bg-slate-300 rounded-full'
+                style={{ width: 56, height: 56, backgroundColor: 'rgb(203 213 225', borderRadius: 2000 }}
               />
             </View>
           </View>
-          <View className='flex flex-row mt-6 justify-between gap-2 content-center'>
-            <View className='flex-2 flex-col gap-y-2'>
-              <View className='flex-row bg-slate-950/30 bg-opacity-55 p-1 justify-between rounded-lg'>
-                <View className='flex flex-row items-start justify-normal'>
-                  <Text className='text-["#00B5C0"] ml-2 font-InterSemibold text-2xl'>₳</Text>
-                  <Text className='text-gray-200 font-InterBold mt-2 ml-3'>Wallet</Text>
+          <View style={{ display: 'flex', flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', gap: 6, alignContent: 'center' }}>
+            <View style={{ flex: 0.8, flexDirection: 'column', rowGap: 8 }}>
+              <View style={{ flexDirection: 'row', backgroundColor: 'rgba(0, 0, 0, 0.3)', opacity: 5, padding: 4, justifyContent: 'space-between', borderRadius: 8 }}>
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'normal' }}>
+                  <Text style={{ color: '#00B5C0', marginLeft: 8, fontFamily: 'Inter_600SemiBold', fontSize: 22 }}>₳</Text>
+                  <Text style={{ color: 'lightgray', fontFamily: 'Inter_700Bold', paddingTop: 6, marginLeft: 12 }}>Wallet</Text>
                 </View>
-                <Text className='text-white ml-2 font-InterBold mt-2 pr-2'>{walletPoints}</Text>
+                <Text style={{ color: 'white', marginLeft: 8, fontFamily: 'Inter_700Bold', marginTop: 6, paddingRight: 8 }}>{walletPoints}</Text>
               </View>
-              <View className='flex-row bg-slate-950/30 pl-3 pt-2 pb-2 justify-between rounded-lg'>
-                <View className='flex flex-row items-start justify-normal'>
+              <View style={{ flexDirection: 'row', backgroundColor: 'rgba(0, 0, 0, 0.3)', paddingLeft: 12, paddingTop: 8, paddingBottom: 8, justifyContent: 'space-between', borderRadius: 8 }}>
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'normal' }}>
                   <CoinsIcon stroke="#00B5C0" size={20} /> 
-                  <Text className='text-gray-200 font-InterBold pt-0.5 ml-3'>Ev.P.</Text>
+                  <Text style={{ color: 'lightgray', fontFamily: 'Inter_700Bold', paddingTop: 2, marginLeft: 12 }}>Ev.P.</Text>
                 </View>
-                <Text className='text-white ml-2 font-InterBold mt-0.5 pr-3'>{correctionPoints}</Text>
+                <Text style={{ color: 'white', marginLeft: 8, fontFamily: 'Inter_700Bold', marginTop: 2, paddingRight: 12 }}>{correctionPoints}</Text>
               </View>
             </View>
-            <View className='flex-1 bg-slate-950/30 pl-3 pr-3 pt-2 gap-y-2 rounded-lg'>
-                <Text className='text-white font-InterBold pt-0.5'>Level based progress</Text>
-                <View className='flex flex-row justify-between'>
-                  <Text className='text-white font-InterMedium pt-1'>{"Level "+ curLevel}</Text>
-                  <Text className='text-gray-400 font-InterRegular pt-1'>{"Level "+ nextLevel}</Text>
+            <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.3)', paddingLeft: 12, paddingRight: 12, paddingTop: 8, rowGap: 8, borderRadius: 8 }}>
+                <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', paddingTop: 2 }}>Level based progress</Text>
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <Text style={{ color: 'white', fontFamily: 'Inter_500Medium' }}>{ "Level " + curLevel }</Text>
+                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular' }}>{"Level "+ nextLevel}</Text>
                 </View>
-                  <Progress.Bar progress={levelProgress} width={200} color={'white'}unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} />
+                  <Progress.Bar progress={levelProgress} width={165} display='flex' color={'white'} unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} />
               </View>
             </View>
           </SafeAreaView>
