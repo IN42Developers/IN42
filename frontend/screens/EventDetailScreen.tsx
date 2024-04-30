@@ -60,13 +60,13 @@ export default function EventDetailScreen() {
     }
 
     return (
-      <SafeAreaView className="flex-1">
-         <View className="flex-[2] pt-2 px-4 content-center justify-center bg-[#202020]">
+      <SafeAreaView style={{flex: 1}}>
+         <View style={styles.wrapper}>
             <View id="Wrapper">
-               <Text className="text-gray-400 font-InterBold text-sm mb-2">{date}</Text>
-               <Text className="text-white font-InterBold text-xl mr-20">{title}</Text>
+               <Text style={{color: 'gray', fontSize: 12, fontFamily: 'Inter_700Bold', marginBottom: 4 }}>{date}</Text>
+               <Text style={{color: 'white', fontSize: 18, fontFamily: 'Inter_600SemiBold' }}>{title}</Text>
             </View>
-            <View className="flex flex-row items-start my-3 justify-between">
+            <View style={styles.eventDisplay}>
             <AttendenceCounter currentCount={currEvent.nbr_subscribers} maxCount={currEvent.max_people} scale={1}></AttendenceCounter>
                <SubscribeButton eventID={currEvent.id} scale={.9} initialState={currEvent.subscribed}></SubscribeButton>
             </View>
@@ -99,9 +99,19 @@ export default function EventDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        // paddingTop: 30,
+    wrapper: {
+        justifyContent: 'flex-start',
+        flexBasis: 'auto',
+        flex: 0,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        backgroundColor: '#202020'
+    },
+    eventDisplay: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 18,
+        paddingBottom: 12,
     },
     button: {
         flex: 1,
@@ -147,11 +157,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#333'
     },
     detailsView: {
-        flex: 6,
-        paddingHorizontal: 20,
+        flex: 1,
+        marginTop: 12,
+        padding: 8,  
         alignContent: 'center',
         // backgroundColor: '#1F1F1F',
         // alignItems: 'stretch',
+        alignSelf: 'stretch',
     },
     nextEventButton: {
         // backgroundColor: 'lightgrey',

@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
         // flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 12,
     },
     text:{
         color: '#838383',
