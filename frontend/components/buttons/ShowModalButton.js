@@ -3,10 +3,11 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons'
 import EvaluationSlotPicker from "../complex/EvaluationSlotPicker";
 import React from 'react'
+import BlurOverlay from "../generic/BlurOverlay";
 
 export default function ShowModalButton() {
     const [mainModalVisible, setMainModalVisible] = React.useState(false);
-
+    const [isBlurred, setIsBlurred] = React.useState(false);
 
     const ButtonPressed = () => {
         console.log("pressed fucking button")

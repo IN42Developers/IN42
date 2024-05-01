@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, FlatList, Button, Text, Modal } from "react-native"
+import { StyleSheet, SafeAreaView, FlatList, Button, Text, Modal, View } from "react-native"
 import React, { useState, useEffect } from 'react'
 import SlotItem from "../components/buttons/SlotItem"
 import SlotContainer from "../components/generic/SlotContainer"
@@ -32,21 +32,21 @@ export default function UserSlotsScreen() {
         console.log("wtf")
     },[])
 
-
-
     return (
         <SafeAreaView style={{flex: 1, marginTop: 12}}>
-            <FlatList 
-                data={slotDays}
-                renderItem={({item}) =>(
-                    <SlotContainer 
-                    title={item}
-                    ComponentData={slotChunks.filter((element) =>IsoDateToWeekDay(element.date) == item).sort(SortByDateAscending)}  
-                    ChildComponent={SlotItem}/> //SlotItem
-                    )}/>
+                <FlatList 
+                    data={slotDays}
+                    renderItem={({item}) =>(
+                        <SlotContainer 
+                        title={item}
+                        ComponentData={slotChunks.filter((element) =>IsoDateToWeekDay(element.date) == item).sort(SortByDateAscending)}  
+                        ChildComponent={SlotItem}/> //SlotItem
+                )}/>
         </SafeAreaView>
     )
 }
+
+
 
 const styles = StyleSheet.create({
     container:{

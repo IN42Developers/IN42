@@ -1,6 +1,6 @@
 import { Modal, StyleSheet, Text, View } from "react-native"
 import { TouchableOpacity } from 'react-native';
-import { useState,useEffect  } from "react";
+import { useState, useEffect } from "react";
 
 import { PostDataToEndPoint,GetDataFromEndPoint } from "../../Utilities/api_utilities";
 import { GetCurrentDateWithOffset, getCurrentActiveCampus } from "../../Utilities/event_utilities";
@@ -9,6 +9,7 @@ import { useStore } from "../../Utilities/store";
 import { TruncateTimeToSlotIncrement } from "../../Utilities/slot_utilities";
 import InDatePicker from "../generic/DatePicker";
 import { Button } from "../buttons/Button";
+import BlurOverlay from "../generic/BlurOverlay";
 
 const START_ID = 0;
 const END_ID = 1;
@@ -23,6 +24,7 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
   const [currEndDate, setEndDate] = useState<Date>(TruncateTimeToSlotIncrement(30 + 60));
   const [descriptionText, setdescriptionText] = useState<string>("Placeholder")
   const [isValidSlot, setIsValidSlot] = useState<boolean>(true);
+  const [isBlurred, setIsBlurred] = useState(false);
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -102,6 +104,7 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
 
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <BlurOverlay visible={true} />
         <View style={{ display: 'flex', backgroundColor: '#1B1B1B', borderRadius: 4, width: '87%' }}>
           <View style={{ borderBottomWidth: 1, borderColor: '#159BA5' }}>
             <Text style={{ color: '#159BA5', fontSize: 20, fontFamily: 'Inter_600SemiBold', paddingTop: 16, paddingBottom: 16, paddingLeft: 24, paddingRight: 24 }}>Create new slot</Text>

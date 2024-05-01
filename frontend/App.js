@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StatusBar } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 
 import { DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import * as Linking from "expo-linking";
@@ -72,7 +72,8 @@ export default function App() {
       }
     }
     retrieveData();
-    NavigationBar.setBackgroundColorAsync("#202020");
+    if (Platform.OS == 'android')
+      NavigationBar.setBackgroundColorAsync("#202020");
   },[])
 
 
