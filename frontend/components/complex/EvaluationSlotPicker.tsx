@@ -53,10 +53,10 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
 
   const validateTimeSlot = () => {
     if(currEndDate < TruncateTimeToSlotIncrement(45,currStartDate)) {
-      return "[Error] Slot is not at least 1h long"
+      return "[Error] Your slot has to be 1 hour long."
     }
     if(currStartDate < TruncateTimeToSlotIncrement(30)){
-      return "[Error] Slot is not at least 30min in the future"
+      return "[Error] Slot is not at least 30 minutes in the future"
     }
     if(currEndDate > TruncateTimeToSlotIncrement(60*24 -15,currStartDate)){
       return "[Error] Slot cannot be longer than 24 hours (it can, but come on...)"
@@ -101,28 +101,28 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
  
 
     return (
-      <View className="flex-1 justify-center items-center">
-        <View className="flex bg-[#1B1B1B] rounded-lg w-5/6">
-          <View className="border-b border-b-[#159BA5]">
-            <Text className="text-[#159BA5] text-xl font-InterSemibold py-4 px-6">Create new slot</Text>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ display: 'flex', backgroundColor: '#1B1B1B', borderRadius: 4, width: '87%' }}>
+          <View style={{ borderBottomWidth: 1, borderColor: '#159BA5' }}>
+            <Text style={{ color: '#159BA5', fontSize: 20, fontFamily: 'Inter_600SemiBold', paddingTop: 16, paddingBottom: 16, paddingLeft: 24, paddingRight: 24 }}>Create new slot</Text>
           </View>
-          <View className="my-4 mx-6 gap-y-4">
-            <Text className="text-gray-300 border-red-600 text-xs font-InterRegular">START</Text>
-            <InDatePicker id= {START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
+          <View style={{ marginVertical: 16, marginHorizontal: 24, rowGap: 16 }}>
+            <Text style={{ color: 'lightgray', borderColor: 'red', fontSize: 11, fontFamily: 'Inter_400Regular' }}>START</Text>
+            <InDatePicker id={START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
           </View>
-          <View className="mx-6 gap-y-4">
-            <Text className="text-gray-300 border-red-600 text-xs font-InterRegular">END</Text>
+          <View style={{ marginHorizontal: 24, rowGap: 16 }}>
+            <Text style={{ color: 'lightgray', borderColor: 'red', fontSize: 11, fontFamily: 'Inter_400Regular' }}>END</Text>
             <InDatePicker id={END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker>
           </View>
-          <Text className="text-gray-400 self-center border-red-600 py-4" >{descriptionText}</Text>
-            <View className="flex-row justify-between gap-x-2 bg-[#212121]">
+          <Text style={{ color: 'lightgray', alignSelf: 'center', borderColor: 'red', paddingVertical: 16 }}>{descriptionText}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', columnGap: 8, backgroundColor: '#212121' }}>
               <Button onPress={PressCancel} variant="dialog">
-                <Text className="text-gray-400 text-center text-lg font-InterSemibold" >CANCEL</Text>
+                <Text style={{ color: 'gray', textAlign: 'center', fontSize: 16, fontFamily: 'Inter_600SemiBold' }}>CANCEL</Text>
               </Button>
               
                 {isValidSlot &&
                   <Button onPress={CreateSlot} variant="dialog">
-                    <Text className="text-gray-400 text-center text-lg font-InterSemibold">CONFIRM</Text>
+                    <Text style={{ color: 'gray', textAlign: 'center', fontSize: 16, fontFamily: 'Inter_600SemiBold' }}>CONFIRM</Text>
                   </Button>
                 }
                 

@@ -15,7 +15,7 @@ export const Button: React.FC<ButtonProps> = ({ onPress, variant, children }) =>
     primary: 'bg-gray-300 rounded-full p-4 active:bg-gray-400',
     secondary: 'bg-blue-500 rounded-lg p-4 active:bg-blue-600',
     link: 'text-white bg-gray-800 p-2 rounded-sm flex-row gap-x-2 items-center',
-    dialog: 'flex bg-[#212121] p-4 w-44',
+    dialog: 'flex bg-[#212121] px-4 py-5 w-44',
   };
 
   const variantStyles = variants[variant] || defaultButtonStyle;
