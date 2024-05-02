@@ -1,4 +1,5 @@
 import {GetDataFromEndPoint, PostDataToEndPoint, DeleteDataFromEndpoint } from './api_utilities';
+import LogData, { logType } from './debugging';
 import { GetUserData } from './UserData';
 
 export const getMonthFromDate = (date) =>
@@ -48,7 +49,7 @@ export const ToggleEventSubscription = async (EventID) =>
         }
         
     } catch (error) {
-        console.log(error);
+        LogData(logType.ERROR, error)
         throw error;
     }
     return subscribedState;
@@ -84,16 +85,14 @@ export const UnsubscribeEvent = async (eventUserID) => {
 
 //retuns null if user is not subscribed, otherwise the event_user_id if the user is subscribed
 export const CheckEventSubscriptionStatus = async (EventID) => {
-    // console.log('checking event status');
     try {
         const userData = GetUserData();
         const eventQueryString = `?filter[event_id]=${EventID}`;
         const eventData = await GetDataFromEndPoint(`/v2/users/${userData.id}/events_users${eventQueryString}`);
         if (eventData.length === 0) {
-            console.log('Event Data with ID: ',EventID,' has not been found')
+            LogData(logType.WARNING, 'Event Data with ID: ',EventID,' has not been found')
             return null;
         }
-        console.log('User is subscribed to that event');
         return eventData[0].id;
     } catch (error) {
         throw error;
@@ -116,7 +115,7 @@ export const getUserSubscribedEvents = async (userID) =>{
             const completeEventData = await GetDataFromEndPoint(`/v2/users/${userID}/events${querystring}`); 
             return completeEventData;
         } catch (error) {
-            console.log(error);
+            LogData(logType.ERROR, error)
             throw error;
         }
 }
@@ -132,12 +131,12 @@ export const getCampusEvents = async () =>{
         if(userData === null)
             throw new Error("Couldn't retrieve UserData in getCampusEvents");
         let campus = getCurrentActiveCampus(userData); //51 =Berlin
-        console.log(campus);
+        LogData(logType.INFO, campus)
         let cursusID = 21;
         const completeEventData = await GetDataFromEndPoint(`/v2/campus/${campus.campus_id}/cursus/${cursusID}/events${querystring}`); //?page[number]=2 just adding this at the end works as query
         return completeEventData;
     } catch (error) {
-        console.log(error);
+        LogData(logType.ERROR, error)
         throw error;
     }
 }

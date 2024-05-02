@@ -11,6 +11,7 @@ import NavigateBackButton from "../components/buttons/NavigateBackButton.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons'
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react-native";
+import LogData, { logType } from "../Utilities/debugging";
 
 export default function EventDetailScreen() {
 
@@ -37,17 +38,16 @@ export default function EventDetailScreen() {
     const prevEvent = GetNextEvent(currEvent.id,-1);
     const nextEvent = GetNextEvent(currEvent.id,1);
     const NextEvent =  () => {
-        console.log('Next Event jaaaa')
+        LogData (logType.INFO,'Navigating to Next Event ')
         // let nextEvent = GetNextEvent(currEvent.id,1);
         
-        console.log(nextEvent)
         if(nextEvent != null){
             navigation.navigate("EventDetails", { eventData: nextEvent, })
         }
     }
 
     const PrevEvent =  () => {
-        console.log('Navigating to Previous Event')
+        LogData (logType.INFO,'Navigating to Previous Event')
         // let nextEvent = GetNextEvent(currEvent.id,-1);
 
         if(prevEvent != null) {

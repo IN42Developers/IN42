@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { GetRequestCounter, GetRequestCounterMax } from '../../Utilities/UserData';
 import { useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import LogData, { logType } from '../../Utilities/debugging';
 
 const RequestCounter = ({textStyle=styles}) =>{
 
@@ -11,10 +12,10 @@ const RequestCounter = ({textStyle=styles}) =>{
     useFocusEffect(()=>{
         let req = GetRequestCounter()
         if(currentRequests != req){
-            console.log("Request amount changed, rerendering")
+            LogData(logType.INFO,"Request amount changed, rerendering")
             SetCurrentRequests(req)
         }
-        console.log("RequestCounter useFocusEffect")
+        LogData(logType.INFO,"RequestCounter useFocusEffect")
 
     })
     return (

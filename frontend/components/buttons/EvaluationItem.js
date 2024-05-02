@@ -5,12 +5,12 @@ import { GetUserData, getCampusTimeZone } from '../../Utilities/UserData';
 import { CalculateRemainingTimePeriod } from '../../Utilities/UserData';
 import {useEffect, useState} from 'react'
 import { getProjectNameFromID } from '../../Utilities/projectIDMapping';
+import LogData, { logType } from '../../Utilities/debugging';
 
 const EvaluationItem = ({data}) => {
 
   const navigation = useNavigation();
   const [evalString, SetEvalString] = useState('unknown');
-  console.log(data);
   if(data == undefined || data == null || data.dummy == true){
     data={
       name:'<Name>',
@@ -24,11 +24,10 @@ const EvaluationItem = ({data}) => {
       },
     }
   }
-  console.log(data);
   useEffect(()=>{
-    // console.log(data.corrector,',',data.team.name)
+    // cLogData(logType.INFO,data.corrector,',',data.team.name)
     let Userdata = GetUserData();
-    console.log(Userdata.id)
+    LogData(logType.INFO,Userdata.id)
     if(data.corrector == 'invisible' ){
       SetEvalString(`Somebody will evaluate you on ${getProjectNameFromID(data.team.project_id)}`)
     }
@@ -67,7 +66,7 @@ const EvaluationItem = ({data}) => {
 
 
   const ShowDetails = () =>{
-    console.log('trying to navigate')
+    LogData(logType.INFO,'trying to navigate')
     navigation.navigate("EvaluationDetailScreen",{ evalData: data  });
   }
 

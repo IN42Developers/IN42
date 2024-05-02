@@ -1,5 +1,6 @@
 import { getAccessToken, setAccessToken } from "./TokenStorage";
 import { IncrementRequestCounter, AssertUserCanRequestData } from "./UserData";
+import LogData, { logType } from "./debugging";
 
 //generic function that allows you to get data from a specific endpoint in json format
 export const GetDataFromEndPoint = async ( endpoint ) => {
@@ -9,7 +10,7 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
 
     let uri = `https://api.intra.42.fr${endpoint}`;
     let tokendata = getAccessToken();
-    // console.log("tokendata in getdata = ",tokendata);
+    // LogData(logType.INFO,"tokendata in getdata = ",tokendata);
     if(!tokendata){
         // return null
         throw new Error("TokenData is Null");
@@ -23,9 +24,9 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
     });
 
     try {
-        // console.log('try fetching')
+        // LogData(logType.INFO,'try fetching')
         await IncrementRequestCounter();
-        console.log("GETting from",uri)
+        LogData(logType.INFO,"GETting from",uri)
         const response = await fetch(req);
         if(response.ok){
             const data = await response.json();
@@ -35,7 +36,7 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
     } catch (error){
-        console.log(error);
+        LogData(logType.ERROR,error);
         throw error;
     }
 }
@@ -49,7 +50,7 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
 
     let uri = `https://api.intra.42.fr${endpoint}`;
     let tokendata = getAccessToken();
-    // console.log("tokendata in getdata = ",tokendata);
+    // LogData(logType.INFO,"tokendata in getdata = ",tokendata);
 
     const tokenRequest = {
         method: 'POST',
@@ -61,18 +62,18 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
       };
 
     try {
-        console.log('POSTing to',uri)
+        LogData(logType.INFO,'POSTing to',uri)
         await IncrementRequestCounter()
-        // console.log("Post Request = ",tokenRequest)
+        // LogData(logType.INFO,"Post Request = ",tokenRequest)
         const response = await fetch(uri,tokenRequest);
         if(response.ok){
-            console.log('Suceess')
+            LogData(logType.INFO,'Suceess')
             return response.json();
         } else {
             throw new Error(`HTTP error! Status: ${response.status}`);
     }
     } catch (error){
-        console.log(error);
+        LogData(logType.ERROR,error);
         throw error;
     }
 }
@@ -87,7 +88,7 @@ export const DeleteDataFromEndpoint =async (endpoint)=> {
     let tokendata = getAccessToken();
     try {
         await IncrementRequestCounter();
-        console.log("DELETEing at",uri)
+        LogData(logType.INFO,"DELETEing at",uri)
         const response = await fetch(uri, {
             method: 'DELETE',
             headers: {
@@ -95,12 +96,12 @@ export const DeleteDataFromEndpoint =async (endpoint)=> {
          },
        })
        if (response.ok) {
-         console.log('Deletion successfully');
+        LogData(logType.INFO,'Deletion successfully');
        } else {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
     } catch (error) {
-        console.error('Error:', error);
+        LogData(logType.ERROR, error);
         throw error;
     }
 

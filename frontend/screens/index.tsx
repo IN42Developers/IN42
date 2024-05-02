@@ -12,6 +12,7 @@ import { setKeyValuePair } from '../Utilities/TokenStorage'
 import { AssertUserCanRequestData } from '../Utilities/UserData'
 import { AuthContext } from '../Context'
 import EntryHeader from '../components/ui/EntryHeader'
+import LogData, { logType } from '../Utilities/debugging'
 
 export default function IndexScreen() {
 
@@ -23,20 +24,18 @@ export default function IndexScreen() {
   useEffect( () => {
     const tokenExchange = async() =>{
       try {
-        console.log('logging Response =',response);
-        console.log('Response Type =',response?.type);
         if (response?.type === 'success') {
           const { code } = response.params;
-          console.log('CODE = ', code);
+          LogData(logType.INFO,'CODE = ', code);
           
           //const accessToken = await getTokenFromCode(code);
           const accessToken = await getTokenFromCode(code);
-          console.log('saved TOKEN = ', accessToken);
+          LogData(logType.INFO,'saved TOKEN = ', accessToken);
           setKeyValuePair('AccessToken', accessToken);
           setAccessToken(accessToken);
         }
       } catch (error) {
-         console.log(error);
+        LogData(logType.ERROR,error);
       }
     }
     
@@ -44,28 +43,22 @@ export default function IndexScreen() {
       (async () => {
           await tokenExchange();
           const token = getAccessToken();
-          console.log('token = ', token);
+          LogData(logType.INFO,'token = ', token);
           if(token != null) {
-            console.log('Authorization Successful. Logging in');
+            LogData(logType.INFO,'Authorization Successful. Logging in');
             Login();
           }
         }
         )();
     } catch (error) {
-      console.log(error);
+      LogData(logType.ERROR,error);
       alert(error)
     }
     //self invoking async function wtf?!
   },[response])
 
-  // const getXSecret = async () => {
-  //   console.log(`X-SECRET = ${process.env.BASIC_HEADER_HASH}`)
-  //   console.log(`EXPO_PUBLIC_AUTH_SERVER_IP = ${process.env.EXPO_PUBLIC_AUTH_SERVER_IP}`)
-  //   console.log(`EXPO_PUBLIC_REDIRECT_URI = ${process.env.EXPO_PUBLIC_REDIRECT_URI}`)
-  // }
-
   const handlePress = async () => {
-    console.log("process.env.IN42_DEV", process.env.IN42_DEV);
+    LogData(logType.INFO,"process.env.IN42_DEV", process.env.IN42_DEV);
     try {
       if (AssertUserCanRequestData() == false) {
         return;
@@ -74,9 +67,9 @@ export default function IndexScreen() {
     }
 
     catch(error){
-      console.log(error);
+      LogData(logType.ERROR,error);
     }
-    console.log('Logged in');
+    LogData(logType.INFO,'Logged in');
   };
 
   return (

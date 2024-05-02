@@ -5,6 +5,7 @@ import { getCampusEvents,getUserSubscribedEvents } from './event_utilities';
 import { GetUserData } from './UserData';
 import { StallTimeBetweenApiCalls } from './api_utilities';
 import { SetUserData } from './UserData';
+import LogData, { logType } from '../Utilities/debugging';
 
 const store = (set) =>({
     events: [], //all events from today to the future /up to 100 entries
@@ -26,7 +27,7 @@ const store = (set) =>({
         }
         set({events: campusEventData});
       } catch (error) {
-        console.log(error);
+        LogData(logType.ERROR, error)
       }
     },
     updateEventSubscriptionStatus: (eventID,newSubState) => set((store)=>({events: store.events.map( event => {
@@ -41,7 +42,6 @@ const store = (set) =>({
           if(allEvents[i].id == eventID) {
           let newEventID = i + direction;
           if(newEventID >= 0 && newEventID <= allEvents.length -1) {
-              // console.log('is subscribed = ',allEvents[newEventID].subscribed);
               return allEvents[newEventID];
           }
       }  
@@ -64,7 +64,7 @@ const store = (set) =>({
               set({Slots: SlotData });
           }
       } catch (error) {
-          console.log(error);
+          LogData(logType.ERROR, error)
       }
     },
     insertSlots: async(rawSlotData) => {
@@ -80,8 +80,6 @@ const store = (set) =>({
     },
     DeleteUserSlotChunk: async (chunkID) => {
       let Slots = useStore.getState().Slots;
-      
-      // console.log("Slots = ", Slots);
 
       let chunkIndex = 0;
       for (; chunkIndex < Slots.length; chunkIndex++) {
@@ -91,15 +89,13 @@ const store = (set) =>({
       }
 
       let ret = await RemoveSlotChunk(Slots[chunkIndex]);
-
-      // console.log('sucess= ',ret)
       if(ret === true) {
-          console.log('Success! Removed all items within the chunk')
+          LogData(logType.INFO,'Success! Removed all items within the chunk')
           const updatedSlotChunks = Slots.filter((item) => item.id !== chunkID);
           set({Slots: updatedSlotChunks});
       }
       else{
-          console.log('Something went wrong when deleting chunk data, check intra to be safe')
+          LogData(logType.ERROR,'Something went wrong when deleting chunk data, check intra to be safe')
           useStore.getState().initSlots();
       }
     },
@@ -108,16 +104,16 @@ const store = (set) =>({
         
         let personalData = await GetDataFromEndPoint('/v2/me');
         if(personalData !== null){
-          console.log('Setting UserData');
+          LogData(logType.INFO,'Setting UserData')
           SetUserData(personalData)
         }
         await StallTimeBetweenApiCalls()
         useStore.getState().initEvents();
         await StallTimeBetweenApiCalls()
         useStore.getState().initEvaluations();
-        console.log('Setting UserData complete');
+        LogData(logType.INFO,'Setting UserData complete')
       } catch (error) {
-        console.log('Error in refreshUserData() = ', error);
+        LogData(logType.ERROR,'Error in refreshUserData() = ', error)
       }
     }
 

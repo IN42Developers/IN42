@@ -3,12 +3,13 @@ import { CalculateRemainingTimePeriod,GetRequestCounterPeriod } from '../../Util
 import {useEffect, useState} from 'react'
 import CountDownTimer from '../generic/CountDownTimer';
 import { useFocusEffect } from '@react-navigation/native';
+import LogData, { logType } from '../../Utilities/debugging';
 
 const CurrenPeriodCounter = ({textStyle=styles}) =>{
 
     const [timeInSeconds, setTimeInSeconds] = useState(0);
 
-    console.log("rendering")
+    LogData(logType.INFO,"rendering")
     useEffect( () => {
             InitTimerPeriod();
 
@@ -22,9 +23,9 @@ const CurrenPeriodCounter = ({textStyle=styles}) =>{
         totaltimeInSeconds += timeData2.hours * 60 * 60;
         totaltimeInSeconds += timeData2.minutes * 60;
         totaltimeInSeconds += timeData2.seconds;
-        console.log("SETTING totTimeinSeconds to: ", totaltimeInSeconds)
+        LogData(logType.INFO,"SETTING totTimeinSeconds to: ", totaltimeInSeconds)
         setTimeInSeconds(totaltimeInSeconds);
-        console.log("time in seconds =",timeInSeconds)
+        LogData(logType.INFO,"time in seconds =",timeInSeconds)
     }
 
 

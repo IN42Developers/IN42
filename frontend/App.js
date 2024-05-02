@@ -11,6 +11,7 @@ import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/Naviga
 import { AuthContext } from './Context';
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
 import "./global.css"
+import LogData, { logType } from './Utilities/debugging';
 
 const prefix = Linking.createURL('/');
 
@@ -33,12 +34,12 @@ export default function App() {
   const authContext = React.useMemo(() =>{
     return {
       Login: () => {
-        console.log("isLoggedIn =",isLoggedIn )
+        LogData(logType.INFO, "isLoggedIn =",isLoggedIn )
         setIsLoading(false);
         setIsLoggedIn(true);
       },
       Logout: () => {
-        console.log("isLoggedIn =",isLoggedIn )
+        LogData(logType.INFO, "isLoggedIn =",isLoggedIn )
         setIsLoading(false);
         setIsLoggedIn(false);
       }
@@ -61,13 +62,12 @@ export default function App() {
           if(AssertUserCanRequestData() == false){
             return;
           }
-          console.log('after Counter Retrieval');
+          LogData(logType.INFO,'after Counter Retrieval');
           const validToken = await isTokenStillValid();
-          console.log('isToken valid? = ', validToken)
           setIsLoggedIn(validToken);
           setIsLoading(false); //currently does nothing 
       } catch (error) {
-        console.log(error);
+        LogData(logType.ERROR,error);
         alert(error);
       }
     }

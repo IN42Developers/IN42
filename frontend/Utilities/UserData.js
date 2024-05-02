@@ -1,4 +1,5 @@
 import { retrieveStoredValue,setKeyValuePair } from "./TokenStorage";
+import LogData, { logType } from "./debugging";
 
 //Object that stores data from /v2/me endpoint
 let UserData = null;
@@ -25,7 +26,6 @@ export const getUserCursus = () => {
         if (UserData.cursus_users[i].cursus_id == 21)
             return UserData.cursus_users[i];
     }
-    console.log(UserData);
     //return the first one if the data is not null and main cursus cant be found
     return (UserData.cursus_users[0]);
 }
@@ -63,9 +63,8 @@ export const GetRequestCounter = () =>{
 
     let currPeriod = getcurrCounterPeriod();
     if(currPeriod > prevRequestPeriod){
-        console.log('New Period has arrived, request counter will be updated now.')
-        // console.log('Previous Peroid = ',new Date(prevRequestPeriod))
-        // console.log('New Peroid = ',new Date(currPeriod))
+        
+        LogData(logType.INFO,'New Period has arrived, request counter will be updated now.')
         prevRequestPeriod = currPeriod;
         setKeyValuePair('PrevCounterPeriod',currPeriod);
         requestCounter = 0;
@@ -81,12 +80,10 @@ export const GetRequestCounterMax = () =>{
 
 export const AssertUserCanRequestData = () =>{
     const val = GetRequestCounter();
-    // console.log('val = ',val)
-    // console.log('max val = ',requestCounterMax )
-    console.log(`current Requests ${val}/${requestCounterMax}`)
+    LogData(logType.INFO,`current Requests ${val}/${requestCounterMax}`)
     if(val >= requestCounterMax){
-        console.log('User Cannot request any more data for this period')
-        console.log(`current Requests ${val}/${requestCounterMax}`)
+        LogData(logType.WARNING,'User Cannot request any more data for this period')
+        LogData(logType.INFO,`current Requests ${val}/${requestCounterMax}`)
         // throw new Error('Exceeded Request Limit');
         let timeData = CalculateRemainingTimePeriod(prevRequestPeriod); 
         alert(`Request Limit exceeded!\nNew Peroid in ${timeData.minutes}min ${timeData.seconds}sec`);  
@@ -105,36 +102,34 @@ function getcurrCounterPeriod () {
     currDate.setSeconds(0);
     currDate.setMilliseconds(0);
     
-    // console.log(currDate);
     return currDate.getTime();
 }
 
 export const LoadCounterPeriod = async ()=>  {
     try {
         let prevCounterPeroid = await retrieveStoredValue('PrevCounterPeriod')
-        console.log('Prev value before parseInt =',prevCounterPeroid);
+        LogData(logType.INFO,'Prev value before parseInt =',prevCounterPeroid);
         if(prevCounterPeroid != null)
             prevCounterPeroid = parseInt(prevCounterPeroid);
         let currPeriod = getcurrCounterPeriod();
-        console.log('prev time = ',prevCounterPeroid);
-        console.log('curr time = ',currPeriod);
+        LogData(logType.INFO,'prev time = ',prevCounterPeroid);
+        LogData(logType.INFO,'curr time = ',currPeriod);
         if(prevCounterPeroid == null || prevCounterPeroid == '' || currPeriod > prevCounterPeroid){
-            console.log('Resetting Counter period and count value')
+            LogData(logType.INFO,'Resetting Counter period and count value')
             SetRequestCounterPeriod(currPeriod);
             await setKeyValuePair('PrevCounterPeriod',currPeriod);
             await setKeyValuePair('RequestCounter',0);
             requestCounter = 0;
 
         }else{
-            console.log('Stored Value is valid, loading value to memory');
+            LogData(logType.INFO,'Stored Value is valid, loading value to memory');
             SetRequestCounterPeriod(prevCounterPeroid);
             const counterVal = await retrieveStoredValue('RequestCounter');
             requestCounter = parseInt(counterVal);
-            console.log('Request Counter = ',requestCounter);
         }
         
     } catch (error) {
-        console.log(error);
+        LogData(logType.ERROR,error);
     }
 }
 

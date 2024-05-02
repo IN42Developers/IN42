@@ -10,6 +10,7 @@ import { TruncateTimeToSlotIncrement } from "../../Utilities/slot_utilities";
 import InDatePicker from "../generic/DatePicker";
 import { Button } from "../buttons/Button";
 import BlurOverlay from "../generic/BlurOverlay";
+import LogData, { logType } from "../../Utilities/debugging";
 
 const START_ID = 0;
 const END_ID = 1;
@@ -92,12 +93,12 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
             insertSlots(response)
             onDismissModal()
         } catch (error) {
-            console.log(error)
+          LogData(logType.ERROR,error)
         }
     }
  
     const PressCancel =  () => {
-        console.log("Cancel Pressed")
+        LogData(logType.INFO,"Cancel Pressed")
         onDismissModal()
     }
  

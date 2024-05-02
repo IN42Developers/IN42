@@ -19,7 +19,6 @@ IN42_DEV_CLIENT_SECRET="s-s4t2ud-36ab78615e3c55d231b6f2f33b15c867d3372edd3ae199a
 EXPO_PUBLIC_CLIENT_ID=u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c
 # Our custom redirect scheme. Will redirect to index screen after auth.
 EXPO_PUBLIC_REDIRECT_URI=in42://index
-# the default IP and Port. This should, by default, stay the same.
-EXPO_PUBLIC_AUTH_SERVER_IP=35.233.217.18:3000
-# Basic 64 hash that allows you to use the live auth server. you will get a 401 if thats not included
-BASIC_HEADER_HASH="You need to ask the people to get this secret. This gives access to our server, hence the secrecy" 
+# Logging debug flag. If this is set to true everything including INFO logs will be displayed
+# will be set to false in production builds to only log WARNING and ERROR messages
+EXPO_PUBLIC_LOGGING=true

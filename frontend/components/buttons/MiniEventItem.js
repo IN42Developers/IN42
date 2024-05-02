@@ -6,12 +6,11 @@ import { useNavigation } from '@react-navigation/native'
 import { getCampusTimeZone } from '../../Utilities/UserData';
 import { AntDesign } from '@expo/vector-icons'
 import {LinearGradient} from 'expo-linear-gradient'
+import LogData, { logType } from '../../Utilities/debugging';
 
 const MiniEventItem = ({data,callback}) => {
 
   const navigation = useNavigation();
-  if(data === undefined)
-    console.log('Title: ',data.name);
   if(data === undefined){
     data={
       location:'<LOCATION>',
@@ -25,11 +24,10 @@ const MiniEventItem = ({data,callback}) => {
   }
 
 
-  console.log(data)
   let location = data.location;
   let locationDefined = (location == "" || location == null || location == undefined) ? false : true;
   location = location.split(' ')[0];
-  // console.log(eventData.location);
+  // LogData(logType.INFO,eventData.location);
 
   let startDate = new Date(data.begin_at);
   
@@ -60,7 +58,7 @@ const MiniEventItem = ({data,callback}) => {
 
 
   const ShowDetails = () =>{
-    console.log('trying to navigate')
+    LogData(logType.INFO,'trying to navigate')
     //a bit silly and should be reworked but may workf or now
     navigation.navigate("EventDetails",{ 
       eventData: data,

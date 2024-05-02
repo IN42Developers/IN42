@@ -12,8 +12,6 @@ import {LinearGradient} from 'expo-linear-gradient'
 const ExpandedEventItem = ({data, callback}) => {
 
   const navigation = useNavigation();
-  if(data === undefined)
-    console.log('Title: ',data.name);
   if(data === undefined){
     data={
       location:'<LOCATION>',
@@ -27,10 +25,10 @@ const ExpandedEventItem = ({data, callback}) => {
   }
 
 
-  // console.log(eventData)
+  // LogData(logType.INFO,eventData)
   let location = data.location;
   location = location.split(' ')[0];
-  // console.log(eventData.location);
+  // LogData(logType.INFO,eventData.location);
 
   let startDate = new Date(data.begin_at);
   
@@ -65,7 +63,7 @@ const ExpandedEventItem = ({data, callback}) => {
   }
 
   const ShowDetails = () =>{
-    console.log('trying to navigate')
+    LogData(logType.INFO,'trying to navigate')
     //a bit silly and should be reworked but may workf or now
     navigation.navigate("EventDetails",{ 
       eventData: data,

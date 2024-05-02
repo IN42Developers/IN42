@@ -29,7 +29,6 @@ export default function UserSlotsScreen() {
 
     useEffect( () => {
         initSlots();
-        console.log("wtf")
     },[])
 
     return (

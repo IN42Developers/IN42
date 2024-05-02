@@ -13,6 +13,7 @@
       "env": {
         "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c",
         "EXPO_PUBLIC_REDIRECT_URI": "in42://index",
+        "EXPO_PUBLIC_LOGGING": "true"
       },
       "android": {
         "buildType": "apk"
@@ -27,7 +28,8 @@
       "autoIncrement": true,
       "env": {
         "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c",
-        "EXPO_PUBLIC_REDIRECT_URI": "in42://index"
+        "EXPO_PUBLIC_REDIRECT_URI": "in42://index",
+        "EXPO_PUBLIC_LOGGING": "false"
       },
       "android": {
       },

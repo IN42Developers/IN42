@@ -1,4 +1,5 @@
 import { DeleteDataFromEndpoint,PostDataToEndPoint,StallTimeBetweenApiCalls } from "./api_utilities"
+import LogData, { logType } from "./debugging";
 
 
 interface Slot {
@@ -29,20 +30,20 @@ export const SortByDateAscending = (a,b): number => {
 
 //takes an array of slot datas and converts them into an array of chunked slot items
 export const CreateSlotChunkata = ( data: Slot[] ) :SlotChunk[] => {
-    // console.log(data)
+    // LogData(logType.INFO,data)
     if(data == null ){
-        console.log('data is null or undefined')
+        LogData(logType.INFO,'data is null or undefined')
         return []
     }
     else if(data.length == 1){
-        console.log('data lenght is 1, found single 15min slot')
+        LogData(logType.INFO,'data lenght is 1, found single 15min slot')
         return [{data:data,id: 0,type: 'slotChunk',date: new Date(data[0].begin_at)}];
     }
 
     //sort data by date ascending 
     data.sort(SortByDateAscending)
 
-    // console.log('in createSlotChunk data')
+    // LogData(logType.INFO,'in createSlotChunk data')
     let chunkData: SlotChunk[]  = [];
     let tmpArray:  Slot[] = [];
     let startChunk: number = 0;
@@ -82,12 +83,12 @@ export const RemoveSlotChunk = async (SlotChunk: SlotChunk) : Promise<boolean> =
     //     }
     //     querystring += SlotChunk.data[0].id; //doing this because the order is messed up
     //     querystring += "&_method=delete&confirm=false"
-    //     console.log("endpoint =",endpoint)
-    //     console.log("querystring =",querystring)
+    //     LogData(logType.INFO,"endpoint =",endpoint)
+    //     LogData(logType.INFO,"querystring =",querystring)
     //     const response = await PostDataToEndPoint(endpoint,querystring)
-    //     console.log("POST response = ",response)
+    //     LogData(logType.INFO,"POST response = ",response)
     // } catch (error) {
-    //     console.log(error);
+    //     LogData(logType.ERROR,error);
     // }
 
 
@@ -98,7 +99,7 @@ export const RemoveSlotChunk = async (SlotChunk: SlotChunk) : Promise<boolean> =
             await DeleteDataFromEndpoint(`/v2/slots/${SlotChunk.data[i].id}`);
             await StallTimeBetweenApiCalls();
         } catch (error) {
-            console.log(error)
+            LogData(logType.ERROR,error)
             return false;
         }
     }

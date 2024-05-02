@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { DeleteDataFromEndpoint } from '../../Utilities/api_utilities';
 import { getCampusTimeZone } from '../../Utilities/UserData';
 import { useStore } from '../../Utilities/store';
+import LogData, { logType } from '../../Utilities/debugging';
 
 const SlotItem = ({data,style}) => {
   const navigation = useNavigation();
@@ -38,7 +39,7 @@ DayString = `${startDate.toLocaleTimeString('en-US',timeFormat)}`
 TimeSlot = `${endDate.toLocaleTimeString('en-US',timeFormat)}`
 
   const ShowDetails = () =>{
-    console.log('trying to navigate')
+    LogData(logType.INFO,'trying to navigate')
     // navigation.navigate("EvaluationDetailScreen",{ evalData: data  });
   }
 
@@ -47,7 +48,7 @@ TimeSlot = `${endDate.toLocaleTimeString('en-US',timeFormat)}`
       DeleteUserSlotChunk(data.id)
       
     } catch (error) {
-      console.log(error);
+      LogData(logType.ERROR,error);
     }
   }
 

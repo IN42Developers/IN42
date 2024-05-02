@@ -10,6 +10,7 @@ import SettingsToggle from '../components/generic/SettingsToggle';
 
 import { LogOutIcon, RefreshCwIcon } from 'lucide-react-native';
 import { Button } from '../components/buttons/Button';
+import LogData, { logType } from '../Utilities/debugging';
 
 const SettingsScreen = () => {
 
@@ -32,7 +33,7 @@ const SettingsScreen = () => {
     const LogoutUser =  async () => {
       await setKeyValuePair('AccessToken', '');
       setAccessToken(null);
-      console.log('Trying to Logout');
+      LogData(logType.INFO,'Trying to Logout');
       Logout();
   
     } 

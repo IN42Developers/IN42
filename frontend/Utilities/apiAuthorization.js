@@ -3,19 +3,20 @@ import {useAuthRequest} from 'expo-auth-session';
 import { setAccessToken,setKeyValuePair, retrieveStoredValue } from './TokenStorage';
 // import { getTokenFromCode } from './api_utilities';
 import { IncrementRequestCounter } from './UserData';
+import LogData, { logType } from './debugging';
 
 export const  authorizeUser =  () => {
 
   const redirectURI = (process.env.IN42_DEV == "true" ? process.env.IN42_DEV_REDIRECT_URI: process.env.EXPO_PUBLIC_REDIRECT_URI );
   const clientID =(process.env.IN42_DEV == "true" ? process.env.IN42_DEV_CLIENT_ID : process.env.EXPO_PUBLIC_CLIENT_ID);
-  console.log('API_URL =',redirectURI);
-  console.log('CLIENT_ID =',clientID);
-  // console.log('process.env.IN42_DEV == "true" = ',process.env.IN42_DEV == "true")
-  // console.log("TEEEEEEEEEST = ",(process.env.IN42_DEV == "true" ? process.env.IN42_DEV_CLIENT_ID : process.env.EXPO_PUBLIC_CLIENT_ID))
+  LogData(logType.INFO,'API_URL =',redirectURI);
+  LogData(logType.INFO,'CLIENT_ID =',clientID);
+  // LogData(logType.INFO,'process.env.IN42_DEV == "true" = ',process.env.IN42_DEV == "true")
+  // LogData(logType.INFO,"TEEEEEEEEEST = ",(process.env.IN42_DEV == "true" ? process.env.IN42_DEV_CLIENT_ID : process.env.EXPO_PUBLIC_CLIENT_ID))
     if(!redirectURI){
-      console.log('REDIRECT URI =',redirectURI)
-      console.log('Redirect URI is undefined, it seems like your .env is not setup')
-      return {undefined, promptAsync: () => console.log(`THIS FUNCTION DOESN'T EXIST. .env is not setup`)};
+      LogData(logType.INFO,'REDIRECT URI =',redirectURI)
+      LogData(logType.WARNING,'Redirect URI is undefined, it seems like your .env is not setup')
+      return {undefined, promptAsync: () => LogData(logType.ERROR,`THIS FUNCTION DOESN'T EXIST. .env is not setup`)};
     }
 
     const [request, response, promptAsync] = useAuthRequest(
@@ -28,7 +29,7 @@ export const  authorizeUser =  () => {
       },
       { authorizationEndpoint: 'https://api.intra.42.fr/oauth/authorize' }
     );
-    // console.log('Request = ', request);
+    // LogData(logType.INFO,'Request = ', request);
     return { response, promptAsync };
 }
 
@@ -60,22 +61,19 @@ export const getTokenFromCode = async (code) => {
   try {
     IncrementRequestCounter();
     
-    console.log('Before fetch request');
     const response = await fetch(createRequestURL(code), createRequestInit(code));
     // const response = await fetch(`https://auth-7y7fitjvjq-uc.a.run.app/?code=${code}`, createRequestInit(code));
-    console.log('after fetch request');
-    console.log(response)
     if (response.ok) {
         const tokenData = await response.json();
         setAccessToken(tokenData);
         await setKeyValuePair('AccessToken', tokenData);
-        // console.log('TOKENDATA = ',tokenData);
+        // LogData(logType.INFO,'TOKENDATA = ',tokenData);
         return tokenData;
     } else {
         throw new Error('Failed to obtain token');
     }
 } catch (error) {
-    console.log(error);
+    LogData(logType.ERROR,error);
     throw new Error(error);
 }
 }

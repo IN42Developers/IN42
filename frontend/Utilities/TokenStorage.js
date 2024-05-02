@@ -1,4 +1,5 @@
 import * as SecureStore from 'expo-secure-store'
+import LogData, { logType } from './debugging';
 
 let accessToken = null;
 
@@ -16,9 +17,9 @@ export async function setKeyValuePair(key, value) {
 
 export async function retrieveStoredValue(key) {
     let result = await SecureStore.getItemAsync(key);
-    // console.log('in retrieve value',result);
+    // LogData(logType.INFO,'in retrieve value',result);
     if(result === null)
-        console.log('found valid key but its null');
+        LogData(logType.WARNING,'found valid key but its null');
 
     return result;
 }
@@ -31,7 +32,6 @@ export async function isTokenStillValid() {
         if(token === null)
             return false;
         const remainingTime = calculateRemainingTokenTime(token.created_at); //7200 is the total time a token is valid
-        // console.log(`Remaining token time = `,remainingTime);
         if(remainingTime > 0) {
             setAccessToken(token);
             return true;
@@ -39,15 +39,15 @@ export async function isTokenStillValid() {
         else if(remainingTime <= 0) {
             await refreshToken();
             if(accessToken !== null) {
-                console.log('Found timed out token, refreshed it to create a new valid one.')
+                LogData(logType.INFO,'Found timed out token, refreshed it to create a new valid one.')
                 return true;
             }
             else
-                console.log('Found timed out token, but couldnt refresh for some reason')
+            LogData(logType.ERROR,'Found timed out token, but couldnt refresh for some reason')
         }
         return false;
     } catch (error) {
-        console.log(error)
+        LogData(logType.ERROR,error)
         throw(error);
     }
 }
@@ -75,7 +75,7 @@ const createRequestInit = (tokendata) => {
   
   //function that depends on the IN42_DEV env variable to bypass auth server
   const createRequestURL = (tokendata) => {
-    console.log('CREATE REQUEST URL',tokendata)
+    LogData(logType.INFO,'CREATE REQUEST URL',tokendata)
     if(process.env.IN42_DEV == 'true' ){
       return "https://api.intra.42.fr/oauth/token";
     }
@@ -86,10 +86,10 @@ const createRequestInit = (tokendata) => {
 
     try {
       let tokendata = await retrieveStoredValue('AccessToken')
-      console.log('tokenData before jsonparse= ',tokendata);
+      LogData(logType.INFO,'tokenData before jsonparse= ',tokendata);
       tokendata = JSON.parse(tokendata);
 
-      console.log('tokenData in refresh token= ',tokendata);
+      LogData(logType.INFO,'tokenData in refresh token= ',tokendata);
       if(tokendata === null)
           throw new Error("Couldn't retrieve tokendata from storage in refreshToken()");
   
@@ -98,13 +98,13 @@ const createRequestInit = (tokendata) => {
             const tokenData = await response.json();
             setAccessToken(tokenData);
             setKeyValuePair('AccessToken', tokenData);
-            console.log('updated TOKENDATA = ',tokenData);
+            LogData(logType.INFO,'updated TOKENDATA = ',tokenData);
             return true;
         } else {
             throw new Error('Failed to refresh token');
         }
     } catch (error) {
-        console.log(error);
+        LogData(logType.ERROR,error);
         throw error;
     }
   }

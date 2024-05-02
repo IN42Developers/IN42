@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { IsoDateToWeekDay,formatDateToCustomString } from "../../Utilities/slot_utilities";
 import { GetCurrentDateWithOffset } from "../../Utilities/event_utilities";
+import LogData, { logType } from "../../Utilities/debugging";
 
 interface Props {
   id: number,
@@ -21,7 +22,7 @@ const InDatePicker = ( props: Props ) => {
   
     useEffect(() => {
       // Update the document title using the browser API
-      console.log("Rerendering DatePicker")
+      LogData(logType.INFO,"Rerendering DatePicker")
   });
 
 

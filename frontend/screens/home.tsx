@@ -16,6 +16,7 @@ import Animated, { useAnimatedGestureHandler, useSharedValue, useAnimatedStyle, 
 import EmptyContainerItem from '../components/buttons/EmptyContainerItem';
 
 import { refreshToken } from '../Utilities/TokenStorage';
+import LogData, { logType } from '../Utilities/debugging';
 
 export default function HomeScreen() {
   const {height} = useWindowDimensions();
@@ -57,12 +58,12 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
 
 
   function NavigateToCampusEventScreen() {
-    console.log('trying to navigate to CampusEventScreen')
+    LogData(logType.INFO,'trying to navigate to CampusEventScreen')
     navigation.navigate("CampusEvents");
   }
 
   function NavigateUserSlotScreen() {
-    console.log('trying to navigate to NavigateUserSlotScreen')
+    LogData(logType.INFO,'trying to navigate to NavigateUserSlotScreen')
     navigation.navigate("UserSlotScreen");
   }
 
@@ -74,11 +75,6 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
       
     }
   }
-
-  // if (!loaded) { 
-  //   console.log('loaded failed returned null')
-  //   return null;
-  // }
 
   // const evalData = [{id:1,dummy: true},{id:2,dummy: true},{id:3,dummy: true},{id:4,dummy: true}] //upcomingEvaluations
   const emptyEvaluationText = 'It’s calm here. No upcoming evaluations so far.'

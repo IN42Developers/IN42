@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import useCountdown from '../../Utilities/useCountdown';
+import LogData, { logType } from '../../Utilities/debugging';
 
 export default CountDownTimer = ({totalTimeInSeconds,textStyle=styles }) =>{
 
@@ -24,10 +25,10 @@ export default CountDownTimer = ({totalTimeInSeconds,textStyle=styles }) =>{
 
 
         if(totalSecondsLeft <= 0){
-            console.log('Timer is complete')
+            LogData(logType.INFO,'Timer is complete')
             // onTimerComplete();
         }
-        // console.log(totalSecondsLeft);
+        // LogData(logType.INFO,totalSecondsLeft);
     },[totalSecondsLeft])
 
     const formatTimeValue = (value) => {
