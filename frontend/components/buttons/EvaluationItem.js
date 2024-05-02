@@ -72,7 +72,7 @@ const EvaluationItem = ({data}) => {
   }
 
   return (
-    <TouchableOpacity style={styles.button} onPress={ShowDetails}>
+    <TouchableOpacity style={styles.button} onPress={ShowDetails} disabled={true}>
       <View style={styles.container}>
         <Text style={styles.timerText}>{CampusEvalTime} {EvalStartTimeString}</Text>
         <Text style={styles.titleText}>{evalString}</Text>
