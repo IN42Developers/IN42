@@ -48,6 +48,8 @@ const InDatePicker_IOS = ( props: Props ) => {
           onChange={onChange}
           minimumDate={new Date()}
           maximumDate={GetCurrentDateWithOffset(0,0,13)}
+          accentColor="teal"
+          themeVariant="dark"
         />
       <DateTimePicker
           testID="timePicker"
@@ -57,6 +59,8 @@ const InDatePicker_IOS = ( props: Props ) => {
           onChange={onChange}
           minimumDate={new Date()}
           maximumDate={GetCurrentDateWithOffset(0,0,13)}
+          accentColor="teal"
+          themeVariant="dark"
         />
     </View>
   );
