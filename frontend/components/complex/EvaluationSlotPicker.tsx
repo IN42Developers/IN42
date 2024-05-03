@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, Text, View } from "react-native"
+import { Modal, Platform, StyleSheet, Text, View } from "react-native"
 import { TouchableOpacity } from 'react-native';
 import { useState, useEffect } from "react";
 
@@ -7,10 +7,11 @@ import { GetCurrentDateWithOffset, getCurrentActiveCampus } from "../../Utilitie
 import { GetUserData } from "../../Utilities/UserData";
 import { useStore } from "../../Utilities/store";
 import { TruncateTimeToSlotIncrement } from "../../Utilities/slot_utilities";
-import InDatePicker from "../generic/DatePicker";
+import InDatePicker_Android from "../platformSpecific/android/DatePicker_Android";
 import { Button } from "../buttons/Button";
 import BlurOverlay from "../generic/BlurOverlay";
 import LogData, { logType } from "../../Utilities/debugging";
+import InDatePicker_IOS from "../platformSpecific/ios/DatePicker_IOS";
 
 const START_ID = 0;
 const END_ID = 1;
@@ -112,12 +113,22 @@ export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
           </View>
           <View style={{ marginVertical: 16, marginHorizontal: 24, rowGap: 16 }}>
             <Text style={{ color: 'lightgray', borderColor: 'red', fontSize: 11, fontFamily: 'Inter_400Regular' }}>START</Text>
-            <InDatePicker id={START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker>
-          </View>
+            {
+            Platform.OS == 'android' ?
+              <InDatePicker_Android id={START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker_Android>
+              :
+              <InDatePicker_IOS id={START_ID} date={TruncateTimeToSlotIncrement(30)} onDateChange={onDateChange}></InDatePicker_IOS>
+            }
+            </View>
           <View style={{ marginHorizontal: 24, rowGap: 16 }}>
             <Text style={{ color: 'lightgray', borderColor: 'red', fontSize: 11, fontFamily: 'Inter_400Regular' }}>END</Text>
-            <InDatePicker id={END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker>
-          </View>
+            {
+            Platform.OS == 'android' ?
+              <InDatePicker_Android id={END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker_Android>
+            :
+              <InDatePicker_IOS id={END_ID} date={TruncateTimeToSlotIncrement(30 + 60)} onDateChange={onDateChange}></InDatePicker_IOS>
+            }
+            </View>
           <Text style={{ color: 'lightgray', alignSelf: 'center', borderColor: 'red', paddingVertical: 16 }}>{descriptionText}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', columnGap: 8, backgroundColor: '#212121' }}>
               <Button onPress={PressCancel} variant="dialog">
