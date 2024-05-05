@@ -73,19 +73,19 @@ export default function IndexScreen() {
   };
 
   return (
-    <View className='flex-1 container'>
+    <View style={{ display: 'flex', flex: 1 }}>
       <EntryHeader />
-      <View className='flex-1 mt-8'>
-        <View className='flex-1 flex-col justify-between gap-y-4 mt-12'>
+      <View style={{ flex: 1, marginTop: 36 }}>
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', rowGap: 16, marginTop: 48 }}>
           <View>
-            <Text className='text-white text-center text-3xl font-InterMedium'>Welcome back</Text>
-            <Text className='text-white/50 text-center text-xl p-4 mt-12 font-InterRegular'>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free and with focus on most-advanced mobile experience.</Text>
+            <Text style={{ color: 'white', textAlign: 'center', fontSize: 28, fontFamily: 'Inter_500Medium' }}>Welcome back</Text>
+            <Text style={{ color: 'gray', textAlign: 'center', fontSize: 18, padding: 16, marginTop: 48, fontFamily: 'Inter_400Regular', lineHeight: 28 }}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free, mobile and accessible. Built together with the community.</Text>
           </View>
-          <View className='bottom-0 absolute w-[90%] mb-12 justify-center self-center mx-auto'>
+          <View style={{ bottom: 0, position: 'absolute', width: '90%', marginBottom: 48, justifyContent: 'center', alignSelf: 'center', marginHorizontal: 'auto' }}>
             <Button onPress={handlePress}>
-              <Text className='text-center font-InterBold text-2xl'>Authorize</Text>
+              <Text style={{ textAlign: 'center', fontFamily: 'Inter_700Bold', fontSize: 22 }}>Authorize</Text>
             </Button>
-            <Text className='text-center mt-8 font-InterRegular text-xs text-gray-500'>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
+            <Text style={{ textAlign: 'center', marginTop: 28, fontSize: 12, color: 'gray' }}>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
           </View>
         </View>
       </View>
