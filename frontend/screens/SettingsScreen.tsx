@@ -19,9 +19,9 @@ const SettingsScreen = () => {
     let displayname = 'Long display name';
     let login = 'intra login';
     let profileimage;
-    const req = GetRequestCounter();
-    const reqMax = GetRequestCounterMax();
-    let requestProgress = 0.5;
+    let req = GetRequestCounter();
+    let reqMax = GetRequestCounterMax();
+    let requestProgress;
 
     if (UserData != null) {
         displayname = UserData.displayname;
@@ -59,7 +59,7 @@ const SettingsScreen = () => {
                 </View>
               </View>
               <View style={{ marginTop: 12, width: '80%', display: 'flex' }}>
-                <Progress.Bar progress={requestProgress} color={'white'} unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} height={1} borderRadius={0} />
+                <Progress.Bar progress={requestProgress} color={'white'} unfilledColor={'gray'} borderColor={'gray'} height={1} borderRadius={0} />
               </View>
               <View style={{ display: 'flex', flexDirection: 'row', marginTop: 12 }}>
                 <RequestCounter />
