@@ -7,6 +7,7 @@ import { GetRequestCounter, GetRequestCounterMax, GetUserData } from '../Utiliti
 import CurrenPeriodCounter from '../components/complex/CurrenPeriodCounter';
 import SettingsSection from '../components/generic/SettingsSection';
 import SettingsToggle from '../components/generic/SettingsToggle';
+import * as Progress from 'react-native-progress';
 
 import { LogOutIcon, RefreshCwIcon } from 'lucide-react-native';
 import { Button } from '../components/buttons/Button';
@@ -18,11 +19,15 @@ const SettingsScreen = () => {
     let displayname = 'Long display name';
     let login = 'intra login';
     let profileimage;
+    const req = GetRequestCounter();
+    const reqMax = GetRequestCounterMax();
+    let requestProgress = 0.5;
 
     if (UserData != null) {
         displayname = UserData.displayname;
         login = UserData.login;
         profileimage = {uri: UserData.image.versions.small};
+        requestProgress = req - reqMax;
     } else {
         displayname = 'User';
         login = 'username';
@@ -33,46 +38,48 @@ const SettingsScreen = () => {
     const LogoutUser =  async () => {
       await setKeyValuePair('AccessToken', '');
       setAccessToken(null);
-      LogData(logType.INFO,'Trying to Logout');
+      LogData(logType.INFO,'Logout button pressed!');
       Logout();
   
     } 
 
     return (
-      <View className='flex justify-center container'>
-        <View className='flex justify-between'>
-          <View className='flex-row gap-x-4 ml-8 mt-10'>
-            <RefreshCwIcon stroke="gray" />
-            <View className='flex flex-col gap-y-2'>
-              <View className='flex flex-row justify-between'>
-                <Text className='text-base font-InterSemibold tracking-wider text-gray-200'>Interaction Rate Limit</Text>
-                <View className='flex mr-[64] '>
+      <View style={{ display: 'flex', flex: 1, marginTop: 32 }}>
+        <View style={{ justifyContent: 'space-between', rowGap: 24, }}>
+          <View style={{ flexDirection: 'row' }}>
+            <RefreshCwIcon stroke="gray" style={{ marginHorizontal: 16 }} />
+            <View style={{ flexDirection: 'column' }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ display: 'flex' }}>
+                  <Text style={{ color: 'lightgray', fontSize: 14, fontFamily: 'Inter_600SemiBold', letterSpacing: 1.2 }}>Interaction Rate Limit</Text>
+                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular', marginTop: 8, marginRight: 108, }}>For API sustainability IN42 will process your API requests to Intra with an hour-updated interaction limit.</Text>
+                </View>
+                <View style={{ position: 'absolute', right: 64 }}>
                   <CurrenPeriodCounter />
                 </View>
               </View>
-              <Text className='text-gray-400 font-InterRegular mr-32'>For API sustainability IN42 will process your API requests to Intra with an hour-updated interaction limit.</Text>
-              <View className='mt-4 h-0.5 w-3/6 bg-slate-400 z-0'>
-                <View className='w-3/4 h-0.5 bg-white' />
+              <View style={{ marginTop: 12, width: '80%', display: 'flex' }}>
+                <Progress.Bar progress={requestProgress} color={'white'} unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} height={1} borderRadius={0} />
               </View>
-              <View className='flex flex-row mt-3'>
+              <View style={{ display: 'flex', flexDirection: 'row', marginTop: 12 }}>
                 <RequestCounter />
               </View>
             </View>
           </View>
-          <View className='ml-0 mt-8 bg-gray-600 h-0.5' />
-          <View className='flex flex-row items-center mt-12 justify-center gap-x-16'>
-            <View className='flex border-gray-500 border w-5/6 p-8 bottom-0 rounded-xl'>
-              <View className='flex flex-row gap-x-8'>
+          <View style={{ backgroundColor: 'gray', padding: 0.5 }}/>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', rowGap: 24 }}>
+            <View style={{ borderColor: 'gray', borderWidth: 1, width: '85%', padding: 32, bottom: 0, borderRadius: 16 }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Image
-                  source={ profileimage}
-                  className='w-14 h-14 bg-slate-300 rounded-full'
+                  source={ profileimage }
+                  style={{ width: 52, height: 52, backgroundColor: 'zinc', borderRadius: 2000 }}
                 />
-                <View className='flex flex-col justify-center'>
-                  <Text className='text-white font-InterBold text-lg'>{displayname}</Text>
-                  <Text className='text-gray-300 font-InterMedium text-sm mb-4'>{login}</Text>
+                <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                  <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', fontSize: 16 }}>{displayname}</Text>
+                  <Text style={{ color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24 }}>{login}</Text>
                   <Button onPress={LogoutUser} variant='link'>
                     <LogOutIcon stroke='white' size="18" />
-                    <Text className='text-white font-InterMedium text-lg'>Log out</Text>
+                    <Text style={{ color: 'white', fontFamily: 'Inter_500Medium', fontSize: 16 }}>Log out</Text>
                   </Button>
                 </View>
               </View>
