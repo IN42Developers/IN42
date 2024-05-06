@@ -1,28 +1,60 @@
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface ButtonProps {
   onPress: () => void;
   variant?: 'primary' | 'secondary' | 'link' | 'dialog' | 'dialogWithBorder';
   children: React.ReactNode;
+  style?: ViewStyle; // Hier fügen wir einen Typ für den Style hinzu
 }
 
-export const Button: React.FC<ButtonProps> = ({ onPress, variant, children }) => {
+export const Button: React.FC<ButtonProps> = ({ onPress, variant, children, style }) => {
 
-  const defaultButtonStyle = 'bg-gray-300 p-4 rounded-full active:bg-gray-400';
+  const defaultButtonStyle: ViewStyle = {
+    backgroundColor: '#CCCCCC',
+    padding: 16,
+    borderRadius: 999, // Ein sehr hoher Wert, um sicherzustellen, dass der Button rund aussieht
+  };
 
-  const variants = {
-    primary: 'bg-gray-300 rounded-full p-4 active:bg-gray-400',
-    secondary: 'bg-blue-500 rounded-lg p-4 active:bg-blue-600',
-    link: 'text-white bg-gray-800 p-2 rounded-sm flex-row gap-x-2 items-center',
-    dialog: 'flex bg-[#212121] px-4 py-5 w-44',
+  const variants: Record<string, ViewStyle> = {
+    primary: {
+      backgroundColor: '#CCCCCC',
+      padding: 16,
+      borderRadius: 999,
+    },
+    secondary: {
+      backgroundColor: '#0055FF',
+      padding: 16,
+      borderRadius: 16,
+    },
+    link: {
+      backgroundColor: '#008891',
+      paddingVertical: 18,
+      borderRadius: 8,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    dialog: {
+      backgroundColor: '#212121',
+      paddingVertical: 20,
+      paddingHorizontal: 16,
+      width: 110,
+    },
   };
 
   const variantStyles = variants[variant] || defaultButtonStyle;
 
   return (
-    <Pressable onPress={onPress} className={`${variantStyles}`}>
-      {children}
-    </Pressable>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={[styles.button, variantStyles, style]}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', columnGap: 8 }}>{children}</View>
+    </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

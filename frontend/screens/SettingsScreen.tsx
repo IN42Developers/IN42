@@ -66,24 +66,27 @@ const SettingsScreen = () => {
               </View>
             </View>
           </View>
-          <View style={{ backgroundColor: 'gray', padding: 0.5 }}/>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', rowGap: 24 }}>
-            <View style={{ borderColor: 'gray', borderWidth: 1, width: '85%', padding: 32, bottom: 0, borderRadius: 16 }}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Image
-                  source={ profileimage }
-                  style={{ width: 52, height: 52, backgroundColor: 'zinc', borderRadius: 2000 }}
-                />
-                <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-                  <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', fontSize: 16 }}>{displayname}</Text>
-                  <Text style={{ color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24 }}>{login}</Text>
-                  <Button onPress={LogoutUser} variant='link'>
-                    <LogOutIcon stroke='white' size="18" />
-                    <Text style={{ color: 'white', fontFamily: 'Inter_500Medium', fontSize: 16 }}>Log out</Text>
-                  </Button>
+          <View style={{ backgroundColor: 'gray', padding: 0.5 }} />
+          <View style={{ alignItems: 'center', alignSelf: 'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', padding: 32 }}>
+              <View style={{ borderColor: '#008891', borderWidth: 1, padding: 32, borderRadius: 16 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <Image
+                    source={ profileimage }
+                    style={{ width: 52, height: 52, backgroundColor: 'zinc', borderRadius: 2000, marginRight: 24 }}
+                  />
+                  <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                    <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', fontSize: 16 }}>{displayname}</Text>
+                    <Text style={{ color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24, marginTop: 2 }}>{login}</Text>
+                    <Button onPress={LogoutUser} variant='link'>
+                      <LogOutIcon stroke='#1E1E1E' size="20" />
+                      <Text style={{ color: '#1E1E1E', fontSize: 16, fontFamily: 'Inter_900Black' }}>Log out</Text>
+                    </Button>
+                  </View>
                 </View>
               </View>
             </View>
+            <Text style={{ color: 'gray' }}>IN42 v0.3.0</Text>
           </View>
         </View>
       </View>
