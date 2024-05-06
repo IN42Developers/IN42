@@ -6,7 +6,7 @@ interface ButtonProps {
   onPress: () => void;
   variant?: 'primary' | 'secondary' | 'link' | 'dialog' | 'dialogWithBorder';
   children: React.ReactNode;
-  style?: ViewStyle; // Hier fügen wir einen Typ für den Style hinzu
+  style?: ViewStyle;
 }
 
 export const Button: React.FC<ButtonProps> = ({ onPress, variant, children, style }) => {
@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({ onPress, variant, children, styl
   const defaultButtonStyle: ViewStyle = {
     backgroundColor: '#CCCCCC',
     padding: 16,
-    borderRadius: 999, // Ein sehr hoher Wert, um sicherzustellen, dass der Button rund aussieht
+    borderRadius: 999,
   };
 
   const variants: Record<string, ViewStyle> = {
