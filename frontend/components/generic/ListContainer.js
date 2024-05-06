@@ -39,8 +39,8 @@ const ListContainer = ({ title='Title', onDetailPressed=null ,detailIcon='plus',
 export default ListContainer;
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
+    container: {
+        flex: 1.3,
         // backgroundColor: 'grey',
         // paddingVertical: 5,
         paddingHorizontal: 16,
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: 5,
         paddingBottom: 10,
+        margin: 0
         // backgroundColor: '#202020'
     },
     headerText: {

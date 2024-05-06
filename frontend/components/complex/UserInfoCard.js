@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, ImageBackground, StyleSheet } from 'react-native'
+import { View, Image, Text, ImageBackground, Platform } from 'react-native'
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CoinsIcon } from 'lucide-react-native';
@@ -36,18 +36,18 @@ export default function UserInfoCard() {
   }
 
   return (
-    <View style={{ display: 'flex' }}>
-      <ImageBackground source={require('../../assets/images/userInfoCard.png')} style={{ display: 'flex', paddingBottom: 12, paddingHorizontal: 32, backgroundColor: 'cyan' }}>
-        <SafeAreaView style={styles.safeArea} >
+    <View style={{ flex: 1 }}>
+      <ImageBackground source={require('../../assets/images/userInfoCard.png')} style={{ display: 'flex', paddingHorizontal: 32, backgroundColor: 'cyan' }}>
+        <SafeAreaView style={{ marginBottom: 16 }}>
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-            <View style={{ flexDirection: 'column', columnGap: 1, marginTop: 14 }}>
+            <View style={{ flexDirection: 'column', columnGap: 1, marginTop: 26 }}>
               <Text style={{ color: 'white', fontFamily: 'Inter_700Bold' }}>{displayname}</Text>
               <Text style={{ color: 'white', fontFamily: 'Inter_400Regular' }}>{login}</Text>
             </View>
             <View>
               <Image
                 source={profileimage}
-                style={{ width: 56, height: 56, backgroundColor: 'rgb(203 213 225', borderRadius: 2000 }}
+                style={{ width: 56, height: 56, backgroundColor: 'rgb(203 213 225', borderRadius: 2000, marginTop: 14 }}
               />
             </View>
           </View>
@@ -74,20 +74,13 @@ export default function UserInfoCard() {
                   <Text style={{ color: 'white', fontFamily: 'Inter_500Medium' }}>{ "Level " + curLevel }</Text>
                   <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular' }}>{"Level "+ nextLevel}</Text>
                 </View>
-                  <Progress.Bar progress={levelProgress} width={165} display='flex' color={'white'} unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} />
-              </View>
+                <View style={{ display: 'flex', width: '100%' }}>
+                  <Progress.Bar progress={levelProgress} width={164} height={4} color={'white'} unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} />
+                </View>
+            </View>
             </View>
           </SafeAreaView>
         </ImageBackground>
       </View>
     )
 };
-
-const styles = StyleSheet.create({
-  safeArea: {
-    // marginTop: -25,
-    // marginBottom: -45,
-    // borderColor: 'red',
-    // borderWidth: 1,
-  }
-})

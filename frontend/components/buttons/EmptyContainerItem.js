@@ -15,8 +15,6 @@ const EmptyContainerItem = ({text,icon}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: 2,
     paddingHorizontal: 30,
     overflow: 'hidden',
     borderRadius: 10,

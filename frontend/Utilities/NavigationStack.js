@@ -106,7 +106,7 @@ export const AppStack = () => {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#202020',
-          borderTopColor: '#595959'
+          borderTopColor: '#202020',
         },
         tabBarLabelStyle: {
           fontFamily: 'Inter_500Medium',
