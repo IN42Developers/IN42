@@ -4,18 +4,18 @@ export default function useCountdown() {
     const [secondsLeft, setSecondsLeft] = useState(0);
 
     useEffect(() =>{
-        if(secondsLeft <= 0) 
-            return;
-
-        const timeout = setTimeout(() =>{
-            setSecondsLeft(secondsLeft-1);
-        },1000);
+        const timeout = setTimeout(() => {
+            if (secondsLeft > 0) {
+                setSecondsLeft(secondsLeft - 1);
+            }
+        }, 1000);
 
         return () => clearTimeout(timeout);
     },[secondsLeft])
 
     function start(seconds){
-        setSecondsLeft(seconds);
+        const nonNegativeSeconds = Math.max(0, seconds);
+        setSecondsLeft(nonNegativeSeconds);
     }
     
     return [secondsLeft, start];

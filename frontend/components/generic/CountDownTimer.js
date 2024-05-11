@@ -26,7 +26,8 @@ export default CountDownTimer = ({totalTimeInSeconds,textStyle=styles }) =>{
 
         if(totalSecondsLeft <= 0){
             LogData(logType.INFO,'Timer is complete')
-            // onTimerComplete();
+            //in the future this should not be hard coded
+            StartTimer(60*60 -1);
         }
         // LogData(logType.INFO,totalSecondsLeft);
     },[totalSecondsLeft])
@@ -35,7 +36,7 @@ export default CountDownTimer = ({totalTimeInSeconds,textStyle=styles }) =>{
         return value < 10 ? `0${value}` : `${value}`;
     };
 
-    return( 
+    return(
         <Text style={textStyle.text}>{minutesLeft}:{secondLeft}</Text>
     )
 }
