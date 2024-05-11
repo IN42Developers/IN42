@@ -10,7 +10,6 @@ import { isTokenStillValid} from './Utilities/TokenStorage';
 import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/NavigationStack';
 import { AuthContext } from './Context';
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
-import "./global.css"
 import LogData, { logType } from './Utilities/debugging';
 
 const prefix = Linking.createURL('/');

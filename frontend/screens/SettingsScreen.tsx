@@ -73,7 +73,7 @@ const SettingsScreen = () => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                   <Image
                     source={ profileimage }
-                    style={{ width: 52, height: 52, backgroundColor: 'zinc', borderRadius: 2000, marginRight: 24 }}
+                    style={{ width: 52, height: 52, backgroundColor: 'gray', borderRadius: 2000, marginRight: 24 }}
                   />
                   <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
                     <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', fontSize: 16 }}>{displayname}</Text>

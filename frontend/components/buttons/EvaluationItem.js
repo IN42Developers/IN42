@@ -37,7 +37,7 @@ const EvaluationItem = ({data}) => {
     else{
       let teamName = data.team.name.split("'")[0];
       SetEvalString(`You will evaluate ${teamName} on ${getProjectNameFromID(data.team.project_id)}`)
-    }
+    } 
 
   },[])
 
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     height: 65,
   },
   container: {
-    // flexDirection: 'row',
+    flex: 1,
     backgroundColor: '#1C535D',
     alignItems: 'flex-start',
     justifyContent: 'center',
