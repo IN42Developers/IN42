@@ -8,7 +8,7 @@
       "developmentClient": true,
       "distribution": "internal"
     },
-// building apks and simulated ios builds
+  // building apks and simulated ios builds
     "preview": {
       "env": {
         "EXPO_PUBLIC_CLIENT_ID": "u-s4t2ud-0aaac4e367834ea3432dea29ce9e054e7adad56896f71983cd61e0ea025e429c",

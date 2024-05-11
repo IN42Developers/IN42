@@ -3,7 +3,7 @@ name: Build and Upload to IOS Store
 on:
   push:
     branches: 
-      - "releases/**" 
+      - "releases/**"
 
 jobs:
   build:

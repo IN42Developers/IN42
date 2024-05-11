@@ -3,7 +3,7 @@ import { StatusBar, Platform } from 'react-native';
 
 import { DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import * as Linking from "expo-linking";
-import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
+import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold, Inter_900Black } from '@expo-google-fonts/inter';
 import * as NavigationBar from 'expo-navigation-bar';
 
 import { isTokenStillValid} from './Utilities/TokenStorage';
@@ -89,7 +89,8 @@ export default function App() {
     Inter_500Medium,
     Inter_600SemiBold,
     Inter_700Bold,
-    Inter_800ExtraBold
+    Inter_800ExtraBold,
+    Inter_900Black
   });
 
   if (!fontsLoaded) {

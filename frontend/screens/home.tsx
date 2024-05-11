@@ -81,10 +81,10 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
   const emptyEventText = 'You are not subscribed to any events at the moment. You can use the + to add one.'
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <Animated.View style={[styles.container, animatedContainerStyle]}>
+    <GestureHandlerRootView style={{ display: 'flex', flex: 1 }}>
+      <Animated.View style={[{flex: 1}, animatedContainerStyle]}>
         <UserInfoCard />
-        <ListContainer title={'Evaluations'}  ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>
+        <ListContainer title={'Evaluations'} ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>
         <ListContainer title={'Events'} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={emptyEventText} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen}/>  
         <PanGestureHandler onGestureEvent={unlockGestureHandler}>
           <Animated.View style={styles.area} />
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     maxHeight: '30%',
     flex: 0,
     paddingHorizontal: 16,
+    paddingTop: 18,
     // borderColor: 'red',
     // borderWidth: 1,
   },

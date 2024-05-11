@@ -5,8 +5,8 @@ import Logo from '../svg/logo'
 
 const EntryHeader = () => {
   return (
-    <View className='flex items-center justify-center'>
-      <View className='flex-col items-center absolute z-10'>
+    <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flexDirection: 'column', alignItems: 'center', position: 'absolute', zIndex: 10 }}>
         <Logo />
       </View>
       <Image
