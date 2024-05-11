@@ -15,14 +15,11 @@ const RequestCounter = ({textStyle=styles}) =>{
             LogData(logType.INFO,"Request amount changed, rerendering")
             SetCurrentRequests(req)
         }
-        LogData(logType.INFO,"RequestCounter useFocusEffect")
+        LogData(logType.INFO,"RequestCounter useFocusEffect") 
 
     })
     return (
-        <View className='flex flex-row'>
-            <Text className='text-white font-InterBold'>{GetRequestCounter()}/</Text>
-            <Text className='text-gray-500 font-InterBold'>{GetRequestCounterMax()}</Text>
-        </View>
+        <Text style={textStyle.text}>{GetRequestCounter()}/{GetRequestCounterMax()}</Text>
     )
 }
 
