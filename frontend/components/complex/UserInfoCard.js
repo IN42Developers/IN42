@@ -47,7 +47,7 @@ export default function UserInfoCard() {
             <View>
               <Image
                 source={profileimage}
-                style={{ width: 56, height: 56, backgroundColor: 'rgb(203 213 225', borderRadius: 2000, marginTop: 14 }}
+                style={{ width: 56, height: 56, backgroundColor: 'rgb(203, 213, 225)', borderRadius: 2000, marginTop: 14 }}
               />
             </View>
           </View>
