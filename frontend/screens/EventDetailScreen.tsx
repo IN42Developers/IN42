@@ -73,8 +73,10 @@ export default function EventDetailScreen() {
          </View>
 
             <ScrollView style={styles.detailsView}>
-            <Text className="text-white text-2xl font-InterSemibold mb-2">About this event</Text>
-               <Text className="text-gray-400 text-base font-InterRegular">{details}</Text>
+            <Text style={styles.aboutHeader}>About this event</Text> 
+            {/* className="text-white text-2xl font-InterSemibold mb-2" */}
+               <Text style={styles.DetailText}>{details}</Text>
+               {/* className="text-gray-400 text-base font-InterRegular" */}
             </ScrollView>
 
          <View style={styles.bottomView}>
@@ -91,7 +93,7 @@ export default function EventDetailScreen() {
                 nextEvent &&
                 <TouchableOpacity style={styles.nextEventButton} onPress={NextEvent} >
                     <ChevronRightIcon stroke='#fff' size='32' />
-                </TouchableOpacity>
+                </TouchableOpacity> 
             }
          </View>
       </SafeAreaView>
@@ -141,9 +143,17 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 30,
     },
+    aboutHeader:{
+        flex: 1,
+        color: 'white',
+        fontSize: 22,
+        paddingVertical: 3,
+        // alignContent: 'center',
+        // justifyContent: 'center'
+    },
     DetailText:{
         flex: 1,
-        color: '#9F9F9F',
+        color: '#989FAA',
         fontSize: 16,
         // alignContent: 'center',
         // justifyContent: 'center'
@@ -159,7 +169,8 @@ const styles = StyleSheet.create({
     detailsView: {
         flex: 1,
         marginTop: 12,
-        padding: 8,  
+        paddingBottom: 8,
+        paddingHorizontal: 8, 
         alignContent: 'center',
         // backgroundColor: '#1F1F1F',
         // alignItems: 'stretch',

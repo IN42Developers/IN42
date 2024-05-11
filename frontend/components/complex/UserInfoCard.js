@@ -36,7 +36,7 @@ export default function UserInfoCard() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 0 }}>
       <ImageBackground source={require('../../assets/images/userInfoCard.png')} style={{ display: 'flex', paddingHorizontal: 32, backgroundColor: 'cyan' }}>
         <SafeAreaView style={{ marginBottom: 16 }}>
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>

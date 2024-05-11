@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 interface ButtonProps {
   onPress: () => void;
