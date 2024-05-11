@@ -35,8 +35,8 @@ export default CountDownTimer = ({totalTimeInSeconds,textStyle=styles }) =>{
         return value < 10 ? `0${value}` : `${value}`;
     };
 
-    return(
-        <Text className='text-gray-300 font-InterRegular'>{minutesLeft}:{secondLeft}</Text>
+    return( 
+        <Text style={textStyle.text}>{minutesLeft}:{secondLeft}</Text>
     )
 }
 
