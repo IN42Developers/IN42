@@ -33,16 +33,20 @@ export const getUserCursus = () => {
 //returns an object with a timeZone field set to the Campus TimeZone o0f the user
 export const getCampusTimeZone = () => {
 
-    if(UserData == null)
-        return null;
+    if(UserData == null){
+        LogData(logType.ERROR,"Couldn't find Userdata to determine timezone, gracefully setting timezone to Asia/Tokyo")
+        return {timeZone: "Asia/Tokyo"}
+    }
 
     //check for the current active campus_users, and return the timezone found in "campus"
     for (let i = 0; i < UserData.campus_users.length; i++) {
-        if(UserData.campus_users[i].is_primary == true)
+        if(UserData.campus_users[i].is_primary == true){
             return {timeZone: UserData.campus[i].time_zone};      
+        }
     }
 
-    return null;
+    LogData(logType.ERROR,"Couldn't find determine timezone, gracefully setting timezone to Asia/Tokyo")
+    return {timeZone: "Asia/Tokyo"};
 }
 
 export const IncrementRequestCounter = async (value=1) => {

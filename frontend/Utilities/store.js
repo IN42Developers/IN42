@@ -7,6 +7,7 @@ import { StallTimeBetweenApiCalls } from './api_utilities';
 import { SetUserData } from './UserData';
 import LogData, { logType } from '../Utilities/debugging';
 
+
 const store = (set) =>({
     events: [], //all events from today to the future /up to 100 entries
     initEvents: async () =>{
@@ -50,9 +51,13 @@ const store = (set) =>({
     },
     evaluations: [], //upcoming evaluations as evaluator or evalueee
     initEvaluations: async () =>{
-      let string = '?filter[future]=true'
-      const SlotData = await GetDataFromEndPoint(`/v2/me/scale_teams${string}`);
-      set({evaluations: SlotData});
+      try {
+        let string = '?filter[future]=true' 
+        const SlotData = await GetDataFromEndPoint(`/v2/me/scale_teams${string}`);
+        set({evaluations: SlotData});
+      } catch (error) {
+        LogData(logType.ERROR, error)
+      }
     },
     Slots: [], //user slots to get booked by other people for evaluations as array of arrays(chunks of slots)
     initSlots: async() => {
