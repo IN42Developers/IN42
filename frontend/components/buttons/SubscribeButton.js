@@ -7,7 +7,11 @@ import { ToggleEventSubscription } from "../../Utilities/event_utilities";
 import { CalendarPlusIcon } from "lucide-react-native";
 import LogData, { logType } from "../../Utilities/debugging";
 
-export default function SubscribeButton ({eventID, initialState=true,scale=1, textData={true: 'SUBSCRIBE', false: 'UNSUBSCRIBE'} , style=styles}) {
+export default function SubscribeButton ({eventID, initialState=true,scale=1, textData={true: 'SUBSCRIBE', false: 'UNSUBSCRIBE'},isfull=false , style=styles}) {
+
+    if(isfull)
+        return null;
+
     const [toggle,SetToggle] = useState(initialState);
 
     const updateEventSubscriptionStatus = useStore((store) => store.updateEventSubscriptionStatus);

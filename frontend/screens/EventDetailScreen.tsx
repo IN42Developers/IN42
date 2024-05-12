@@ -15,13 +15,16 @@ import LogData, { logType } from "../Utilities/debugging";
 
 export default function EventDetailScreen() {
 
-  const route = useRoute();
-  const eventData = route.params;
-  const navigation = useNavigation();
     
-  const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.eventData.id)); //needs cleanup
-  const GetNextEvent = useStore((store)=> store.GetNextEvent)
-
+    const route = useRoute();
+    const eventData = route.params;
+    const navigation = useNavigation();
+    
+    const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.eventData.id)); //needs cleanup
+    const GetNextEvent = useStore((store)=> store.GetNextEvent)
+    
+    LogData(logType.WARNING,currEvent)
+    LogData(logType.WARNING,eventData)
     if(currEvent === null)
         return;
     const title = currEvent.name;
@@ -34,6 +37,9 @@ export default function EventDetailScreen() {
     const date = tempDate.toLocaleDateString('en-US',getCampusTimeZone()) +' '+ tempDate.toLocaleTimeString('en-US',getCampusTimeZone());
 
     const details = currEvent.description;
+    let isEventFull = false;
+    if(currEvent.max_people != null)
+        isEventFull = currEvent.nbr_subscribers == currEvent.max_people ? true : false;
 
     const prevEvent = GetNextEvent(currEvent.id,-1);
     const nextEvent = GetNextEvent(currEvent.id,1);
@@ -68,8 +74,8 @@ export default function EventDetailScreen() {
             </View>
             <View style={styles.eventDisplay}>
             <AttendenceCounter currentCount={currEvent.nbr_subscribers} maxCount={currEvent.max_people} scale={1}></AttendenceCounter>
-               <SubscribeButton eventID={currEvent.id} scale={.9} initialState={currEvent.subscribed}></SubscribeButton>
-            </View>
+               <SubscribeButton eventID={currEvent.id} scale={.9} initialState={currEvent.subscribed} isfull={isEventFull}></SubscribeButton>
+            </View> 
          </View>
 
             <ScrollView style={styles.detailsView}>
