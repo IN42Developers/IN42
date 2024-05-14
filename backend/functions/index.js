@@ -100,3 +100,10 @@ exports.refresh = onRequest( async (request, response) => {
     }
   });
 });
+
+
+exports.crashData = onRequest((request, response) => {
+  // console.log(request)
+  logger.warn("JUST BEFORE PRINTING BODY")
+  logger.warn(request.body)
+})
