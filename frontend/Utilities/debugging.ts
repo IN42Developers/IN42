@@ -22,3 +22,42 @@ export default function LogData(logtype: logType,...args):void {
     }
     console.log(logMessage,...args)
 }
+
+export const sendJSCrashData =(error: Error,isFatal: boolean) => {
+    console.log("EXCEPTION FUNCTIOn",error,isFatal);
+  
+    const string = "WOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWO"
+    let crashData = {
+      date: new Date().toDateString(),
+      errorMessage: JSON.stringify(error.message),
+      errorDump: JSON.stringify(error.stack),
+      fatality: isFatal,
+      random: string}
+  
+    
+    const tokenRequest = {
+      method: 'POST',
+      body: JSON.stringify(crashData),
+    };
+  
+    console.log("CrashData =",tokenRequest);
+    fetch("https://crashdata-7y7fitjvjq-uc.a.run.app",tokenRequest);
+  }
+
+export const sendNativeCrashData = (exceptionMsg: string) => {
+  
+    const string = "INCREDIBLEKILLME1231312312"
+    let crashData = {
+      date: new Date().toDateString(),
+      errorMessage: exceptionMsg,
+      random: string}
+  
+    
+    const tokenRequest = {
+      method: 'POST',
+      body: JSON.stringify(crashData),
+    };
+  
+    console.log("CrashData =",tokenRequest);
+    fetch("https://crashdata-7y7fitjvjq-uc.a.run.app",tokenRequest);
+  }

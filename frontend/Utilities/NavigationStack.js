@@ -189,7 +189,7 @@ export const AppStack = () => {
           )
         }}
       />
-      {process.env.IN42_DEV == 'true' &&
+      {(process.env.IN42_DEV == 'true' || process.env.EXPO_PUBLIC_LOGGING == 'true') &&
       <Tab.Screen
         name="Testing"
         component={TestingScreen3}

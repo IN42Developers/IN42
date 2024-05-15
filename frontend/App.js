@@ -10,32 +10,15 @@ import { isTokenStillValid} from './Utilities/TokenStorage';
 import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/NavigationStack';
 import { AuthContext } from './Context';
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
-import LogData, { logType } from './Utilities/debugging';
+import LogData, { logType, sendJSCrashData, sendNativeCrashData } from './Utilities/debugging';
 
 import {setJSExceptionHandler,setNativeExceptionHandler} from 'react-native-exception-handler'
 
 const prefix = Linking.createURL('/');
 
-//
-
-setJSExceptionHandler( (error,isFatal) => {
-  console.log("EXCEPTION FUNCTIOn",error,isFatal);
-
-  const string = "WOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWO"
-  let crashData = {
-    errorDump: JSON.stringify(error),
-    fatality: isFatal,
-    random: string}
-
-  
-  const tokenRequest = {
-    method: 'POST',
-    body: JSON.stringify(crashData),
-  };
-
-  fetch("https://crashdata-7y7fitjvjq-uc.a.run.app",tokenRequest);
-},true)
-
+//handle crashes for JS and Native
+setJSExceptionHandler( sendJSCrashData);
+setNativeExceptionHandler(sendNativeCrashData);
 
 export const PostDataToEndPoint = async (endpoint, params ) => {
 

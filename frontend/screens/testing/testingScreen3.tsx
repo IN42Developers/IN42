@@ -147,6 +147,22 @@ export default function TestingScreen3() {
         }
     }
     
+    const CrashApp =  () => {
+        this.setState(state => ({
+            number: state.data.number +1,
+        }))
+    }
+
+    const causeException =  () => {
+        fetch('weweasdas')
+        .then((res)=>res.json())
+        .then(res =>{
+            alert(res);
+        })
+        .catch(error => {
+            console.log('an error has occured ->',error);
+        })
+    }
 
     return (
         <SafeAreaView style={{flex: 1,paddingTop: 30}}>
@@ -159,6 +175,8 @@ export default function TestingScreen3() {
                 <Button onPress={projects}><Text>projects</Text></Button>
                 <Button onPress={exams}><Text>exams</Text></Button>
                 <Button onPress={random}><Text>random</Text></Button>
+                <Button onPress={CrashApp} variant={'secondary'}><Text>Crash App</Text></Button>
+                <Button onPress={causeException} variant={'secondary'}><Text>causeException</Text></Button>
             </View>
         </SafeAreaView>
     )
