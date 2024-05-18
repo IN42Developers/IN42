@@ -103,8 +103,14 @@ exports.refresh = onRequest( async (request, response) => {
 
 // ------------ INFO ON WHAT IS SENT -------------------
 // export interface CrashUserData {
-//   userdata: string,
-
+//   id: number,
+//   login: string,
+//   usual_full_name: string,
+//   pool_month: string,
+//   pool_year: string,
+//   primary_cursus_id: number,
+//   primary_campus_id: number,
+//   // add more shit as needed over time
 // }
 
 // export interface CrashData {
@@ -194,12 +200,14 @@ exports.crashData = onRequest(async (request, response) => {
   if(request.method != 'POST')
     response.status('405').send("WRONG Method Boi")
 
-  const crashData = request.body;
+  const crashData = JSON.parse(request.body);
   logger.warn(request.body);
-  let crashDataDescription = `${crashData.UserData.userdata}\n` + 
-  `fatality = ${crashData.fatality}\n` +
+  let crashDataDescription = `fatality = ${crashData.fatality}\n` +
   `platform = ${crashData.platform}\n\n`
   
+  crashDataDescription += `${crashData.UserData}\n\n`
+
+
   crashDataDescription += crashData.errorDump;
   // console.log(request)
 

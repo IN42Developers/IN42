@@ -1,8 +1,14 @@
 import { Platform } from "react-native";
 
 export interface CrashUserData {
-  userdata: string,
-
+  id: number,
+  login: string,
+  usual_full_name: string,
+  pool_month: string,
+  pool_year: string,
+  primary_cursus_id: number,
+  primary_campus_id: number,
+  // add more shit as needed over time
 }
 
 export interface CrashData {
@@ -12,7 +18,7 @@ export interface CrashData {
   fatality: boolean,
   errorMessage: string,
   errorDump?: string,
-  UserData: CrashUserData
+  UserData: CrashUserData | null
 }
 
 export enum logType {
@@ -42,7 +48,7 @@ export default function LogData(logtype: logType,...args):void {
 
 
 
-export const sendJSCrashData =(error: Error,isFatal: boolean) => {
+export const sendJSCrashData =(error: Error,isFatal: boolean,userData) => {
 
     if(process.env.IN_42 == 'true')
       return;
@@ -56,10 +62,7 @@ export const sendJSCrashData =(error: Error,isFatal: boolean) => {
       platform: platform,
       type: "JsError",
       fatality: isFatal,
-      UserData: {
-        userdata: 'jisserst'
-      }
-
+      UserData: userData
       }
   
     
@@ -72,10 +75,11 @@ export const sendJSCrashData =(error: Error,isFatal: boolean) => {
     fetch("https://crashdata-7y7fitjvjq-uc.a.run.app",tokenRequest);
   }
 
-export const sendNativeCrashData = (exceptionMsg: string) => {
+export const sendNativeCrashData = (exceptionMsg: string, userData) => {
   
   if(process.env.IN_42 == 'true')
     return;
+
 
   const platform:string = Platform.OS == 'android' ? 'android' : 'ios';
 
@@ -85,10 +89,7 @@ export const sendNativeCrashData = (exceptionMsg: string) => {
     platform: platform,
     type: "NativeError",
     fatality: true,
-    UserData: {
-      userdata: 'jisserst'
-    }
-
+    UserData: userData,
     }
     
     const tokenRequest = {

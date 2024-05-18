@@ -163,6 +163,9 @@ export default function TestingScreen3() {
             console.log('an error has occured ->',error);
         })
     }
+    const divideByZero =  () => {
+    let num = 10 / 0;
+}
 
     return (
         <SafeAreaView style={{flex: 1,paddingTop: 30}}>
@@ -177,6 +180,7 @@ export default function TestingScreen3() {
                 <Button onPress={random}><Text>random</Text></Button>
                 <Button onPress={CrashApp} variant={'secondary'}><Text>Crash App</Text></Button>
                 <Button onPress={causeException} variant={'secondary'}><Text>causeException</Text></Button>
+                <Button onPress={divideByZero} variant={'secondary'}><Text>divideByZero</Text></Button>
             </View>
         </SafeAreaView>
     )

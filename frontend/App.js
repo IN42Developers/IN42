@@ -9,7 +9,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 import { isTokenStillValid} from './Utilities/TokenStorage';
 import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/NavigationStack';
 import { AuthContext } from './Context';
-import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
+import { LoadCounterPeriod,AssertUserCanRequestData, GetUserData } from './Utilities/UserData';
 import LogData, { logType, sendJSCrashData, sendNativeCrashData } from './Utilities/debugging';
 
 import {setJSExceptionHandler,setNativeExceptionHandler} from 'react-native-exception-handler'
@@ -18,11 +18,19 @@ import {setJSExceptionHandler,setNativeExceptionHandler} from 'react-native-exce
 const prefix = Linking.createURL('/');
 
 //handle crashes for JS and Native
-setJSExceptionHandler((error ,isFatal) => {sendJSCrashData(error,isFatal)},true);
+setJSExceptionHandler((error ,isFatal) => {
+
+  let userData = GetUserData();
+
+  sendJSCrashData(error,isFatal,userData)
+},true);
 
 //this could break your setup if you don't have it defined
 if(!process.env.IN42_DEV)
-  setNativeExceptionHandler((msg) =>{sendNativeCrashData(msg)});
+  setNativeExceptionHandler((msg) =>{
+    let userData = GetUserData();
+    sendNativeCrashData(msg,userData)
+});
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
