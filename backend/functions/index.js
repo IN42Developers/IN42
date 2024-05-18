@@ -102,8 +102,41 @@ exports.refresh = onRequest( async (request, response) => {
 });
 
 
-exports.crashData = onRequest((request, response) => {
+exports.crashData = onRequest(async (request, response) => {
   // console.log(request)
-  logger.warn("JUST BEFORE PRINTING BODY")
-  logger.warn(request.body)
+
+  // logger.warn("JUST BEFORE PRINTING BODY")
+  // logger.warn(request.body)
+
+  //setup 
+  const trelloApiKey = "8d9df4659c5da1046e33b9939ae06a4d";
+  const trelloToken = defineString('TRELLO_TOKEN');
+  const trelloCrashListID = "66465de418cb110b4af870ea";
+  // const trelloBoardID = "b7JXesa1";
+
+  const params = new URLSearchParams({
+    idList: trelloCrashListID,
+    key: trelloApiKey,
+    token: trelloToken.value(),
+    name: "myBalls",
+  }).toString();
+
+  logger.warn(params)
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  logger.info("-------------------hereee--------------------")
+  logger.info(requestOptions)
+  
+  const data = await fetch(`https://api.trello.com/1/cards?${params}`,requestOptions)
+  
+  logger.error(data)
+  logger.error(data.status)
+  logger.error(data.body)
+
+  response.status(data.status).send(data.body);
 })

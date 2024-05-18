@@ -14,47 +14,12 @@ import LogData, { logType, sendJSCrashData, sendNativeCrashData } from './Utilit
 
 import {setJSExceptionHandler,setNativeExceptionHandler} from 'react-native-exception-handler'
 
+//setup deep linking
 const prefix = Linking.createURL('/');
 
 //handle crashes for JS and Native
 setJSExceptionHandler( sendJSCrashData);
 setNativeExceptionHandler(sendNativeCrashData);
-
-export const PostDataToEndPoint = async (endpoint, params ) => {
-
-  if(AssertUserCanRequestData() == false)
-      return;
-
-  let uri = `https://api.intra.42.fr${endpoint}`;
-  let tokendata = getAccessToken();
-  // LogData(logType.INFO,"tokendata in getdata = ",tokendata);
-
-  const tokenRequest = {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Bearer ${tokendata.access_token}`,
-      },
-      body: params,
-    };
-
-  try {
-      LogData(logType.INFO,'POSTing to',uri)
-      await IncrementRequestCounter()
-      // LogData(logType.INFO,"Post Request = ",tokenRequest)
-      const response = await fetch(uri,tokenRequest);
-      if(response.ok){
-          LogData(logType.INFO,'Suceess')
-          return response.json();
-      } else {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  } catch (error){
-      LogData(logType.ERROR,error);
-      throw error;
-  }
-}
-
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

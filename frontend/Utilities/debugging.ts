@@ -1,3 +1,18 @@
+import { GetUserData } from "./UserData";
+
+export interface CrashUserData {
+  userdata: string,
+
+}
+
+export interface CrashData {
+  date: string,
+  fatality: boolean,
+  errorMessage: string,
+  errorDump?: string,
+  UserData: CrashUserData
+}
+
 export enum logType {
     INFO = 1,
     WARNING = 2,
@@ -23,9 +38,13 @@ export default function LogData(logtype: logType,...args):void {
     console.log(logMessage,...args)
 }
 
+
+
 export const sendJSCrashData =(error: Error,isFatal: boolean) => {
     console.log("EXCEPTION FUNCTIOn",error,isFatal);
-  
+
+    LogData(logType.ERROR,GetUserData())
+
     const string = "WOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWO"
     let crashData = {
       date: new Date().toDateString(),
