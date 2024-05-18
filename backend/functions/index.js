@@ -197,22 +197,22 @@ exports.refresh = onRequest( async (request, response) => {
 
 exports.crashData = onRequest(async (request, response) => {
 
-  if(request.method != 'POST')
+  if(request.method != 'POST'){
+    logger.warn("WRONG Method Boi");
     response.status('405').send("WRONG Method Boi")
+    return;
+  }
 
-  const crashData = JSON.parse(request.body);
+  //do more error checks
+  if (!request.is('application/json')) {
+    logger.warn('Bad Request: Content-Type must be application/json');
+    response.status(400).send('Bad Request: Content-Type must be application/json');
+    return;
+  }
+
+  logger.warn("BEFORE accessing the body");
+  const crashData = request.body;
   logger.warn(request.body);
-  let crashDataDescription = `fatality = ${crashData.fatality}\n` +
-  `platform = ${crashData.platform}\n\n`
-  
-  crashDataDescription += `${crashData.UserData}\n\n`
-
-
-  crashDataDescription += crashData.errorDump;
-  // console.log(request)
-
-  // logger.warn("JUST BEFORE PRINTING BODY")
-  // logger.warn(request.body)
 
   //setup 
   const trelloApiKey = "8d9df4659c5da1046e33b9939ae06a4d";
@@ -220,14 +220,29 @@ exports.crashData = onRequest(async (request, response) => {
   const trelloCrashListID = "66465de418cb110b4af870ea";
   // const trelloBoardID = "b7JXesa1";
 
+  //format Description
+  let crashDataDescription = `fatality = ${crashData.fatality}\n` +
+  `platform = ${crashData.platform}\n\n`
+  crashDataDescription += `${crashData.UserData}\n\n`
+  crashDataDescription += crashData.errorDump;
 
+  const cardTitle = '[CRASH] ' + crashData.errorMessage;
 
+  //get potentially matching/existing trello card
+  let existingCards = await fetch(`https://api.trello.com/1/boards/b7JXesa1/cards?key=${trelloApiKey}&token=${trelloToken.value()}`)
+  existingCards = await existingCards.json();
+  logger.warn("existingCards = ",existingCards);
+  const matchingCard = existingCards.find((element)=>{element.name == cardTitle});
+  logger.warn("matchingCard = ",matchingCard);
+
+  if(matchingCard){
+  }
 
   const params = new URLSearchParams({
     idList: trelloCrashListID,
     key: trelloApiKey,
     token: trelloToken.value(),
-    name: '[CRASH] ' + crashData.errorMessage,
+    name: cardTitle,
     desc: crashDataDescription,
     start: crashData.date,
     pos: 'top',

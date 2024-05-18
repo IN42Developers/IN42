@@ -68,6 +68,9 @@ export const sendJSCrashData =(error: Error,isFatal: boolean,userData) => {
     
     const tokenRequest = {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(crashData),
     };
   
@@ -94,6 +97,9 @@ export const sendNativeCrashData = (exceptionMsg: string, userData) => {
     
     const tokenRequest = {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(crashData),
     };
   

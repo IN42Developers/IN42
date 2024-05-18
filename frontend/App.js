@@ -23,7 +23,7 @@ setJSExceptionHandler((error ,isFatal) => {
   let userData = GetUserData();
 
   sendJSCrashData(error,isFatal,userData)
-},true);
+});
 
 //this could break your setup if you don't have it defined
 if(!process.env.IN42_DEV)
