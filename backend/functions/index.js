@@ -229,14 +229,13 @@ exports.crashData = onRequest(async (request, response) => {
   const cardTitle = '[CRASH] ' + crashData.errorMessage;
 
   //get potentially matching/existing trello card
-  let existingCards = await fetch(`https://api.trello.com/1/boards/b7JXesa1/cards?key=${trelloApiKey}&token=${trelloToken.value()}`)
-  existingCards = await existingCards.json();
+  //Currently not working!!!
+  const res = await fetch(`https://api.trello.com/1/boards/b7JXesa1/cards?key=${trelloApiKey}&token=${trelloToken.value()}`)
+  const existingCards = await res.json();
   logger.warn("existingCards = ",existingCards);
   const matchingCard = existingCards.find((element)=>{element.name == cardTitle});
   logger.warn("matchingCard = ",matchingCard);
 
-  if(matchingCard){
-  }
 
   const params = new URLSearchParams({
     idList: trelloCrashListID,
