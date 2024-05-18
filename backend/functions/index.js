@@ -101,8 +101,106 @@ exports.refresh = onRequest( async (request, response) => {
   });
 });
 
+// ------------ INFO ON WHAT IS SENT -------------------
+// export interface CrashUserData {
+//   userdata: string,
+
+// }
+
+// export interface CrashData {
+//   date: string,
+//   platform: string,
+//   type: "JsError" | "NativeError"
+//   fatality: boolean,
+//   errorMessage: string,
+//   errorDump?: string,
+//   UserData: CrashUserData
+// }
+
+
+  // idMembers
+  // 59d4608d007ee08faf60e2ef = Jean
+  // 6465f0d24cae128fa50d9e73 = Chris
+
+  // [
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaaa",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Programming",
+  //     "color": "blue",
+  //     "uses": 32
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaa5",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "V.0.3.1",
+  //     "color": "lime_dark",
+  //     "uses": 27
+  //   },
+  //   {
+  //     "id": "663e3cd835ead4e89a1f5ebb",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "v0.4.0",
+  //     "color": "pink_dark",
+  //     "uses": 14
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffa9c",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Design",
+  //     "color": "green",
+  //     "uses": 11
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaad",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Bug",
+  //     "color": "red",
+  //     "uses": 11
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaa7",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Decison/Investigation",
+  //     "color": "purple",
+  //     "uses": 8
+  //   },
+  //   {
+  //     "id": "6624feb6f42e92eb7002d2b4",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Organizing",
+  //     "color": "pink",
+  //     "uses": 5
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaa4",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Figma UI/UX",
+  //     "color": "yellow",
+  //     "uses": 2
+  //   },
+  //   {
+  //     "id": "662501b375691a7368a9bfe3",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Replaced",
+  //     "color": "black_dark",
+  //     "uses": 1
+  //   }
+  // ]
+
 
 exports.crashData = onRequest(async (request, response) => {
+
+  if(request.method != 'POST')
+    response.status('405').send("WRONG Method Boi")
+
+  const crashData = request.body;
+  logger.warn(request.body);
+  let crashDataDescription = `${crashData.UserData.userdata}\n` + 
+  `fatality = ${crashData.fatality}\n` +
+  `platform = ${crashData.platform}\n\n`
+  
+  crashDataDescription += crashData.errorDump;
   // console.log(request)
 
   // logger.warn("JUST BEFORE PRINTING BODY")
@@ -114,11 +212,20 @@ exports.crashData = onRequest(async (request, response) => {
   const trelloCrashListID = "66465de418cb110b4af870ea";
   // const trelloBoardID = "b7JXesa1";
 
+
+
+
   const params = new URLSearchParams({
     idList: trelloCrashListID,
     key: trelloApiKey,
     token: trelloToken.value(),
-    name: "myBalls",
+    name: '[CRASH] ' + crashData.errorMessage,
+    desc: crashDataDescription,
+    start: crashData.date,
+    pos: 'top',
+    idLabels: '64fb32bf4410395e0d6ffaad',
+    idMembers: '59d4608d007ee08faf60e2ef',
+
   }).toString();
 
   logger.warn(params)
@@ -133,10 +240,6 @@ exports.crashData = onRequest(async (request, response) => {
   logger.info(requestOptions)
   
   const data = await fetch(`https://api.trello.com/1/cards?${params}`,requestOptions)
-  
-  logger.error(data)
-  logger.error(data.status)
-  logger.error(data.body)
 
   response.status(data.status).send(data.body);
 })

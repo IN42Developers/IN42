@@ -1,4 +1,4 @@
-import { GetUserData } from "./UserData";
+import { Platform } from "react-native";
 
 export interface CrashUserData {
   userdata: string,
@@ -7,6 +7,8 @@ export interface CrashUserData {
 
 export interface CrashData {
   date: string,
+  platform: string,
+  type: "JsError" | "NativeError"
   fatality: boolean,
   errorMessage: string,
   errorDump?: string,
@@ -41,17 +43,24 @@ export default function LogData(logtype: logType,...args):void {
 
 
 export const sendJSCrashData =(error: Error,isFatal: boolean) => {
-    console.log("EXCEPTION FUNCTIOn",error,isFatal);
 
-    LogData(logType.ERROR,GetUserData())
+    if(process.env.IN_42 == 'true')
+      return;
 
-    const string = "WOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWOWO"
-    let crashData = {
+    const platform:string = Platform.OS == 'android' ? 'android' : 'ios';
+
+    let crashData: CrashData = {
       date: new Date().toDateString(),
       errorMessage: JSON.stringify(error.message),
       errorDump: JSON.stringify(error.stack),
+      platform: platform,
+      type: "JsError",
       fatality: isFatal,
-      random: string}
+      UserData: {
+        userdata: 'jisserst'
+      }
+
+      }
   
     
     const tokenRequest = {
@@ -65,12 +74,22 @@ export const sendJSCrashData =(error: Error,isFatal: boolean) => {
 
 export const sendNativeCrashData = (exceptionMsg: string) => {
   
-    const string = "INCREDIBLEKILLME1231312312"
-    let crashData = {
-      date: new Date().toDateString(),
-      errorMessage: exceptionMsg,
-      random: string}
-  
+  if(process.env.IN_42 == 'true')
+    return;
+
+  const platform:string = Platform.OS == 'android' ? 'android' : 'ios';
+
+  let crashData: CrashData = {
+    date: new Date().toDateString(),
+    errorMessage: JSON.stringify(exceptionMsg),
+    platform: platform,
+    type: "NativeError",
+    fatality: true,
+    UserData: {
+      userdata: 'jisserst'
+    }
+
+    }
     
     const tokenRequest = {
       method: 'POST',

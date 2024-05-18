@@ -18,8 +18,11 @@ import {setJSExceptionHandler,setNativeExceptionHandler} from 'react-native-exce
 const prefix = Linking.createURL('/');
 
 //handle crashes for JS and Native
-setJSExceptionHandler( sendJSCrashData);
-setNativeExceptionHandler(sendNativeCrashData);
+setJSExceptionHandler((error ,isFatal) => {sendJSCrashData(error,isFatal)},true);
+
+//this could break your setup if you don't have it defined
+if(!process.env.IN42_DEV)
+  setNativeExceptionHandler((msg) =>{sendNativeCrashData(msg)});
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
