@@ -4,6 +4,28 @@ const { defineString } = require('firebase-functions/params');
 
 const { PostDataToTrello, getExistingCardByName } = require('../utilities/trelloUtils');
 
+// ------------ INFO ON WHAT IS SENT -------------------
+// export interface CrashUserData {
+//   id: number,
+//   login: string,
+//   usual_full_name: string,
+//   pool_month: string,
+//   pool_year: string,
+//   primary_cursus_id: number,
+//   primary_campus_id: number,
+//   // add more shit as needed over time
+// }
+
+// export interface CrashData {
+//   date: string,
+//   platform: string,
+//   type: "JsError" | "NativeError"
+//   fatality: boolean,
+//   errorMessage: string,
+//   errorDump?: string,
+//   UserData: CrashUserData
+// }
+
 const crashData = onRequest(async (request, response) => {
 
     if(request.method != 'POST'){
@@ -24,7 +46,7 @@ const crashData = onRequest(async (request, response) => {
     logger.warn(request.body);
   
     //setup 
-    const trelloApiKey = "8d9df4659c5da1046e33b9939ae06a4d";
+    const trelloApiKey =defineString('TRELLO_API_KEY');
     const trelloToken = defineString('TRELLO_TOKEN');
     const trelloCrashListID = "6649e65f590414449730bdb6";
     // const trelloBoardID = "b7JXesa1";
@@ -32,7 +54,7 @@ const crashData = onRequest(async (request, response) => {
     //format Description
     let crashDataDescription = `fatality = ${crashData.fatality}\n` +
     `platform = ${crashData.platform}\n\n`
-    crashDataDescription += `${crashData.UserData}\n\n`
+    crashDataDescription += `${JSON.stringify(crashData.UserData)}\n\n`
     crashDataDescription += crashData.errorDump;
   
     const cardTitle = '[CRASH] ' + crashData.errorMessage;
@@ -42,7 +64,7 @@ const crashData = onRequest(async (request, response) => {
         
         const params = new URLSearchParams({
             idList: trelloCrashListID,
-            key: trelloApiKey,
+            key: trelloApiKey.value(),
             token: trelloToken.value(),
       name: cardTitle,
       desc: crashDataDescription,
