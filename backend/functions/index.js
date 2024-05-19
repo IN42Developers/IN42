@@ -11,6 +11,9 @@ const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const cors = require("cors")({ origin: true });
 const { defineString } = require('firebase-functions/params');
+const { crashData } = require('./handlers/crashData');
+
+exports.crashData = crashData;
 
 
 exports.auth = onRequest( async (request, response) => {
@@ -194,74 +197,3 @@ exports.refresh = onRequest( async (request, response) => {
   //   }
   // ]
 
-
-exports.crashData = onRequest(async (request, response) => {
-
-  if(request.method != 'POST'){
-    logger.warn("WRONG Method Boi");
-    response.status('405').send("WRONG Method Boi")
-    return;
-  }
-
-  //do more error checks
-  if (!request.is('application/json')) {
-    logger.warn('Bad Request: Content-Type must be application/json');
-    response.status(400).send('Bad Request: Content-Type must be application/json');
-    return;
-  }
-
-  logger.warn("BEFORE accessing the body");
-  const crashData = request.body;
-  logger.warn(request.body);
-
-  //setup 
-  const trelloApiKey = "8d9df4659c5da1046e33b9939ae06a4d";
-  const trelloToken = defineString('TRELLO_TOKEN');
-  const trelloCrashListID = "66465de418cb110b4af870ea";
-  // const trelloBoardID = "b7JXesa1";
-
-  //format Description
-  let crashDataDescription = `fatality = ${crashData.fatality}\n` +
-  `platform = ${crashData.platform}\n\n`
-  crashDataDescription += `${crashData.UserData}\n\n`
-  crashDataDescription += crashData.errorDump;
-
-  const cardTitle = '[CRASH] ' + crashData.errorMessage;
-
-  //get potentially matching/existing trello card
-  //Currently not working!!!
-  const res = await fetch(`https://api.trello.com/1/boards/b7JXesa1/cards?key=${trelloApiKey}&token=${trelloToken.value()}`)
-  const existingCards = await res.json();
-  logger.warn("existingCards = ",existingCards);
-  const matchingCard = existingCards.find((element)=>{element.name == cardTitle});
-  logger.warn("matchingCard = ",matchingCard);
-
-
-  const params = new URLSearchParams({
-    idList: trelloCrashListID,
-    key: trelloApiKey,
-    token: trelloToken.value(),
-    name: cardTitle,
-    desc: crashDataDescription,
-    start: crashData.date,
-    pos: 'top',
-    idLabels: '64fb32bf4410395e0d6ffaad',
-    idMembers: '59d4608d007ee08faf60e2ef',
-
-  }).toString();
-
-  logger.warn(params)
-
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  logger.info("-------------------hereee--------------------")
-  logger.info(requestOptions)
-  
-  const data = await fetch(`https://api.trello.com/1/cards?${params}`,requestOptions)
-
-  response.status(data.status).send(data.body);
-})
