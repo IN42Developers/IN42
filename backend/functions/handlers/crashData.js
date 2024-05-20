@@ -2,7 +2,7 @@ const { onRequest } = require('firebase-functions/v2/https');
 const logger = require("firebase-functions/logger");
 const { defineString } = require('firebase-functions/params');
 
-const { PostDataToTrello, getExistingCardByName } = require('../utilities/trelloUtils');
+const { PostDataToTrello, getExistingCardByName, GetDataFromTrello } = require('../utilities/trelloUtils');
 
 // ------------ INFO ON WHAT IS SENT -------------------
 // export interface CrashUserData {
@@ -41,9 +41,7 @@ const crashData = onRequest(async (request, response) => {
       return;
     }
   
-    logger.warn("BEFORE accessing the body");
     const crashData = request.body;
-    logger.warn(request.body);
   
     //setup 
     const trelloApiKey =defineString('TRELLO_API_KEY');
@@ -60,27 +58,25 @@ const crashData = onRequest(async (request, response) => {
     const cardTitle = '[CRASH] ' + crashData.errorMessage;
   
     let existingCardID = await getExistingCardByName(cardTitle);
-    if(!existingCardID){
-        
-        const params = new URLSearchParams({
-            idList: trelloCrashListID,
-            key: trelloApiKey.value(),
-            token: trelloToken.value(),
-      name: cardTitle,
-      desc: crashDataDescription,
-      start: crashData.date,
-      pos: 'top',
-      idLabels: '64fb32bf4410395e0d6ffaad',
-      idMembers: '59d4608d007ee08faf60e2ef',
-      
-    }).toString();
-    
-        logger.warn(params)
-    
-        existingCardID = await PostDataToTrello("https://api.trello.com/1/cards",params);
-    }
-
-    //do something with existingCardID
+    let checklistID;
+    if(!existingCardID) {
+      const params = {
+        idList: trelloCrashListID,
+        name: cardTitle,
+        desc: crashDataDescription,
+        start: crashData.date,
+        pos: 'top',
+        idLabels: '64fb32bf4410395e0d6ffaad',
+        idMembers: '59d4608d007ee08faf60e2ef',
+      }
+        existingCardID = await PostDataToTrello("/cards",params);
+        const checklist = await PostDataToTrello("/checklists",{idCard: existingCardID.id, name: "Users"});
+        checklistID = checklist.id;
+      }
+      else{
+        checklistID = existingCardID.idChecklists[0];
+      }
+      await PostDataToTrello(`/checklists/${checklistID}/checkItems`,{name: `${crashData.UserData.login} at ${crashData.date}`})
     
     response.status(200).send(existingCardID);
   })
