@@ -73,7 +73,7 @@ const crashData = onRequest(async (request, response) => {
         const checklist = await PostDataToTrello("/checklists",{idCard: existingCardID.id, name: "Users"});
         checklistID = checklist.id;
       }
-      else{
+      else{ 
         checklistID = existingCardID.idChecklists[0];
       }
       await PostDataToTrello(`/checklists/${checklistID}/checkItems`,{name: `${crashData.UserData.login} at ${crashData.date}`})
