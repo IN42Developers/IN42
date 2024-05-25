@@ -21,8 +21,20 @@ const prefix = Linking.createURL('/');
 setJSExceptionHandler((error ,isFatal) => {
 
   let userData = GetUserData();
+  // console.log(userData);
+  const userCrashData = userData != null ? 
+  {
+    id: userData.id,
+    login: userData.login,
+    usual_full_name: userData.usual_full_name,
+    pool_month: userData.pool_month,
+    pool_year: userData.pool_year,
+    primary_cursus_id: userData.primary_cursus_id,// doesn't work yet
+    primary_campus_id: userData.primary_campus_id, //doesn't work yet
+  } : 
+  {login: "unknown"}
 
-  sendJSCrashData(error,isFatal,userData)
+  sendJSCrashData(error,isFatal,userCrashData)
 });
 
 //this could break your setup if you don't have it defined

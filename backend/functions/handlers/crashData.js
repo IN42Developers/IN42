@@ -28,9 +28,11 @@ const { PostDataToTrello, getExistingCardByName, GetDataFromTrello } = require('
 
 const crashData = onRequest(async (request, response) => {
 
+    logger.info("Start of CrashData function")
+
     if(request.method != 'POST'){
       logger.warn("WRONG Method Boi");
-      response.status('405').send("WRONG Method Boi")
+      response.status(405).send("WRONG Method Boi")
       return;
     }
   
@@ -42,10 +44,8 @@ const crashData = onRequest(async (request, response) => {
     }
   
     const crashData = request.body;
-  
+    logger.warn("request.body = ",crashData)
     //setup 
-    const trelloApiKey =defineString('TRELLO_API_KEY');
-    const trelloToken = defineString('TRELLO_TOKEN');
     const trelloCrashListID = "6649e65f590414449730bdb6";
     // const trelloBoardID = "b7JXesa1";
   

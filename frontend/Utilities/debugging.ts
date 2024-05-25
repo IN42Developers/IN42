@@ -48,12 +48,12 @@ export default function LogData(logtype: logType,...args):void {
 
 
 
-export const sendJSCrashData =(error: Error,isFatal: boolean,userData) => {
+export const sendJSCrashData =(error: Error,isFatal: boolean,userData: CrashUserData) => {
 
-    if(process.env.IN_42 == 'true')
+    if(process.env.IN42_DEV == 'true')
       return;
 
-    const platform:string = Platform.OS == 'android' ? 'android' : 'ios';
+    const platform: string = Platform.OS == 'android' ? 'android' : 'ios';
 
     let crashData: CrashData = {
       date: new Date().toDateString(),
@@ -64,7 +64,7 @@ export const sendJSCrashData =(error: Error,isFatal: boolean,userData) => {
       fatality: isFatal,
       UserData: userData
       }
-  
+      
     
     const tokenRequest = {
       method: 'POST',
@@ -74,13 +74,16 @@ export const sendJSCrashData =(error: Error,isFatal: boolean,userData) => {
       body: JSON.stringify(crashData),
     };
   
-    console.log("CrashData =",tokenRequest);
-    fetch("https://crashdata-7y7fitjvjq-uc.a.run.app",tokenRequest);
+    const endpoint = "https://crashdata-7y7fitjvjq-uc.a.run.app";
+
+    console.log("endpoint =",endpoint)
+
+    fetch(endpoint,tokenRequest); //.then((resp)=> resp.json()).then((data)=> console.log(data))
   }
 
 export const sendNativeCrashData = (exceptionMsg: string, userData) => {
   
-  if(process.env.IN_42 == 'true')
+  if(process.env.IN42_DEV == 'true')
     return;
 
 

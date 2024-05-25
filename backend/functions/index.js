@@ -11,8 +11,8 @@ const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const cors = require("cors")({ origin: true });
 const { defineString } = require('firebase-functions/params');
-const { crashData } = require('./handlers/crashData');
 
+const { crashData } = require('./handlers/crashData');
 exports.crashData = crashData;
 
 
@@ -104,27 +104,7 @@ exports.refresh = onRequest( async (request, response) => {
   });
 });
 
-// ------------ INFO ON WHAT IS SENT -------------------
-// export interface CrashUserData {
-//   id: number,
-//   login: string,
-//   usual_full_name: string,
-//   pool_month: string,
-//   pool_year: string,
-//   primary_cursus_id: number,
-//   primary_campus_id: number,
-//   // add more shit as needed over time
-// }
 
-// export interface CrashData {
-//   date: string,
-//   platform: string,
-//   type: "JsError" | "NativeError"
-//   fatality: boolean,
-//   errorMessage: string,
-//   errorDump?: string,
-//   UserData: CrashUserData
-// }
 
 
   // idMembers

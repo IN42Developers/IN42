@@ -11,20 +11,35 @@ const PostDataToTrello = async (endpoint, data) => {
     token: trelloToken.value()
   }
 
-  const params = new URLSearchParams({...data,...auth
-}).toString();
+//   const params = new URLSearchParams({...data,...auth
+// }).toString();
 
     const requestOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({...data,...auth})
       };
       logger.info("-------------------hereee--------------------")
       logger.info(requestOptions)
       
-      const resp = await fetch(`https://api.trello.com/1${endpoint}?${params}`,requestOptions)
-      return await resp.json();
+      try {
+        const response = await fetch(`https://api.trello.com/1${endpoint}`, requestOptions);
+        
+        if (!response.ok) {
+            // Handle HTTP errors
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Attempt to parse the JSON response
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        // Handle fetch or JSON parse errors
+        console.error('Error fetching data:', error);
+        throw error;
+    }
 }
 
 const GetDataFromTrello = async (endpoint) => {

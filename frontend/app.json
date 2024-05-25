@@ -14,7 +14,7 @@
     "scheme": "in42",
     "plugins": [
       ["expo-font", {}],
-      ["expo-secure-store", {}]
+      ["expo-secure-store", {}],
     ],
     "assetBundlePatterns": [
       "**/*"
