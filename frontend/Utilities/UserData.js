@@ -45,6 +45,22 @@ export const getCampusTimeZone = () => {
     return null;
 }
 
+//returns the current active campus_users from the userData
+export const getUserCampus = () => {
+
+    if(UserData == null)
+        return null;
+
+    //check for the current active campus_users, and return the timezone found in "campus"
+    for (let i = 0; i < UserData.campus_users.length; i++) {
+        if(UserData.campus_users[i].is_primary == true)
+            return  UserData.campus_users[i];
+    }
+
+    return null;
+}
+
+
 export const IncrementRequestCounter = async (value=1) => {
     requestCounter+=value;
     await setKeyValuePair('RequestCounter',requestCounter);

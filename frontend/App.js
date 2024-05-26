@@ -9,7 +9,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 import { isTokenStillValid} from './Utilities/TokenStorage';
 import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/NavigationStack';
 import { AuthContext } from './Context';
-import { LoadCounterPeriod,AssertUserCanRequestData, GetUserData } from './Utilities/UserData';
+import { LoadCounterPeriod,AssertUserCanRequestData, GetUserData, getUserCursus, getUserCampus } from './Utilities/UserData';
 import LogData, { logType, sendJSCrashData, sendNativeCrashData } from './Utilities/debugging';
 
 import {setJSExceptionHandler,setNativeExceptionHandler} from 'react-native-exception-handler'
@@ -21,7 +21,9 @@ const prefix = Linking.createURL('/');
 setJSExceptionHandler((error ,isFatal) => {
 
   let userData = GetUserData();
-  // console.log(userData);
+  let cursusData = getUserCursus();
+  let campusData = getUserCampus();
+  console.log(userData);
   const userCrashData = userData != null ? 
   {
     id: userData.id,
@@ -29,8 +31,8 @@ setJSExceptionHandler((error ,isFatal) => {
     usual_full_name: userData.usual_full_name,
     pool_month: userData.pool_month,
     pool_year: userData.pool_year,
-    primary_cursus_id: userData.primary_cursus_id,// doesn't work yet
-    primary_campus_id: userData.primary_campus_id, //doesn't work yet
+    primary_cursus_id: cursusData.cursus_id,
+    primary_campus_id: campusData.campus_id,
   } : 
   {login: "unknown"}
 

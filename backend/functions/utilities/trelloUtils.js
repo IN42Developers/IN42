@@ -3,6 +3,7 @@ const logger = require("firebase-functions/logger");
 
 const trelloApiKey =defineString('TRELLO_API_KEY');
 const trelloToken = defineString('TRELLO_TOKEN');
+const boardID = "b7JXesa1";
 
 const PostDataToTrello = async (endpoint, data) => {
 
@@ -48,20 +49,33 @@ const GetDataFromTrello = async (endpoint) => {
     return await data.json();
 }
 
-
+//returns first card with matchign name or null
 const getExistingCardByName = async (name) => {
 
-    //get potentially matching/existing trello card
-    //Currently not working!!!
-    let existingCards = await GetDataFromTrello("/boards/b7JXesa1/cards") 
+    let existingCards = await GetDataFromTrello(`/boards/${boardID}/cards`) 
     let matchingCard = existingCards.find((element)=>element.name == name);
     logger.warn("matchingCard bla = ",existingCards.find((element)=>element.name == name));
     logger.warn("matchingCard = ",matchingCard);
     return matchingCard;
 }
 
+//returns an ID of a matching list by name or any list ID
+const getTrelloListByNameWithFallback = async (listName) => {
+
+  let allLists = await GetDataFromTrello(`/boards/${boardID}/lists`) 
+  let matchingList = allLists.find((element)=>element.name == listName);
+  logger.warn("matchingList = ",matchingList);
+  if(matchingList)
+    return matchingList.id;
+  if(allLists)
+    return allLists[0].id;
+  return null;
+}
+
+
 module.exports = {
     PostDataToTrello,
     getExistingCardByName,
     GetDataFromTrello,
+    getTrelloListByNameWithFallback,
   };

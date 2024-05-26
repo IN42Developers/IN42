@@ -2,7 +2,7 @@ const { onRequest } = require('firebase-functions/v2/https');
 const logger = require("firebase-functions/logger");
 const { defineString } = require('firebase-functions/params');
 
-const { PostDataToTrello, getExistingCardByName, GetDataFromTrello } = require('../utilities/trelloUtils');
+const { PostDataToTrello, getExistingCardByName, GetDataFromTrello,getTrelloListByNameWithFallback } = require('../utilities/trelloUtils');
 
 // ------------ INFO ON WHAT IS SENT -------------------
 // export interface CrashUserData {
@@ -46,14 +46,13 @@ const crashData = onRequest(async (request, response) => {
     const crashData = request.body;
     logger.warn("request.body = ",crashData)
     //setup 
-    const trelloCrashListID = "6649e65f590414449730bdb6";
-    // const trelloBoardID = "b7JXesa1";
+    const trelloCrashListID =  await getTrelloListByNameWithFallback("Crashes")
   
     //format Description
-    let crashDataDescription = `fatality = ${crashData.fatality}\n` +
+    let crashDataSimple = `fatality = ${crashData.fatality}\n` +
     `platform = ${crashData.platform}\n\n`
-    crashDataDescription += `${JSON.stringify(crashData.UserData)}\n\n`
-    crashDataDescription += crashData.errorDump;
+    crashDataSimple += `${JSON.stringify(crashData.UserData)}\n\n`
+    let crashDataDescription = crashDataSimple + crashData.errorDump;
   
     const cardTitle = '[CRASH] ' + crashData.errorMessage;
   
@@ -76,7 +75,7 @@ const crashData = onRequest(async (request, response) => {
       else{ 
         checklistID = existingCardID.idChecklists[0];
       }
-      await PostDataToTrello(`/checklists/${checklistID}/checkItems`,{name: `${crashData.UserData.login} at ${crashData.date}`})
+      await PostDataToTrello(`/checklists/${checklistID}/checkItems`,{name: `${crashDataSimple}`})
     
     response.status(200).send(existingCardID);
   })
