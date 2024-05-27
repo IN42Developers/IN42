@@ -22,7 +22,10 @@ export interface CrashUserData {
     UserData: CrashUserData | null
   }
 
-export const sendCrashData =(error: Error,isFatal: boolean):void => {
+export const sendCrashData =(error: Error,isFatal: boolean) => {
+
+    if(process.env.IN42_DEV == 'true')
+      return;
 
     const userData: CrashUserData = getUserCrashData();
     const platform: string = Platform.OS == 'android' ? 'android' : 'ios';
@@ -38,7 +41,7 @@ export const sendCrashData =(error: Error,isFatal: boolean):void => {
       }
       
     
-    const tokenRequest:RequestInit = {
+    const tokenRequest: RequestInit = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
