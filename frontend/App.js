@@ -12,7 +12,16 @@ import { AuthContext } from './Context';
 import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
 import LogData, { logType } from './Utilities/debugging';
 
+import {setJSExceptionHandler} from 'react-native-exception-handler'
+import { sendCrashData } from './Utilities/crashes';
+
+//setup deep linking
 const prefix = Linking.createURL('/');
+
+//handle crashes for JS
+setJSExceptionHandler((error ,isFatal) => {
+  sendCrashData(error,isFatal)
+});
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

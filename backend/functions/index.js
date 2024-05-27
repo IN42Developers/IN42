@@ -12,6 +12,9 @@ const logger = require("firebase-functions/logger");
 const cors = require("cors")({ origin: true });
 const { defineString } = require('firebase-functions/params');
 
+const { crashData } = require('./handlers/crashData');
+exports.crashData = crashData;
+
 
 exports.auth = onRequest( async (request, response) => {
     cors(request, response, async () => {
@@ -100,3 +103,77 @@ exports.refresh = onRequest( async (request, response) => {
     }
   });
 });
+
+
+
+
+  // idMembers
+  // 59d4608d007ee08faf60e2ef = Jean
+  // 6465f0d24cae128fa50d9e73 = Chris
+
+  // [
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaaa",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Programming",
+  //     "color": "blue",
+  //     "uses": 32
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaa5",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "V.0.3.1",
+  //     "color": "lime_dark",
+  //     "uses": 27
+  //   },
+  //   {
+  //     "id": "663e3cd835ead4e89a1f5ebb",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "v0.4.0",
+  //     "color": "pink_dark",
+  //     "uses": 14
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffa9c",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Design",
+  //     "color": "green",
+  //     "uses": 11
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaad",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Bug",
+  //     "color": "red",
+  //     "uses": 11
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaa7",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Decison/Investigation",
+  //     "color": "purple",
+  //     "uses": 8
+  //   },
+  //   {
+  //     "id": "6624feb6f42e92eb7002d2b4",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Organizing",
+  //     "color": "pink",
+  //     "uses": 5
+  //   },
+  //   {
+  //     "id": "64fb32bf4410395e0d6ffaa4",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Figma UI/UX",
+  //     "color": "yellow",
+  //     "uses": 2
+  //   },
+  //   {
+  //     "id": "662501b375691a7368a9bfe3",
+  //     "idBoard": "64fb32bf745c5508d8fa35ae",
+  //     "name": "Replaced",
+  //     "color": "black_dark",
+  //     "uses": 1
+  //   }
+  // ]
+

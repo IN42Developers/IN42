@@ -4,7 +4,7 @@ import LogData, { logType } from "./debugging";
 //Object that stores data from /v2/me endpoint
 let UserData = null;
 let requestCounter = -1;
-const requestCounterMax =process.env.IN42_DEV ? 10000 : 100;
+const requestCounterMax =process.env.IN42_DEV ? 1200 : 100;
 //the time when how long the counter needs to count
 //, will determine resetting of requestCounter
 let prevRequestPeriod = -1; 
@@ -49,6 +49,22 @@ export const getCampusTimeZone = () => {
     return {timeZone: "Asia/Tokyo"};
 }
 
+//returns the current active campus_users from the userData
+export const getUserCampus = () => {
+
+    if(UserData == null)
+        return null;
+
+    //check for the current active campus_users, and return the timezone found in "campus"
+    for (let i = 0; i < UserData.campus_users.length; i++) {
+        if(UserData.campus_users[i].is_primary == true)
+            return  UserData.campus_users[i];
+    }
+
+    return null;
+}
+
+
 export const IncrementRequestCounter = async (value=1) => {
     requestCounter+=value;
     await setKeyValuePair('RequestCounter',requestCounter);
@@ -78,13 +94,24 @@ export const GetRequestCounter = () =>{
     return requestCounter;
 }
 
+//------------------DEV ONLY----------
+export const SetRequestCounter = (val) =>{
+
+    requestCounter = val;
+    setKeyValuePair('RequestCounter',requestCounter);
+
+}
+
 export const GetRequestCounterMax = () =>{
     return requestCounterMax;
 }
 
 export const AssertUserCanRequestData = () =>{
     const val = GetRequestCounter();
-    LogData(logType.INFO,`current Requests ${val}/${requestCounterMax}`)
+    const percentage = Math.round(val/requestCounterMax * 100); //get value between 0-100 as integers
+    // LogData(logType.INFO,`current Requests ${val}/${requestCounterMax}`)
+    if(percentage === 10 || percentage === 25 || percentage === 50 || percentage === 90)
+        LogData(logType.WARNING,`Exhausted ${percentage}% of requests for time period`)
     if(val >= requestCounterMax){
         LogData(logType.WARNING,'User Cannot request any more data for this period')
         LogData(logType.INFO,`current Requests ${val}/${requestCounterMax}`)

@@ -16,6 +16,7 @@ import Icon from '../constants/AutoIcon';
 import ShowModalButton from '../components/buttons/ShowModalButton';
 import { useStore } from './store';
 import { truncateStringAppendDots } from './event_utilities';
+import TestingScreen3 from '../screens/testing/testingScreen3';
 
 const Stack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -188,6 +189,28 @@ export const AppStack = () => {
           )
         }}
       />
+      {(process.env.IN42_DEV == 'true' || process.env.EXPO_PUBLIC_LOGGING == 'true') &&
+      <Tab.Screen
+        name="Testing"
+        component={TestingScreen3}
+        options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#202020',
+            borderColor: '#595959',
+            borderEndWidth: 0,
+            shadowRadius: 0
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontFamily: 'Inter_500Medium',
+          },
+          tabBarIcon: ({ color, focused }) => (
+            <Icon name='Cog' color={color} focused={focused} />
+          )
+        }}
+      />}
     </Tab.Navigator>
     );
   };

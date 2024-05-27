@@ -3,7 +3,7 @@ import { IncrementRequestCounter, AssertUserCanRequestData } from "./UserData";
 import LogData, { logType } from "./debugging";
 
 //generic function that allows you to get data from a specific endpoint in json format
-export const GetDataFromEndPoint = async ( endpoint ) => {
+export const GetDataFromEndPoint = async ( endpoint,logEndpoint = true ) => {
 
     if(AssertUserCanRequestData() == false)
         return;
@@ -26,7 +26,8 @@ export const GetDataFromEndPoint = async ( endpoint ) => {
     try {
         // LogData(logType.INFO,'try fetching')
         await IncrementRequestCounter();
-        LogData(logType.INFO,"GETting from",uri)
+        if(logEndpoint)
+            LogData(logType.INFO,"GETting from",uri)
         const response = await fetch(req);
         if(response.ok){
             const data = await response.json();

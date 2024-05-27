@@ -22,3 +22,5 @@ export default function LogData(logtype: logType,...args):void {
     }
     console.log(logMessage,...args)
 }
+
+
