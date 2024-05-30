@@ -73,22 +73,70 @@ export default function IndexScreen() {
   };
 
   return (
-    <View style={{ display: 'flex', flex: 1 }}>
+    <View style={styles.container}>
       <EntryHeader />
-      <View style={{ flex: 1, marginTop: 36 }}>
-        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', rowGap: 16, marginTop: 48 }}>
-          <View>
-            <Text style={{ color: 'white', textAlign: 'center', fontSize: 28, fontFamily: 'Inter_500Medium' }}>Welcome back</Text>
-            <Text style={{ color: 'gray', textAlign: 'center', fontSize: 18, padding: 16, marginTop: 48, fontFamily: 'Inter_400Regular', lineHeight: 28 }}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free, mobile and accessible. Built together with the community.</Text>
-          </View>
-          <View style={{ bottom: 0, position: 'absolute', width: '90%', marginBottom: 48, justifyContent: 'center', alignSelf: 'center', marginHorizontal: 'auto' }}>
+      <View style={styles.bottomContainer}>
+            <Text style={styles.titleText}>Welcome back</Text>
+            <Text style={styles.descriptionText}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free, mobile and accessible. Built together with the community.</Text>
+          <View style={styles.buttonContainer}>
             <Button onPress={handlePress}>
-              <Text style={{ textAlign: 'center', fontFamily: 'Inter_700Bold', fontSize: 22 }}>Authorize</Text>
+              <Text style={styles.buttonText}>Authorize</Text>
             </Button>
-            <Text style={{ textAlign: 'center', marginTop: 28, fontSize: 12, color: 'gray' }}>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
+            <Text style={styles.detailText}>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
           </View>
-        </View>
       </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flex: 1
+  },
+  bottomContainer: {
+    // borderColor: 'red',
+    // borderWidth: 1,
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  titleText: {
+    // borderColor: 'red',
+    // borderWidth: 1,
+    paddingTop: 90,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 28,
+    fontFamily: 'Inter_500Medium'
+  },
+  descriptionText:{
+    // borderColor: 'red',
+    // borderWidth: 1,
+    paddingBottom: 60,
+    color: 'gray',
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 16,
+    fontFamily:'Inter_400Regular',
+    lineHeight: 28
+  },
+  buttonContainer: {
+    // borderColor: 'red',
+    // borderWidth: 1,
+    paddingBottom: 42,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: '90%',
+  },
+  buttonText:{
+    textAlign: 'center',
+    fontFamily:'Inter_700Bold',
+    fontSize: 22
+  },
+  detailText:{
+    textAlign: 'center',
+    paddingTop: 28,
+    fontSize: 12,
+    color: 'gray'
+  },
+})
