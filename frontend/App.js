@@ -6,14 +6,14 @@ import * as Linking from "expo-linking";
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold, Inter_900Black } from '@expo-google-fonts/inter';
 import * as NavigationBar from 'expo-navigation-bar';
 
-import { isTokenStillValid} from './Utilities/TokenStorage';
-import { HomeNavigationSubStack,  AppStack, AuthStack } from './Utilities/NavigationStack';
+import { isTokenStillValid } from './src/utils/TokenStorage';
+import { AppStack, AuthStack }  from './src/navigation/NavigationStack'
 import { AuthContext } from './Context';
-import { LoadCounterPeriod,AssertUserCanRequestData } from './Utilities/UserData';
-import LogData, { logType } from './Utilities/debugging';
+import { LoadCounterPeriod,AssertUserCanRequestData } from './src/utils/UserData';
+import LogData, { logType } from './src/utils/debugging/debugging';
 
 import {setJSExceptionHandler} from 'react-native-exception-handler'
-import { sendCrashData } from './Utilities/crashes';
+import { sendCrashData } from './src/utils/debugging/crashes';
 
 //setup deep linking
 const prefix = Linking.createURL('/');
