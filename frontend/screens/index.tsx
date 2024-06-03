@@ -74,7 +74,10 @@ export default function IndexScreen() {
 
   return (
     <View style={styles.container}>
-      <EntryHeader />
+      <View style={styles.image}>
+        <EntryHeader />
+
+      </View>
       <View style={styles.bottomContainer}>
             <Text style={styles.titleText}>Welcome back</Text>
             <Text style={styles.descriptionText}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free, mobile and accessible. Built together with the community.</Text>
@@ -92,18 +95,22 @@ export default function IndexScreen() {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1
-  },
-  bottomContainer: {
-    // borderColor: 'red',
-    // borderWidth: 1,
     flex: 1,
     justifyContent: 'space-between',
+  },
+  image: {
+    flex:1,
+  },
+  bottomContainer: {
+    // borderColor: 'green',
+    // borderWidth: 2,
+    flex: 1,
+    justifyContent: 'space-between',
+    // justifyContent: 'flex-end',
   },
   titleText: {
     // borderColor: 'red',
     // borderWidth: 1,
-    paddingTop: 90,
     color: 'white',
     textAlign: 'center',
     fontSize: 28,
@@ -112,19 +119,20 @@ const styles = StyleSheet.create({
   descriptionText:{
     // borderColor: 'red',
     // borderWidth: 1,
-    paddingBottom: 60,
     color: 'gray',
     textAlign: 'center',
     fontSize: 18,
-    padding: 16,
+    paddingHorizontal: 16,
     fontFamily:'Inter_400Regular',
-    lineHeight: 28
+    // lineHeight: 28
   },
   buttonContainer: {
     // borderColor: 'red',
     // borderWidth: 1,
-    paddingBottom: 42,
-    justifyContent: 'center',
+    // paddingBottom: 42,
+    // justifyContent: 'center',
+    // flex: 0.8,
+    // justifyContent: 'space-evenly',
     alignSelf: 'center',
     width: '90%',
   },
@@ -135,7 +143,7 @@ const styles = StyleSheet.create({
   },
   detailText:{
     textAlign: 'center',
-    paddingTop: 28,
+    paddingBottom: 10,
     fontSize: 12,
     color: 'gray'
   },
