@@ -6,16 +6,17 @@ import { CoinsIcon } from 'lucide-react-native';
 
 import { GetUserData, getUserCursus } from '../../utils/UserData'
 import * as Progress from 'react-native-progress';
+import { UserData } from '../../types/apiTypes'
 
 export default function UserInfoCard() {
-  const UserData = GetUserData();
+  const UserData: UserData = GetUserData();
   const UserCursus = getUserCursus();
   let displayname = 'Long display name';
   let login = 'intra login';
-  let profileimage = '';
+  let profileimage = {};
   let walletPoints = -1;
   let correctionPoints = -1;
-  let curLevel = '';
+  let curLevel = -1;
   let nextLevel = -1;
   let levelProgress = 0.5;
   if (UserData != null) {
@@ -31,8 +32,8 @@ export default function UserInfoCard() {
     displayname = 'Loading displayname ...';
     login = 'Loading login ...'
     profileimage = require('../../../assets/images/profilePlaceholder.png');
-    walletPoints = '0';
-    correctionPoints = '0';
+    walletPoints = 0;
+    correctionPoints = 0;
   }
 
   return (

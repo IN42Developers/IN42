@@ -17,6 +17,7 @@ import EmptyContainerItem from '../components/general/EmptyContainerItem';
 
 import { refreshToken } from '../utils/TokenStorage';
 import LogData, { logType } from '../utils/debugging/debugging';
+import { GetUserData } from '../utils/UserData';
 
 export default function HomeScreen() {
   const {height} = useWindowDimensions();
