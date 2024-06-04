@@ -8,30 +8,25 @@ import { GetUserData, getUserCursus } from '../../utils/UserData'
 import * as Progress from 'react-native-progress';
 import { UserData } from '../../types/apiTypes'
 import Avatar from './Avatar';
+import UserCurrencyContainer from './UserCurrencyContainer';
 
 export default function UserInfoCard() {
   const UserData: UserData = GetUserData();
   const UserCursus = getUserCursus();
   let displayname = 'Long display name';
   let login = 'intra login';
-  let walletPoints = -1;
-  let correctionPoints = -1;
   let curLevel = -1;
   let nextLevel = -1;
   let levelProgress = 0.5;
   if (UserData != null) {
     displayname = UserData.displayname;
     login = UserData.login;
-    walletPoints = UserData.wallet;
-    correctionPoints = UserData.correction_point;
     curLevel = Math.floor(UserCursus.level);
     nextLevel = curLevel + 1;
     levelProgress = UserCursus.level - curLevel;
   } else {
     displayname = 'Loading displayname ...';
     login = 'Loading login ...'
-    walletPoints = 0;
-    correctionPoints = 0;
   }
 
   return (
@@ -49,20 +44,8 @@ export default function UserInfoCard() {
           </View>
           <View style={{ display: 'flex', flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', gap: 6, alignContent: 'center' }}>
             <View style={{ flex: 0.8, flexDirection: 'column', rowGap: 8 }}>
-              <View style={{ flexDirection: 'row', backgroundColor: 'rgba(0, 0, 0, 0.3)', opacity: 5, padding: 4, justifyContent: 'space-between', borderRadius: 8 }}>
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'normal' }}>
-                  <Text style={{ color: '#00B5C0', marginLeft: 8, fontFamily: 'Inter_600SemiBold', fontSize: 22 }}>₳</Text>
-                  <Text style={{ color: 'lightgray', fontFamily: 'Inter_700Bold', paddingTop: 6, marginLeft: 12 }}>Wallet</Text>
-                </View>
-                <Text style={{ color: 'white', marginLeft: 8, fontFamily: 'Inter_700Bold', marginTop: 6, paddingRight: 8 }}>{walletPoints}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', backgroundColor: 'rgba(0, 0, 0, 0.3)', paddingLeft: 12, paddingTop: 8, paddingBottom: 8, justifyContent: 'space-between', borderRadius: 8 }}>
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'normal' }}>
-                  <CoinsIcon stroke="#00B5C0" size={20} /> 
-                  <Text style={{ color: 'lightgray', fontFamily: 'Inter_700Bold', paddingTop: 2, marginLeft: 12 }}>Ev.P.</Text>
-                </View>
-                <Text style={{ color: 'white', marginLeft: 8, fontFamily: 'Inter_700Bold', marginTop: 2, paddingRight: 12 }}>{correctionPoints}</Text>
-              </View>
+              <UserCurrencyContainer currencyAmount={UserData.wallet} currencyText={"Wallet"} icon={<CoinsIcon stroke="#00B5C0" size={20}/>}/>
+              <UserCurrencyContainer currencyAmount={UserData.correction_point} currencyText={"Ev.P."} icon={<CoinsIcon stroke="#00B5C0" size={20} /> }/>
             </View>
             <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.3)', paddingLeft: 12, paddingRight: 12, paddingTop: 8, rowGap: 8, borderRadius: 8 }}>
                 <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', paddingTop: 2 }}>Level based progress</Text>
