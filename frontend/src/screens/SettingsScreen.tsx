@@ -12,13 +12,13 @@ import * as Progress from 'react-native-progress';
 import { LogOutIcon, RefreshCwIcon } from 'lucide-react-native';
 import { Button } from '../components/general/Button';
 import LogData, { logType } from '../utils/debugging/debugging';
+import Avatar from '../components/home/Avatar';
 
 const SettingsScreen = () => {
 
     const UserData = GetUserData();
     let displayname = 'Long display name';
     let login = 'intra login';
-    let profileimage;
     let req = GetRequestCounter();
     let reqMax = GetRequestCounterMax();
     let requestProgress;
@@ -26,12 +26,10 @@ const SettingsScreen = () => {
     if (UserData != null) {
         displayname = UserData.displayname;
         login = UserData.login;
-        profileimage = {uri: UserData.image.versions.small};
         requestProgress = req - reqMax;
     } else {
         displayname = 'User';
         login = 'username';
-        profileimage = require('../../assets/images/profilePlaceholder.png');
     }
 
     const {Logout} = React.useContext(AuthContext);
@@ -71,10 +69,9 @@ const SettingsScreen = () => {
             <View style={{ flexDirection: 'row', justifyContent: 'center', padding: 32 }}>
               <View style={{ borderColor: '#008891', borderWidth: 1, padding: 32, borderRadius: 16 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <Image
-                    source={ profileimage }
-                    style={{ width: 52, height: 52, backgroundColor: 'gray', borderRadius: 2000, marginRight: 24 }}
-                  />
+                  <View style= {{ marginRight: 24 }}>
+                    <Avatar width={52} height={52}/>
+                  </View>
                   <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
                     <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', fontSize: 16 }}>{displayname}</Text>
                     <Text style={{ color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24, marginTop: 2 }}>{login}</Text>

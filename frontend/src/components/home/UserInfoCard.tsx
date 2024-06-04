@@ -7,13 +7,13 @@ import { CoinsIcon } from 'lucide-react-native';
 import { GetUserData, getUserCursus } from '../../utils/UserData'
 import * as Progress from 'react-native-progress';
 import { UserData } from '../../types/apiTypes'
+import Avatar from './Avatar';
 
 export default function UserInfoCard() {
   const UserData: UserData = GetUserData();
   const UserCursus = getUserCursus();
   let displayname = 'Long display name';
   let login = 'intra login';
-  let profileimage = {};
   let walletPoints = -1;
   let correctionPoints = -1;
   let curLevel = -1;
@@ -22,7 +22,6 @@ export default function UserInfoCard() {
   if (UserData != null) {
     displayname = UserData.displayname;
     login = UserData.login;
-    profileimage ={uri: UserData.image.versions.small};
     walletPoints = UserData.wallet;
     correctionPoints = UserData.correction_point;
     curLevel = Math.floor(UserCursus.level);
@@ -31,7 +30,6 @@ export default function UserInfoCard() {
   } else {
     displayname = 'Loading displayname ...';
     login = 'Loading login ...'
-    profileimage = require('../../../assets/images/profilePlaceholder.png');
     walletPoints = 0;
     correctionPoints = 0;
   }
@@ -45,11 +43,8 @@ export default function UserInfoCard() {
               <Text style={{ color: 'white', fontFamily: 'Inter_700Bold' }}>{displayname}</Text>
               <Text style={{ color: 'white', fontFamily: 'Inter_400Regular' }}>{login}</Text>
             </View>
-            <View>
-              <Image
-                source={profileimage}
-                style={{ width: 56, height: 56, backgroundColor: 'rgb(203, 213, 225)', borderRadius: 2000, marginTop: 14 }}
-              />
+            <View style= {{marginTop: 14,}}> 
+              <Avatar width={56} height={56}/>
             </View>
           </View>
           <View style={{ display: 'flex', flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', gap: 6, alignContent: 'center' }}>
