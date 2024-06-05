@@ -1,4 +1,4 @@
-import { Campus, CampusUser, CursusUser, UserData} from "../types/apiTypes";
+import { Campus, CampusUser, CursusUser, UserData} from "../types/UserDataTypes";
 import { RemainingTimePeriod, TimeZoneResult } from "../types/customTypes";
 import { retrieveStoredValue,setKeyValuePair } from "./TokenStorage";
 import LogData, { logType } from "./debugging/debugging";

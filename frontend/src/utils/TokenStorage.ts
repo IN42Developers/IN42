@@ -1,14 +1,14 @@
 import * as SecureStore from 'expo-secure-store'
 import LogData, { logType } from './debugging/debugging';
-import { AuthTokenData } from '../types/apiTypes';
+import { AuthTokenData } from '../types/UserDataTypes';
 
-let accessToken: AuthTokenData | null = null;
+let accessToken: AuthTokenData;
 
 export function setAccessToken(token: AuthTokenData){
     accessToken = token;
 }
 
-export function getAccessToken(): AuthTokenData | null{
+export function getAccessToken(): AuthTokenData{
     return accessToken;
 }
 
@@ -68,7 +68,7 @@ const createRequestInit = (tokendata: AuthTokenData): RequestInit => {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `grant_type=refresh_token&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&refresh_token=${tokendata.refresh_token}&redirect_uri=${encodeURIComponent(process.env.IN42_DEV_REDIRECT_URI)}`,
+        body: `grant_type=refresh_token&client_id=${process.env.IN42_DEV_CLIENT_ID}&client_secret=${process.env.IN42_DEV_CLIENT_SECRET}&refresh_token=${tokendata.refresh_token}&redirect_uri=${encodeURIComponent(process.env.IN42_DEV_REDIRECT_URI!)}`,
       };
     }
     return {};

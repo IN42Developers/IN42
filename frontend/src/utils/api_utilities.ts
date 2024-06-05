@@ -1,22 +1,22 @@
+import { AuthTokenData } from "../types/UserDataTypes";
 import { getAccessToken, setAccessToken } from "./TokenStorage";
 import { IncrementRequestCounter, AssertUserCanRequestData } from "./UserData";
 import LogData, { logType } from "./debugging/debugging";
 
 //generic function that allows you to get data from a specific endpoint in json format
-export const GetDataFromEndPoint = async ( endpoint,logEndpoint = true ) => {
+export const GetDataFromEndPoint = async ( endpoint: string, logEndpoint: boolean = true ): Promise<any> => {
 
     if(AssertUserCanRequestData() == false)
         return;
 
-    let uri = `https://api.intra.42.fr${endpoint}`;
-    let tokendata = getAccessToken();
+    let uri: string = `https://api.intra.42.fr${endpoint}`;
+    let tokendata: AuthTokenData = getAccessToken();
     // LogData(logType.INFO,"tokendata in getdata = ",tokendata);
     if(!tokendata){
-        // return null
         throw new Error("TokenData is Null");
     }
 
-    let req = new Request(uri, {
+    let req: Request = new Request(uri, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${tokendata.access_token}`
@@ -24,7 +24,6 @@ export const GetDataFromEndPoint = async ( endpoint,logEndpoint = true ) => {
     });
 
     try {
-        // LogData(logType.INFO,'try fetching')
         await IncrementRequestCounter();
         if(logEndpoint)
             LogData(logType.INFO,"GETting from",uri)
@@ -44,16 +43,16 @@ export const GetDataFromEndPoint = async ( endpoint,logEndpoint = true ) => {
 
 
 //generic function that allows you to get data from a specific endpoint in json format
-export const PostDataToEndPoint = async (endpoint, params ) => {
+export const PostDataToEndPoint = async (endpoint: string, params: any ): Promise<any> => {
 
     if(AssertUserCanRequestData() == false)
         return;
 
-    let uri = `https://api.intra.42.fr${endpoint}`;
+    let uri: string = `https://api.intra.42.fr${endpoint}`;
     let tokendata = getAccessToken();
     // LogData(logType.INFO,"tokendata in getdata = ",tokendata);
 
-    const tokenRequest = {
+    const tokenRequest: RequestInit = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -80,13 +79,13 @@ export const PostDataToEndPoint = async (endpoint, params ) => {
 }
 
 
-export const DeleteDataFromEndpoint =async (endpoint)=> {
+export const DeleteDataFromEndpoint =async (endpoint: string): Promise<void> => {
 
     const uri = `https://api.intra.42.fr${endpoint}`;
     if(AssertUserCanRequestData() == false)
         return;
 
-    let tokendata = getAccessToken();
+    let tokendata: AuthTokenData = getAccessToken();
     try {
         await IncrementRequestCounter();
         LogData(logType.INFO,"DELETEing at",uri)

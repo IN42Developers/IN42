@@ -6,7 +6,7 @@ import { CoinsIcon } from 'lucide-react-native';
 
 import { GetUserData, getUserCursus } from '../../utils/UserData'
 import * as Progress from 'react-native-progress';
-import { UserData } from '../../types/apiTypes'
+import { UserData } from '../../types/UserDataTypes'
 import Avatar from './Avatar';
 import UserCurrencyContainer from './UserCurrencyContainer';
 

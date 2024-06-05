@@ -5,7 +5,7 @@ export enum logType {
 }
 
 
-export default function LogData(logtype: logType,...args):void {
+export default function LogData(logtype: logType,...args: any[]):void {
     let logMessage;
     switch (logtype) {
         case logType.INFO:

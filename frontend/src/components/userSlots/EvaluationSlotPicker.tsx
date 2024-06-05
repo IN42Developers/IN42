@@ -3,7 +3,6 @@ import { TouchableOpacity } from 'react-native';
 import { useState, useEffect } from "react";
 
 import { PostDataToEndPoint,GetDataFromEndPoint } from "../../utils/api_utilities";
-import { GetCurrentDateWithOffset, getCurrentActiveCampus } from "../../utils/events/event_utilities";
 import { GetUserData } from "../../utils/UserData";
 import { useStore } from "../../services/state/store";
 import { TruncateTimeToSlotIncrement } from "../../utils/slot_utilities";

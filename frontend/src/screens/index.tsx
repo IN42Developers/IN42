@@ -5,9 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 import { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import {authorizeUser} from '../utils/apiAuthorization.js'
 import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid } from '../utils/TokenStorage';
-import { getTokenFromCode } from '../utils/apiAuthorization.js'
+import { getTokenFromCode, authorizeUser } from '../utils/apiAuthorization'
 import { setKeyValuePair } from '../utils/TokenStorage'
 import { AssertUserCanRequestData } from '../utils/UserData'
 import { AuthContext } from '../../Context'

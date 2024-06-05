@@ -1,26 +1,11 @@
+import { Slot, SlotChunk } from "../types/customTypes";
 import { DeleteDataFromEndpoint,PostDataToEndPoint,StallTimeBetweenApiCalls } from "./api_utilities"
 import LogData, { logType } from "./debugging/debugging";
 
 
-interface Slot {
-    id: number,
-    begin_at: string,
-    end_at: string,
-}
-
-//note: new returned object will have a unique wrapped structure
-//data = the array of slots that make up a chunk
-//type = used to uniquely identify what is a chunk and an added element for viewing properly
-//date = the date of the slot chunk without detailed info (2023-09-24)
-interface SlotChunk {
-    data: Slot[],
-    id: number,
-    type: string,
-    date: Date,
-}
 
 //a and b needs to be convertable to Date() //make more generic later to return sort function
-export const SortByDateAscending = (a,b): number => {
+export const SortByDateAscending = (a: Slot,b: Slot): number => {
     const dateA = new Date(a.begin_at)
     const dateB = new Date(b.begin_at)
     if(dateA > dateB)
@@ -45,9 +30,9 @@ export const CreateSlotChunkata = ( data: Slot[] ) :SlotChunk[] => {
 
     // LogData(logType.INFO,'in createSlotChunk data')
     let chunkData: SlotChunk[]  = [];
-    let tmpArray:  Slot[] = [];
+    let tmpArray: Slot[] = [];
     let startChunk: number = 0;
-    let totalChunks:number = 0;
+    let totalChunks: number = 0;
 
     for (let i: number = 0; i < data.length -1; i++) {
         if(data[i].end_at !== data[i+1].begin_at || i == data.length - 2 || new Date(data[i].begin_at).getDate() != new Date(data[i].end_at).getDate()){

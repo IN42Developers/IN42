@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet } from 'react-native'
-import { UserData } from '../../types/apiTypes';
+import { UserData } from '../../types/UserDataTypes';
 import { GetUserData } from '../../utils/UserData';
 
 type AvatarProps = {

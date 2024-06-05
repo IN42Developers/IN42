@@ -1,7 +1,7 @@
 //I know .... this is very tragic, buutt it works for now
-const projects = {};
+const projects: { [key: number]: string } = {};
 
-export const getProjectNameFromID = (id) =>{
+export const getProjectNameFromID = (id: number) =>{
     return projects[id] || 'UNKNOWN PROJECT';
 }
 
