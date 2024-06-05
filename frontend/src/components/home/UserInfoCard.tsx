@@ -18,15 +18,21 @@ export default function UserInfoCard() {
   let curLevel = -1;
   let nextLevel = -1;
   let levelProgress = 0.5;
+  let walletPoints = -1;
+  let correctionPoints = -1;
   if (UserData != null) {
     displayname = UserData.displayname;
     login = UserData.login;
     curLevel = Math.floor(UserCursus.level);
     nextLevel = curLevel + 1;
     levelProgress = UserCursus.level - curLevel;
+    walletPoints = UserData.wallet;
+    correctionPoints = UserData.correction_point;
   } else {
     displayname = 'Loading displayname ...';
     login = 'Loading login ...'
+    walletPoints = 0;
+    correctionPoints = 0;
   }
 
   return (
@@ -44,8 +50,8 @@ export default function UserInfoCard() {
           </View>
           <View style={{ display: 'flex', flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', gap: 6, alignContent: 'center' }}>
             <View style={{ flex: 0.8, flexDirection: 'column', rowGap: 8 }}>
-              <UserCurrencyContainer currencyAmount={UserData.wallet} currencyText={"Wallet"} icon={<CoinsIcon stroke="#00B5C0" size={20}/>}/>
-              <UserCurrencyContainer currencyAmount={UserData.correction_point} currencyText={"Ev.P."} icon={<CoinsIcon stroke="#00B5C0" size={20} /> }/>
+              <UserCurrencyContainer currencyAmount={walletPoints} currencyText={"Wallet"} icon={<CoinsIcon stroke="#00B5C0" size={20}/>}/>
+              <UserCurrencyContainer currencyAmount={correctionPoints} currencyText={"Ev.P."} icon={<CoinsIcon stroke="#00B5C0" size={20} /> }/>
             </View>
             <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.3)', paddingLeft: 12, paddingRight: 12, paddingTop: 8, rowGap: 8, borderRadius: 8 }}>
                 <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', paddingTop: 2 }}>Level based progress</Text>
