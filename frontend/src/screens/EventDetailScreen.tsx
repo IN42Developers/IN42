@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native';
 import { UnsubscribeEvent,SubscribeEvent,ToggleEventSubscription,CheckEventSubscriptionStatus } from '../Utilities/event_utilities.js'
 import AttendenceCounter from "../components/general/AttendenceCounter.js";
-import { getCampusTimeZone } from "../utils/UserData.js";
+import { getCampusTimeZone } from "../utils/UserData";
 import { useStore } from "../services/state/store.js";
 import { useNavigation } from "@react-navigation/native";
 import SubscribeButton from "../components/events/SubscribeButton.js";

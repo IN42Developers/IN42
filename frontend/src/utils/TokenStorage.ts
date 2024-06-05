@@ -1,22 +1,23 @@
 import * as SecureStore from 'expo-secure-store'
 import LogData, { logType } from './debugging/debugging';
+import { AuthTokenData } from '../types/apiTypes';
 
-let accessToken = null;
+let accessToken: AuthTokenData | null = null;
 
-export function setAccessToken(token){
+export function setAccessToken(token: AuthTokenData){
     accessToken = token;
 }
 
-export function getAccessToken(){
+export function getAccessToken(): AuthTokenData | null{
     return accessToken;
 }
 
-export async function setKeyValuePair(key, value) {
-    await SecureStore.setItemAsync(key,JSON.stringify(value));
+export async function setKeyValuePair(key: string, value: any) {
+    await SecureStore.setItemAsync(key, JSON.stringify(value));
 }
 
-export async function retrieveStoredValue(key) {
-    let result = await SecureStore.getItemAsync(key);
+export async function retrieveStoredValue(key: string): Promise<any> {
+    let result: any = await SecureStore.getItemAsync(key);
     // LogData(logType.INFO,'in retrieve value',result);
     if(result === null)
         LogData(logType.WARNING,'found valid key but its null');
@@ -25,7 +26,7 @@ export async function retrieveStoredValue(key) {
 }
 
 //returns true or false whether a token is still valid, will refresh timed out token automatically
-export async function isTokenStillValid() {
+export async function isTokenStillValid(): Promise<boolean> {
     try {
         let token = await retrieveStoredValue('AccessToken')
         token = JSON.parse(token);
@@ -53,15 +54,15 @@ export async function isTokenStillValid() {
 }
 
 //calculates the remaining AccessToken time
-export function calculateRemainingTokenTime(creationDate) {
+export function calculateRemainingTokenTime(creationDate: number): number {
     const currentTimestamp =Math.floor( Date.now()/1000); //get current date in seconds
     const res = 7200 - ( currentTimestamp - creationDate); //7200 is the total time a token is valid
     return res;
 }
 
 //function that depends on the IN42_DEV env variable to bypass auth server
-const createRequestInit = (tokendata) => {
-    if(process.env.IN42_DEV == 'true' ){
+const createRequestInit = (tokendata: AuthTokenData): RequestInit => {
+    if(process.env.IN42_DEV == 'true' ) {
       return {
         method: 'POST',
         headers: {
@@ -74,7 +75,7 @@ const createRequestInit = (tokendata) => {
   }
   
   //function that depends on the IN42_DEV env variable to bypass auth server
-  const createRequestURL = (tokendata) => {
+  const createRequestURL = (tokendata: AuthTokenData): string => {
     LogData(logType.INFO,'CREATE REQUEST URL',tokendata)
     if(process.env.IN42_DEV == 'true' ){
       return "https://api.intra.42.fr/oauth/token";
@@ -82,12 +83,12 @@ const createRequestInit = (tokendata) => {
     return `https://refresh-7y7fitjvjq-uc.a.run.app?refresh_token=${tokendata.refresh_token}`;
   }
 
-  export const refreshToken = async () => {
+  export const refreshToken = async (): Promise<boolean> => {
 
     try {
-      let tokendata = await retrieveStoredValue('AccessToken')
-      LogData(logType.INFO,'tokenData before jsonparse= ',tokendata);
-      tokendata = JSON.parse(tokendata);
+      let storedVal = await retrieveStoredValue('AccessToken')
+      LogData(logType.INFO,'tokenData before jsonparse= ',storedVal);
+      let tokendata:AuthTokenData = JSON.parse(storedVal);
 
       LogData(logType.INFO,'tokenData in refresh token= ',tokendata);
       if(tokendata === null)

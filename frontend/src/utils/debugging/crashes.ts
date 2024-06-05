@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { GetUserData, getUserCampus, getUserCursus } from "../UserData";
+import { GetUserData, getCampusUser, getUserCursus } from "../UserData";
 
 export interface CrashUserData {
     id: number,
@@ -58,7 +58,7 @@ export const sendCrashData =(error: Error,isFatal: boolean) => {
   const getUserCrashData = (): CrashUserData => {
     let userData = GetUserData();
     let cursusData = getUserCursus();
-    let campusData = getUserCampus();
+    let campusData = getCampusUser();
     const userCrashData = userData != null ? 
     {
       id: userData.id,

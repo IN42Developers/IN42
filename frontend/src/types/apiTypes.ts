@@ -9,6 +9,8 @@ export interface UserData {
     correction_point: number,
     created_at: string,
     cursus_users: CursusUser[],
+    campus_users: CampusUser[],
+    campus: Campus[],
     data_erasure_date: string,
     displayname: string,
     email: string,
@@ -56,7 +58,7 @@ interface Achievement {
 
 }
 
-interface Campus {
+export interface Campus {
     active: boolean,
     address: string,
     city: string,
@@ -75,7 +77,7 @@ interface Campus {
     zip: number,
 }
 
-interface CampusUser {
+export interface CampusUser {
     campus_id: number,
     created_at: string,
     id: number,
@@ -84,7 +86,7 @@ interface CampusUser {
     user_id: number
 }
 
-interface CursusUser {
+export interface CursusUser {
     begin_at: string,
     blackholed_at: null,
     created_at: string,
@@ -143,4 +145,16 @@ interface TitleUser {
     title_id: number,
     updated_at: string,
     user_id: number
+}
+
+
+
+export interface AuthTokenData {
+    access_token: string,
+    created_at: number,
+    expires_in: number,
+    refresh_token: string,
+    scope: string,
+    secret_valid_until: number,
+    token_type: string,
 }
