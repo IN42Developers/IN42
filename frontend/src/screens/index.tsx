@@ -12,6 +12,7 @@ import { AssertUserCanRequestData } from '../utils/UserData'
 import { AuthContext } from '../../Context'
 import EntryHeader from '../components/index/EntryHeader'
 import LogData, { logType } from '../utils/debugging/debugging'
+import { useIn42Store } from '../services/state/store'
 
 export default function IndexScreen() {
 
@@ -19,6 +20,7 @@ export default function IndexScreen() {
   const navigation = useNavigation();
 
   const { response, promptAsync: AuthUser } = authorizeUser();
+  const languageObject = useIn42Store((store)=> store.language)
 
   useEffect( () => {
     const tokenExchange = async() =>{
@@ -78,13 +80,13 @@ export default function IndexScreen() {
 
       </View>
       <View style={styles.bottomContainer}>
-            <Text style={styles.titleText}>Welcome back</Text>
-            <Text style={styles.descriptionText}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free, mobile and accessible. Built together with the community.</Text>
+            <Text style={styles.titleText}>{languageObject.index_title}</Text>
+            <Text style={styles.descriptionText}>{languageObject.index_description}</Text>
           <View style={styles.buttonContainer}>
             <Button onPress={handlePress}>
-              <Text style={styles.buttonText}>Authorize</Text>
+              <Text style={styles.buttonText}>{languageObject.index_auth_btn}</Text>
             </Button>
-            <Text style={styles.detailText}>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
+            <Text style={styles.detailText}>{languageObject.index_footer}</Text>
           </View>
       </View>
     </View>

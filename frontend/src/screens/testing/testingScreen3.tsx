@@ -13,8 +13,12 @@ import { LinearGradient } from "expo-linear-gradient"
 import { Button } from "../../components/general/Button"
 import LogData, { logType } from "../../utils/debugging/debugging"
 import { getAccessToken } from "../../utils/TokenStorage"
+import { ELanguages } from "../../../assets/translation"
 
 export default function TestingScreen3() {
+
+    const changeLanguage = useIn42Store((store)=>store.updateLanguage);
+
 
     const v2_me =async () => {
         try {
@@ -167,6 +171,7 @@ export default function TestingScreen3() {
     let num = 10 / 0;
 }
 
+
     return (
         <SafeAreaView style={{flex: 1,paddingTop: 30}}>
             <View style={styles.container}>
@@ -181,6 +186,8 @@ export default function TestingScreen3() {
                 <Button onPress={CrashApp} variant={'secondary'}><Text>Crash App</Text></Button>
                 <Button onPress={causeException} variant={'secondary'}><Text>causeException</Text></Button>
                 <Button onPress={divideByZero} variant={'secondary'}><Text>divideByZero</Text></Button>
+                <Button onPress={()=>changeLanguage(ELanguages.LANG_GER)} variant={'dialogWithBorder'}><Text>german translation</Text></Button>
+                <Button onPress={()=>changeLanguage(ELanguages.LANGU_EN)} variant={'dialogWithBorder'}><Text>english translation</Text></Button>
             </View>
         </SafeAreaView>
     )

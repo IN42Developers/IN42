@@ -10,6 +10,9 @@ import LogData, { logType } from '../../utils/debugging/debugging';
 import { CampusEvent } from '../../types/eventTypes';
 import { UserData } from '../../types/UserDataTypes';
 import { Slot, SlotChunk } from '../../types/customTypes';
+import { ELanguages, changeLanguage } from '../../../assets/translation';
+import { LanguageDict } from '../../types/languageTranslation';
+import { en } from '../../../assets/translation/en';
 
 interface In42Store {
   events: CampusEvent[];
@@ -26,6 +29,9 @@ interface In42Store {
   DeleteUserSlotChunk: (chunkID: number) => void;
 
   RefreshUserData: () => Promise<void>;
+
+  language: LanguageDict;
+  updateLanguage: (language: ELanguages) => void;
 }
 
 export const useIn42Store = create<In42Store>((set,get) => ({
@@ -142,6 +148,10 @@ export const useIn42Store = create<In42Store>((set,get) => ({
     } catch (error) {
       LogData(logType.ERROR,'Error in refreshUserData() = ', error)
     }
+  },
+  language: en,
+  updateLanguage: (lang:ELanguages) => {
+    set({language: changeLanguage(lang)});
   }
 
 }))
