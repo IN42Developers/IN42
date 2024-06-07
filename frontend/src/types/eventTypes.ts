@@ -16,4 +16,5 @@ export interface CampusEvent {
         // themes: string[],
         updated_at: string,
         waitlist: null, //probably more than null
+        subscribed?: boolean; //customly added to see if a user is subscribed or not
 }

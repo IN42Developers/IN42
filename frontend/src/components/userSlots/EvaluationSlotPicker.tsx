@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { PostDataToEndPoint,GetDataFromEndPoint } from "../../utils/api_utilities";
 import { GetUserData } from "../../utils/UserData";
-import { useStore } from "../../services/state/store";
+import { useIn42Store } from "../../services/state/store";
 import { TruncateTimeToSlotIncrement } from "../../utils/slot_utilities";
 import { Button } from "../general/Button";
 import BlurOverlay from "../general/BlurOverlay";
@@ -20,7 +20,7 @@ const END_ID = 1;
 //30min in advance of current time (rounded up to next 15min timeframe)
 export default function EvaluationSlotPicker({modalVisible,onDismissModal}) {
 
-  const insertSlots = useStore((store) => store.insertSlots);
+  const insertSlots = useIn42Store((store) => store.insertSlots);
   const [currStartDate, setStartDate] = useState<Date>(TruncateTimeToSlotIncrement(30));
   const [currEndDate, setEndDate] = useState<Date>(TruncateTimeToSlotIncrement(30 + 60));
   const [descriptionText, setdescriptionText] = useState<string>("Placeholder")

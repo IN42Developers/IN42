@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react'
 import SlotItem from "../components/userSlots/SlotItem"
 import SlotContainer from "../components/general/slotContainer/SlotContainer"
 
-import { useStore } from '../services/state/store';
+import { useIn42Store } from '../services/state/store';
 import { IsoDateToWeekDay,SortByDateAscending } from "../utils/slot_utilities"
+import { SlotChunk } from "../types/customTypes";
 
 export default function UserSlotsScreen() {
 
-    const initSlots = useStore((store) => store.initSlots);
-    const slotChunks = useStore((store) => store.Slots);
+    const initSlots = useIn42Store((store) => store.initSlots);
+    const slotChunks: SlotChunk[] = useIn42Store((store) => store.Slots);
 
     let slotDays:string[] = [];// custom user facing strings
 

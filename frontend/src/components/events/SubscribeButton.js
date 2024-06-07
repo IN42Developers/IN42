@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { View,StyleSheet,TouchableOpacity,Text } from "react-native"
-import { useStore } from "../../services/state/store";
+import { useIn42Store } from "../../services/state/store";
 import { useEffect } from "react";
 import { ToggleEventSubscription } from "../../utils/events/event_utilities";
 
@@ -14,7 +14,7 @@ export default function SubscribeButton ({eventID, initialState=true,scale=1, te
 
     const [toggle,SetToggle] = useState(initialState);
 
-    const updateEventSubscriptionStatus = useStore((store) => store.updateEventSubscriptionStatus);
+    const updateEventSubscriptionStatus = useIn42Store((store) => store.updateEventSubscriptionStatus);
     
     let text: string = toggle ? textData.false : textData.true;
     let maxTextLength: number = textData.true.length > textData.false.length ? textData.true.length : textData.false.length

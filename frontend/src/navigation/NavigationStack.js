@@ -14,7 +14,7 @@ import CampusEventsScreen from '../screens/CampusEventsScreen';
 import UserSlotsScreen from '../screens/UserSlotScreen';
 import Icon from '../../assets/svgs/AutoIcon';
 import ShowModalButton from '../components/general/ShowModalButton';
-// import { useStore } from './store';
+// import { useIn42Store } from './store';
 import { truncateStringAppendDots } from '../utils/events/event_utilities';
 import TestingScreen3 from '../screens/testing/testingScreen3';
 

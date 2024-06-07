@@ -5,14 +5,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { PanGestureHandler } from "react-native-gesture-handler"
 import Animated,{useAnimatedGestureHandler, useSharedValue, useAnimatedStyle, withTiming, Easing, runOnJS} from "react-native-reanimated"
 import { GetDataFromEndPoint } from "../../utils/api_utilities"
-import { useStore } from "../../services/state/store"
+import { useIn42Store } from "../../services/state/store"
 
 export default function TestingScreenGestures() {
     const {height} = useWindowDimensions()
     const y = useSharedValue(0);
 
-    const InitEvents = useStore((store) => store.initEvents);
-    const initEvaluations = useStore((store) => store.initEvaluations);
+    const InitEvents = useIn42Store((store) => store.initEvents);
+    const initEvaluations = useIn42Store((store) => store.initEvaluations);
 
     const randomfunction = () =>{
         console.log('EXECUTED FUNCTION');

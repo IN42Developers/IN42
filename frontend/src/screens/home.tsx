@@ -7,7 +7,7 @@ import EventItem from '../components/events/EventItem';
 import EvaluationItem from '../components/evaluation/EvaluationItem';
 import UserInfoCard from '../components/home/UserInfoCard';
 import { useNavigation } from '@react-navigation/native'
-import { useStore } from '../services/state/store';
+import { useIn42Store } from '../services/state/store';
 import { shallow } from 'zustand/shallow'
 
 import { GestureHandlerRootView } from "react-native-gesture-handler"
@@ -24,9 +24,9 @@ export default function HomeScreen() {
 
   const navigation = useNavigation();
   
-  const subbedEvents = useStore((store) =>store.events.filter((event)=>event.subscribed == true), shallow)
-  const upcomingEvaluations = useStore((store) => store.evaluations);
-  const RefreshUserData = useStore((store) => store.RefreshUserData);
+  const subbedEvents = useIn42Store((store) =>store.events.filter((event)=>event.subscribed == true), shallow)
+  const upcomingEvaluations = useIn42Store((store) => store.evaluations);
+  const RefreshUserData = useIn42Store((store) => store.RefreshUserData);
 
   const y = useSharedValue(0);
 

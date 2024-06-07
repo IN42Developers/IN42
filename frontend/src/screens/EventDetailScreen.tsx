@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { UnsubscribeEvent,SubscribeEvent,ToggleEventSubscription,CheckEventSubscriptionStatus } from '../Utilities/event_utilities.js'
 import AttendenceCounter from "../components/general/AttendenceCounter.js";
 import { getCampusTimeZone } from "../utils/UserData";
-import { useStore } from "../services/state/store.js";
+import { useIn42Store } from "../services/state/store";
 import { useNavigation } from "@react-navigation/native";
 import SubscribeButton from "../components/events/SubscribeButton.js";
 import { ScrollView } from "react-native-gesture-handler";
@@ -19,11 +19,9 @@ export default function EventDetailScreen() {
     const eventData = route.params;
     const navigation = useNavigation();
     
-    const currEvent = useStore((store)=>store.events.find((item)=>item.id == eventData.eventData.id)); //needs cleanup
-    const GetNextEvent = useStore((store)=> store.GetNextEvent)
+    const currEvent = useIn42Store((store)=>store.events.find((item)=>item.id == eventData.eventData.id)); //needs cleanup
+    const GetNextEvent = useIn42Store((store)=> store.GetNextEvent)
     
-    LogData(logType.WARNING,currEvent)
-    LogData(logType.WARNING,eventData)
     if(currEvent === null)
         return;
     const title = currEvent.name;

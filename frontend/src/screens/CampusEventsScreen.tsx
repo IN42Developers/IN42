@@ -2,11 +2,11 @@ import { View,StyleSheet,Text,SafeAreaView } from "react-native"
 import React, { useState, useEffect } from 'react'
 import ListContainer from "../components/general/ListContainer"
 import EventItem from "../components/events/EventItem"
-import { useStore } from '../services/state/store'
+import { useIn42Store } from '../services/state/store'
 
 export default function CampusEventsScreen() {
 
-    const allEvents = useStore((store) => store.events);
+    const allEvents = useIn42Store((store) => store.events);
 
     return (
         <SafeAreaView style={{flex: 1}}>

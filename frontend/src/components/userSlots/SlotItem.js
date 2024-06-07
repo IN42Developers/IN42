@@ -3,12 +3,12 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native'
 import { DeleteDataFromEndpoint } from '../../utils/api_utilities';
 import { getCampusTimeZone } from '../../utils/UserData';
-import { useStore } from '../../services/state/store';
+import { useIn42Store } from '../../services/state/store';
 import LogData, { logType } from '../../utils/debugging/debugging';
 
 const SlotItem = ({data,style}) => {
   const navigation = useNavigation();
-  const DeleteUserSlotChunk = useStore((store)=>store.DeleteUserSlotChunk);
+  const DeleteUserSlotChunk = useIn42Store((store)=>store.DeleteUserSlotChunk);
 
   if(data === undefined || data === null){
     data={data:[{
