@@ -18,10 +18,10 @@ interface In42Store {
   GetNextEvent: (eventID: number,direction: number) => CampusEvent | null;
 
   evaluations: any;
-  initEvaluations:  () => void;
+  initEvaluations:  () => Promise<void>;
 
   Slots: SlotChunk[];
-  initSlots: () => void;
+  initSlots: () => Promise<void>;
   insertSlots: (rawSlotData: Slot[]) => void;
   DeleteUserSlotChunk: (chunkID: number) => void;
 
