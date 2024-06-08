@@ -1,5 +1,5 @@
 import { StyleSheet, SafeAreaView, FlatList, Button, Text, Modal, View } from "react-native"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FunctionComponent } from 'react'
 import SlotItem from "../components/userSlots/SlotItem"
 import SlotContainer from "../components/general/slotContainer/SlotContainer"
 
@@ -7,7 +7,7 @@ import { useIn42Store } from '../services/state/store';
 import { IsoDateToWeekDay,SortByDateAscending } from "../utils/slot_utilities"
 import { SlotChunk } from "../types/customTypes";
 
-export default function UserSlotsScreen() {
+const UserSlotsScreen: React.FC = () => {
 
     const initSlots = useIn42Store((store) => store.initSlots);
     const slotChunks: SlotChunk[] = useIn42Store((store) => store.Slots);
@@ -15,7 +15,7 @@ export default function UserSlotsScreen() {
     let slotDays:string[] = [];// custom user facing strings
 
     for (let i = 0; i < slotChunks.length; i++) {
-        const day = IsoDateToWeekDay(slotChunks[i].date)
+        const day:string = IsoDateToWeekDay(slotChunks[i].date)
         if(!slotDays.includes(day))
             slotDays.push(day)
     }
@@ -66,3 +66,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 })
+
+export default UserSlotsScreen

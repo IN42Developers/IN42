@@ -2,13 +2,13 @@ import * as SecureStore from 'expo-secure-store'
 import LogData, { logType } from './debugging/debugging';
 import { AuthTokenData } from '../types/UserDataTypes';
 
-let accessToken: AuthTokenData;
+let accessToken: AuthTokenData | null;
 
-export function setAccessToken(token: AuthTokenData){
+export function setAccessToken(token: AuthTokenData | null){
     accessToken = token;
 }
 
-export function getAccessToken(): AuthTokenData{
+export function getAccessToken(): AuthTokenData| null{
     return accessToken;
 }
 

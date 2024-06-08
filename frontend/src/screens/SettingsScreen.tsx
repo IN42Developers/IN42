@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, Pressable } from "react-native"
-import { AuthContext } from '../../Context'
-import { setAccessToken, setKeyValuePair } from '../utils/TokenStorage';
+import { View, Text } from "react-native"
 import RequestCounter from '../components/settings/RequestCounter';
 import { GetRequestCounter, GetRequestCounterMax, GetUserData } from '../utils/UserData';
 import CurrenPeriodCounter from '../components/settings/CurrenPeriodCounter';
@@ -9,37 +7,16 @@ import CurrenPeriodCounter from '../components/settings/CurrenPeriodCounter';
 // import SettingsToggle from '../components/generic/SettingsToggle';
 import * as Progress from 'react-native-progress';
 
-import { LogOutIcon, RefreshCwIcon } from 'lucide-react-native';
-import { Button } from '../components/general/Button';
-import LogData, { logType } from '../utils/debugging/debugging';
-import Avatar from '../components/home/Avatar';
+import {  RefreshCwIcon } from 'lucide-react-native';
+import LogOutField from '../components/settings/LogOutField';
+import { useIn42Store } from '../services/state/store';
 
-const SettingsScreen = () => {
+const SettingsScreen: React.FC = () => {
 
-    const UserData = GetUserData();
-    let displayname = 'Long display name';
-    let login = 'intra login';
-    let req = GetRequestCounter();
-    let reqMax = GetRequestCounterMax();
-    let requestProgress;
+  const languageObject = useIn42Store((store)=> store.language)
 
-    if (UserData != null) {
-        displayname = UserData.displayname;
-        login = UserData.login;
-        requestProgress = req - reqMax;
-    } else {
-        displayname = 'User';
-        login = 'username';
-    }
+    let requestProgress = GetRequestCounter() - GetRequestCounterMax();
 
-    const {Logout} = React.useContext(AuthContext);
-    const LogoutUser =  async () => {
-      await setKeyValuePair('AccessToken', '');
-      setAccessToken(null);
-      LogData(logType.INFO,'Logout button pressed!');
-      Logout();
-  
-    } 
 
     return (
       <View style={{ display: 'flex', flex: 1, marginTop: 32 }}>
@@ -49,8 +26,8 @@ const SettingsScreen = () => {
             <View style={{ flexDirection: 'column' }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ display: 'flex' }}>
-                  <Text style={{ color: 'lightgray', fontSize: 14, fontFamily: 'Inter_600SemiBold', letterSpacing: 1.2 }}>Interaction Rate Limit</Text>
-                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular', marginTop: 8, marginRight: 108, }}>For API sustainability IN42 will process your API requests to Intra with an hour-updated interaction limit.</Text>
+                  <Text style={{ color: 'lightgray', fontSize: 14, fontFamily: 'Inter_600SemiBold', letterSpacing: 1.2 }}>{languageObject.settings_rateLimit_title}</Text>
+                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular', marginTop: 8, marginRight: 108, }}>{languageObject.settings_rateLimit_description}</Text>
                 </View>
                 <View style={{ position: 'absolute', right: 64 }}>
                   <CurrenPeriodCounter />
@@ -66,24 +43,8 @@ const SettingsScreen = () => {
           </View>
           <View style={{ backgroundColor: 'gray', padding: 0.5 }} />
           <View style={{ alignItems: 'center', alignSelf: 'center' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', padding: 32 }}>
-              <View style={{ borderColor: '#008891', borderWidth: 1, padding: 32, borderRadius: 16 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View style= {{ marginRight: 24 }}>
-                    <Avatar width={52} height={52}/>
-                  </View>
-                  <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-                    <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', fontSize: 16 }}>{displayname}</Text>
-                    <Text style={{ color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24, marginTop: 2 }}>{login}</Text>
-                    <Button onPress={LogoutUser} variant='link'>
-                      <LogOutIcon stroke='#1E1E1E' size="20" />
-                      <Text style={{ color: '#1E1E1E', fontSize: 16, fontFamily: 'Inter_900Black' }}>Log out</Text>
-                    </Button>
-                  </View>
-                </View>
-              </View>
-            </View>
-            <Text style={{ color: 'gray' }}>IN42 v0.3.0</Text>
+            <LogOutField/>
+            <Text style={{ color: 'gray' }}>{languageObject.settings_appVersion}</Text>
           </View>
         </View>
       </View>

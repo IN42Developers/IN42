@@ -9,9 +9,10 @@ import * as Progress from 'react-native-progress';
 import { UserData } from '../../types/UserDataTypes'
 import Avatar from './Avatar';
 import UserCurrencyContainer from './UserCurrencyContainer';
+import UserName from './UserName';
 
 export default function UserInfoCard() {
-  const UserData: UserData = GetUserData();
+  const UserData: UserData | null = GetUserData();
   const UserCursus = getUserCursus();
   let displayname = 'Long display name';
   let login = 'intra login';
@@ -41,8 +42,7 @@ export default function UserInfoCard() {
         <SafeAreaView style={{ marginBottom: 16 }}>
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'column', columnGap: 1, marginTop: 26 }}>
-              <Text style={{ color: 'white', fontFamily: 'Inter_700Bold' }}>{displayname}</Text>
-              <Text style={{ color: 'white', fontFamily: 'Inter_400Regular' }}>{login}</Text>
+              <UserName/>
             </View>
             <View style= {{marginTop: 14,}}> 
               <Avatar width={56} height={56}/>
