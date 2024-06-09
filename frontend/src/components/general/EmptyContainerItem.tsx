@@ -2,7 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View,Image,ImageBackground } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-const EmptyContainerItem = ({text,icon}) => {
+interface EmptyContainerItemProps {
+  text: string,
+  icon: string,
+}
+
+
+const EmptyContainerItem: React.FC<EmptyContainerItemProps> = ({
+  text = "Its very Empty here",
+  icon = "calendar",
+}) => {
 
 
   return (

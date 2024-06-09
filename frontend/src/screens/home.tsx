@@ -6,7 +6,7 @@ import ListContainer from '../components/general/ListContainer';
 import EventItem from '../components/events/EventItem';
 import EvaluationItem from '../components/evaluation/EvaluationItem';
 import UserInfoCard from '../components/home/UserInfoCard';
-import { useNavigation } from '@react-navigation/native'
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native'
 import { useIn42Store } from '../services/state/store';
 import { shallow } from 'zustand/shallow'
 
@@ -17,16 +17,16 @@ import EmptyContainerItem from '../components/general/EmptyContainerItem';
 
 import { refreshToken } from '../utils/TokenStorage';
 import LogData, { logType } from '../utils/debugging/debugging';
-import { GetUserData } from '../utils/UserData';
 
-export default function HomeScreen() {
+const HomeScreen:React.FC = () => {
   const {height} = useWindowDimensions();
 
-  const navigation = useNavigation();
+  const navigation:NavigationProp<ParamListBase> = useNavigation();
   
   const subbedEvents = useIn42Store((store) =>store.events.filter((event)=>event.subscribed == true), shallow)
   const upcomingEvaluations = useIn42Store((store) => store.evaluations);
   const RefreshUserData = useIn42Store((store) => store.RefreshUserData);
+  const languageObject = useIn42Store((store)=> store.language)
 
   const y = useSharedValue(0);
 
@@ -58,12 +58,12 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
   },[])
 
 
-  function NavigateToCampusEventScreen() {
+  const NavigateToCampusEventScreen = () => {
     LogData(logType.INFO,'trying to navigate to CampusEventScreen')
     navigation.navigate("CampusEvents");
   }
 
-  function NavigateUserSlotScreen() {
+  const NavigateUserSlotScreen = () => {
     LogData(logType.INFO,'trying to navigate to NavigateUserSlotScreen')
     navigation.navigate("UserSlotScreen");
   }
@@ -78,15 +78,13 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
   }
 
   // const evalData = [{id:1,dummy: true},{id:2,dummy: true},{id:3,dummy: true},{id:4,dummy: true}] //upcomingEvaluations
-  const emptyEvaluationText = 'It’s calm here. No upcoming evaluations so far.'
-  const emptyEventText = 'You are not subscribed to any events at the moment. You can use the + to add one.'
 
   return (
     <GestureHandlerRootView style={{ display: 'flex', flex: 1 }}>
       <Animated.View style={[{flex: 1}, animatedContainerStyle]}>
         <UserInfoCard />
-        <ListContainer title={'Evaluations'} ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={emptyEvaluationText} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen}/>
-        <ListContainer title={'Events'} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={emptyEventText} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen}/>  
+        <ListContainer title={languageObject.title_evaluations} ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={languageObject.evaluations_empty_list} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen} headerStyle="full"/>
+        <ListContainer title={languageObject.title_events} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={languageObject.events_empty_list} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen} headerStyle="full"/>  
         <PanGestureHandler onGestureEvent={unlockGestureHandler}>
           <Animated.View style={styles.area} />
         </PanGestureHandler>
@@ -130,3 +128,5 @@ const styles = StyleSheet.create({
     // left: 0,
 }
 });
+
+export default HomeScreen;

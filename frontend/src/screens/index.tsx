@@ -14,7 +14,7 @@ import EntryHeader from '../components/index/EntryHeader'
 import LogData, { logType } from '../utils/debugging/debugging'
 import { useIn42Store } from '../services/state/store'
 
-export default function IndexScreen() {
+export const IndexScreen:React.FC = ()=> {
 
   const {Login} = React.useContext(AuthContext);
   const navigation = useNavigation();
@@ -149,3 +149,5 @@ const styles = StyleSheet.create({
     color: 'gray'
   },
 })
+
+export default IndexScreen

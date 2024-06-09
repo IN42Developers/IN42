@@ -17,6 +17,7 @@ import ShowModalButton from '../components/general/ShowModalButton';
 // import { useIn42Store } from './store';
 import { truncateStringAppendDots } from '../utils/events/event_utilities';
 import TestingScreen3 from '../screens/testing/testingScreen3';
+import { useIn42Store } from '../services/state/store';
 
 const Stack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -97,6 +98,8 @@ export const AppStack = () => {
   };
   
   export const TabNavigator = () => {
+
+    const languageObject = useIn42Store((store)=> store.language)
   const Tab = createBottomTabNavigator();
 
   return (
@@ -119,10 +122,10 @@ export const AppStack = () => {
         name="Home"
         component={HomeNavigationSubStack}
         options={{
-          tabBarIcon: ({ color, focused }) =>
-          (
+          tabBarIcon: ({ color, focused }) => (
             <Icon name='Home' color={color} focused={focused} />
-          )
+          ),
+        title: languageObject.title_home,
         }}
       />
       <Tab.Screen
@@ -143,7 +146,8 @@ export const AppStack = () => {
           },
           tabBarIcon: ({ color, focused }) => (
             <Icon name='CalendarFold' color={color} focused={focused} />
-          )
+          ),
+          title: languageObject.title_events,
         }}
       />
       <Tab.Screen
@@ -165,7 +169,8 @@ export const AppStack = () => {
           headerRight: () => (<ShowModalButton></ShowModalButton>),
           tabBarIcon: ({ color, focused }) => (
             <Icon name='UserCheck' color={color} focused={focused} />
-          )
+          ),
+          title: languageObject.title_evaluations,
         }}
       />
       <Tab.Screen
@@ -186,7 +191,8 @@ export const AppStack = () => {
           },
           tabBarIcon: ({ color, focused }) => (
             <Icon name='Cog' color={color} focused={focused} />
-          )
+          ),
+          title: languageObject.title_settings,
         }}
       />
       {(process.env.IN42_DEV == 'true' || process.env.EXPO_PUBLIC_LOGGING == 'true') &&

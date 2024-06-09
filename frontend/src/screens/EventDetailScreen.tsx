@@ -1,37 +1,32 @@
 import { View,StyleSheet,Text,SafeAreaView,TouchableOpacity } from "react-native"
-import React, { useEffect, useState } from 'react'
-import { useRoute } from '@react-navigation/native';
-import { UnsubscribeEvent,SubscribeEvent,ToggleEventSubscription,CheckEventSubscriptionStatus } from '../Utilities/event_utilities.js'
+import React from 'react'
+import { NavigationProp, ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
 import AttendenceCounter from "../components/general/AttendenceCounter.js";
 import { getCampusTimeZone } from "../utils/UserData";
 import { useIn42Store } from "../services/state/store";
 import { useNavigation } from "@react-navigation/native";
 import SubscribeButton from "../components/events/SubscribeButton.js";
 import { ScrollView } from "react-native-gesture-handler";
-import { AntDesign } from '@expo/vector-icons'
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react-native";
 import LogData, { logType } from "../utils/debugging/debugging";
 
-export default function EventDetailScreen() {
+const EventDetailScreen:React.FC = () => {
 
-    
-    const route = useRoute();
+    const route:RouteProp<ParamListBase> = useRoute();
+    const navigation:NavigationProp<ParamListBase> = useNavigation();
     const eventData = route.params;
-    const navigation = useNavigation();
     
-    const currEvent = useIn42Store((store)=>store.events.find((item)=>item.id == eventData.eventData.id)); //needs cleanup
+    const currEvent = useIn42Store((store)=>store.events.find((item)=>item.id == eventData?.eventData?.id)); //needs cleanup
     const GetNextEvent = useIn42Store((store)=> store.GetNextEvent)
+    const languageObject = useIn42Store((store)=> store.language)
     
-    if(currEvent === null)
+    if(currEvent == null)
         return;
+    
     const title = currEvent.name;
-    const type = currEvent.kind;
-
-    if(title === null)
-        return;
 
     let tempDate = new Date (currEvent.begin_at);
-    const date = tempDate.toLocaleDateString('en-US',getCampusTimeZone()) +' '+ tempDate.toLocaleTimeString('en-US',getCampusTimeZone());
+    const date = tempDate.toLocaleDateString('en-US',getCampusTimeZone()) + ' '+ tempDate.toLocaleTimeString('en-US',getCampusTimeZone());
 
     const details = currEvent.description;
     let isEventFull = false;
@@ -42,8 +37,6 @@ export default function EventDetailScreen() {
     const nextEvent = GetNextEvent(currEvent.id,1);
     const NextEvent =  () => {
         LogData (logType.INFO,'Navigating to Next Event ')
-        // let nextEvent = GetNextEvent(currEvent.id,1);
-        
         if(nextEvent != null){
             navigation.navigate("EventDetails", { eventData: nextEvent, })
         }
@@ -51,15 +44,9 @@ export default function EventDetailScreen() {
 
     const PrevEvent =  () => {
         LogData (logType.INFO,'Navigating to Previous Event')
-        // let nextEvent = GetNextEvent(currEvent.id,-1);
-
         if(prevEvent != null) {
             navigation.navigate("EventDetails",{ eventData: prevEvent, })
         }
-    }
-
-    const press = () => {
-        navigation.goBack();
     }
 
     return (
@@ -76,15 +63,12 @@ export default function EventDetailScreen() {
          </View>
 
             <ScrollView style={styles.detailsView}>
-            <Text style={styles.aboutHeader}>About this event</Text> 
-            {/* className="text-white text-2xl font-InterSemibold mb-2" */}
-               <Text style={styles.DetailText}>{details}</Text>
-               {/* className="text-gray-400 text-base font-InterRegular" */}
+                <Text style={styles.aboutHeader}>{languageObject.events_about_event}</Text> 
+                <Text style={styles.DetailText}>{details}</Text>
             </ScrollView>
 
          <View style={styles.bottomView}>
-            {
-                prevEvent ?
+            { prevEvent ?
                 <TouchableOpacity style={styles.nextEventButton} onPress={PrevEvent} >
                     <ChevronLeftIcon stroke='#fff' size='32' />
                 </TouchableOpacity>
@@ -92,8 +76,7 @@ export default function EventDetailScreen() {
                 //to keep the other bottom aligned we keep a dummy around
                 <TouchableOpacity disabled={true}/>
             }
-            {
-                nextEvent &&
+            { nextEvent &&
                 <TouchableOpacity style={styles.nextEventButton} onPress={NextEvent} >
                     <ChevronRightIcon stroke='#fff' size='32' />
                 </TouchableOpacity> 
@@ -215,3 +198,5 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     }
 })
+
+export default EventDetailScreen;

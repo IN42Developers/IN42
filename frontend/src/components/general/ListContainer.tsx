@@ -1,33 +1,50 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native"
+import { View, Text, TouchableOpacity, FlatList, ViewStyle } from "react-native"
 import { StyleSheet } from "react-native";
 import EmptyContainerItem from "./EmptyContainerItem";
 import { AntDesign } from '@expo/vector-icons';
+import LogData, { logType } from "../../utils/debugging/debugging";
 
-const ListContainer = ({ title='Title', onDetailPressed=null ,detailIcon='plus',containerStyle=styles.container, ComponentData=[],emptyListComponent=<EmptyContainerItem text='Nothing going on here' icon='calendar'/>, ChildComponent }) => {
+interface ListContainerProps {
+    title?: String,
+    headerStyle?: 'full'|'title'|'collapsed',
+    detailIcon?: String,
+    onDetailPressed?: () => void,
+    ChildComponent?: React.FC<{ data: any }>,
+    ComponentData?: any[],
+    emptyListComponent?: React.FC,
+    containerStyle?: ViewStyle,
+}
+
+
+const ListContainer:React.FC<ListContainerProps> = ({
+    title = 'Title',
+    onDetailPressed = () =>{ LogData(logType.INFO,"Pressed DetailButton") },
+    detailIcon = 'plus',
+    containerStyle = styles.container,
+    ComponentData = [],
+    emptyListComponent = <EmptyContainerItem text='Nothing going on here' icon='calendar'/>,
+    headerStyle = 'title',
+    ChildComponent,
+    }) => {
   
-    let renderButton = true;
-    if(onDetailPressed === null || onDetailPressed === undefined){
-        renderButton = false;
-    }
 
     return(
         <View style={containerStyle}>
-            <View style={styles.header}>
+            { headerStyle != 'collapsed' &&
+                <View style={styles.header}>
                 <Text style={styles.headerText}>{title}</Text>
-                {renderButton ?
+                { headerStyle != 'title' &&
                 <TouchableOpacity style={styles.button} onPress={onDetailPressed}>
-                    {/* <Text style={styles.buttonText}>...</Text> */}
                     <AntDesign name={detailIcon} color={'white'} size={20}></AntDesign>
                 </TouchableOpacity>
-                :
-                null
                 }
             </View>
+            }
             <FlatList
             showsVerticalScrollIndicator={false}
             animated={false}
             data={ComponentData}
-            renderItem={({item}) =>(
+            renderItem={({item}) =>( 
                 <ChildComponent key={item.id} data={item} ></ChildComponent>
             )}
             ListEmptyComponent={() =>(emptyListComponent)}

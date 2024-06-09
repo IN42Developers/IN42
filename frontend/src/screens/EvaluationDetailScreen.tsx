@@ -1,16 +1,30 @@
 import React from 'react'
-import { Text, View } from "react-native"
+import { Text, View, StyleSheet } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useIn42Store } from '../services/state/store'
 
 
-const EvaluationDetailScreen = () => {
+const EvaluationDetailScreen:React.FC = () => {
+
+  const languageObject = useIn42Store((store)=> store.language)
+
   return (
     <SafeAreaView>
-      <View className='justify-center items-center mt-12'>
-        <Text className="text-2xl font-InterSemibold text-white">Evaluations</Text>
+      <View style={styles.container}>
+        <Text style={styles.text}>{languageObject.title_evaluations}</Text>
       </View>
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  container:{
+    justifyContent: "center",
+    alignItems: 'center',
+  },
+  text:{
+    color: 'white',
+  },
+})
 
 export default EvaluationDetailScreen
