@@ -33,8 +33,9 @@ interface In42Store {
   language: LanguageDict;
   updateLanguage: (language: ELanguages) => void;
 }
-
-export const useIn42Store = create<In42Store>((set,get) => ({
+// const store<In42Store> = (set) => ({
+// const store = create<In42Store>((set,get) => ({
+const store = (set: (state: Partial<In42Store>) => void): In42Store => ({
   events: [],
   initEvents: async () =>{
     try {
@@ -59,14 +60,18 @@ export const useIn42Store = create<In42Store>((set,get) => ({
       LogData(logType.ERROR, error)
     }
   },
-  updateEventSubscriptionStatus: (eventID,newSubState) => set((store)=>({events: store.events.map( event => {
-    if (event.id === eventID) {
-        return { ...event, subscribed: newSubState };
-    }
-    return event;
-})})),
+  updateEventSubscriptionStatus: (eventID: number, newSubState: boolean) => {
+      const allEvents = useIn42Store.getState().events
+      set({events: allEvents.map((event) => {
+        if (event.id === eventID) {
+          return { ...event, subscribed: newSubState };
+        }
+        return event;
+      }),
+    })
+  },
   GetNextEvent: (eventID,direction) => {
-    const allEvents = get().events;
+    const allEvents = useIn42Store.getState().events;
   for (let i = 0; i < allEvents.length; i++) {
     if(allEvents[i].id == eventID) {
     let newEventID = i + direction;
@@ -104,7 +109,7 @@ export const useIn42Store = create<In42Store>((set,get) => ({
       let newSlotChunks = CreateSlotChunkata(rawSlotData);
 
       //merge both arrays
-      let allSlots = [...get().Slots,...newSlotChunks]
+      let allSlots = [...useIn42Store.getState().Slots,...newSlotChunks]
       //reassign IDs for(used for later deletion)
       for (let i = 0; i < allSlots.length; i++)
         allSlots[i].id = i;
@@ -112,7 +117,7 @@ export const useIn42Store = create<In42Store>((set,get) => ({
       set({Slots: allSlots });
   },
   DeleteUserSlotChunk: async (chunkID) => {
-    let Slots = get().Slots;
+    let Slots = useIn42Store.getState().Slots;
 
     let chunkIndex = 0;
     for (; chunkIndex < Slots.length; chunkIndex++) {
@@ -129,7 +134,7 @@ export const useIn42Store = create<In42Store>((set,get) => ({
     }
     else{
         LogData(logType.ERROR,'Something went wrong when deleting chunk data, check intra to be safe')
-        get().initSlots();
+        useIn42Store.getState().initSlots();
     }
   },
   RefreshUserData: async () =>{
@@ -141,9 +146,9 @@ export const useIn42Store = create<In42Store>((set,get) => ({
         SetUserData(personalData)
       }
       await StallTimeBetweenApiCalls()
-      get().initEvents();
+      useIn42Store.getState().initEvents();
       await StallTimeBetweenApiCalls()
-      get().initEvaluations();
+      useIn42Store.getState().initEvaluations();
       LogData(logType.INFO,'Setting UserData complete')
     } catch (error) {
       LogData(logType.ERROR,'Error in refreshUserData() = ', error)
@@ -154,4 +159,6 @@ export const useIn42Store = create<In42Store>((set,get) => ({
     set({language: changeLanguage(lang)});
   }
 
-}))
+})
+
+export const useIn42Store = createWithEqualityFn<In42Store>(store)
