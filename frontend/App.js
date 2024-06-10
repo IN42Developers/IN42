@@ -7,13 +7,15 @@ import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_7
 import * as NavigationBar from 'expo-navigation-bar';
 
 import { isTokenStillValid } from './src/utils/TokenStorage';
-import { AppStack, AuthStack }  from './src/navigation/NavigationStack'
+// import { AppStack, AuthStack }  from './src/navigation/NavigationStack'
 import { AuthContext } from './Context';
 import { LoadCounterPeriod,AssertUserCanRequestData } from './src/utils/UserData';
 import LogData, { logType } from './src/utils/debugging/debugging';
 
 import {setJSExceptionHandler} from 'react-native-exception-handler'
 import { sendCrashData } from './src/utils/debugging/crashes';
+import { AppStack } from './src/navigation/home/AppStack';
+import { AuthStack } from './src/navigation/auth/AuthStack';
 
 //setup deep linking
 const prefix = Linking.createURL('/');
