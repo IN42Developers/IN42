@@ -1,8 +1,14 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import React from 'react';
+import { SlotChunk } from '../../types/customTypes';
+
+interface SlotPlaceHolderProps {
+  data: SlotChunk,
+  style: ViewStyle,
+}
 
 //a simple component that fills rows in a SlotContainer
-const SlotPlaceholderItem = ({data,style}) => {
+const SlotPlaceholderItem:React.FC<SlotPlaceHolderProps> = ({data,style}) => {
 
 
   return (

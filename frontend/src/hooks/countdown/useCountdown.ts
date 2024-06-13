@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react"
 
-export default function useCountdown() {
+export default function useCountdown(): [number,(seconds:number)=> void] {
     const [secondsLeft, setSecondsLeft] = useState(0);
 
     useEffect(() =>{
@@ -13,7 +13,7 @@ export default function useCountdown() {
         return () => clearTimeout(timeout);
     },[secondsLeft])
 
-    function start(seconds){
+    function start(seconds: number){
         const nonNegativeSeconds = Math.max(0, seconds);
         setSecondsLeft(nonNegativeSeconds);
     }
