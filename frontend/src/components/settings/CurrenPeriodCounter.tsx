@@ -1,11 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextStyle, View } from 'react-native';
 import { CalculateRemainingTimePeriod,GetRequestCounterPeriod } from '../../utils/UserData';
 import {useEffect, useState} from 'react'
 import CountDownTimer from '../general/CountDownTimer';
 import { useFocusEffect } from '@react-navigation/native';
 import LogData, { logType } from '../../utils/debugging/debugging';
 
-const CurrenPeriodCounter = ({textStyle=styles}) =>{
+interface CurrenPeriodCounterProps {
+    textStyle?: TextStyle,
+}
+
+const CurrenPeriodCounter:React.FC<CurrenPeriodCounterProps> = ({textStyle=styles.text}) =>{
 
     const [timeInSeconds, setTimeInSeconds] = useState(0);
 
@@ -15,8 +19,6 @@ const CurrenPeriodCounter = ({textStyle=styles}) =>{
 
     },[])
 
-
-    
     const InitTimerPeriod =() => {
         let timeData2 = CalculateRemainingTimePeriod(GetRequestCounterPeriod());
         let totaltimeInSeconds = timeData2.days * 24 * 60 * 60;
@@ -28,10 +30,8 @@ const CurrenPeriodCounter = ({textStyle=styles}) =>{
         LogData(logType.INFO,"time in seconds =",timeInSeconds)
     }
 
-
-
     return(
-        <CountDownTimer totalTimeInSeconds={timeInSeconds} className="text-gray-300"></CountDownTimer>
+        <CountDownTimer totalTimeInSeconds={timeInSeconds} showHours={false} textStyle={textStyle}></CountDownTimer>
     )
 }
 

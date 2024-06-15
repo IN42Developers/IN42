@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View } from "react-native"
 import React, { useEffect } from 'react';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { TouchableOpacity } from 'react-native';
 import { useState } from "react";
 
@@ -8,15 +8,15 @@ import { IsoDateToWeekDay,formatDateToCustomString } from "../../../utils/slot_u
 import { GetCurrentDateWithOffset } from "../../../utils/events/event_utilities";
 import LogData, { logType } from "../../../utils/debugging/debugging";
 
-interface Props {
+interface InDatePickerProps {
   id: number,
   date: Date; // Define the type of the 'date' prop
   onDateChange: (id: number, date: Date) => void;
 }
 
 
-const InDatePicker_Android = ( props: Props ) => {
-    const [currDate, setDate] = useState<Date>(props.date);
+const InDatePicker_Android:React.FC<InDatePickerProps> = ({id,date,onDateChange} ) => {
+    const [currDate, setDate] = useState<Date>(date);
     const [mode, setMode] = useState<'date' | 'time'>('date');
     const [show, setShow] = useState(false);
   
@@ -26,11 +26,11 @@ const InDatePicker_Android = ( props: Props ) => {
   });
 
 
-    const onChange = (event: any, selectedDate: Date) => {
-      const currentDate = new Date(selectedDate.getTime()/1000*1000) ;
+    const onChange = (event: DateTimePickerEvent, date: Date) => {
+      const currentDate = new Date(event.nativeEvent.timestamp/1000*1000) ;
       setShow(false);
       setDate(currentDate);
-      props.onDateChange(props.id, currentDate);
+      onDateChange(id, currentDate);
     };
   
     const showMode = (currentMode: 'date' | 'time') => {
@@ -74,30 +74,20 @@ export default InDatePicker_Android;
 
 const styles = StyleSheet.create({
     container:{
-        // flex: 1,
         flexDirection: 'row',
-        // borderColor: 'red',
-        // borderWidth: 2,
-        // margin:4,
         justifyContent: 'space-between',
     },
     timeElement:{
-        // flex: 1,
         borderColor: 'red',
         margin:4,
         borderWidth: 12,
     },
     text:{
-        // flex: 1,
         color: 'white',
         backgroundColor: '#1F1F1F',
         alignSelf: 'center',
-        // borderColor: 'red',
         fontSize: 18,
-        // margin:10,
-        // borderWidth: 2,
         paddingHorizontal:10,
         paddingVertical: 5,
-        // marginHorizontal:  10,
     }
 })

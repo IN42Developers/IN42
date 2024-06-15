@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View,StyleSheet } from 'react-native';
 import Avatar from '../home/Avatar';
 import { Button } from '../general/Button';
 import { LogOutIcon } from 'lucide-react-native';
@@ -38,12 +38,12 @@ const LogOutField: React.FC = () => {
 
 
     return(
-            <View style={{ borderColor: '#008891', borderWidth: 1, padding: 32, borderRadius: 16 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={styles.container}>
+                <View style={styles.userContainer}>
                     <View style= {{ marginRight: 24 }}>
                         <Avatar width={52} height={52}/>
                     </View>
-                    <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                    <View style={styles.buttonContainer}>
                         <UserName 
                         nameStyle={ { fontSize: 16 }} 
                         slugStyle={ {color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24, marginTop: 2 }}/>
@@ -56,5 +56,12 @@ const LogOutField: React.FC = () => {
       </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: { borderColor: '#008891', borderWidth: 1, padding: 32, borderRadius: 16 },
+    userContainer: { flexDirection: 'row', justifyContent: 'space-between' },
+    buttonContainer: { flexDirection: 'column', justifyContent: 'center' },
+})
+
 
 export default LogOutField;

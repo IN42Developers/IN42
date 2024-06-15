@@ -1,10 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextStyle, View } from 'react-native';
 import { GetRequestCounter, GetRequestCounterMax } from '../../utils/UserData';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import LogData, { logType } from '../../utils/debugging/debugging';
 
-const RequestCounter = ({textStyle=styles}) =>{
+interface RequestCounterProps {
+    textStyle?: TextStyle,
+}
+
+const RequestCounter:React.FC<RequestCounterProps> = ({textStyle}) => {
 
     const [currentRequests, SetCurrentRequests] = useState(GetRequestCounter())
 
@@ -19,7 +23,7 @@ const RequestCounter = ({textStyle=styles}) =>{
 
     })
     return (
-        <Text style={textStyle.text}>{GetRequestCounter()}/{GetRequestCounterMax()}</Text>
+        <Text style={[styles.text,textStyle]}>{GetRequestCounter()}/{GetRequestCounterMax()}</Text>
     )
 }
 

@@ -1,12 +1,12 @@
-import { View, Image } from 'react-native'
+import { View, Image,StyleSheet } from 'react-native'
 import React from 'react'
 
 import Logo from '../../../assets/svgs/logo'
 
-const EntryHeader = () => {
+const EntryHeader:React.FC = () => {
   return (
-    <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <View style={{ flexDirection: 'column', alignItems: 'center', position: 'absolute', zIndex: 10 }}>
+    <View style={styles.container}>
+      <View style={styles.logo}>
         <Logo />
       </View>
       <Image
@@ -16,5 +16,19 @@ const EntryHeader = () => {
     </View>
   )
 }
+
+const styles= StyleSheet.create({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  logo: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
+    zIndex: 10,
+  },
+})
 
 export default EntryHeader
