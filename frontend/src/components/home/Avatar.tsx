@@ -12,7 +12,7 @@ const Avatar: React.FC<AvatarProps> = ({
     height= 56,
 }) => {
 
-    const UserData: UserData = GetUserData();
+    const UserData: UserData | null = GetUserData();
     let profileimage = require('../../../assets/images/profilePlaceholder.png')
     if (UserData != null) {
         profileimage ={uri: UserData.image.versions.small};
