@@ -9,14 +9,15 @@ import * as Progress from 'react-native-progress';
 
 import {  RefreshCwIcon } from 'lucide-react-native';
 import LogOutField from '../components/settings/LogOutField';
-import { useIn42Store } from '../services/state/store';
+import { useTranslation } from 'react-i18next';
+import appConfig from '../../app.json';
 
 const SettingsScreen: React.FC = () => {
 
-  const languageObject = useIn42Store((store)=> store.language)
+  const { t } = useTranslation();
+  const version: string = appConfig.expo.version;
 
     let requestProgress = GetRequestCounter() - GetRequestCounterMax();
-
 
     return (
       <View style={{ display: 'flex', flex: 1, marginTop: 32 }}>
@@ -26,8 +27,8 @@ const SettingsScreen: React.FC = () => {
             <View style={{ flexDirection: 'column' }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ display: 'flex' }}>
-                  <Text style={{ color: 'lightgray', fontSize: 14, fontFamily: 'Inter_600SemiBold', letterSpacing: 1.2 }}>{languageObject.settings_rateLimit_title}</Text>
-                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular', marginTop: 8, marginRight: 108, }}>{languageObject.settings_rateLimit_description}</Text>
+                  <Text style={{ color: 'lightgray', fontSize: 14, fontFamily: 'Inter_600SemiBold', letterSpacing: 1.2 }}>{t('settings_rateLimit_title')}</Text>
+                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular', marginTop: 8, marginRight: 108, }}>{t('settings_rateLimit_description')}</Text>
                 </View>
                 <View style={{ position: 'absolute', right: 64 }}>
                   <CurrenPeriodCounter />
@@ -44,7 +45,7 @@ const SettingsScreen: React.FC = () => {
           <View style={{ backgroundColor: 'gray', padding: 0.5 }} />
           <View style={{ alignItems: 'center', alignSelf: 'center' }}>
             <LogOutField/>
-            <Text style={{ color: 'gray' }}>{languageObject.settings_appVersion}</Text>
+            <Text style={{ color: 'gray' }}>{'IN42 ' + version}</Text>
           </View>
         </View>
       </View>

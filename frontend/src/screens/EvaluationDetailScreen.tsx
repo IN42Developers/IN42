@@ -1,17 +1,17 @@
 import React from 'react'
 import { Text, View, StyleSheet } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useIn42Store } from '../services/state/store'
+import { useTranslation } from 'react-i18next'
 
 
 const EvaluationDetailScreen:React.FC = () => {
 
-  const languageObject = useIn42Store((store)=> store.language)
+  const { t } = useTranslation();
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <Text style={styles.text}>{languageObject.title_evaluations}</Text>
+        <Text style={styles.text}>{t('title_evaluations')}</Text>
       </View>
     </SafeAreaView>
   )

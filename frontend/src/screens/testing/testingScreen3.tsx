@@ -2,22 +2,13 @@ import { View,StyleSheet,Text,SafeAreaView,ScrollView,FlatList,Image } from "rea
 import React, { useState } from 'react'
 import { GetDataFromEndPoint, PostDataToEndPoint, StallTimeBetweenApiCalls } from "../../utils/api_utilities"
 import { GetCurrentDateWithOffset, getCampusEvents } from "../../utils/events/event_utilities"
-import ListContainer from "../../components/general/ListContainer"
-import EventItem from "../../components/events/EventItem"
-import EvaluationItem from "../../components/evaluation/EvaluationItem"
 import { GetUserData } from "../../utils/UserData"
-import { useIn42Store } from "../../services/state/store"
-// import { GetImageFromUrl } from "../../Utilities/api_utilities"
-import SubscribeButton from "../../components/events/SubscribeButton"
-import { LinearGradient } from "expo-linear-gradient"
 import { Button } from "../../components/general/Button"
 import LogData, { logType } from "../../utils/debugging/debugging"
-import { getAccessToken } from "../../utils/TokenStorage"
 import { ELanguages } from "../../../assets/translation"
+import { useTranslation } from "react-i18next"
 
 export default function TestingScreen3() {
-
-    const changeLanguage = useIn42Store((store)=>store.updateLanguage);
 
 
     const v2_me =async () => {
@@ -171,6 +162,12 @@ export default function TestingScreen3() {
     let num = 10 / 0;
 }
 
+const { i18n } = useTranslation();
+
+const changeLanguage = (lng: string) => {
+  i18n.changeLanguage(lng);
+};
+
 
     return (
         <SafeAreaView style={{flex: 1,paddingTop: 30}}>
@@ -186,8 +183,8 @@ export default function TestingScreen3() {
                 <Button onPress={CrashApp} variant={'secondary'}><Text>Crash App</Text></Button>
                 <Button onPress={causeException} variant={'secondary'}><Text>causeException</Text></Button>
                 <Button onPress={divideByZero} variant={'secondary'}><Text>divideByZero</Text></Button>
-                <Button onPress={()=>changeLanguage(ELanguages.LANG_GER)} variant={'dialogWithBorder'}><Text>german translation</Text></Button>
-                <Button onPress={()=>changeLanguage(ELanguages.LANGU_EN)} variant={'dialogWithBorder'}><Text>english translation</Text></Button>
+                <Button onPress={()=>changeLanguage('ger')} variant={'dialogWithBorder'}><Text>german translation</Text></Button>
+                <Button onPress={()=>changeLanguage('en')} variant={'dialogWithBorder'}><Text>english translation</Text></Button>
             </View>
         </SafeAreaView>
     )

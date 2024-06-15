@@ -11,7 +11,7 @@ import { CampusEvent } from '../../types/eventTypes';
 import { UserData } from '../../types/UserDataTypes';
 import { Slot, SlotChunk } from '../../types/customTypes';
 import { ELanguages, changeLanguage } from '../../../assets/translation';
-import { LanguageDict } from '../../types/languageTranslation';
+import { TranslationKeys } from '../../types/languageTranslation';
 import { en } from '../../../assets/translation/en';
 
 interface In42Store {
@@ -29,9 +29,6 @@ interface In42Store {
   DeleteUserSlotChunk: (chunkID: number) => void;
 
   RefreshUserData: () => Promise<void>;
-
-  language: LanguageDict;
-  updateLanguage: (language: ELanguages) => void;
 }
 // const store<In42Store> = (set) => ({
 // const store = create<In42Store>((set,get) => ({
@@ -154,11 +151,6 @@ const store = (set: (state: Partial<In42Store>) => void): In42Store => ({
       LogData(logType.ERROR,'Error in refreshUserData() = ', error)
     }
   },
-  language: en,
-  updateLanguage: (lang:ELanguages) => {
-    set({language: changeLanguage(lang)});
-  }
-
 })
 
 export const useIn42Store = createWithEqualityFn<In42Store>(store)

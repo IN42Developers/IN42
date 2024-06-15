@@ -10,11 +10,11 @@ import { UserData } from '../../types/UserDataTypes'
 import Avatar from './Avatar';
 import UserCurrencyContainer from './UserCurrencyContainer';
 import UserName from './UserName';
-import { useIn42Store } from '../../services/state/store';
+import { useTranslation } from 'react-i18next';
 
 export default function UserInfoCard() {
 
-  const languageObject = useIn42Store((store)=> store.language)
+  const { t } = useTranslation();
 
   const UserData: UserData | null = GetUserData();
   const UserCursus = getUserCursus();
@@ -48,14 +48,14 @@ export default function UserInfoCard() {
           </View>
           <View style={{ display: 'flex', flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', gap: 6, alignContent: 'center' }}>
             <View style={{ flex: 0.8, flexDirection: 'column', rowGap: 8 }}>
-              <UserCurrencyContainer currencyAmount={walletPoints} currencyText={languageObject.home_currency_wallet} icon={<CoinsIcon stroke="#00B5C0" size={20}/>}/>
-              <UserCurrencyContainer currencyAmount={correctionPoints} currencyText={languageObject.home_currency_evalPoints} icon={<CoinsIcon stroke="#00B5C0" size={20} /> }/>
+              <UserCurrencyContainer currencyAmount={walletPoints} currencyText={t('home_currency_wallet')} icon={<CoinsIcon stroke="#00B5C0" size={20}/>}/>
+              <UserCurrencyContainer currencyAmount={correctionPoints} currencyText={t('home_currency_evalPoints')} icon={<CoinsIcon stroke="#00B5C0" size={20} /> }/>
             </View>
             <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.3)', paddingLeft: 12, paddingRight: 12, paddingTop: 8, rowGap: 8, borderRadius: 8 }}>
-                <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', paddingTop: 2 }}>{languageObject.home_level_progress}</Text>
+                <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', paddingTop: 2 }}>{t('home_level_progress')}</Text>
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <Text style={{ color: 'white', fontFamily: 'Inter_500Medium' }}>{ languageObject.home_level + " " + curLevel }</Text>
-                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular' }}>{languageObject.home_level + " " + nextLevel}</Text>
+                  <Text style={{ color: 'white', fontFamily: 'Inter_500Medium' }}>{ t('home_level') + " " + curLevel }</Text>
+                  <Text style={{ color: 'gray', fontFamily: 'Inter_400Regular' }}>{t('home_level') + " " + nextLevel}</Text>
                 </View>
                 <View style={{ display: 'flex', width: '100%' }}>
                   <Progress.Bar progress={levelProgress} width={164} height={4} color={'white'} unfilledColor={'#94a3b8'} borderColor={'#94a3b8'} />

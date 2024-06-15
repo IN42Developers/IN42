@@ -8,13 +8,13 @@ import LogData, { logType } from '../../utils/debugging/debugging';
 import { AuthContext } from '../../../Context';
 import { GetUserData } from '../../utils/UserData';
 import { UserData } from '../../types/UserDataTypes';
-import { useIn42Store } from '../../services/state/store';
 import UserName from '../home/UserName';
+import { useTranslation } from 'react-i18next';
 
 const LogOutField: React.FC = () => {
 
     const {Logout} = React.useContext(AuthContext);
-    const languageObject = useIn42Store((store)=> store.language)
+    const { t } = useTranslation();
     
     const UserData:UserData | null = GetUserData();
     let displayname = 'Long display name';
@@ -49,7 +49,7 @@ const LogOutField: React.FC = () => {
                         slugStyle={ {color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24, marginTop: 2 }}/>
                         <Button onPress={LogoutUser} variant='link'>
                             <LogOutIcon stroke='#1E1E1E' size="20" />
-                            <Text style={{ color: '#1E1E1E', fontSize: 16, fontFamily: 'Inter_900Black' }}>{languageObject.settings_logout}</Text>
+                            <Text style={{ color: '#1E1E1E', fontSize: 16, fontFamily: 'Inter_900Black' }}>{t('settings_logout')}</Text>
                         </Button>
                     </View>
             </View>

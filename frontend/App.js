@@ -17,6 +17,9 @@ import { sendCrashData } from './src/utils/debugging/crashes';
 import { AppStack } from './src/navigation/home/AppStack';
 import { AuthStack } from './src/navigation/auth/AuthStack';
 
+import { I18nextProvider } from 'react-i18next';
+import i18n from './assets/translation/i18n';
+
 //setup deep linking
 const prefix = Linking.createURL('/');
 
@@ -109,10 +112,12 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer theme={AppTheme} linking={linking}>
-      <StatusBar barStyle="light-content" navigationBarHandleColor="#202020" backgroundColor="transparent" showHideTransition={true} translucent={true} />
-        { isLoggedIn ? <AppStack/> : <AuthStack/> }
-      </NavigationContainer>
-      </AuthContext.Provider>
+      <I18nextProvider i18n={i18n}>
+        <NavigationContainer theme={AppTheme} linking={linking}>
+        <StatusBar barStyle="light-content" navigationBarHandleColor="#202020" backgroundColor="transparent" showHideTransition={true} translucent={true} />
+          { isLoggedIn ? <AppStack/> : <AuthStack/> }
+        </NavigationContainer>
+      </I18nextProvider>
+    </AuthContext.Provider>
   );
 }

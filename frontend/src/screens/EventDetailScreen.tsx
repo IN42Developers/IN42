@@ -9,6 +9,7 @@ import SubscribeButton from "../components/events/SubscribeButton.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react-native";
 import LogData, { logType } from "../utils/debugging/debugging";
+import { useTranslation } from "react-i18next";
 
 const EventDetailScreen:React.FC = () => {
 
@@ -18,7 +19,7 @@ const EventDetailScreen:React.FC = () => {
     
     const currEvent = useIn42Store((store)=>store.events.find((item)=>item.id == eventData?.eventData?.id)); //needs cleanup
     const GetNextEvent = useIn42Store((store)=> store.GetNextEvent)
-    const languageObject = useIn42Store((store)=> store.language)
+    const { t } = useTranslation();
     
     if(currEvent == null)
         return;
@@ -63,7 +64,7 @@ const EventDetailScreen:React.FC = () => {
          </View>
 
             <ScrollView style={styles.detailsView}>
-                <Text style={styles.aboutHeader}>{languageObject.events_about_event}</Text> 
+                <Text style={styles.aboutHeader}>{t('events_about_event')}</Text> 
                 <Text style={styles.DetailText}>{details}</Text>
             </ScrollView>
 

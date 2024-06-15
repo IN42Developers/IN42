@@ -11,6 +11,7 @@ import TestingScreen3 from '../../screens/testing/testingScreen3';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { HomeNavigationSubStack } from './HomeNavigationSubStack';
 import { defaultNavigationStyle } from '../../styles/generalStyles/defaultNavigationStyle';
+import { useTranslation } from 'react-i18next';
 
     //   {
     //     {
@@ -41,7 +42,8 @@ import { defaultNavigationStyle } from '../../styles/generalStyles/defaultNaviga
 
 export const TabNavigator:React.FC = () => {
 
-    const languageObject = useIn42Store((store)=> store.language)
+    // const languageObject = useIn42Store((store)=> store.language)
+    const { t } = useTranslation();
     const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
@@ -52,7 +54,7 @@ export const TabNavigator:React.FC = () => {
         options={{
           headerShown: false,
           tabBarIcon: renderTabBarIcon('Home'),
-        title: languageObject.title_home,
+        title: t('title_home'),
         }}
       />
       <Tab.Screen
@@ -60,7 +62,7 @@ export const TabNavigator:React.FC = () => {
         component={CampusEventsScreen}
         options={{
           tabBarIcon: renderTabBarIcon('CalendarFold'),
-          title: languageObject.title_events,
+          title: t('title_events'),
         }}
       />
       <Tab.Screen
@@ -69,7 +71,7 @@ export const TabNavigator:React.FC = () => {
         options={{
           headerRight: () => (<ShowModalButton></ShowModalButton>),
           tabBarIcon: renderTabBarIcon('UserCheck'),
-          title: languageObject.title_evaluations,
+          title: t('title_evaluations'),
         }}
       />
       <Tab.Screen
@@ -77,7 +79,7 @@ export const TabNavigator:React.FC = () => {
         component={SettingsScreen}
         options={{
           tabBarIcon: renderTabBarIcon('Cog'),
-          title: languageObject.title_settings,
+          title: t('title_settings'),
         }}
       />
       {(process.env.IN42_DEV == 'true' || process.env.EXPO_PUBLIC_LOGGING == 'true') &&

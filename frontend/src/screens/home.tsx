@@ -17,6 +17,7 @@ import EmptyContainerItem from '../components/general/EmptyContainerItem';
 
 import { refreshToken } from '../utils/TokenStorage';
 import LogData, { logType } from '../utils/debugging/debugging';
+import { useTranslation } from 'react-i18next';
 
 const HomeScreen:React.FC = () => {
   const {height} = useWindowDimensions();
@@ -26,7 +27,7 @@ const HomeScreen:React.FC = () => {
   const subbedEvents = useIn42Store((store) =>store.events.filter((event)=>event.subscribed == true), shallow)
   const upcomingEvaluations = useIn42Store((store) => store.evaluations);
   const RefreshUserData = useIn42Store((store) => store.RefreshUserData);
-  const languageObject = useIn42Store((store)=> store.language)
+  const { t } = useTranslation();
 
   const y = useSharedValue(0);
 
@@ -83,8 +84,8 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
     <GestureHandlerRootView style={{ display: 'flex', flex: 1 }}>
       <Animated.View style={[{flex: 1}, animatedContainerStyle]}>
         <UserInfoCard />
-        <ListContainer title={languageObject.title_evaluations} ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={languageObject.evaluations_empty_list} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen} headerStyle="full"/>
-        <ListContainer title={languageObject.title_events} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={languageObject.events_empty_list} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen} headerStyle="full"/>  
+        <ListContainer title={t('title_evaluations')} ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={t('evaluations_empty_list')} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen} headerStyle="full"/>
+        <ListContainer title={t('title_events')} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={t('events_empty_list')} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen} headerStyle="full"/>  
         <PanGestureHandler onGestureEvent={unlockGestureHandler}>
           <Animated.View style={styles.area} />
         </PanGestureHandler>

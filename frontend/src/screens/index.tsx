@@ -12,7 +12,7 @@ import { AssertUserCanRequestData } from '../utils/UserData'
 import { AuthContext } from '../../Context'
 import EntryHeader from '../components/index/EntryHeader'
 import LogData, { logType } from '../utils/debugging/debugging'
-import { useIn42Store } from '../services/state/store'
+import { useTranslation } from 'react-i18next'
 
 export const IndexScreen:React.FC = ()=> {
 
@@ -20,7 +20,7 @@ export const IndexScreen:React.FC = ()=> {
   const navigation = useNavigation();
 
   const { response, promptAsync: AuthUser } = authorizeUser();
-  const languageObject = useIn42Store((store)=> store.language)
+  const { t } = useTranslation();
 
   useEffect( () => {
     const tokenExchange = async() =>{
@@ -80,13 +80,13 @@ export const IndexScreen:React.FC = ()=> {
 
       </View>
       <View style={styles.bottomContainer}>
-            <Text style={styles.titleText}>{languageObject.index_title}</Text>
-            <Text style={styles.descriptionText}>{languageObject.index_description}</Text>
+            <Text style={styles.titleText}>{t('index_title')}</Text>
+            <Text style={styles.descriptionText}>{t('index_description')}</Text>
           <View style={styles.buttonContainer}>
             <Button onPress={handlePress}>
-              <Text style={styles.buttonText}>{languageObject.index_auth_btn}</Text>
+              <Text style={styles.buttonText}>{t('index_auth_btn')}</Text>
             </Button>
-            <Text style={styles.detailText}>{languageObject.index_footer}</Text>
+            <Text style={styles.detailText}>{t('index_footer')}</Text>
           </View>
       </View>
     </View>
