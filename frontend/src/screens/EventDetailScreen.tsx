@@ -9,7 +9,7 @@ import SubscribeButton from "../components/events/SubscribeButton.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react-native";
 import LogData, { logType } from "../utils/debugging/debugging";
-import { useTranslation } from "react-i18next";
+import { useTypedTranslation } from "../hooks/useTypedTranslation";
 
 const EventDetailScreen:React.FC = () => {
 
@@ -19,7 +19,7 @@ const EventDetailScreen:React.FC = () => {
     
     const currEvent = useIn42Store((store)=>store.events.find((item)=>item.id == eventData?.eventData?.id)); //needs cleanup
     const GetNextEvent = useIn42Store((store)=> store.GetNextEvent)
-    const { t } = useTranslation();
+    const { t } = useTypedTranslation();
     
     if(currEvent == null)
         return;

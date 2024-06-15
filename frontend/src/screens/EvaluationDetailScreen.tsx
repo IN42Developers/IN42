@@ -1,12 +1,12 @@
 import React from 'react'
 import { Text, View, StyleSheet } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useTranslation } from 'react-i18next'
+import { useTypedTranslation } from '../hooks/useTypedTranslation'
 
 
 const EvaluationDetailScreen:React.FC = () => {
 
-  const { t } = useTranslation();
+  const { t } = useTypedTranslation();
 
   return (
     <SafeAreaView>

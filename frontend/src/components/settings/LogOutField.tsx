@@ -9,12 +9,12 @@ import { AuthContext } from '../../../Context';
 import { GetUserData } from '../../utils/UserData';
 import { UserData } from '../../types/UserDataTypes';
 import UserName from '../home/UserName';
-import { useTranslation } from 'react-i18next';
+import { useTypedTranslation } from '../../hooks/useTypedTranslation';
 
 const LogOutField: React.FC = () => {
 
     const {Logout} = React.useContext(AuthContext);
-    const { t } = useTranslation();
+    const { t } = useTypedTranslation();
     
     const UserData:UserData | null = GetUserData();
     let displayname = 'Long display name';

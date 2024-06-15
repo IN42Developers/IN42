@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native';
-import useCountdown from '../../hooks/countdown/useCountdown';
+import useCountdown from '../../hooks/useCountdown';
 import LogData, { logType } from '../../utils/debugging/debugging';
 
 export default CountDownTimer = ({totalTimeInSeconds,textStyle=styles }) =>{

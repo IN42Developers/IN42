@@ -24,7 +24,12 @@ const en = {
     generic_cancel_btn: "Cancel",
     generic_confirm_btn: "Confirm",
     slots_today: "Today",
-    slots_total_slot_time: "Tomorrow",
+    slots_tomorrow: "Today",
+    slots_total_slot_time: "Total Slot time:",
+    slots_hour: 'hour',
+    slots_hours: 'hours',
+    slots_minute: 'minute',
+    slots_minutes: 'minutes',
     day_monday: "Monday",
     day_tuesday: "Tuesday",
     day_wednesday: "Wednesday",
@@ -34,6 +39,10 @@ const en = {
     day_sunday: "Sunday",    
     events_subscribe: "Subscribe",
     events_about_event: "About this event",
+    slots_error: "[Error]",
+    slots_errormessage_too_short: "Your slot has to be at least {{minutes}} minutes long.",
+    slots_errormessage_too_early: "Slot is not at least {{minutes}} minutes in the future",
+    slots_errormessage_too_long: "Slot cannot be longer than {{hours}} hours (it can, but come on...)",
 }
 
 export default en;

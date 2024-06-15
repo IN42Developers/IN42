@@ -17,7 +17,7 @@ import EmptyContainerItem from '../components/general/EmptyContainerItem';
 
 import { refreshToken } from '../utils/TokenStorage';
 import LogData, { logType } from '../utils/debugging/debugging';
-import { useTranslation } from 'react-i18next';
+import { useTypedTranslation } from '../hooks/useTypedTranslation';
 
 const HomeScreen:React.FC = () => {
   const {height} = useWindowDimensions();
@@ -27,7 +27,7 @@ const HomeScreen:React.FC = () => {
   const subbedEvents = useIn42Store((store) =>store.events.filter((event)=>event.subscribed == true), shallow)
   const upcomingEvaluations = useIn42Store((store) => store.evaluations);
   const RefreshUserData = useIn42Store((store) => store.RefreshUserData);
-  const { t } = useTranslation();
+  const { t } = useTypedTranslation();
 
   const y = useSharedValue(0);
 

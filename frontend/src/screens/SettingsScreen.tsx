@@ -9,12 +9,12 @@ import * as Progress from 'react-native-progress';
 
 import {  RefreshCwIcon } from 'lucide-react-native';
 import LogOutField from '../components/settings/LogOutField';
-import { useTranslation } from 'react-i18next';
 import appConfig from '../../app.json';
+import { useTypedTranslation } from '../hooks/useTypedTranslation';
 
 const SettingsScreen: React.FC = () => {
 
-  const { t } = useTranslation();
+  const { t } = useTypedTranslation();
   const version: string = appConfig.expo.version;
 
     let requestProgress = GetRequestCounter() - GetRequestCounterMax();

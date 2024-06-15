@@ -12,7 +12,7 @@ import { AssertUserCanRequestData } from '../utils/UserData'
 import { AuthContext } from '../../Context'
 import EntryHeader from '../components/index/EntryHeader'
 import LogData, { logType } from '../utils/debugging/debugging'
-import { useTranslation } from 'react-i18next'
+import { useTypedTranslation } from '../hooks/useTypedTranslation'
 
 export const IndexScreen:React.FC = ()=> {
 
@@ -20,7 +20,7 @@ export const IndexScreen:React.FC = ()=> {
   const navigation = useNavigation();
 
   const { response, promptAsync: AuthUser } = authorizeUser();
-  const { t } = useTranslation();
+  const { t } = useTypedTranslation();
 
   useEffect( () => {
     const tokenExchange = async() =>{

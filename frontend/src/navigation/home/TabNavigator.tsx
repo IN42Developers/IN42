@@ -11,7 +11,7 @@ import TestingScreen3 from '../../screens/testing/testingScreen3';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { HomeNavigationSubStack } from './HomeNavigationSubStack';
 import { defaultNavigationStyle } from '../../styles/generalStyles/defaultNavigationStyle';
-import { useTranslation } from 'react-i18next';
+import { useTypedTranslation } from '../../hooks/useTypedTranslation';
 
     //   {
     //     {
@@ -43,7 +43,7 @@ import { useTranslation } from 'react-i18next';
 export const TabNavigator:React.FC = () => {
 
     // const languageObject = useIn42Store((store)=> store.language)
-    const { t } = useTranslation();
+    const { t } = useTypedTranslation();
     const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator

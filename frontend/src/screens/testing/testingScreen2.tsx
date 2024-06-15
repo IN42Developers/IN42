@@ -5,7 +5,7 @@ import { DeleteDataFromEndpoint, GetDataFromEndPoint, PostDataToEndPoint } from 
 import { GetUserData } from "../../utils/UserData"
 import { getCampusTimeZone } from "../../utils/UserData"
 // import {getJsonFileAsCorrector} from "../../Utilities/test"
-import useCountdown from "../../hooks/countdown/useCountdown"
+import useCountdown from "../../hooks/useCountdown"
 import {useEffect} from "react"
 
 export default function TestingScreen2() {
