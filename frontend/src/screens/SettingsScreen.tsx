@@ -3,14 +3,11 @@ import { View, Text } from "react-native"
 import RequestCounter from '../components/settings/RequestCounter';
 import { GetRequestCounter, GetRequestCounterMax, GetUserData } from '../utils/UserData';
 import CurrenPeriodCounter from '../components/settings/CurrenPeriodCounter';
-// import SettingsSection from '../components/general/SettingsSection';
-// import SettingsToggle from '../components/generic/SettingsToggle';
 import * as Progress from 'react-native-progress';
-
-import {  RefreshCwIcon } from 'lucide-react-native';
 import LogOutField from '../components/settings/LogOutField';
 import appConfig from '../../app.json';
 import { useTypedTranslation } from '../hooks/useTypedTranslation';
+import In42Icon from '../components/general/ui_basic/In42Icon';
 
 const SettingsScreen: React.FC = () => {
 
@@ -23,7 +20,7 @@ const SettingsScreen: React.FC = () => {
       <View style={{ display: 'flex', flex: 1, marginTop: 32 }}>
         <View style={{ justifyContent: 'space-between', rowGap: 24, }}>
           <View style={{ flexDirection: 'row' }}>
-            <RefreshCwIcon stroke="gray" style={{ marginHorizontal: 16 }} />
+          <In42Icon origin={'lucide'} name={"RefreshCw"} size={20} color={"gray"} style={{ marginHorizontal: 16 }} ></In42Icon>
             <View style={{ flexDirection: 'column' }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ display: 'flex' }}>

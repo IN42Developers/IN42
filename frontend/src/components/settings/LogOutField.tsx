@@ -10,6 +10,7 @@ import { GetUserData } from '../../utils/UserData';
 import { UserData } from '../../types/UserDataTypes';
 import UserName from '../home/UserName';
 import { useTypedTranslation } from '../../hooks/useTypedTranslation';
+import In42Icon from '../general/ui_basic/In42Icon';
 
 const LogOutField: React.FC = () => {
 
@@ -48,7 +49,7 @@ const LogOutField: React.FC = () => {
                         nameStyle={ { fontSize: 16 }} 
                         slugStyle={ {color: 'lightgray', fontFamily: 'Inter_500Medium', fontSize: 12, marginBottom: 24, marginTop: 2 }}/>
                         <Button onPress={LogoutUser} variant='link'>
-                            <LogOutIcon stroke='#1E1E1E' size="20" />
+                            <In42Icon origin={'lucide'} name={"LogOut"} size={20} color={'#1E1E1E'}></In42Icon>
                             <Text style={{ color: '#1E1E1E', fontSize: 16, fontFamily: 'Inter_900Black' }}>{t('settings_logout')}</Text>
                         </Button>
                     </View>

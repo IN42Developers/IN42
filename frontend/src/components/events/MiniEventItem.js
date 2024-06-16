@@ -4,9 +4,9 @@ import RoundedDescriptor from '../general/RoundedDescriptor';
 import { getMonthFromDate, getShortDayFromDate,getEventTypeColorGradient as getImageFromEventType } from '../../utils/events/event_utilities'
 import { useNavigation } from '@react-navigation/native'
 import { getCampusTimeZone } from '../../utils/UserData';
-import { AntDesign } from '@expo/vector-icons'
 import {LinearGradient} from 'expo-linear-gradient'
 import LogData, { logType } from '../../utils/debugging/debugging';
+import In42Icon from '../general/ui_basic/In42Icon';
 
 const MiniEventItem = ({data,callback}) => {
 
@@ -91,7 +91,7 @@ const MiniEventItem = ({data,callback}) => {
               {locationDefined && <RoundedDescriptor  title={location} scale ={.4} IconName='enviromento'/>}
             </View>
             {data.subscribed == true ?
-            <AntDesign style={styles.subscribedIcon} name='check'></AntDesign>
+            <In42Icon origin={'antdesign'} style={styles.subscribedIcon} color={'lightgrey'} name='check'></In42Icon>
             : null }
           </View>
         </View>
@@ -158,7 +158,6 @@ const styles = StyleSheet.create({
   subscribedIcon: {
     // flex: 1,
     flexDirection: 'row',
-    color: 'lightgrey',
     // color: 'lime',
     fontWeight: 'bold',
     fontSize: 20,

@@ -1,6 +1,6 @@
 import { View,Text,TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from '@expo/vector-icons'
+import In42Icon from "./ui_basic/In42Icon";
 
 export default function NavigateBackButton({size=30}) {
     const navigation = useNavigation();
@@ -11,7 +11,7 @@ export default function NavigateBackButton({size=30}) {
 
     return (
         <TouchableOpacity onPress={onPress} style={{flex:1,}}>
-            <AntDesign name={'left'} size={size} color={'white'}></AntDesign>
+            <In42Icon origin={'antdesign'} name={'left'} size={size} color={'white'}></In42Icon>
         </TouchableOpacity>
     )
 }

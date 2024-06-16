@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Image, Text, ImageBackground, Platform } from 'react-native'
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { CoinsIcon } from 'lucide-react-native';
 
 import { GetUserData, getUserCursus } from '../../utils/UserData'
 import * as Progress from 'react-native-progress';
@@ -10,11 +9,12 @@ import { UserData } from '../../types/UserDataTypes'
 import Avatar from './Avatar';
 import UserCurrencyContainer from './UserCurrencyContainer';
 import UserName from './UserName';
-import { useTranslation } from 'react-i18next';
+import { useTypedTranslation } from '../../hooks/useTypedTranslation';
+import In42Icon from '../general/ui_basic/In42Icon';
 
 export default function UserInfoCard() {
 
-  const { t } = useTranslation();
+  const { t } = useTypedTranslation();
 
   const UserData: UserData | null = GetUserData();
   const UserCursus = getUserCursus();
@@ -48,8 +48,10 @@ export default function UserInfoCard() {
           </View>
           <View style={{ display: 'flex', flexDirection: 'row', marginTop: 24, justifyContent: 'space-between', gap: 6, alignContent: 'center' }}>
             <View style={{ flex: 0.8, flexDirection: 'column', rowGap: 8 }}>
-              <UserCurrencyContainer currencyAmount={walletPoints} currencyText={t('home_currency_wallet')} icon={<CoinsIcon stroke="#00B5C0" size={20}/>}/>
-              <UserCurrencyContainer currencyAmount={correctionPoints} currencyText={t('home_currency_evalPoints')} icon={<CoinsIcon stroke="#00B5C0" size={20} /> }/>
+              <UserCurrencyContainer currencyAmount={walletPoints} currencyText={t('home_currency_wallet')} 
+                icon={<In42Icon origin={'lucide'} name={"Coins"} size={20} color={"#00B5C0"}></In42Icon>}/> 
+              <UserCurrencyContainer currencyAmount={correctionPoints} currencyText={t('home_currency_evalPoints')} 
+                icon={<In42Icon origin={'lucide'} name={"Coins"} size={20} color={"#00B5C0"}></In42Icon> }/>
             </View>
             <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.3)', paddingLeft: 12, paddingRight: 12, paddingTop: 8, rowGap: 8, borderRadius: 8 }}>
                 <Text style={{ color: 'white', fontFamily: 'Inter_700Bold', paddingTop: 2 }}>{t('home_level_progress')}</Text>

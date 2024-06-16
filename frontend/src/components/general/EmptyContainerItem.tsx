@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View,Image,ImageBackground } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { StyleSheet, Text, View } from 'react-native';
+import In42Icon from './ui_basic/In42Icon';
 
 interface EmptyContainerItemProps {
   text: string,
@@ -16,7 +16,7 @@ const EmptyContainerItem: React.FC<EmptyContainerItemProps> = ({
 
   return (
       <View style={styles.container}>
-        <AntDesign name={icon} color={'#606060'} size={24} />
+        <In42Icon origin={'antdesign'} name={icon} color={'#606060'} size={24}></In42Icon>
         <Text style={styles.titleText}>{text}</Text>
       </View>
   );

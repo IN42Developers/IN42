@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'
-import { UsersIcon } from 'lucide-react-native';
+import In42Icon from './ui_basic/In42Icon';
 
 
 const AttendenceCounter = ({currentCount,maxCount,scale=1}) =>{
@@ -13,7 +12,7 @@ const AttendenceCounter = ({currentCount,maxCount,scale=1}) =>{
 
     return(
         <View  style={styles.container}>
-        <UsersIcon stroke='gray' size='20' />
+        <In42Icon origin={'lucide'} color={'grey'} size='20' name='Users'></In42Icon>
             <Text style={[styles.text, {fontSize: 14 * scale}]}> {text}</Text>
         </View>
     )

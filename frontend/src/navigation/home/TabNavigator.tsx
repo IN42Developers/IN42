@@ -1,7 +1,5 @@
 import React from 'react';
-import Icon from '../../../assets/svgs/AutoIcon';
 import ShowModalButton from '../../components/general/ShowModalButton';
-import { useIn42Store } from '../../services/state/store';
 
 import CampusEventsScreen from '../../screens/CampusEventsScreen';
 import UserSlotsScreen from '../../screens/UserSlotScreen';
@@ -12,33 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { HomeNavigationSubStack } from './HomeNavigationSubStack';
 import { defaultNavigationStyle } from '../../styles/generalStyles/defaultNavigationStyle';
 import { useTypedTranslation } from '../../hooks/useTypedTranslation';
-
-    //   {
-    //     {
-    //     tabBarActiveTintColor: '#00B5C0',
-    //     tabBarInactiveTintColor: 'gray',
-    //     headerShown: true,
-    //     headerTitleAlign: 'center',
-    //     tabBarStyle: {
-    //       backgroundColor: '#202020',
-    //       borderTopColor: '#202020',
-    //     },
-    //     tabBarLabelStyle: {
-    //       fontFamily: 'Inter_500Medium',
-    //       fontSize: 11
-    //     },
-    //     headerStyle: {
-    //         backgroundColor: '#202020',
-    //         borderColor: '#595959',
-    //         borderEndWidth: 0,
-    //         shadowRadius: 0
-    //       },
-    //       headerTitleStyle: {
-    //         color: '#fff',
-    //         fontFamily: 'Inter_500Medium',
-    //       },
-    //   }
-    // }
+import In42Icon from '../../components/general/ui_basic/In42Icon';
 
 export const TabNavigator:React.FC = () => {
 
@@ -100,5 +72,5 @@ export const TabNavigator:React.FC = () => {
   };
 
   const renderTabBarIcon = (iconName: string) => ({ color, focused }: TabBarIconProps) => (
-    <Icon name={iconName} color={color} focused={focused} />
+    <In42Icon origin={'lucide'} name={iconName} color={focused ? '#007F87' : 'gray'} size={24} ></In42Icon>
   );

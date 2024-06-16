@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import MiniEventItem from './MiniEventItem';
-import ExpandedEventItem from './ExpandedEventItem';
 import { useNavigation } from '@react-navigation/native';
 import LogData, { logType } from '../../utils/debugging/debugging';
 

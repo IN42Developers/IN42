@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, FlatList, ViewStyle } from "react-native"
 import { StyleSheet } from "react-native";
 import EmptyContainerItem from "./EmptyContainerItem";
-import { AntDesign } from '@expo/vector-icons';
 import LogData, { logType } from "../../utils/debugging/debugging";
+import In42Icon from "./ui_basic/In42Icon";
 
 interface ListContainerProps {
     title?: String,
@@ -35,7 +35,7 @@ const ListContainer:React.FC<ListContainerProps> = ({
                 <Text style={styles.headerText}>{title}</Text>
                 { headerStyle != 'title' &&
                 <TouchableOpacity style={styles.button} onPress={onDetailPressed}>
-                    <AntDesign name={detailIcon} color={'white'} size={20}></AntDesign>
+                    <In42Icon origin={'antdesign'} name={detailIcon} color={'white'} size={20}></In42Icon>
                 </TouchableOpacity>
                 }
             </View>

@@ -1,21 +1,19 @@
 import { View,Text,TouchableOpacity, Modal, Button,StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from '@expo/vector-icons'
 import EvaluationSlotPicker from "../userSlots/EvaluationSlotPicker";
 import React from 'react'
 import BlurOverlay from "./BlurOverlay";
 import LogData, { logType } from "../../utils/debugging/debugging";
 
-export default function ShowModalButton() {
+ const ShowModalButton: React.FC = () => {
     const [mainModalVisible, setMainModalVisible] = React.useState(false);
     const [isBlurred, setIsBlurred] = React.useState(false);
 
-    const ButtonPressed = () => {
+    const ButtonPressed = (): void => {
         LogData(logType.INFO,"pressed fucking button")
         setMainModalVisible(true)
     }
 
-    const deactivate = () => {
+    const deactivate = (): void => {
         LogData(logType.INFO,"pressed Cancel from other screen")
         setMainModalVisible(false)
     }
@@ -45,3 +43,5 @@ const styles = StyleSheet.create({
         paddingRight:10,
     },
 })
+
+export default ShowModalButton;

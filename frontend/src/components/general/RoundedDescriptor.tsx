@@ -1,8 +1,18 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'
+import In42Icon, {In42IconName} from './ui_basic/In42Icon';
 
-const RoundedDescriptor = ({ title='temp',scale=1,IconName='minuscircleo' }) => {
+interface RoundedDescriptorProps {
+  title: string,
+  scale?: number,
+  IconName?: In42IconName,
+}
+
+const RoundedDescriptor:React.FC<RoundedDescriptorProps> = ({
+   title='temp',
+   scale=1,
+   IconName='minuscircleo'
+   }) => {
     let ItemWidth = title.length * 20 * scale;
     let minWidth = 50;
     if(ItemWidth < minWidth)
@@ -13,16 +23,11 @@ const RoundedDescriptor = ({ title='temp',scale=1,IconName='minuscircleo' }) => 
     const PaddingR = 7 * scale;
   return (
     <View style={[styles.view, { width: ItemWidth, height: ItemHeight}]}>
-        <AntDesign style={[styles.icon, {paddingRight:PaddingR  }] }
-        size={IconSize} 
-        name={IconName}>
-        </AntDesign>
-        <Text style={[styles.text, { fontSize:TextSize}]}>{title}</Text>
+      <In42Icon origin={'antdesign'} style={{paddingRight:PaddingR  }} size={IconSize} name={IconName}/>
+      <Text style={[styles.text, { fontSize:TextSize}]}>{title}</Text>
     </View>
   )
 }
-
-export default RoundedDescriptor
 
 const styles = StyleSheet.create({
   view: {
@@ -39,11 +44,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon:{
-    color: '#999999',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   text: {
     fontSize: 16,
     color: '#999999',
@@ -52,3 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
+export default RoundedDescriptor
