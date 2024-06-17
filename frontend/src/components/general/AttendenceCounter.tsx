@@ -1,8 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import In42Icon from './ui_basic/In42Icon';
 
+interface AttendenceCounterProps {
+    currentCount: number,
+    maxCount: number,
+    scale?: number,
+}
 
-const AttendenceCounter = ({currentCount,maxCount,scale=1}) =>{
+const AttendenceCounter:React.FC<AttendenceCounterProps> = ({currentCount,maxCount,scale=1}) =>{
 
     let text = `${currentCount}`;
     if(maxCount != null)
@@ -12,7 +17,7 @@ const AttendenceCounter = ({currentCount,maxCount,scale=1}) =>{
 
     return(
         <View  style={styles.container}>
-        <In42Icon origin={'lucide'} color={'grey'} size='20' name='Users'></In42Icon>
+            <In42Icon origin={'lucide'} color={'grey'} size={20} name='Users'></In42Icon>
             <Text style={[styles.text, {fontSize: 14 * scale}]}> {text}</Text>
         </View>
     )

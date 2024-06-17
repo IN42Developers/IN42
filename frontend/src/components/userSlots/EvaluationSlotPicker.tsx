@@ -6,7 +6,7 @@ import { PostDataToEndPoint,GetDataFromEndPoint } from "../../utils/api_utilitie
 import { GetUserData } from "../../utils/UserData";
 import { useIn42Store } from "../../services/state/store";
 import { TruncateTimeToSlotIncrement } from "../../utils/slot_utilities";
-import { Button } from "../general/Button";
+import { Button } from "../general/ui_basic/Button";
 import BlurOverlay from "../general/BlurOverlay";
 import LogData, { logType } from "../../utils/debugging/debugging";
 import InDatePicker_Android from "../platformSpecific/android/DatePicker_Android";

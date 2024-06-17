@@ -10,9 +10,6 @@ import LogData, { logType } from '../../utils/debugging/debugging';
 import { CampusEvent } from '../../types/eventTypes';
 import { UserData } from '../../types/UserDataTypes';
 import { Slot, SlotChunk } from '../../types/customTypes';
-import { ELanguages, changeLanguage } from '../../../assets/translation';
-import { TranslationKeys } from '../../types/languageTranslation';
-import { en } from '../../../assets/translation/en';
 
 interface In42Store {
   events: CampusEvent[];

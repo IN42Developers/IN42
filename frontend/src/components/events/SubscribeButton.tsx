@@ -1,22 +1,45 @@
 import { useState } from "react"
-import { View,StyleSheet,TouchableOpacity,Text } from "react-native"
+import { View,StyleSheet,TouchableOpacity,Text, TextStyle, ViewStyle } from "react-native"
 import { useIn42Store } from "../../services/state/store";
 import { useEffect } from "react";
 import { ToggleEventSubscription } from "../../utils/events/event_utilities";
 
-import { CalendarPlusIcon } from "lucide-react-native";
 import LogData, { logType } from "../../utils/debugging/debugging";
+import { useTypedTranslation } from "../../hooks/useTypedTranslation";
+import In42Icon from "../general/ui_basic/In42Icon";
 
-export default function SubscribeButton ({eventID, initialState=true,scale=1, textData={true: 'SUBSCRIBE', false: 'UNSUBSCRIBE'},isfull=false , style=styles}) {
+interface ToggleStyles {
+    containerOn: ViewStyle,
+    containerOff: ViewStyle,
+    textOn: TextStyle,
+    textOff: TextStyle,
+}
+
+interface SubscribeButtonProps {
+    eventID: number,
+    initialState?:boolean,
+    isfull?: boolean ,
+    scale?:number,
+    style?: ToggleStyles,
+}
+
+const SubscribeButton:React.FC<SubscribeButtonProps> = ({
+    eventID,
+    initialState=true,
+    scale=1,
+    isfull=false,
+    style=styles }) => {
 
     if(isfull)
         return null;
 
     const [toggle,SetToggle] = useState(initialState);
+    const {t} = useTypedTranslation();
 
+    const textData={true: t('events_subscribe'), false: t('events_unSubscribe')};
     const updateEventSubscriptionStatus = useIn42Store((store) => store.updateEventSubscriptionStatus);
     
-    let text: string = toggle ? textData.false : textData.true;
+    let text: string = toggle ? textData.false.toUpperCase() : textData.true.toUpperCase();
     let maxTextLength: number = textData.true.length > textData.false.length ? textData.true.length : textData.false.length
     let btnWidth: number = maxTextLength * 10 * scale;
 
@@ -36,42 +59,32 @@ export default function SubscribeButton ({eventID, initialState=true,scale=1, te
         }
 
     }
-
-
-    function onPress(params:any) {
-        SetToggle(!toggle);
-        LogData(logType.INFO,'toggle = ',toggle);
-    } 
-
     return (
-        <TouchableOpacity onPress={ToggleEvent} style={[toggle ? style.containerOff : style.containerOn ,{width: btnWidth,justifyContent: 'center',alignItems: 'center'}]}>
-            <CalendarPlusIcon stroke="white" size="24" />
-            {/* Note for Jean: When shown Unsubscribe, change Icon to CalendarMinus2Icon */}
+        <TouchableOpacity onPress={ToggleEvent} style={[styles.containerGeneral,toggle ? style.containerOff : style.containerOn ,{width: btnWidth}]}>
+            <In42Icon origin={'lucide'} name={toggle ? 'CalendarMinus2': 'CalendarPlus' } size={24} color={"white"}></In42Icon>
             <Text style={[toggle ? style.textOff : style.textOn, {fontSize: 14 * scale}]}>{text}</Text>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    containerOn: {
+    containerGeneral: {
         flex: 1,
+        maxWidth: 148,
         flexDirection: 'row',
-        backgroundColor: '#333',
         borderRadius: 200,
-        maxWidth: 142,
         paddingVertical: 10,
-        borderColor: '#00000000',
         gap: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    containerOn: {
+        backgroundColor: '#333',
+        borderColor: '#00000000',
     },
     containerOff: {
-        flex: 1,
-        flexDirection: 'row',
         borderColor: '#333',
         borderWidth: 2,
-        borderRadius: 200,
-        maxWidth: 148,
-        paddingVertical: 10,
-        gap: 8,
     },
     textOn: {
         color: 'lightgray',
@@ -82,3 +95,5 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter_700Bold'
     },
 })
+
+export default SubscribeButton;

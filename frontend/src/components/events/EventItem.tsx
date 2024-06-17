@@ -7,20 +7,17 @@ import { getCampusTimeZone } from '../../utils/UserData';
 import {LinearGradient} from 'expo-linear-gradient'
 import LogData, { logType } from '../../utils/debugging/debugging';
 import In42Icon from '../general/ui_basic/In42Icon';
+import { CampusEvent } from '../../types/eventTypes';
 
-const MiniEventItem = ({data,callback}) => {
+interface EventItemProps {
+  data: CampusEvent,
+}
+
+const EventItem:React.FC<EventItemProps> = ({data}) => {
 
   const navigation = useNavigation();
-  if(data === undefined){
-    data={
-      location:'<LOCATION>',
-      description: '<Default description>',
-      date: '<Default date>',
-      name: '<This is a Dummy Title>',
-      kind: '<event Type>',
-      subscribed: true,
-      // begin_at: '0000-00-00T00:00:00.000Z'
-    }
+  if(data == null) {
+    return null;
   }
 
 
@@ -52,7 +49,7 @@ const MiniEventItem = ({data,callback}) => {
   if (title.length > maxLength) {
     title = title.slice(0, maxLength - 3) + "..."; 
   }
-  eventType = data.kind
+  let eventType = data.kind;
   eventType = eventType.replace(/_/g," "); //replace all _ with spaces
   let EventImgPath = getImageFromEventType(data.kind);
 
@@ -66,18 +63,13 @@ const MiniEventItem = ({data,callback}) => {
   }
 
   return (
-    <TouchableOpacity style={styles.button} onPress={callback}>
+    <TouchableOpacity style={styles.button} onPress={ShowDetails}>
       <View style={styles.container}>
         <LinearGradient
         colors={EventImgPath} // An array of colors for the gradient
         start={{ x: 0, y: 0 }} // Start point (0,0) is top-left, (1,1) is bottom-right
         end={{ x: 1, y: 1 }} // End point
         style={styles.ImgDate}>
-        {/* <ImageBackground
-          source={EventImgPath}
-          style={styles.ImgDate}
-          >
-        </ImageBackground> */}
           <Text style={styles.dayText}>{weekdayAbbreviation}</Text>
           <Text style={[styles.dayText,{fontSize: 22, fontWeight: 'bold',paddingBottom: 4 }] }>{weekDayNumber}</Text>
           <Text style={styles.dayText}>{monthName}</Text>
@@ -186,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MiniEventItem;
+export default EventItem;

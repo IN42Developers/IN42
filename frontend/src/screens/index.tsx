@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
-import { Button } from '../components/general/Button'
+import { Button } from '../components/general/ui_basic/Button'
 import { useNavigation } from '@react-navigation/native'
 import { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'

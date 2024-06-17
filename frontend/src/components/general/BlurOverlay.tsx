@@ -2,7 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { BlurView } from 'expo-blur';
 
-const BlurOverlay = ({ visible }) => {
+interface BlurOverlayProps {
+  visible: boolean;
+}
+
+const BlurOverlay:React.FC<BlurOverlayProps> = ({ visible }) => {
   if (!visible) return null;
 
   return (

@@ -2,7 +2,12 @@ import { View,Text,TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import In42Icon from "./ui_basic/In42Icon";
 
-export default function NavigateBackButton({size=30}) {
+interface NavigateBackButtonProps {
+    size?: number
+}
+
+
+const NavigateBackButton:React.FC<NavigateBackButtonProps> = ({size=30}) => {
     const navigation = useNavigation();
 
     const onPress =() => {
@@ -15,3 +20,5 @@ export default function NavigateBackButton({size=30}) {
         </TouchableOpacity>
     )
 }
+
+export default NavigateBackButton;

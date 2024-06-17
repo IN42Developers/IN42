@@ -38,6 +38,7 @@ const en = {
     day_saturday: "Saturday",
     day_sunday: "Sunday",    
     events_subscribe: "Subscribe",
+    events_unSubscribe: "Unsubscribe",
     events_about_event: "About this event",
     slots_error: "[Error]",
     slots_errormessage_too_short: "Your slot has to be at least {{minutes}} minutes long.",

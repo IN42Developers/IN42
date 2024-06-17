@@ -12,7 +12,7 @@ const SlotPlaceholderItem:React.FC<SlotPlaceHolderProps> = ({data,style}) => {
 
 
   return (
-    <TouchableOpacity style={[style,styles.button]} onPress={() => null}> 
+    <TouchableOpacity style={[styles.button,style]} onPress={() => null}> 
       <View style={styles.container}>
        <Text style={styles.titleText}>{'....'}</Text>
       </View>

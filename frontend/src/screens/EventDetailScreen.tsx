@@ -1,11 +1,11 @@
 import { View,StyleSheet,Text,SafeAreaView,TouchableOpacity } from "react-native"
 import React from 'react'
 import { NavigationProp, ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
-import AttendenceCounter from "../components/general/AttendenceCounter.js";
+import AttendenceCounter from "../components/general/AttendenceCounter";
 import { getCampusTimeZone } from "../utils/UserData";
 import { useIn42Store } from "../services/state/store";
 import { useNavigation } from "@react-navigation/native";
-import SubscribeButton from "../components/events/SubscribeButton.js";
+import SubscribeButton from "../components/events/SubscribeButton";
 import { ScrollView } from "react-native-gesture-handler";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react-native";
 import LogData, { logType } from "../utils/debugging/debugging";

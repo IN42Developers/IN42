@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { GetDataFromEndPoint, PostDataToEndPoint, StallTimeBetweenApiCalls } from "../../utils/api_utilities"
 import { GetCurrentDateWithOffset, getCampusEvents } from "../../utils/events/event_utilities"
 import { GetUserData } from "../../utils/UserData"
-import { Button } from "../../components/general/Button"
+import { Button } from "../../components/general/ui_basic/Button"
 import LogData, { logType } from "../../utils/debugging/debugging"
 import { ELanguages } from "../../../assets/translation"
 import { useTranslation } from "react-i18next"

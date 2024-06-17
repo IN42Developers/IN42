@@ -1,14 +1,21 @@
 import { View,Text, ScrollView,TouchableOpacity } from "react-native"
 import { StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { useWindowDimensions } from "react-native";
 import SlotPlaceholderItem from "../../userSlots/SlotPlaceholderItem";
 
 const containerPadding = 3;
 const columns = 3;
 const elementMargin = 1; //in percent
 const elementMarginRatio = elementMargin * 2 * columns;
-const SlotContainer = ({ title='Title', onDetailPressed=null, ComponentData=[], ChildComponent }) => {
+
+interface SlotContainerProps {
+    title?: String,
+    onDetailPressed: () => void ,
+    ComponentData: any[],
+    ChildComponent: any,
+}
+
+const SlotContainer:React.FC<SlotContainerProps> = ({ title='Title', onDetailPressed=null, ComponentData=[], ChildComponent }) => {
 
     let renderButton = true;
     if(onDetailPressed === null || onDetailPressed === undefined){
@@ -27,7 +34,7 @@ const SlotContainer = ({ title='Title', onDetailPressed=null, ComponentData=[], 
             <View style={styles.header}>
                 <Text style={styles.headerText}>{title}</Text>
                 {renderButton ?
-                <TouchableOpacity style={styles.button} onPress={onDetailPressed}>
+                <TouchableOpacity style={styles.button} onPress={()=>onDetailPressed}>
                     <Text style={styles.buttonText}>...</Text>
                 </TouchableOpacity>
                 :
@@ -36,14 +43,14 @@ const SlotContainer = ({ title='Title', onDetailPressed=null, ComponentData=[], 
             </View>
             <FlatList
             showsVerticalScrollIndicator={false}
-            animated={false}
+            // animated={false}
             numColumns={columns}
             data={ComponentData}
             renderItem={({item}) =>(
                 item.type == 'slotChunk' ?
                 <ChildComponent key={item.id} data={item} style={{width: (100-containerPadding-elementMarginRatio) / columns + '%',margin: elementMargin +'%',}}></ChildComponent>
                 :
-                <SlotPlaceholderItem key={item.id} data={item} style={{width: (100-containerPadding-elementMarginRatio) / columns + '%',margin: elementMargin +'%',}}></SlotPlaceholderItem>
+                <SlotPlaceholderItem key={item.id} data={item} style={{width: `${(100-containerPadding-elementMarginRatio) / columns }%`,margin: `${elementMargin}%`,}}></SlotPlaceholderItem>
                 )}>
             
             </FlatList>
@@ -51,14 +58,12 @@ const SlotContainer = ({ title='Title', onDetailPressed=null, ComponentData=[], 
     )
 }
 
-export default SlotContainer;
+
 
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        // backgroundColor: 'grey',
-        // paddingVertical: 5,
-        paddingHorizontal: containerPadding + '%',
+        paddingHorizontal: `${containerPadding}%`,
     },
     header: {
         flexDirection: 'row',
@@ -88,3 +93,5 @@ const styles = StyleSheet.create({
         bottom: 3,
     },  
 })
+
+export default SlotContainer;

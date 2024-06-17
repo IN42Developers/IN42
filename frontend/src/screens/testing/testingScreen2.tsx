@@ -1,6 +1,6 @@
 import { View,StyleSheet,Text,SafeAreaView,ScrollView,FlatList } from "react-native"
 import React, { useState } from 'react'
-import DefaultButton from "../../components/general/Button"
+import DefaultButton from "../../components/general/ui_basic/Button"
 import { DeleteDataFromEndpoint, GetDataFromEndPoint, PostDataToEndPoint } from "../../utils/api_utilities"
 import { GetUserData } from "../../utils/UserData"
 import { getCampusTimeZone } from "../../utils/UserData"

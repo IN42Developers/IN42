@@ -7,7 +7,12 @@ import { getProjectNameFromID } from '../../utils/events/projectIDMapping';
 import LogData, { logType } from '../../utils/debugging/debugging';
 import { formatEvaluationMessageString, formatEvaluationTimeString } from '../../utils/evaluation_utilities';
 
-const EvaluationItem = ({data}) => {
+interface EvaluationItemProps {
+  data: any,
+}
+
+
+const EvaluationItem:React.FC<EvaluationItemProps> = ({data}) => {
 
   const navigation = useNavigation();
   const [evalString, SetEvalString] = useState('unknown');

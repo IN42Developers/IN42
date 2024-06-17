@@ -1,8 +1,7 @@
 import React from 'react';
 import { Text, View,StyleSheet } from 'react-native';
 import Avatar from '../home/Avatar';
-import { Button } from '../general/Button';
-import { LogOutIcon } from 'lucide-react-native';
+import { Button } from '../general/ui_basic/Button';
 import { setAccessToken, setKeyValuePair } from '../../utils/TokenStorage';
 import LogData, { logType } from '../../utils/debugging/debugging';
 import { AuthContext } from '../../../Context';
