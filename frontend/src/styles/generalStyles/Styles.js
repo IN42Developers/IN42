@@ -1,12 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
 
-export const Gradient = () => {
-   return (
-      <LinearGradient
-         colors={[rgba(255, 255, 255, 1), rgba(247, 247, 247, 0.81), rgba(217, 217, 217, 0.1)]}>
-      </LinearGradient>
-   )
-}
 
 export const Color = {
     primary: '#3498db',

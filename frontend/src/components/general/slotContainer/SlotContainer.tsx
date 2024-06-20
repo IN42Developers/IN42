@@ -10,7 +10,7 @@ const elementMarginRatio = elementMargin * 2 * columns;
 
 interface SlotContainerProps {
     title?: String,
-    onDetailPressed: () => void ,
+    onDetailPressed?: () => void ,
     ComponentData: any[],
     ChildComponent: any,
 }

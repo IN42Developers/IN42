@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View,Image,ImageBackground } from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native'
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native'
 import { GetUserData, getCampusTimeZone } from '../../utils/UserData';
 import {useEffect, useState} from 'react'
 import { getProjectNameFromID } from '../../utils/events/projectIDMapping';
@@ -14,7 +14,7 @@ interface EvaluationItemProps {
 
 const EvaluationItem:React.FC<EvaluationItemProps> = ({data}) => {
 
-  const navigation = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
   const [evalString, SetEvalString] = useState('unknown');
   if(data == undefined || data == null || data.dummy == true){
     return null;

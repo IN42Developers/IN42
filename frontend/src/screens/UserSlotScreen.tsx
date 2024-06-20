@@ -4,7 +4,7 @@ import SlotItem from "../components/userSlots/SlotItem"
 import SlotContainer from "../components/general/slotContainer/SlotContainer"
 
 import { useIn42Store } from '../services/state/store';
-import { IsoDateToWeekDay,SortByDateAscending } from "../utils/slot_utilities"
+import { IsoDateToWeekDay,SortSlotByDateAscending, SortSlotChunkByDateAscending } from "../utils/slot_utilities"
 import { SlotChunk } from "../types/customTypes";
 
 const UserSlotsScreen: React.FC = () => {
@@ -38,7 +38,7 @@ const UserSlotsScreen: React.FC = () => {
                     renderItem={({item}) =>(
                         <SlotContainer 
                         title={item}
-                        ComponentData={slotChunks.filter((element) =>IsoDateToWeekDay(element.date) == item).sort(SortByDateAscending)}  
+                        ComponentData={slotChunks.filter((element) =>IsoDateToWeekDay(element.date) == item).sort(SortSlotChunkByDateAscending)}  
                         ChildComponent={SlotItem}/> //SlotItem
                 )}/>
         </SafeAreaView>

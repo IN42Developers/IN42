@@ -5,11 +5,11 @@ import LogData, { logType } from "../../utils/debugging/debugging";
 import In42Icon from "./ui_basic/In42Icon";
 
 interface ListContainerProps {
-    title?: String,
+    title?: string,
     headerStyle?: 'full'|'title'|'collapsed',
-    detailIcon?: String,
+    detailIcon?: string,
     onDetailPressed?: () => void,
-    ChildComponent?: React.FC<{ data: any }>,
+    ChildComponent: React.FC<{ data: any }>,
     ComponentData?: any[],
     emptyListComponent?: React.FC,
     containerStyle?: ViewStyle,
@@ -42,12 +42,12 @@ const ListContainer:React.FC<ListContainerProps> = ({
             }
             <FlatList
             showsVerticalScrollIndicator={false}
-            animated={false}
+            // animated={false}
             data={ComponentData}
             renderItem={({item}) =>( 
                 <ChildComponent key={item.id} data={item} ></ChildComponent>
             )}
-            ListEmptyComponent={() =>(emptyListComponent)}
+            ListEmptyComponent={emptyListComponent}
             />
         </View>
     )

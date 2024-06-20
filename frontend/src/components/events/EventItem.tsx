@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View,Image,ImageBackground } from '
 import React from 'react';
 import RoundedDescriptor from '../general/RoundedDescriptor';
 import { getMonthFromDate, getShortDayFromDate,getEventTypeColorGradient as getImageFromEventType } from '../../utils/events/event_utilities'
-import { useNavigation } from '@react-navigation/native'
+import { NavigationProp, ParamListBase, RouteProp, useNavigation } from '@react-navigation/native'
 import { getCampusTimeZone } from '../../utils/UserData';
 import {LinearGradient} from 'expo-linear-gradient'
 import LogData, { logType } from '../../utils/debugging/debugging';
@@ -15,7 +15,7 @@ interface EventItemProps {
 
 const EventItem:React.FC<EventItemProps> = ({data}) => {
 
-  const navigation = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
   if(data == null) {
     return null;
   }

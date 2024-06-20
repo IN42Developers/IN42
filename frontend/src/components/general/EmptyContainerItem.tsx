@@ -8,10 +8,12 @@ interface EmptyContainerItemProps {
 }
 
 
+
 const EmptyContainerItem: React.FC<EmptyContainerItemProps> = ({
-  text = "Its very Empty here",
-  icon = "calendar",
+  text,
+  icon
 }) => {
+
 
 
   return (
@@ -21,6 +23,11 @@ const EmptyContainerItem: React.FC<EmptyContainerItemProps> = ({
       </View>
   );
 }
+
+EmptyContainerItem.defaultProps = {
+  text: "It's very empty here",
+  icon: "calendar",
+};
 
 const styles = StyleSheet.create({
   container: {

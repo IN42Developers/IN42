@@ -23,7 +23,7 @@ export default function UserInfoCard() {
   let levelProgress = 0.5;
   let walletPoints = -1;
   let correctionPoints = -1;
-  if (UserData != null) {
+  if (UserData != null && UserCursus) {
     curLevel = Math.floor(UserCursus.level);
     nextLevel = curLevel + 1;
     levelProgress = UserCursus.level - curLevel;

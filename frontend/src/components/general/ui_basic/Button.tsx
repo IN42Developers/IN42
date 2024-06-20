@@ -42,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({ onPress, variant, children, styl
     },
   };
 
-  const variantStyles = variants[variant] || defaultButtonStyle;
+  const variantStyles = variant ? variants[variant] : defaultButtonStyle;
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={[styles.button, variantStyles, style]}>

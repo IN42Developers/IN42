@@ -5,13 +5,22 @@ import LogData, { logType } from "./debugging/debugging";
 
 
 //a and b needs to be convertable to Date() //make more generic later to return sort function
-export const SortByDateAscending = (a: Slot,b: Slot): number => {
+export const SortSlotByDateAscending = (a: Slot,b: Slot): number => {
     const dateA = new Date(a.begin_at)
     const dateB = new Date(b.begin_at)
     if(dateA > dateB)
         return 1;
     return -1;
 }
+
+export const SortSlotChunkByDateAscending = (a: SlotChunk,b: SlotChunk): number => {
+    const dateA = new Date(a.date)
+    const dateB = new Date(b.date)
+    if(dateA > dateB)
+        return 1;
+    return -1;
+}
+
 
 //takes an array of slot datas and converts them into an array of chunked slot items
 export const CreateSlotChunkata = ( data: Slot[] ) :SlotChunk[] => {
@@ -26,7 +35,7 @@ export const CreateSlotChunkata = ( data: Slot[] ) :SlotChunk[] => {
     }
 
     //sort data by date ascending 
-    data.sort(SortByDateAscending)
+    data.sort(SortSlotByDateAscending)
 
     // LogData(logType.INFO,'in createSlotChunk data')
     let chunkData: SlotChunk[]  = [];

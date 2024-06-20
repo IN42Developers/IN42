@@ -10,12 +10,19 @@ import { ScrollView } from "react-native-gesture-handler";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react-native";
 import LogData, { logType } from "../utils/debugging/debugging";
 import { useTypedTranslation } from "../hooks/useTypedTranslation";
+import { CampusEvent } from "../types/eventTypes";
+
+interface EventParams {
+    eventData: CampusEvent,
+  }
+
+type EventDetailScreenRouteProp = RouteProp<{ params: EventParams }, 'params'>;
 
 const EventDetailScreen:React.FC = () => {
 
-    const route:RouteProp<ParamListBase> = useRoute();
+    const route= useRoute<EventDetailScreenRouteProp>();
     const navigation:NavigationProp<ParamListBase> = useNavigation();
-    const eventData = route.params;
+    const eventData= route.params;
     
     const currEvent = useIn42Store((store)=>store.events.find((item)=>item.id == eventData?.eventData?.id)); //needs cleanup
     const GetNextEvent = useIn42Store((store)=> store.GetNextEvent)

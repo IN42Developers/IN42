@@ -3,7 +3,7 @@ import In42Icon from './ui_basic/In42Icon';
 
 interface AttendenceCounterProps {
     currentCount: number,
-    maxCount: number,
+    maxCount: number | null,
     scale?: number,
 }
 

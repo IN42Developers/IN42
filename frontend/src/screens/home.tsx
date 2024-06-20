@@ -84,8 +84,8 @@ const animatedContainerStyle = useAnimatedStyle(() =>( {
     <GestureHandlerRootView style={{ display: 'flex', flex: 1 }}>
       <Animated.View style={[{flex: 1}, animatedContainerStyle]}>
         <UserInfoCard />
-        <ListContainer title={t('title_evaluations')} ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={<EmptyContainerItem text={t('evaluations_empty_list')} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen} headerStyle="full"/>
-        <ListContainer title={t('title_events')} ComponentData={subbedEvents} emptyListComponent={<EmptyContainerItem text={t('events_empty_list')} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen} headerStyle="full"/>  
+        <ListContainer title={t('title_evaluations')} ComponentData={upcomingEvaluations} detailIcon='layout' containerStyle={styles.evaluationContainer} emptyListComponent={() => <EmptyContainerItem text={t('evaluations_empty_list')} icon='book'/>} ChildComponent={EvaluationItem} onDetailPressed={NavigateUserSlotScreen} headerStyle="full"/>
+        <ListContainer title={t('title_events')} ComponentData={subbedEvents} emptyListComponent={() =><EmptyContainerItem text={t('events_empty_list')} icon='calendar' />} ChildComponent={EventItem} onDetailPressed={NavigateToCampusEventScreen} headerStyle="full"/>  
         <PanGestureHandler onGestureEvent={unlockGestureHandler}>
           <Animated.View style={styles.area} />
         </PanGestureHandler>

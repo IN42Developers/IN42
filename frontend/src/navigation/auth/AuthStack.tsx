@@ -11,7 +11,12 @@ export const AuthStack:React.FC = () => {
             backgroundColor: '#101010',
           },
         }}>
-          <Stack.Screen name="index" options={{ statusBarColor: '#000', headerShown: false }} component={IndexScreen}/>
+          <Stack.Screen 
+            name="index"
+            options= {{
+              headerShown: false
+            }}
+            component={IndexScreen}/>
         </Stack.Navigator>
     );
   };
