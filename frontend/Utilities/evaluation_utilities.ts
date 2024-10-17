@@ -117,8 +117,7 @@ export const formatEvaluationMessageString = (data: ScaleTeam):string => {
 
     let Userdata = GetUserData(); 
     LogData(logType.INFO,Userdata.id)
-    const projectName = data.team.name != null ? getProjectNameFromID(data.team.project_id) : "[ProjectError]"
-
+    const projectName = data?.team?.name != null ? getProjectNameFromID(data.team.project_id) : "[ProjectError]";
     if(data.corrector == 'invisible' ){
       return (`Somebody will evaluate you on ${projectName}`)
     }
