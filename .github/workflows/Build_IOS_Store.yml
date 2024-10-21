@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - "releases/**"
+      - "features/**"
 
 jobs:
   build:
