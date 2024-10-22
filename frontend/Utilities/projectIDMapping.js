@@ -5,6 +5,7 @@ export const getProjectNameFromID = (id) =>{
     return projects[id] || 'UNKNOWN PROJECT';
 }
 
+projects[ 1260 ] = 'C Piscine C 03'
 projects[ 1314 ] = ' Libft'
 projects[ 1315 ] = ' miniRT'
 projects[ 1316 ] = ' ft_printf'

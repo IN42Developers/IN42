@@ -1,150 +1,120 @@
-import { Image, StyleSheet, Text, View, Dimensions } from 'react-native'
-import React from 'react'
-import { Button } from '../components/buttons/Button'
-import { useNavigation } from '@react-navigation/native'
-import { useEffect } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Image, StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import { ButtonTs } from '../components/buttons/Button-ts';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import {authorizeUser} from '../Utilities/apiAuthorization.js'
-import {getAccessToken, setAccessToken, retrieveStoredValue, isTokenStillValid } from '../Utilities/TokenStorage';
-import { getTokenFromCode } from '../Utilities/apiAuthorization.js'
-import { setKeyValuePair } from '../Utilities/TokenStorage'
-import { AssertUserCanRequestData } from '../Utilities/UserData'
-import { AuthContext } from '../Context'
-import EntryHeader from '../components/ui/EntryHeader'
-import LogData, { logType } from '../Utilities/debugging'
+import { authorizeUser, getTokenFromCode } from '../Utilities/apiAuthorization.js';
+import { getAccessToken, setAccessToken, setKeyValuePair } from '../Utilities/TokenStorage';
+import { AssertUserCanRequestData } from '../Utilities/UserData';
+import { AuthContext } from '../Context';
+import EntryHeader from '../components/ui/EntryHeader';
+import LogData, { logType } from '../Utilities/debugging';
+
+const { width } = Dimensions.get('window');
 
 export default function IndexScreen() {
-
-  const {Login} = React.useContext(AuthContext);
+  const { Login } = React.useContext(AuthContext);
   const navigation = useNavigation();
-
   const { response, promptAsync: AuthUser } = authorizeUser();
 
-  useEffect( () => {
-    const tokenExchange = async() =>{
+  useEffect(() => {
+    const tokenExchange = async () => {
       try {
         if (response?.type === 'success') {
           const { code } = response.params;
-          LogData(logType.INFO,'CODE = ', code);
-          
-          //const accessToken = await getTokenFromCode(code);
           const accessToken = await getTokenFromCode(code);
-          LogData(logType.INFO,'saved TOKEN = ', accessToken);
           setKeyValuePair('AccessToken', accessToken);
           setAccessToken(accessToken);
         }
       } catch (error) {
-        LogData(logType.ERROR,error);
+        LogData(logType.ERROR, error);
       }
-    }
-    
-    try {
-      (async () => {
-          await tokenExchange();
-          const token = getAccessToken();
-          LogData(logType.INFO,'token = ', token);
-          if(token != null) {
-            LogData(logType.INFO,'Authorization Successful. Logging in');
-            Login();
-          }
-        }
-        )();
-    } catch (error) {
-      LogData(logType.ERROR,error);
-      alert(error)
-    }
-    //self invoking async function wtf?!
-  },[response])
+    };
+
+    (async () => {
+      await tokenExchange();
+      const token = getAccessToken();
+      if (token != null) {
+        Login();
+      }
+    })();
+  }, [response]);
 
   const handlePress = async () => {
-    LogData(logType.INFO,"process.env.IN42_DEV", process.env.IN42_DEV);
     try {
-      if (AssertUserCanRequestData() == false) {
-        return;
-      }
+      if (!AssertUserCanRequestData()) return;
       await AuthUser();
+    } catch (error) {
+      LogData(logType.ERROR, error);
     }
-
-    catch(error){
-      LogData(logType.ERROR,error);
-    }
-    LogData(logType.INFO,'Logged in');
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.image}>
-        <EntryHeader />
-
+    <View style={{ flex: 1 }}>
+      <View>
+          <EntryHeader />
       </View>
-      <View style={styles.bottomContainer}>
-            <Text style={styles.titleText}>Welcome back</Text>
-            <Text style={styles.descriptionText}>Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free, mobile and accessible. Built together with the community.</Text>
+      <View style={styles.container}>
+        <View style={styles.bottomContainer}>
+          <Text style={styles.titleText}>Welcome back</Text>
+          <Text style={styles.descriptionText}>
+            Login as one from over 21,000 students in the 42 Network - ever-evolving intra companion, free, mobile and accessible. Built together with the community.
+          </Text>
           <View style={styles.buttonContainer}>
-            <Button onPress={handlePress}>
+            <ButtonTs onPress={handlePress}>
               <Text style={styles.buttonText}>Authorize</Text>
-            </Button>
-            <Text style={styles.detailText}>You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.</Text>
+            </ButtonTs>
+            <Text style={styles.detailText}>
+              You will be redirected to 42 Intra where you may authorize our app. If successful, you will be redirected back.
+            </Text>
           </View>
+        </View>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flex: 1,
-    justifyContent: 'space-between',
-  },
-  image: {
-    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bottomContainer: {
-    // borderColor: 'green',
-    // borderWidth: 2,
-    flex: 1,
     justifyContent: 'space-between',
-    // justifyContent: 'flex-end',
+    alignItems: 'center',
+    width: width * 0.9,
+    gap: 12
   },
   titleText: {
-    // borderColor: 'red',
-    // borderWidth: 1,
     color: 'white',
     textAlign: 'center',
     fontSize: 28,
-    fontFamily: 'Inter_500Medium'
+    fontFamily: 'Inter_500Medium',
   },
-  descriptionText:{
-    // borderColor: 'red',
-    // borderWidth: 1,
+  descriptionText: {
     color: 'gray',
     textAlign: 'center',
     fontSize: 18,
-    paddingHorizontal: 16,
-    fontFamily:'Inter_400Regular',
-    // lineHeight: 28
+    padding: 8,
+    fontFamily: 'Inter_400Regular',
   },
   buttonContainer: {
-    // borderColor: 'red',
-    // borderWidth: 1,
-    // paddingBottom: 42,
-    // justifyContent: 'center',
-    // flex: 0.8,
-    // justifyContent: 'space-evenly',
     alignSelf: 'center',
-    width: '90%',
+    justifyContent: 'center',
+    width: width * 0.9,
+    gap: 12
   },
-  buttonText:{
+  buttonText: {
     textAlign: 'center',
-    fontFamily:'Inter_700Bold',
-    fontSize: 22
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 18,
   },
-  detailText:{
+  detailText: {
     textAlign: 'center',
-    paddingBottom: 10,
+    padding: 4,
     fontSize: 12,
-    color: 'gray'
+    color: 'gray',
   },
-})
+});

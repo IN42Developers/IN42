@@ -117,6 +117,7 @@ export const formatEvaluationMessageString = (data: ScaleTeam):string => {
 
     let Userdata = GetUserData(); 
     LogData(logType.INFO,Userdata.id)
+    LogData(logType.INFO, JSON.stringify(data.team));
     const projectName = data?.team?.name != null ? getProjectNameFromID(data.team.project_id) : "[ProjectError]";
     if(data.corrector == 'invisible' ){
       return (`Somebody will evaluate you on ${projectName}`)
@@ -127,5 +128,5 @@ export const formatEvaluationMessageString = (data: ScaleTeam):string => {
     else{
       let teamName = data.team?.name?.split("'")[0];
       return(`You will evaluate ${teamName} on ${projectName}`)
-    } 
+    }
 }
