@@ -1,10 +1,13 @@
 
 ![Header](/docs/images/Header.png)
 
+> [!IMPORTANT]
+> We shut down the app development of IN42 on November 7, 2024. Feel free to fork the project and develop it further. For that, we have updated our License and Docs.
 
 ### What is IN42?
-Intra Native 42 is a mobile app developed for students at 42 schools around the world. It is available for Android and iOS.
-The project itself is developed in React Native together with Expo.
+IN42 (Intra Native 42) is here to help students at 42 worldwide (50+ campus). The 42 Learning Platform (Intra) has all features in-house to help Students using their desktop devices. With IN42 we will bring features from it to both iOS and Android.
+
+Native on iOS and Android, cross-platform and super easy to use - this is IN42.
 
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
 ![App views](/docs/images/AppViewPresentation.png)
@@ -110,106 +113,136 @@ It can happen that some packages will not work anymore in the latest version - o
 
 `npx expo install --fix`
 
-# 
-
-<br>
-Android Studio
-
-#### Installing & Setting up Android Studio
-
-<br>
-
-> [!NOTE]
-> Android Studio has a big filesize. We recommend to install it in Folders or Drives where you have a bit more space available.
-
-<br>
-
-_Reference: https://operavps.com/docs/install-android-studio-on-linux/_ <br>
-
-<br>
-
-Start by downloading and extracting Android Studio <br>
-
-`wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz`
-`tar -xvzf android-studio-*-linux.tar.gz`
-
-<br>
-
-Add some Paths to your environment to be able to start the android emulator directly from your terminal. <br>
-
-`export ANDROID_SDK=$HOME/Android/Sdk/` <br>
-`export PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools` <br>
-
-<br>
-
-_Write it into your .bashrc file - you don't have to setup it again!_
-
 #
 
-<br>
+#### Android Studio
 
-## Set up a virtual device (Your emulator that you use to test the project)
+For the Prototyping & Building process of an Android App, you <ins>need</ins> to use Android Studio for this project.
 
-After it has completed installing you should be able to run "make android". It opens the Android Studio wizard. If you manually installed it somewhere else, just find the studio.sh file and run it.
+Of course, we are nice enough to give you a small guide which contains the downloading and unzip part.
+#
+
+**Reference: https://operavps.com/docs/install-android-studio-on-linux/**
+
+
+Always make sure that you have enough space available. Let's start with downloading our target file.
+
+
+
+`wget`
+https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz
+
+That worked! After you know your version of Android Studio, continue with extracting your file.
+
+`tar -xvzf android-studio-*-linux.tar.gz`
+
+Hint: Add following Paths to your environment to be able to start the Android emulator directly from your terminal. How convenient!<br>
+
+`export`
+ANDROID_SDK=$HOME/Android/Sdk/
+
+`export` PATH=${PATH}:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools <br>
+
+**Use Terminal or the .bashrc/.zshrc file:** Both works and you never have to setup it again!
+
+
+### Set up a virtual device
+
+After the installation had been successful, you should be able to run `make android`. This will open the Android Studio wizard.
+
+If you manually installed it somewhere else, just find the studio.sh file and run it.
 
 > ./android-studio/bin/studio.sh
-Install it with the standard settings<br>
 
-create a virtual device https://developer.android.com/studio/run/managing-avds?utm_source=android-studio<br>
-doesnt really matter which one at this point. Its your working device, you will later install different versions anyways<br>
+Install it with common settings, you should be fine.
+
+#### Creating a virtual device
+Follow this Guide:
+
+`https://developer.android.com/studio/run/managing-avds?utm_source=android-studio<br>`
+
+> At this point, it doesn't really matter which model you select. It's your working device, you will later install different versions anyways!
 <br>
 
-## Create an Expo EAS account
+## Create a Expo EAS account
 Expo is the service that we use to locally install and run our app on the emulator. It will also be used later for the building process. Its important that you do this step as it will change the redirecto URL from "anonymous" to "your account name", which you need for for creating your Intra APP in the next step. <br>
 
 > https://expo.dev/signup
 
 ## Create your own Intra App
-For locally testing changes its worth to create your own Intra App, since we don't want to disturb the live app when testing functionality. There is only one field that is important, the "redirect URI".<br>
+> [!NOTE]
+> A live environment doesn't exist anymore, since we shut down the app in November 7, 2024.
+
+If you're locally testing your changes, you should therefore create your own Application on Intra. We don't really want to disturb the live app when testing functionality. There is only one field that is important, the "Redirect URI".<br>
 
 > https://profile.intra.42.fr/oauth/applications/new
 
-In order to get the redirect URI from expo simple start the project. Either use the makefile, or manually start the dev server <br>
+In order to get the Redirect URI from Expo, simple start the project. Either use the Makefile, or manually start the Development server. <br>
 
-> make start
->
-> npx expo start --tunnel
+`make start`
 
-When you start your server you see something like "Metro waiting on 'RedirectURI'"
+`npx expo start --tunnel`
+
+When you start your server, you should see something like "Metro waiting on 'RedirectURI'":
+
 ![Redirect Uri](/docs/images/RedirectURI.png)
 
 ## Setting up your .env file
-Last step. Create and configure a .env file locally in the root directory with the following key-value pairs<br>
-The variables required are: <br>
+
+Congrats! You made it until the last step. Create and configure a .env file locally in the root directory, with the following key-value pairs:<br>
+
 <br>
+
 > CLIENT_ID=u-s4t2ud-someverylonghashnumbers
-> 
+
 > CLIENT_SECRET=s-s4t2ud-someverylonghashnumbers
-> 
+
 > REDIRECT_URI=exp://bryezl4.mrm0lten.8081.exp.direct (this is an example, yours will be different)
-> 
-<br>
-Needless to say the CLIENT_ID and CLIENT_SECRET are sensitive information. Don't share this with anyone<br>
+
+> [!CAUTION]
+> Needless to say the CLIENT_ID and CLIENT_SECRET are sensitive information. Don't share them with anyone.<br>
 
 ## Start developing!
-As explained in a previous step to start the dev server simply by using  one of 2 commands:<br>
+Our development environment is ready, and the app should be too!
 
-> make start
->
-> npx expo start --tunnel
+Let's use these commands, to spoil up the engines and get the App running in DEV MODE.
 
-If you don't have the emulator open already, simply press "a" on the terminal to open the android device. It will start downloading expo and install the project<br>
-you may have to reload(with "r") the app to it update properly.<br>
+`make start`
+
+`npx expo start --tunnel`
+
+If your emulator is not open already, simply press "a" on the terminal to open up the Android device.
+
+It will start downloading Expo and install the project and it dependencies.
+
+You may have to reload the app (with "r") to update it properly.<br>
+
+>You should be able to see the app :)
+
+
+
+
+## Visual Studio Code
+
+Working with JavaScript, TypeScript and JSX can be a pain without certain extensions.
+
+Feel free to install what you want. However, it is recommended to use the following extensions:
+
+> ES7+ React/Redux/React-Native snippets
+
+> Prettier - Code formatter
+
+> npm install -g eslint
+
+Use your Terminal and type in this command first, BEFORE installing the ESLint extension, to make sure that it will run how it should. Easy, or isn't it?
+
+> ESLint
+
+#
+
 <br>
-You should be able to see the app :)<br>
 
+Thanks for reading until here. It was sure quite a ride!
+We hope that you continue what we did and make IN42 as awesome as it can be.
 
-
-
-![Setting up vs code](/docs/images/SettingUpVsCode.png)
-
-Working with javascript,typescript and jsx can be a pain without certain extensions. You are free to install what you want but its recommended to use these 3:<br>
-ES7+ React/Redux/React-Native snippets<br>
-Prettier - Code formatter<br>
-npm install -g eslint (type this command in your terminal before installing the extension)<br>
-ESLint<br>
+Copyright 2024, IN42.
