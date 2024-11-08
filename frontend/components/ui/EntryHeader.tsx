@@ -5,7 +5,7 @@ import Logo from '../svg/logo'
 
 const EntryHeader = () => {
   return (
-    <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ display: 'flex', flex: 0, alignItems: 'center', justifyContent: 'center' }}>
       <View style={{ flexDirection: 'column', alignItems: 'center', position: 'absolute', zIndex: 10 }}>
         <Logo />
       </View>

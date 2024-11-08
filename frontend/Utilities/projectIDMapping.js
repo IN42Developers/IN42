@@ -5,6 +5,20 @@ export const getProjectNameFromID = (id) =>{
     return projects[id] || 'UNKNOWN PROJECT';
 }
 
+projects[ 1257 ] = 'C Piscine C 00'
+projects[ 1258 ] = 'C Piscine C 01'
+projects[ 1259 ] = 'C Piscine C 02'
+projects[ 1260 ] = 'C Piscine C 03'
+projects[ 1261 ] = 'C Piscine C 04'
+projects[ 1262 ] = 'C Piscine C 05'
+projects[ 1263 ] = 'C Piscine C 06'
+projects[ 1264 ] = 'C Piscine C 07'
+projects[ 1265 ] = 'C Piscine C 08'
+projects[ 1266 ] = 'C Piscine C 09'
+projects[ 1267 ] = 'C Piscine C 10'
+projects[ 1268 ] = 'C Piscine C 11'
+projects[ 1269 ] = 'C Piscine C 12'
+projects[ 1270 ] = 'C Piscine C 13'
 projects[ 1314 ] = ' Libft'
 projects[ 1315 ] = ' miniRT'
 projects[ 1316 ] = ' ft_printf'
