@@ -1,8 +1,12 @@
 
 ![Header](/docs/images/Header.png)
 
+<br>
+
 > [!IMPORTANT]
-> We shut down the app development of IN42 on November 7, 2024. Feel free to fork the project and develop it further. For that, we have updated our License and Docs.
+> App development of IN42 has been shutdown on November 7, 2024. Feel free to fork the project and develop it further. To allow these modifications we have just updated our License and documentation.
+
+#### UI Kit: https://www.figma.com/design/64g3XPn26sVwYdkR5cGMnR/IN42-Final-UI?node-id=0-1&t=KFSS413oMH4lhrs0-1
 
 ### What is IN42?
 IN42 (Intra Native 42) is here to help students at 42 worldwide (50+ campus). The 42 Learning Platform (Intra) has all features in-house to help Students using their desktop devices. With IN42 we will bring features from it to both iOS and Android.
@@ -10,6 +14,9 @@ IN42 (Intra Native 42) is here to help students at 42 worldwide (50+ campus). Th
 Native on iOS and Android, cross-platform and super easy to use - this is IN42.
 
 ![NodeJS](https://img.shields.io/badge/Supported-NodeJS-green?style=flat) ![Supported](https://img.shields.io/badge/Supported-TypeScript-blue?style=flat) ![Built with](https://img.shields.io/badge/Built%20with-React%20Native-lightblue?style=flat) ![Using](https://img.shields.io/badge/Using-Expo-white?style=flat)
+
+<br>
+
 ![App views](/docs/images/AppViewPresentation.png)
 
 # Resources
@@ -120,14 +127,11 @@ It can happen that some packages will not work anymore in the latest version - o
 For the Prototyping & Building process of an Android App, you <ins>need</ins> to use Android Studio for this project.
 
 Of course, we are nice enough to give you a small guide which contains the downloading and unzip part.
-#
 
 **Reference: https://operavps.com/docs/install-android-studio-on-linux/**
 
 
 Always make sure that you have enough space available. Let's start with downloading our target file.
-
-
 
 `wget`
 https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.1.1.22/android-studio-2021.1.1.22-linux.tar.gz
@@ -162,7 +166,6 @@ Follow this Guide:
 `https://developer.android.com/studio/run/managing-avds?utm_source=android-studio<br>`
 
 > At this point, it doesn't really matter which model you select. It's your working device, you will later install different versions anyways!
-<br>
 
 ## Create a Expo EAS account
 Expo is the service that we use to locally install and run our app on the emulator. It will also be used later for the building process. Its important that you do this step as it will change the redirecto URL from "anonymous" to "your account name", which you need for for creating your Intra APP in the next step. <br>
